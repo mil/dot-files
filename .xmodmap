@@ -1,0 +1,4 @@
+! Remap Caps Lock to Escapeo
+clear Lock
+keycode 66 = Escape
+keycode 62 = Right
