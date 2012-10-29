@@ -1,7 +1,8 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 require 'json'
 
 def unicodeSymbol(unicodeNumber)
+  return ""
   return %x[echo -ne "\\uE#{unicodeNumber}"]
 end
 
@@ -14,10 +15,10 @@ state	= File.read("/sys/class/power_supply/BAT0/status").chomp!.to_s
 now 	= File.read("/sys/class/power_supply/BAT0/energy_now").to_f
 full 	= File.read("/sys/class/power_supply/BAT0/energy_full").to_f
 battery = "%05.2f" % ((now / full) * 100)
-battery = "\\f8|\\fr\\f4\\b2 #{unicodeSymbol("037")} \\f4\\br #{battery}% \\fr\\br"
+battery = "\\fr\\f4\\b2 \\f1Battery \\f4\\br #{battery}% \\fr\\br"
 
-	weather = %x[weather 24060].gsub!(/\:(.+)/, '\\f5\1')
-	weather = "\\f8|\\fr\\f7\\b2 #{unicodeSymbol("01B")} \\br\\f7 #{weather} \\fr\\br"
+weather = %x[weather 24060].gsub!(/\:(.+)/, '\\f5\1')
+	weather = "\\f1\\b2 Weather \\br\\f7 #{weather} \\fr\\br"
 	
 
 	network = %x[netcfg current].chomp!
@@ -28,22 +29,22 @@ battery = "\\f8|\\fr\\f4\\b2 #{unicodeSymbol("037")} \\f4\\br #{battery}% \\fr\\
 
   subwayTime.gsub!(/in (\d+) Minutes and/, '\\f6\1Min')
 	subwayTime.gsub!(/(\d+) Seconds/, '\\f4\1Secs')
-	subway = "\\f8|\\fr\\f9\\b2 #{unicodeSymbol("0BF")} \\f9\\br #{subwayTime}\\fr\\br"
+	subway = "\\f9\\b2 Bus \\f9\\br #{subwayTime}\\fr\\br"
 
   m = JSON %x[foo-wm-c "/tmp/stable-wm.socket" "get marks"]
   marks = m["marks"].join(" \\b0\\f7 | \\f6\\b2")
  
   marks = "\\f6\\b2 #{marks} \\br\\fr"
 
-	time = Time.now.to_s.gsub!(/:\d{2}\s.+/, '').gsub!(/(\d{2}:\d{2})/, "\\f8|\\fr\\b2 #{unicodeSymbol(194)}\\f4 \\br \\1")
-  time = "\\f8|\\fr\\b2 " + unicodeSymbol("018") + " \\br #{time}\\br\\fr"
+	time = Time.now.to_s.gsub!(/:\d{2}\s.+/, '').gsub!(/(\d{2}:\d{2})/, "\\f8|\\fr\\b2 \\f4 \\br \\1")
+  time = "\\f8\\fr\\b2\\br #{time}\\br\\fr"
 
 	#ip = Socket.ip_address_list.detect{|intf| intf.ipv4_private?} 
 
-	wifi = "\\f5\\b2 #{unicodeSymbol("048")} \\f5\\br #{network} \\b5\\fr\\br"
+	wifi = "\\f1\\b2 Net \\f5\\br #{network} \\b5\\fr\\br"
 
-	volume = "\\f8|\\fr\\f6\\b2 #{unicodeSymbol("05D")} \\f6\\br " + %x[amixer get Master | grep -woE "([0-9]+)\%"].chomp! + " \\br\\fr"
-	s = "\\l\\u8#{wifi} #{battery} #{volume}\\c#{marks}\\r#{time} #{subway} #{weather}"
+	volume = "\\f1\\b2 Sound \\f6\\br " + %x[amixer get Master | grep -woE "([0-9]+)\%" | head -1].chomp! + " \\br\\fr"
+	s = "\\u8#{wifi} #{battery} #{volume}\\c#{marks}\\r#{time} #{subway} #{weather}"
 
 	STDOUT.puts s
 	STDOUT.flush

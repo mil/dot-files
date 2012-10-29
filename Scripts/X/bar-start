@@ -1,2 +1,2 @@
 #!/bin/bash
-/home/mil/bin/x/status-bar | /home/mil/code/contrib/bar/bar
+~/Scripts/X/status-bar | ~/Code/Stable/bar/bar
