@@ -70,22 +70,22 @@ export BROWSER="dwb"
 
 
 #Z
-. /home/mil/code/dl/z/z.sh
-
-
-###PATH
-export PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin/:$PATH"
+[[ -s ~/.autojump/etc/profile.d/autojump.zsh ]] && source ~/.autojump/etc/profile.d/autojump.zsh
 export PATH="/usr/bin/vendor_perl:$PATH" #ls++
 export PATH="/usr/lib/cw:$PATH" #Colorized output
 
-export PATH="/home/mil/bin/data:$PATH"
-export PATH="/home/mil/bin/downloaded:$PATH"
-export PATH="/home/mil/bin/misc:$PATH"
-export PATH="/home/mil/bin/symlinks:$PATH"
-export PATH="/home/mil/bin/system:$PATH"
-export PATH="/home/mil/bin/util:$PATH"
-export PATH="/home/mil/bin/wm:$PATH"
-export PATH="/home/mil/bin/x:$PATH"
+# I do a lot of scripting apparently
+export PATH="/home/mil/Scripts/Binaries:$PATH"
+export PATH="/home/mil/Scripts/Cron:$PATH"
+export PATH="/home/mil/Scripts/Data:$PATH"
+export PATH="/home/mil/Scripts/Downloaded:$PATH"
+export PATH="/home/mil/Scripts/Irc:$PATH"
+export PATH="/home/mil/Scripts/Misc:$PATH"
+export PATH="/home/mil/Scripts/Symlinks:$PATH"
+export PATH="/home/mil/Scripts/System:$PATH"
+export PATH="/home/mil/Scripts/Utilites:$PATH"
+export PATH="/home/mil/Scripts/Wm:$PATH"
+export PATH="/home/mil/Scripts/X:$PATH"
 
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
@@ -98,6 +98,7 @@ export PATH
 
 ### ALIASES 
 #alias ls='ls++'
+alias ls='ls -1 --color -F'
 alias goodnight='xset dpms force off'
 alias v='vim'
 alias back='cd "$OLDPWD";pwd'
@@ -178,7 +179,6 @@ set_xterm_title() {
     fi
 }
 export TDIR="sdfasdf"
-alias scmstatus=`echo $TDIR`
 
 preexec() {
     set_xterm_title "urxvt< %n@%m: %50>...>$1%<<"
@@ -233,8 +233,7 @@ $PRMPT"
 
 precmd() {
     set_xterm_title "urxvt> %n@%m: %50<...<%~%<<"
-    echo -e "\e[1;30m\e[1;43m`sh /home/mil/bin/system/scmstatus $PWD`"
 		setprompt
 }
 
-fortune /home/mil/data/fortunes
+fortune ~/.fortunes/fortunes

@@ -1,0 +1,2 @@
+csv-0.22.vmb: call delete('/home/miles/.vim/ftplugin/csv.vim')|call delete('/home/miles/.vim/doc/ft-csv.txt')|call delete('/home/miles/.vim/syntax/csv.vim')|call delete('/home/miles/.vim/ftdetect/csv.vim')|call delete('/home/miles/.vim/plugin/csv.vim')
+tail-3.0.vba: call delete('/home/mil/.vim/tail_options.vim')|call delete('/home/mil/.vim/autoload/tail.vim')|call delete('/home/mil/.vim/doc/tail.txt')|call delete('/home/mil/.vim/macros/vim-tail.zsh')|call delete('/home/mil/.vim/plugin/tail.vim')

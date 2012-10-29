@@ -1,0 +1,176 @@
+! enable colors in native X applications
+#ifdef COLOR
+*customization              : -color
+#endif
+
+!-----------------------------------------------------------------------------
+! Rxvt
+!-----------------------------------------------------------------------------
+
+! interaction
+Rxvt.saveLines              : 8192
+Rxvt.scrollTtyOutput        : False
+Rxvt.scrollTtyKeypress      : True
+Rxvt.scrollWithBuffer       : True
+
+! emulate XTerm keycodes to support Vim
+Rxvt.keysym.M-Up            : \033[1;3A
+Rxvt.keysym.M-Down          : \033[1;3B
+Rxvt.keysym.M-Right         : \033[1;3C
+Rxvt.keysym.M-Left          : \033[1;3D
+Rxvt.keysym.M-S-Up          : \033[1;4A
+Rxvt.keysym.M-S-Down        : \033[1;4B
+Rxvt.keysym.M-S-Right       : \033[1;4C
+Rxvt.keysym.M-S-Left        : \033[1;4D
+Rxvt.keysym.C-Up            : \033[1;5A
+Rxvt.keysym.C-Down          : \033[1;5B
+Rxvt.keysym.C-Right         : \033[1;5C
+Rxvt.keysym.C-Left          : \033[1;5D
+Rxvt.keysym.C-S-Up          : \033[1;6A
+Rxvt.keysym.C-S-Down        : \033[1;6B
+Rxvt.keysym.C-S-Right       : \033[1;6C
+Rxvt.keysym.C-S-Left        : \033[1;6D
+Rxvt.keysym.M-Page_Up       : \033[5;3~
+Rxvt.keysym.M-Page_Down     : \033[6;3~
+Rxvt.keysym.M-Home          : \033[1;3H
+Rxvt.keysym.M-End           : \033[1;3F
+Rxvt.keysym.M-S-Home        : \033[1;4H
+Rxvt.keysym.M-S-End         : \033[1;4F
+Rxvt.keysym.C-Page_Up       : \033[5;5~
+Rxvt.keysym.C-Page_Down     : \033[6;5~
+Rxvt.keysym.C-Home          : \033[1;5H
+Rxvt.keysym.C-End           : \033[1;5F
+Rxvt.keysym.C-S-Home        : \033[1;6H
+Rxvt.keysym.C-S-End         : \033[1;6F
+
+! appearance
+Rxvt.scrollBar_right        : True
+Rxvt.scrollBar_floating     : True
+Rxvt.scrollstyle            : plain
+
+! Fonts
+! *font: xft:Terminus-10
+*font: xft:EnvyCodeR-9
+*hinting: false
+Xft.hintstyle:hintslight
+
+
+
+
+! Change fonts on demand
+URxvt.keysym.C-A-1: command:\033]710;xft:terminus-1:style=Regular;terminus-12:style=Bold:antialias=true:hinting=true\007
+URxvt.keysym.C-A-2: command:\033]710;xft:EnvyCodeR-12:style=Regular:antialias=true:hinting=true\007\033]711;xft:EnvyCodeR-12:style=Bold:antialias=true:hinting=true\007
+URxvt.keysym.C-A-3: command:\033]710;xft:Monospace-10:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-10:style=Bold:antialias=true:hinting=true\007:
+URxvt.keysym.C-A-4: command:\033]710;xft:Terminus-10:style=Regular:antialias=true:hinting=true\007\033]711;xft:Terminus-12:style=Bold:antialias=true:hinting=true\007
+URxvt*cursorBlink : true 
+URxvt.keysym.C-A-5: command:\033]710;xft:Monospace-11:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-11:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
+URxvt*cursorColor: orange
+URxvt.keysym.C-A-6: command:\033]710;xft:Monospace-8:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-8:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
+URxvt.keysym.C-A-7: command:\033]710;xft:Monospace-9:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-9:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
+URxvt.keysym.C-A-8: command:\033]710;xft:Monospace-10:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-10:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
+URxvt.keysym.C-A-9: command:\033]710;xft:Monospace-18:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-18:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
+
+URxvt.keysym.C-A-9: command:\033]710;xft:smoothansi:style=Regular:antialias=true:hinting=true\007\033]711;xft:smoothansi:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
+
+
+Xft.dpi: 96
+Xft.hinting: 1
+Xft.hintstyle: hintful
+
+Rxvt*transparent: true
+Rxvt*shading: 100
+
+! extensions
+URxvt.perl-ext-common       : default,matcher,clipboard,font,font-size
+
+URxvt.copyCommand: xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
+
+URxvt.keysym.A-c: perl:clipboard:copy
+URxvt.keysym.A-v: perl:clipboard:paste
+
+! Open URLS
+URxvt.perl-ext-common:  default,url-select
+URxvt.urlLauncher:      /usr/bin/chromium
+URxvt.matcher.button:   1
+URxvt.keysym.M-U:  perl:matcher:last
+URxvt.keysym.M-I:  perl:matcher:list
+URxvt.underlineURLs: true
+
+
+! XTERM 
+XTerm*vt100.metaSendsEscape : True
+XTerm*vt100.saveLines       : 8192
+
+! appearance
+XTerm*vt100.colorMode       : True
+XTerm*vt100.colorBDMode     : True
+XTerm*vt100.colorULMode     : True
+XTerm*vt100.showBlinkAsBold : True
+XTerm*vt100.veryBoldColors  : 6
+
+
+
+*cursorColor: #5e5e58
+*background: #ffffff
+*foreground: #000000
+
+! --- standard colors ---
+
+! black
+*color0: #000000
+
+! bright_black
+*color8: #000000
+
+! red
+*color1: #c30e23
+
+! bright_red
+*color9: #f02f45
+
+! green
+*color2: #23c30e
+
+! bright_green
+*color10: #45f02f
+
+! yellow
+*color3: #c3ae0e
+
+! bright_yellow
+*color11: #f0da2f
+
+! blue
+*color4: #0e23c3
+
+! bright_blue
+*color12: #2f45f0
+
+! magenta
+*color5: #ae0ec3
+
+! bright_magenta
+*color13: #da2ff0
+
+! cyan
+*color6: #0ec3ae
+
+! bright_cyan
+*color14: #2ff0da
+
+! white
+*color7: #cccccc
+
+! bright_white
+*color15: #000000
+
+
+! ------------------------------------------------------------------------------
+! --- end of terminal colors section -------------------------------------------
+! ------------------------------------------------------------------------------
