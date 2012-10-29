@@ -1,0 +1,45 @@
+#!/usr/bin/env io
+# Determines the appropriate fifo and command for given arg 
+Sequence switcher := method( call message arguments foreach(index, msg, 
+	if (index != call message arguments size - 1,
+		result := thisContext asString doMessage(msg arguments at(0))
+		if(result, doMessage(msg arguments at(1), call sender); break)
+	, doMessage(msg, call sender))
+))
+
+fifo := nil
+if (System system("pidof pianobar") == 0) then (
+	fifo = "/home/mil/fifos/pianobar"
+	fifoCommand := nil
+
+	System args at(1) asMutable strip switcher(
+		(=="previous", call sender fifoCommand = nil),
+		(=="next", call sender fifoCommand = "n"),
+		(=="pause", call sender fifoCommand = " "),
+		(fifoCommand = nil)
+	)
+) elseif (System system("pidof mplayer") == 0) then (
+	fifo = "/home/mil/fifos/mplayer"
+	fifoCommand := nil
+
+	System args at(1) asMutable strip switcher(
+		(=="previous", call sender fifoCommand = "pt_step -1"),
+		(=="next", call sender fifoCommand = "pt_step 1"),
+		(=="pause", call sender fifoCommand = "pause"),
+		(fifoCommand = nil)
+	)
+) else (
+  command := ""
+  System args at(1) asMutable strip switcher(
+    (=="previous", call sender command = "Left"),
+    (=="next", call sender command = "Right"),
+    (=="pause", call sender command = "space"),
+    (fifoCommand = nil)
+  )
+  ("xdotool key --window `xdotool search --name rdio` " .. command) println
+  System system("xdotool key --window `xdotool search --name rdio` " .. command)
+)
+
+if (fifo != nil and fifoCommand != nil) then (
+	System system("echo '#{fifoCommand}' > #{fifo}" interpolate)
+)

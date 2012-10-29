@@ -1,0 +1,91 @@
+#!/usr/bin/ruby
+xinit = "/home/mil/.xinitrc"
+commands = {
+	"stable" => [
+		"bar-start",
+		"xbindkeys -f /home/mil/code/stable/foo-wm/config/.xbindkeysrc",
+		"dunst",
+    "keynav",
+		"exec /home/mil/code/stable/foo-wm/foo-wm"
+	],
+	"fifowm" => [
+		"bar-start", 
+		"xbindkeys -f /home/mil/code/repos/github/fifo-wm/config/.xbindkeysrc",
+		"exec /home/mil/code/repos/github/fifo-wm/fifo-wm"	
+	],
+	"foowm" => [
+		"bar-start",
+		"xbindkeys -f /home/mil/code/repos/github/foo-wm/config/.xbindkeysrc",
+		"exec /home/mil/code/repos/github/foo-wm/foo-wm"
+	],
+	"simplewm" => [
+		"xbindkeys",
+		"exec /home/mil/code/repos/github/simple-wm/simple-wm"
+	],
+	"i3" => [
+		#"xchainkeys",
+		"xbindkeys",
+		"dunst",
+		"exec i3"
+	],
+	"sawfish" => [
+    "xbindkeys",
+		"exec sawfish"
+	],
+
+	"herbs" => [
+#		"xchainkeys",
+		"xbindkeys",
+		"dunst",
+		"exec herbstluftwm"
+	],
+	"ttwm" => [
+		"xchainkeys",
+		"xbindkeys",
+		"dunst",
+		"dropboxd",
+		"exec /home/mil/code/contrib/ttwm/ttwm"
+	],
+  "jwm" => [
+    "xbindkeys",
+    "exec jwm"
+  ],
+	"monsterwm" => [
+		"xbindkeys",
+		"exec /home/mil/code/repos/github/monsterwm/monsterwm"
+	],
+	"dwm" => [
+		"xbindkeys",
+		"exec /home/mil/code/scratch/c/dwm-6.0/dwm"
+	],
+	"windowlab" => [
+		"xbindkeys",
+		"exec windowlab"
+	]
+}
+if (commands[ARGV[0]]) then
+	finalOut = ""
+
+	File.open(xinit, "r").each_line do |line|
+		finalOut += line
+		if (line =~ /setwm/) then
+			break
+		end
+	end
+
+	commands[ARGV[0]].each do |command|
+		finalOut += command
+		unless (commands[ARGV[0]].last == command) then
+			finalOut += ' &'
+		end
+		finalOut += "\n"
+	end
+
+	File.delete(xinit)
+	File.open(xinit, "w") do |file| 
+		file.write(finalOut)
+	end
+	puts "[\e[32m#{ARGV[0]}\e[0m] ===> [\e[35m#{xinit}\e[0m]"
+else
+	puts "No WM specified in setwm script"
+end

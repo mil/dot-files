@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+puts %x[weatherman -e 24060]

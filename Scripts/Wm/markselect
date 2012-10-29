@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'json'
+m = JSON %x[foo-wm-c "/tmp/stable-wm.socket" "get marks"]
+puts m["marks"].join("\n")

@@ -1,0 +1,2 @@
+#!/bin/bash
+setleds -D $1caps < /dev/tty7

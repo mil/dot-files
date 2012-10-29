@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+Thread.new do
+  puts "Connecting to Freenode"
+  %x[ii -s irc.freenode.net -n mil]
+  puts "Disconnected from Freenode"
+end
+
+Thread.new do
+  puts "Connecting to Oftc"
+  %x[ii -s irc.oftc.net -n mil]
+  puts "Disonnected from Oftc"
+end
+
+puts "Identifying nick on Freenode"
+%x[freenode]
+
+puts "Identifyig nick on Oftc"
+%x[oftc]

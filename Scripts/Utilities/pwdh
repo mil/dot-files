@@ -1,0 +1,2 @@
+#!/bin/bash
+pwdhash $1 | sed -n 2p
