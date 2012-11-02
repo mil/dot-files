@@ -88,6 +88,8 @@ export PATH="/home/mil/Scripts/Wm:$PATH"
 export PATH="/home/mil/Scripts/X:$PATH"
 
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+export rvm_ignore_gemrc_issues=1
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 PATH=$PATH:/home/mil/.gem/ruby/1.9.1/bin

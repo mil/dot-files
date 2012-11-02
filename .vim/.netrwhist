@@ -1,11 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/mil/sol/js'
-let g:netrw_dirhist_2='/home/mil/sol'
-let g:netrw_dirhist_3='/home/mil/sol/js'
-let g:netrw_dirhist_4='/home/mil/sol'
-let g:netrw_dirhist_5='/home/mil/code/repos/github/foo-wm/src'
-let g:netrw_dirhist_6='/home/mil/j'
-let g:netrw_dirhist_7='/home/mil/code/repos/github/foo-wm/config'
-let g:netrw_dirhist_8='/home/mil/Scripts/System'
-let g:netrw_dirhist_9='/home/mil/.zsh'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/home/mil/.zsh'
