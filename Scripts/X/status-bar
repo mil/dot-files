@@ -6,51 +6,58 @@ def unicodeSymbol(unicodeNumber)
   return %x[echo -ne "\\uE#{unicodeNumber}"]
 end
 
+class String
+  def fg(i)
+    return "\\f#{i}#{self}\\fr"
+  end
+  def bg(i)
+    return "\\b#{i}#{self}\\br"
+  end
+end
+
 count = 0
 loop do
+  # Battery
+  state	= File.read("/sys/class/power_supply/BAT0/status").chomp!.to_s
+  now 	= File.read("/sys/class/power_supply/BAT0/energy_now").to_f
+  full 	= File.read("/sys/class/power_supply/BAT0/energy_full").to_f
+  battery = "%05.2f" % ((now / full) * 100)
+
+  batteryLabel = " Battery ".fg(1).bg(2)
+  batteryValue = " #{battery}% ".fg(4)
+  battery = "#{batteryLabel}#{batteryValue}"
+
+  # Network
+  networkLabel = " Network ".fg(1).bg(2)
+  networkValue = " #{%x[netcfg current].chomp!} ".fg(5)
+  network = "#{networkLabel}#{networkValue}"
+
+  #Volume
+  volumeLabel = " Volume ".fg(1).bg(2)
+  volumeValue = " #{%x[amixer get Master | grep -woE '([0-9]+)\%' | head -1].chomp!} ".fg(6)
+  volume = "#{volumeLabel}#{volumeValue}"
 
 
-#Get Battery Info
-state	= File.read("/sys/class/power_supply/BAT0/status").chomp!.to_s
-now 	= File.read("/sys/class/power_supply/BAT0/energy_now").to_f
-full 	= File.read("/sys/class/power_supply/BAT0/energy_full").to_f
-battery = "%05.2f" % ((now / full) * 100)
-battery = "\\fr\\f4\\b2 \\f1Battery \\f4\\br #{battery}% \\fr\\br"
+  time = Time.now.to_s.gsub!(/:\d{2}\s.+/, '').gsub!(/(\d{2}:\d{2})/, "\\f8| \\f4\\1")
+  time = "\\fr\\br #{time}\\br\\fr"
 
-weather = %x[weather 24060].gsub!(/\:(.+)/, '\\f5\1')
-	weather = "\\f1\\b2 Weather \\br\\f7 #{weather} \\fr\\br"
-	
-
-	network = %x[netcfg current].chomp!
-
-
-  transit = %x[bt].chomp!.split(/ at.+\d{4} /)
- 	subwayTime = "#{transit[0]} \\f3#{transit[1]}"
-
-  subwayTime.gsub!(/in (\d+) Minutes and/, '\\f6\1Min')
-	subwayTime.gsub!(/(\d+) Seconds/, '\\f4\1Secs')
-	subway = "\\f9\\b2 Bus \\f9\\br #{subwayTime}\\fr\\br"
 
   m = JSON %x[foo-wm-c "/tmp/stable-wm.socket" "get marks"]
-  marks = m["marks"].join(" \\b0\\f7 | \\f6\\b2")
- 
-  marks = "\\f6\\b2 #{marks} \\br\\fr"
+  marks = m["marks"].join(" // \\f4".fg(4))
 
-	time = Time.now.to_s.gsub!(/:\d{2}\s.+/, '').gsub!(/(\d{2}:\d{2})/, "\\f8|\\fr\\b2 \\f4 \\br \\1")
-  time = "\\f8\\fr\\b2\\br #{time}\\br\\fr"
+  marks = "\\f4\\b2 #{marks} \\br\\fr"
 
-	#ip = Socket.ip_address_list.detect{|intf| intf.ipv4_private?} 
 
-	wifi = "\\f1\\b2 Net \\f5\\br #{network} \\b5\\fr\\br"
+  #s = "\\u8#{wifi} #{battery} #{volume}\\c#{marks}\\r#{time} #{subway} #{weather}"
+  active = "| urxvt - vim "
+  s = "#{battery}#{network}#{volume}\\c#{time}\\r#{marks}#{active}"
 
-	volume = "\\f1\\b2 Sound \\f6\\br " + %x[amixer get Master | grep -woE "([0-9]+)\%" | head -1].chomp! + " \\br\\fr"
-	s = "\\u8#{wifi} #{battery} #{volume}\\c#{marks}\\r#{time} #{subway} #{weather}"
 
-	STDOUT.puts s
-	STDOUT.flush
+  STDOUT.puts s
+  STDOUT.flush
 
-	count = count + 1
+  count = count + 1
   if (count > 1) then
-		sleep 20
-	end
+    sleep 20
+  end
 end

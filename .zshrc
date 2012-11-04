@@ -83,7 +83,7 @@ export PATH="/home/mil/Scripts/Irc:$PATH"
 export PATH="/home/mil/Scripts/Misc:$PATH"
 export PATH="/home/mil/Scripts/Symlinks:$PATH"
 export PATH="/home/mil/Scripts/System:$PATH"
-export PATH="/home/mil/Scripts/Utilites:$PATH"
+export PATH="/home/mil/Scripts/Utilities:$PATH"
 export PATH="/home/mil/Scripts/Wm:$PATH"
 export PATH="/home/mil/Scripts/X:$PATH"
 

@@ -2,21 +2,13 @@
 xinit = "/home/mil/.xinitrc"
 commands = {
 	"stable" => [
-		"bar-start",
-		"xbindkeys -f /home/mil/code/stable/foo-wm/config/.xbindkeysrc",
-		"dunst",
-    "keynav",
-		"exec /home/mil/code/stable/foo-wm/foo-wm"
-	],
-	"fifowm" => [
-		"bar-start", 
-		"xbindkeys -f /home/mil/code/repos/github/fifo-wm/config/.xbindkeysrc",
-		"exec /home/mil/code/repos/github/fifo-wm/fifo-wm"	
+		"bar-start", "xbindkeys", "dunst", "keynav",
+		"exec /home/mil/Code/Stable/foo-wm/foo-wm"
 	],
 	"foowm" => [
 		"bar-start",
-		"xbindkeys -f /home/mil/code/repos/github/foo-wm/config/.xbindkeysrc",
-		"exec /home/mil/code/repos/github/foo-wm/foo-wm"
+    "xbindkeys -f /home/mil/Code/Github/foo-wm/config/.xbindkeys",
+		"exec /home/mil/Code/Github/foo-wm/foo-wm"
 	],
 	"simplewm" => [
 		"xbindkeys",
