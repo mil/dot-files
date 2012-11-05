@@ -126,7 +126,7 @@
 
 
 # Dmenu
-"dmenu-suggestions.rb | dmenu -h 50 -x 0 -y 0 -l 14 -w 1024 -fn 'Envy Code R-12' -sb '#ffffff' -nf '#000000' -nb '#cfcfcf' -sf '#000000' -b -p 'Command' | xargs -0 -I INPUT handler INPUT"
+"dmenu-suggestions.rb | dmenu -h 40 -x 50 -y 350 -w 900 -fn 'Envy Code R-12' -sb '#121212' -nf '#000000' -nb '#cfcfcf' -sf '#c4ffc8' -b -p 'Command' | xargs -0 -I INPUT handler INPUT"
 	m:0x8 + c:40
 	Alt + d
 
