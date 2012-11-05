@@ -1,0 +1,198 @@
+### Applications 
+"urxvt"
+    m:0x8 + c:36
+    Alt + enter 
+"urxvt"
+	m:0x8 + c:48
+	Alt + apostrophe
+
+"dwb"
+    m:0x8 + c:51
+    Alt + backslash
+
+"xdotool getactivewindow windowkill"
+	m:0x9 + c:24
+	Shift+Alt + q
+
+### WM
+
+# Layout Commands
+"foo-wm-c  /tmp/stable-wm.socket 'layout vertical'"
+	m:0x8 + c:55
+	Alt + v
+
+"foo-wm-c /tmp/stable-wm.socket 'layout horizontal'"
+	m:0x8 + c:56
+	Alt + b
+
+"foo-wm-c /tmp/stable-wm.socket 'layout grid'"
+	m:0x8 + c:57
+	Alt + n
+
+"foo-wm-c /tmp/stable-wm.socket 'layout max'"
+	m:0x8 + c:58
+	Alt + m
+
+# Containerize Command
+"foo-wm-c  /tmp/stable-wm.socket 'containerize'"
+	m:0x8 + c:47
+	Alt + semicolon
+
+# Focus Commands
+"foo-wm-c  /tmp/stable-wm.socket 'focus brother 1'"
+	m:0x8 + c:23
+	Alt + Tab
+
+"foo-wm-c  /tmp/stable-wm.socket 'focus brother 2'"
+	m:0x8 + c:43
+	Alt + h
+
+"foo-wm-c  /tmp/stable-wm.socket 'focus brother 1'"
+	m:0x8 + c:44
+	Alt + j
+
+"foo-wm-c  /tmp/stable-wm.socket 'focus brother -1'"
+	m:0x8 + c:45
+	Alt + k
+
+"foo-wm-c  /tmp/stable-wm.socket 'focus brother -2'"
+	m:0x8 + c:46
+	Alt + l
+
+
+
+"foo-wm-c  /tmp/stable-wm.socket 'focus pc -1'"
+	m:0x8 + c:32
+	Alt + o
+
+"foo-wm-c  /tmp/stable-wm.socket 'focus pc 1'"
+	m:0x8 + c:33
+	Alt + p
+
+# Move Commands
+"foo-wm-c  /tmp/stable-wm.socket 'move 1'"
+	m:0x9 + c:23
+	Shift+Alt + Tab
+
+# Shift VIM-Esque Movement
+"foo-wm-c  /tmp/stable-wm.socket 'shift brother -2'"
+	m:0x9 + c:43
+	Shift+Alt + h
+
+"foo-wm-c  /tmp/stable-wm.socket 'shift brother 1'"
+	m:0x9 + c:44
+	Shift+Alt + j
+
+
+"foo-wm-c  /tmp/stable-wm.socket 'shift brother -1'"
+	m:0x9 + c:45
+	Shift+Alt + k
+
+"foo-wm-c  /tmp/stable-wm.socket 'shift brother -2'"
+	m:0x9 + c:46
+	Shift+Alt + l
+
+
+"foo-wm-c  /tmp/stable-wm.socket 'set client_border_width 1'"
+    m:0x8 + c:10
+    Alt + 1
+
+"foo-wm-c  /tmp/stable-wm.socket 'set client_border_width 20'"
+    m:0x8 + c:11
+    Alt + 2
+
+
+
+# Zoom Commands
+"foo-wm-c  /tmp/stable-wm.socket 'zoom -1'"
+	m:0x8 + c:31
+	Alt + i 
+
+"foo-wm-c  /tmp/stable-wm.socket 'zoom 1'"
+	m:0x8 + c:30
+	Alt + u
+
+
+# Killing Clients
+"foo-wm-c  /tmp/stable-wm.socket 'kill client'"
+	m:0x8 + c:24
+	Alt + q
+
+
+# Dumps the Tree
+"foo-wm-c  /tmp/stable-wm.socket 'dump tree'"
+	m:0x8 + c:28
+	Alt + t
+
+
+# Dmenu
+"dmenu-suggestions.rb | dmenu -h 50 -x 0 -y 0 -l 14 -w 1024 -fn 'Envy Code R-12' -sb '#ffffff' -nf '#000000' -nb '#cfcfcf' -sf '#000000' -b -p 'Command' | xargs -0 -I INPUT handler INPUT"
+	m:0x8 + c:40
+	Alt + d
+
+# Dmenu
+"cat /home/mil/code/stable/foo-wm/config/commands | dmenu -h 40 -x 100 -y 350 -w 900 -fn 'Envy Code R-14' -sb '#000000' -nf '#2b4f00' -nb '#cfcfcf' -sf '#ffffff' -b -p 'Foo-WM' | xargs -0 -I INPUT foo-wm-c /tmp/stable-wm.socket INPUT"
+  m:0x8 + c:38
+  Alt + a
+
+# Wifi Network Listings in DMenu
+"find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | dmenu -h 40 -x 100 -y 400 -w 700 -fn 'Envy Code R-13' -sb '#ffffff' -nf '#2b4f00' -nb '#cfcfcf' -sf '#0052d6' -b -p 'Netcfg' | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK"
+  m:0x8 + c:25
+  Alt + w
+
+#File Browser
+"ls ~ | dmenu -h 10 -x 0 -y 19 -w 400 -fn 'Ency Code R-11' -sb '#ffffff' -sf '#000000' -l 10 -p '~' | xargs -0 -I FILE handler /home/mil/FILE"
+  m:0x8 + c:41
+  Alt + f
+
+
+#Brightness controls
+"sudo brightcontrol down"
+	m:0x0 + c:232
+	XF86MonBrightnessDown
+
+"sudo brightcontrol up"
+	m:0x0 + c:233
+	XF86MonBrightnessDown
+
+
+#Multimedia
+"dvol -i 2"
+	m:0x0 + c:123
+	XF86AudioRaiseVolume
+
+"dvol -d 2"
+	m:0x0 + c:122
+	XF86AudioLowerVolume
+
+"dvol -t"
+	m:0x0 + c:121
+	XF86AudioMute	
+
+"mediaControl previous"
+	m:0x0 + c:173
+	XF86AudioPrev
+
+"mediaControl next"
+	m:0x0 + c:171
+	XF86AudioNext
+
+"mediaControl pause"
+	m:0x0 + c:172
+	XF86AudioPlay
+
+"scrot -s"
+    m:0x9 + c:13
+    Shift+Alt + 4
+
+"`sselp`"
+  m:0x8 + c:27
+  Alt + r
+
+"dwb `sselp`"
+  m:0x8 + c:28
+  Alt + t
+
+"`sselp`"
+  m:0x0 + c:169
+  XF86Eject
