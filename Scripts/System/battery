@@ -5,7 +5,8 @@
 def getPercentage
   now = File.read("/sys/class/power_supply/BAT0/energy_now").to_f
   full = File.read("/sys/class/power_supply/BAT0/energy_full").to_f
-  return "%05.2f" % ((now/full) * 100)
+  percentage = "%05.2f" % ((now/full) * 100)
+  return "#{percentage}%"
 end
 
 def getStatus
