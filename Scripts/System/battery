@@ -1,5 +1,23 @@
 #!/usr/bin/env ruby
-now = File.read("/sys/class/power_supply/BAT0/energy_now").to_f
-full = File.read("/sys/class/power_supply/BAT0/energy_full").to_f
 
-puts "%05.2f" % ((now/full) * 100)
+
+
+def getPercentage
+  now = File.read("/sys/class/power_supply/BAT0/energy_now").to_f
+  full = File.read("/sys/class/power_supply/BAT0/energy_full").to_f
+  return "%05.2f" % ((now/full) * 100)
+end
+
+def getStatus
+  return File.read("/sys/class/power_supply/BAT0/status").chomp!
+end
+
+if (ARGV[0] == "percentage") then
+  puts getPercentage
+elsif (ARGV[0] == "status") then
+  puts getStatus
+else
+  puts "#{getStatus} #{getPercentage}"
+end
+
+
