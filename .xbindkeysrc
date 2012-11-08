@@ -125,15 +125,20 @@
 	Alt + t
 
 
-# Dmenu
+# Launcher Dmenu
 "dmenu-suggestions.rb | dmenu -h 40 -x 50 -y 350 -w 900 -fn 'Envy Code R-12' -sb '#121212' -nf '#000000' -nb '#cfcfcf' -sf '#c4ffc8' -b -p 'Command' | xargs -0 -I INPUT handler INPUT"
 	m:0x8 + c:40
 	Alt + d
 
-# Dmenu
+# WM Dmenu
 "cat /home/mil/code/stable/foo-wm/config/commands | dmenu -h 40 -x 100 -y 350 -w 900 -fn 'Envy Code R-14' -sb '#000000' -nf '#2b4f00' -nb '#cfcfcf' -sf '#ffffff' -b -p 'Foo-WM' | xargs -0 -I INPUT foo-wm-c /tmp/stable-wm.socket INPUT"
   m:0x8 + c:38
   Alt + a
+
+# Jump on Dmenu
+"markselect | dmenu -x 100 -y 400 -w 700 -h 40 -fn 'Envy Code R-12' -sb '#000000' -nf '#2b4f00' -p 'Jump' -nb '#cfcfcf' | xargs -0 -I MARK foo-wm-c '/tmp/stable-wm.socket' 'jump MARK'"
+  m:0x8 + c:65
+  Alt + space
 
 # Wifi Network Listings in DMenu
 "find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | dmenu -h 40 -x 100 -y 400 -w 700 -fn 'Envy Code R-13' -sb '#ffffff' -nf '#2b4f00' -nb '#cfcfcf' -sf '#0052d6' -b -p 'Netcfg' | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK"

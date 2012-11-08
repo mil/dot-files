@@ -7,7 +7,7 @@ commands = {
 	],
 	"foowm" => [
 		"bar-start",
-    "xbindkeys -f /home/mil/Code/Github/foo-wm/config/.xbindkeys",
+    "xbindkeys -f /home/mil/Code/Github/foo-wm/config/.xbindkeysrc",
 		"exec /home/mil/Code/Github/foo-wm/foo-wm"
 	],
 	"simplewm" => [
