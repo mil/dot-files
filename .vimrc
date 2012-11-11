@@ -83,7 +83,7 @@ command XlibFunctions syn keyword Directory XDraw XRebindKeysym XrmLocaleOfDatab
 
 
 
-au VimEnter * RainbowParenthesesToggleAll
+"au VimEnter * RainbowParenthesesToggleAll
 au VimEnter * syn keyword ErrorMsg Display Window XEvent Cursor XButtonEvent XWindowAttributes XMapRequestEvent GC True False
 au VimEnter * syn keyword ErrorMsg xcb_connection_t xcb_screen_t xcb_drawable_t xcb_gcontext_t xcb_generic_event_t
 au VimEnter * XlibFunctions
@@ -91,9 +91,9 @@ au VimEnter * XlibFunctions
 command XcbFunctions syn keyword Directory xcb_connect xcb_setup_roots_iterator xcb_generate_id xcb_create_gc xcb_rectangle_t
 
 
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+"au Syntax * RainbowParenthesesLoadRound
+"au Syntax * RainbowParenthesesLoadSquare
+"au Syntax * RainbowParenthesesLoadBraces
 
 
 
