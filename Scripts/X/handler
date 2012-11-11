@@ -20,6 +20,10 @@ extensions=(
 ["png"]="feh"
 ["gif"]="feh"
 ["pdf"]="zathura"
+["doc"]="abiword"
+["docx"]="abiword"
+["md"]="urxvt -e vim"
+["html"]="dwb"
 )
 
 
