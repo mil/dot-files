@@ -6,6 +6,11 @@
 	m:0x8 + c:48
 	Alt + apostrophe
 
+"xdotool type `sselp`"
+    m:0x0 + c:156
+    XF86Launch1
+
+
 "dwb"
     m:0x8 + c:51
     Alt + backslash
@@ -126,12 +131,12 @@
 
 
 # Launcher Dmenu
-"dmenu-suggestions.rb | dmenu -h 40 -x 50 -y 350 -w 900 -fn 'Envy Code R-12' -sb '#121212' -nf '#000000' -nb '#cfcfcf' -sf '#c4ffc8' -b -p 'Command' | xargs -0 -I INPUT handler INPUT"
+"dmenu-suggestions.rb | dmenu -h 40 -x 60 -y 350 -w 900 -fn 'Envy Code R-13' -sb '#ffffff' -nf '#2b4f00' -nb '#cfcfcf' -sf '#0052d6' -b -p 'Command' | tr -d '\n' | xargs -0 -I INPUT handler INPUT"
 	m:0x8 + c:40
 	Alt + d
 
 # WM Dmenu
-"cat /home/mil/code/stable/foo-wm/config/commands | dmenu -h 40 -x 100 -y 350 -w 900 -fn 'Envy Code R-14' -sb '#000000' -nf '#2b4f00' -nb '#cfcfcf' -sf '#ffffff' -b -p 'Foo-WM' | xargs -0 -I INPUT foo-wm-c /tmp/stable-wm.socket INPUT"
+"cat /home/mil/Code/Stable/foo-wm/config/commands | dmenu -h 40 -x 60 -y 350 -w 900 -fn 'Envy Code R-14' -sb '#000000' -nf '#2b4f00' -nb '#cfcfcf' -sf '#ffffff' -b -p 'Foo-WM' | xargs -0 -I INPUT foo-wm-c /tmp/stable-wm.socket INPUT"
   m:0x8 + c:38
   Alt + a
 
@@ -146,7 +151,7 @@
   Alt + w
 
 #File Browser
-"ls ~ | dmenu -h 10 -x 0 -y 19 -w 400 -fn 'Ency Code R-11' -sb '#ffffff' -sf '#000000' -l 10 -p '~' | xargs -0 -I FILE handler /home/mil/FILE"
+"browse"
   m:0x8 + c:41
   Alt + f
 
@@ -201,3 +206,4 @@
 "`sselp`"
   m:0x0 + c:169
   XF86Eject
+
