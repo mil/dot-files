@@ -14,9 +14,9 @@ $dmenuOptions = {
   # Assumes dmenu with q,xywh,xft patches
   # http://github.com/mil/dmenu-q-xywh-xft
   :h => 20,
-  :x => 2,
-  :y => 20,
-  :w => 1020,
+  :x => 4,
+  :y => 22,
+  :w => 1014,
   :fn => 'Envy Code R-9',
   :sb => '#ffffff',
   :sf => '#000000',
