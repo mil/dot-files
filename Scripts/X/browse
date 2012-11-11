@@ -1,0 +1,68 @@
+#!/usr/bin/env ruby
+# A simple quick and dirty dmenu file browser
+# Takes in one param of directory to begin in
+# then you can browse till you hit a file, then 
+# passes whatever file you hit to $handler.
+# Entering directories respawns dmenu
+# Also ../ may be entered to go to the previous directory
+
+
+#Options
+$handler = 'handler'
+$defaultDirectory = "/home/mil"
+$dmenuOptions = { 
+  # Assumes dmenu with q,xywh,xft patches
+  # http://github.com/mil/dmenu-q-xywh-xft
+  :h => 20,
+  :x => 2,
+  :y => 20,
+  :w => 1020,
+  :fn => 'Envy Code R-9',
+  :sb => '#ffffff',
+  :sf => '#000000',
+  :nb => '#0052d6',
+  :nf => '#ffffff',
+  :l => 10
+}
+
+
+def dmenuOptsToString(optsHash, pwd)
+  returnString = "dmenu -p '#{pwd}'"
+  optsHash.each do |option, value|
+    if (value.is_a? String)
+      value = "'#{value}'"
+    end
+    returnString = "#{returnString} -#{option} #{value}"
+  end
+
+  return returnString
+end
+
+def browse(directory)
+  dm = dmenuOptsToString($dmenuOptions, directory)
+  selectedOption = %x[ls #{directory} | #{dm}].chomp!
+  if (!selectedOption) then
+    exit
+  end
+
+  begin
+    Dir.chdir("#{directory}/#{selectedOption}")
+    browse(Dir.getwd)
+  rescue
+    %x[#{$handler} #{directory}/#{selectedOption}]
+  end
+end
+
+def main
+  if (ARGV[0]) then
+    if (ARGV[0] == "") then
+      exit
+    else
+      browse(ARGV[0])
+    end
+  else
+    browse($defaultDirectory)
+  end
+end
+
+main
