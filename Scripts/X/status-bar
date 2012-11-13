@@ -18,9 +18,12 @@ end
 count = 0
 loop do
   # Battery
-  batteryLabel = " Battery ".fg(1).bg(2)
-  batteryValue = " #{`battery`.chomp!} ".fg(4)
-  battery = "#{batteryLabel}#{batteryValue}"
+  batteryStatus = `battery status`.chomp!
+  f = 3
+  f = 4 if batteryStatus == "Charging"
+  batteryStatus = " #{batteryStatus} ".fg(1).bg(2)
+  batteryValue = " #{`battery percentage`.chomp!} ".fg(f)
+  battery = "#{batteryStatus}#{batteryValue}"
 
   # Network
   networkLabel = " Network ".fg(1).bg(2)
