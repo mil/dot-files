@@ -2,6 +2,7 @@
 xinit = "/home/mil/.xinitrc"
 commands = {
 	"stable" => [
+    "if [ -f \"/usr/bin/tpb\" ];\nthen\nsudo tpb &\nfi",
 		"bar-start", "xbindkeys", "dunst", "keynav",
 		"exec /home/mil/Code/Stable/foo-wm/foo-wm"
 	],
@@ -50,6 +51,8 @@ commands = {
 		"xbindkeys",
 		"exec /home/mil/code/scratch/c/dwm-6.0/dwm"
 	],
+
+  "system-dwm" => [ "xbindkeys", "exec dwm" ],
 	"windowlab" => [
 		"xbindkeys",
 		"exec windowlab"
