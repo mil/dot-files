@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+puts %x[ps aux | grep '#{ARGV[0]}' | awk '{print $2}']
