@@ -182,14 +182,24 @@
 "mediaControl previous"
 	m:0x0 + c:173
 	XF86AudioPrev
+"mediaControl previous"
+  m:0x0 + c:72
+  F6
 
 "mediaControl next"
 	m:0x0 + c:171
 	XF86AudioNext
+"mediaControl next"
+  m:0x0 + c:74
+  F8
 
 "mediaControl pause"
 	m:0x0 + c:172
 	XF86AudioPlay
+"mediaControl pause"
+  m:0x0 + c:73
+  F7
+  
 
 "scrot -s"
     m:0x9 + c:13
