@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/mil/.zsh'
-let g:netrw_dirhist_2='/home/mil/.git'
-let g:netrw_dirhist_3='/home/mil/.zsh'
-let g:netrw_dirhist_4='/home/mil/School/documents/PHIL-4224/draft'
-let g:netrw_dirhist_5='/home/mil/School/documents/PHIL-4224'
-let g:netrw_dirhist_6='/home/mil/School/documents/PHIL-4224/proposal'
-let g:netrw_dirhist_7='/etc/modprobe.d'

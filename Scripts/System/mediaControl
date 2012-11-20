@@ -9,7 +9,7 @@ Sequence switcher := method( call message arguments foreach(index, msg,
 
 fifo := nil
 if (System system("pidof pianobar") == 0) then (
-	fifo = "/home/mil/fifos/pianobar"
+	fifo = "/home/mil/IPC/Fifos/pianobar"
 	fifoCommand := nil
 
 	System args at(1) asMutable strip switcher(
@@ -19,7 +19,7 @@ if (System system("pidof pianobar") == 0) then (
 		(fifoCommand = nil)
 	)
 ) elseif (System system("pidof mplayer") == 0) then (
-	fifo = "/home/mil/fifos/mplayer"
+	fifo = "/home/mil/IPC/Fifos/mplayer"
 	fifoCommand := nil
 
 	System args at(1) asMutable strip switcher(
