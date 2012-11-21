@@ -24,6 +24,7 @@ extensions=(
 ["docx"]="abiword"
 ["md"]="urxvt -e vim"
 ["html"]="dwb"
+["xcf"]="gimp"
 )
 
 

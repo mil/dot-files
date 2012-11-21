@@ -2,7 +2,8 @@
 "urxvt"
     m:0x8 + c:36
     Alt + enter 
-"urxvt"
+
+"urxvt -e 'ranger'"
 	m:0x8 + c:48
 	Alt + apostrophe
 
