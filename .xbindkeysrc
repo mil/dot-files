@@ -148,23 +148,22 @@
 
 # Wifi Network Listings in DMenu
 "find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | dmenu -h 40 -x 100 -y 400 -w 700 -fn 'Envy Code R-13' -sb '#ffffff' -nf '#2b4f00' -nb '#cfcfcf' -sf '#0052d6' -b -p 'Netcfg' | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK"
-  m:0x8 + c:25
-  Alt + w
+Alt + w
 
 #File Browser
 "browse"
-  m:0x8 + c:41
-  Alt + f
+Alt + f
+
+"pwdhashX"
+Shift+Alt + p
 
 
 #Brightness controls
 "sudo brightcontrol down"
-	m:0x0 + c:232
-	XF86MonBrightnessDown
+XF86MonBrightnessDown
 
 "sudo brightcontrol up"
-	m:0x0 + c:233
-	XF86MonBrightnessDown
+XF86MonBrightnessDown
 
 
 #Multimedia
