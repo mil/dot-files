@@ -11,16 +11,15 @@
 $dmenuOptions = { 
   # Assumes dmenu with q,xywh,xft patches
   # http://github.com/mil/dmenu-q-xywh-xft
-  :h => 20,
-  :x => 4,
-  :y => 22,
+  :h => 40,
+  :x => 5,
+  :y => 24 ,
   :w => 1014,
-  :fn => 'Envy Code R-9',
+  :fn => 'Envy Code R-13',
   :sb => '#ffffff',
   :sf => '#000000',
-  :nb => '#0052d6',
-  :nf => '#ffffff',
-  :l => 10
+  :nb => '#cccccc',
+  :nf => '#000000'
 }
 
 
@@ -35,5 +34,5 @@ def dmenuOptsToString(optsHash, pwd)
 
   return returnString
 end
-  dm = dmenuOptsToString($dmenuOptions, "mdmenu")
+  dm = dmenuOptsToString($dmenuOptions, "surf")
   puts %x[#{dm}]

@@ -66,7 +66,7 @@ export HISTFILE="$HOME/.history"
 export SAVEHIST=$HISTSIZE
 
 export EDITOR="vim -u ~/.vimrc"
-export BROWSER="dwb"
+export BROWSER="surf"
 
 
 #Z
