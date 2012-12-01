@@ -4,7 +4,7 @@ commands = {
 	"stable" => [
     "if [ -f \"/usr/bin/tpb\" ];\nthen\nsudo tpb &\nfi",
 		"bar-start", "xbindkeys", "dunst", "keynav",
-		"exec /home/mil/Code/Stable/foo-wm/foo-wm"
+		"exec foo-wm"
 	],
 	"foowm" => [
 		"bar-start",

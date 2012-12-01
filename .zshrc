@@ -147,8 +147,8 @@ fi
 
 
 ###ZSH PLUGINS
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 #source /home/mil/.zsh/auto-fu.zsh
 #zle-line-init () {auto-fu-init;}; zle -N zle-line-init

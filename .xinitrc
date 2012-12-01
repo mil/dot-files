@@ -14,4 +14,4 @@ bar-start &
 xbindkeys &
 dunst &
 keynav &
-exec /home/mil/Code/Stable/foo-wm/foo-wm
+exec foo-wm

@@ -40,7 +40,7 @@ loop do
   time = "\\fr\\br #{time}\\br\\fr"
 
 
-  m = JSON %x[foo-wm-c "/tmp/stable-wm.socket" "get marks"]
+  m = JSON %x[foo-wm-c "/tmp/foo-wm.socket" "get marks"]
   marks = m["marks"].join(" // \\f4".fg(4))
 
   marks = "\\f4\\b2 #{marks} \\br\\fr"

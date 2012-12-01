@@ -1,2 +1,2 @@
 #!/bin/bash
-~/Scripts/X/status-bar | ~/Code/Stable/bar/bar
+status-bar | bar
