@@ -23,110 +23,110 @@
 ### WM
 
 # Layout Commands
-"foo-wm-c  /tmp/stable-wm.socket 'layout vertical'"
+"foo-wm-c  /tmp/foo-wm.socket 'layout vertical'"
 	m:0x8 + c:55
 	Alt + v
 
-"foo-wm-c /tmp/stable-wm.socket 'layout horizontal'"
+"foo-wm-c /tmp/foo-wm.socket 'layout horizontal'"
 	m:0x8 + c:56
 	Alt + b
 
-"foo-wm-c /tmp/stable-wm.socket 'layout grid'"
+"foo-wm-c /tmp/foo-wm.socket 'layout grid'"
 	m:0x8 + c:57
 	Alt + n
 
-"foo-wm-c /tmp/stable-wm.socket 'layout max'"
+"foo-wm-c /tmp/foo-wm.socket 'layout max'"
 	m:0x8 + c:58
 	Alt + m
 
 # Containerize Command
-"foo-wm-c  /tmp/stable-wm.socket 'containerize'"
+"foo-wm-c  /tmp/foo-wm.socket 'containerize'"
 	m:0x8 + c:47
 	Alt + semicolon
 
 # Focus Commands
-"foo-wm-c  /tmp/stable-wm.socket 'focus brother 1'"
+"foo-wm-c  /tmp/foo-wm.socket 'focus brother 1'"
 	m:0x8 + c:23
 	Alt + Tab
 
-"foo-wm-c  /tmp/stable-wm.socket 'focus brother 2'"
+"foo-wm-c  /tmp/foo-wm.socket 'focus brother 2'"
 	m:0x8 + c:43
 	Alt + h
 
-"foo-wm-c  /tmp/stable-wm.socket 'focus brother 1'"
+"foo-wm-c  /tmp/foo-wm.socket 'focus brother 1'"
 	m:0x8 + c:44
 	Alt + j
 
-"foo-wm-c  /tmp/stable-wm.socket 'focus brother -1'"
+"foo-wm-c  /tmp/foo-wm.socket 'focus brother -1'"
 	m:0x8 + c:45
 	Alt + k
 
-"foo-wm-c  /tmp/stable-wm.socket 'focus brother -2'"
+"foo-wm-c  /tmp/foo-wm.socket 'focus brother -2'"
 	m:0x8 + c:46
 	Alt + l
 
 
 
-"foo-wm-c  /tmp/stable-wm.socket 'focus pc -1'"
+"foo-wm-c  /tmp/foo-wm.socket 'focus pc -1'"
 	m:0x8 + c:32
 	Alt + o
 
-"foo-wm-c  /tmp/stable-wm.socket 'focus pc 1'"
+"foo-wm-c  /tmp/foo-wm.socket 'focus pc 1'"
 	m:0x8 + c:33
 	Alt + p
 
 # Move Commands
-"foo-wm-c  /tmp/stable-wm.socket 'move 1'"
+"foo-wm-c  /tmp/foo-wm.socket 'move 1'"
 	m:0x9 + c:23
 	Shift+Alt + Tab
 
 # Shift VIM-Esque Movement
-"foo-wm-c  /tmp/stable-wm.socket 'shift brother -2'"
+"foo-wm-c  /tmp/foo-wm.socket 'shift brother -2'"
 	m:0x9 + c:43
 	Shift+Alt + h
 
-"foo-wm-c  /tmp/stable-wm.socket 'shift brother 1'"
+"foo-wm-c  /tmp/foo-wm.socket 'shift brother 1'"
 	m:0x9 + c:44
 	Shift+Alt + j
 
 
-"foo-wm-c  /tmp/stable-wm.socket 'shift brother -1'"
+"foo-wm-c  /tmp/foo-wm.socket 'shift brother -1'"
 	m:0x9 + c:45
 	Shift+Alt + k
 
-"foo-wm-c  /tmp/stable-wm.socket 'shift brother -2'"
+"foo-wm-c  /tmp/foo-wm.socket 'shift brother -2'"
 	m:0x9 + c:46
 	Shift+Alt + l
 
 
-"foo-wm-c  /tmp/stable-wm.socket 'set client_border_width 1'"
+"foo-wm-c  /tmp/foo-wm.socket 'set client_border_width 1'"
     m:0x8 + c:10
     Alt + 1
 
-"foo-wm-c  /tmp/stable-wm.socket 'set client_border_width 20'"
+"foo-wm-c  /tmp/foo-wm.socket 'set client_border_width 20'"
     m:0x8 + c:11
     Alt + 2
 
 
 
 # Zoom Commands
-"foo-wm-c  /tmp/stable-wm.socket 'zoom -1'"
+"foo-wm-c  /tmp/foo-wm.socket 'zoom -1'"
 	m:0x8 + c:31
 	Alt + i 
 
-"foo-wm-c  /tmp/stable-wm.socket 'zoom 1'"
+"foo-wm-c  /tmp/foo-wm.socket 'zoom 1'"
 	m:0x8 + c:30
 	Alt + u
 
 
 # Killing Clients
-"foo-wm-c  /tmp/stable-wm.socket 'kill client'"
+"foo-wm-c  /tmp/foo-wm.socket 'kill client'"
 	m:0x8 + c:24
 	Alt + q
 
 
 # Dumps the Tree
-"foo-wm-c  /tmp/stable-wm.socket 'dump tree'"
+"foo-wm-c  /tmp/foo-wm.socket 'dump tree'"
 	m:0x8 + c:28
 	Alt + t
 
@@ -137,12 +137,12 @@
 	Alt + d
 
 # WM Dmenu
-"cat /home/mil/Code/Stable/foo-wm/config/commands | dmenu -h 40 -x 60 -y 350 -w 900 -fn 'Envy Code R-14' -sb '#000000' -nf '#2b4f00' -nb '#cfcfcf' -sf '#ffffff' -b -p 'Foo-WM' | xargs -0 -I INPUT foo-wm-c /tmp/stable-wm.socket INPUT"
+"cat /home/mil/Code/Stable/foo-wm/config/commands | dmenu -h 40 -x 60 -y 350 -w 900 -fn 'Envy Code R-14' -sb '#000000' -nf '#2b4f00' -nb '#cfcfcf' -sf '#ffffff' -b -p 'Foo-WM' | xargs -0 -I INPUT foo-wm-c /tmp/foo-wm.socket INPUT"
   m:0x8 + c:38
   Alt + a
 
 # Jump on Dmenu
-"markselect | dmenu -x 100 -y 400 -w 700 -h 40 -fn 'Envy Code R-12' -sb '#000000' -nf '#2b4f00' -p 'Jump' -nb '#cfcfcf' | xargs -0 -I MARK foo-wm-c '/tmp/stable-wm.socket' 'jump MARK'"
+"markselect | dmenu -x 100 -y 400 -w 700 -h 40 -fn 'Envy Code R-12' -sb '#000000' -nf '#2b4f00' -p 'Jump' -nb '#cfcfcf' | xargs -0 -I MARK foo-wm-c '/tmp/foo-wm.socket' 'jump MARK'"
   m:0x8 + c:65
   Alt + space
 
@@ -163,7 +163,7 @@ Shift+Alt + p
 XF86MonBrightnessDown
 
 "sudo brightcontrol up"
-XF86MonBrightnessDown
+XF86MonBrightnessUp
 
 
 #Multimedia
