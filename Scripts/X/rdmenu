@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+# A dmenu display customization script
+# Assumes dmenu with q,xywh,xft patches
+# http://github.com/mil/dmenu-q-xywh-xft
+
+def screen(arg) 
+  %x[xrandr | head -n1 | cut -d, -f2 | cut -d " " -f3-5].split(" x ")[arg == :width ? 0 : 1].to_i
+end
+
+# Defaults
+$defaults = { 
+  :h => 40,
+  :x => 10,
+  :y => (screen(:height) / 2) - 20,
+  :w => screen(:width) - 20,
+  :fn => 'Envy Code R-13',
+  :sb => '#ffffff',
+  :sf => '#000000',
+  :nb => '#cccccc',
+  :nf => '#000000',
+  :p  => 'mil'
+}
+
+#Profiles
+$profiles = {
+  "surfURI" => {
+    :p => "Surf"
+  },
+  "surfSearch" =>  {
+    :p => "Search"
+  }
+}
+
+def dmenuOptsToString(optsHash)
+  returnString = "dmenu "
+  optsHash.each do |option, value|
+    if (value.is_a? String)
+      value = "'#{value}'"
+    end
+    returnString = "#{returnString} -#{option} #{value}"
+  end
+
+  return returnString
+end
+
+def main
+  if ($profiles[ARGV[0]] != nil) then
+    $defaults.merge!($profiles[ARGV[0]])
+  end
+
+  dm = dmenuOptsToString($defaults) 
+  puts %x[#{dm}]
+end
+
+main
