@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+off = %x[synclient | grep TouchpadOff]
+
+if (off.match('1')) then
+  %x[synclient TouchpadOff=0]
+else
+  %x[synclient TouchpadOff=1]
+end

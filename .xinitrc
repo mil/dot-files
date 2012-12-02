@@ -7,6 +7,5 @@ feh --bg-scale ~/.wallpaper.jpg &
 
 # setwm
 bar-start &
-xcalib -a -invert &
 xbindkeys -f /home/mil/Code/Github/foo-wm/config/.xbindkeysrc &
 exec /home/mil/Code/Github/foo-wm/foo-wm
