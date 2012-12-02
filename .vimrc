@@ -59,7 +59,8 @@ map! <Ctrl-F>   :call SmoothPageScrollUp()<CR>
 
 " 256 Colors with Wombat
 set t_Co=256
-colorscheme louver 
+colorscheme louver
+"colorscheme Mustang
 
 
 " set list!
@@ -68,8 +69,7 @@ set listchars=tab:+-
 "
 
 function Dark()
-	:colorscheme molokai 
-	:hi Normal ctermbg=Black
+	:colorscheme Mustang 
 endfunction
 
 command Light colorscheme summerfruit256 

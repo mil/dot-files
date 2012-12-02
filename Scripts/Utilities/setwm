@@ -1,86 +1,93 @@
 #!/usr/bin/ruby
 xinit = "/home/mil/.xinitrc"
 commands = {
-	"stable" => [
+  "foowm" => [
     "if [ -f \"/usr/bin/tpb\" ];\nthen\nsudo tpb &\nfi",
-		"bar-start", "xbindkeys", "dunst", "keynav",
-		"exec foo-wm"
-	],
-	"foowm" => [
-		"bar-start",
+    "bar-start", "xbindkeys", "dunst", "keynav",
+    "exec foo-wm"
+],
+  "dev" => [
+    "bar-start",
     "xbindkeys -f /home/mil/Code/Github/foo-wm/config/.xbindkeysrc",
-		"exec /home/mil/Code/Github/foo-wm/foo-wm"
-	],
-	"simplewm" => [
-		"xbindkeys",
-		"exec /home/mil/code/repos/github/simple-wm/simple-wm"
-	],
-	"i3" => [
-		#"xchainkeys",
-		"xbindkeys",
-		"dunst",
-		"exec i3"
-	],
-	"sawfish" => [
-    "xbindkeys",
-		"exec sawfish"
-	],
+    "exec /home/mil/Code/Github/foo-wm/foo-wm"
+],
+  "hack" => [
+    "bar-start",
+    "xcalib -a -invert",
+    "xbindkeys -f /home/mil/Code/Github/foo-wm/config/.xbindkeysrc",
+    "exec /home/mil/Code/Github/foo-wm/foo-wm"
+],
 
-	"herbs" => [
-#		"xchainkeys",
-		"xbindkeys",
-		"dunst",
-		"exec herbstluftwm"
-	],
-	"ttwm" => [
-		"xchainkeys",
-		"xbindkeys",
-		"dunst",
-		"dropboxd",
-		"exec /home/mil/code/contrib/ttwm/ttwm"
-	],
+  "simplewm" => [
+    "xbindkeys",
+    "exec /home/mil/code/repos/github/simple-wm/simple-wm"
+],
+  "i3" => [
+    #"xchainkeys",
+    "xbindkeys",
+    "dunst",
+    "exec i3"
+],
+  "sawfish" => [
+    "xbindkeys",
+    "exec sawfish"
+],
+
+  "herbs" => [
+    #		"xchainkeys",
+    "xbindkeys",
+    "dunst",
+    "exec herbstluftwm"
+],
+  "ttwm" => [
+    "xchainkeys",
+    "xbindkeys",
+    "dunst",
+    "dropboxd",
+    "exec /home/mil/code/contrib/ttwm/ttwm"
+],
   "jwm" => [
     "xbindkeys",
     "exec jwm"
-  ],
-	"monsterwm" => [
-		"xbindkeys",
-		"exec /home/mil/code/repos/github/monsterwm/monsterwm"
-	],
-	"dwm" => [
-		"xbindkeys",
-		"exec /home/mil/code/scratch/c/dwm-6.0/dwm"
-	],
+],
+  "monsterwm" => [
+    "xbindkeys",
+    "exec /home/mil/code/repos/github/monsterwm/monsterwm"
+],
+  "dwm" => [
+    "xbindkeys",
+    "exec /home/mil/code/scratch/c/dwm-6.0/dwm"
+],
 
   "system-dwm" => [ "xbindkeys", "exec dwm" ],
-	"windowlab" => [
-		"xbindkeys",
-		"exec windowlab"
-	]
+  "windowlab" => [
+    "xbindkeys",
+    "exec windowlab"
+]
 }
 if (commands[ARGV[0]]) then
-	finalOut = ""
+  finalOut = ""
 
-	File.open(xinit, "r").each_line do |line|
-		finalOut += line
-		if (line =~ /setwm/) then
-			break
-		end
-	end
+  File.open(xinit, "r").each_line do |line|
+    finalOut += line
+    if (line =~ /setwm/) then
+      break
+    end
+  end
 
-	commands[ARGV[0]].each do |command|
-		finalOut += command
-		unless (commands[ARGV[0]].last == command) then
-			finalOut += ' &'
-		end
-		finalOut += "\n"
-	end
+  commands[ARGV[0]].each do |command|
+    finalOut += command
+    unless (commands[ARGV[0]].last == command) then
+      finalOut += ' &'
+    end
+    finalOut += "\n"
+  end
 
-	File.delete(xinit)
-	File.open(xinit, "w") do |file| 
-		file.write(finalOut)
-	end
-	puts "[\e[32m#{ARGV[0]}\e[0m] ===> [\e[35m#{xinit}\e[0m]"
+  File.delete(xinit)
+  File.open(xinit, "w") do |file| 
+    file.write(finalOut)
+  end
+  puts "[\e[32m#{ARGV[0]}\e[0m] ===> [\e[35m#{xinit}\e[0m]"
 else
-	puts "No WM specified in setwm script"
+  puts "No WM specified in setwm script"
 end
