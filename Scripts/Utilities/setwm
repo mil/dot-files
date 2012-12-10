@@ -11,6 +11,22 @@ commands = {
     "xbindkeys -f /home/mil/Code/Github/foo-wm/config/.xbindkeysrc",
     "exec /home/mil/Code/Github/foo-wm/foo-wm"
 ],
+  "no-wm" => [
+    "bar-start",
+    "xbindkeys",
+    "exec /home/mil/Code/Scratch/no-wm/x-focus-manager",
+    "exec /home/mil/Code/Scratch/no-wm/x-session"
+],
+
+  "meis-wm" => [
+    "bar-start",
+    "xbindkeys",
+    "exec /home/mil/Code/Github/meis-wm/meis-wm",
+    "exec /home/mil/Code/Github/meis-wm/x-session"
+],
+
+
+
   "hack" => [
     "bar-start",
     "xcalib -a -invert",
