@@ -10,21 +10,31 @@
  * If you're a vim addict, and you always find yourself typing j or k in a web
  * page, then wondering why it just does not go up and down like any good
  * software, that user script is what you have been looking for.
+    // 10% of the size or 2 lines.  
+    return window.innerHeight - Math.min(window.innerHeight / 10, 24);
+}
+
+window.addEventListener("keypress", keypress, false);
+    // 10% of the size or 2 lines.  
+    return window.innerHeight - Math.min(window.innerHeight / 10, 24);
+}
+
+window.addEventListener("keypress", keypress, false);
  */
 
 
 function up() {
     if (window.scrollByLines)
-        window.scrollByLines(-4); // gecko
+        window.scrollByLines(-1); // gecko
     else
-        window.scrollBy(0, -96); // webkit
+        window.scrollBy(0, -12); // webkit
 }
 
 function down() {
     if (window.scrollByLines)
-        window.scrollByLines(4); // gecko
+        window.scrollByLines(1); // gecko
     else
-        window.scrollBy(0, 96); // webkit
+        window.scrollBy(0, 12); // webkit
 }
 
 function pageup() {
@@ -67,7 +77,7 @@ var bindings = {
     'g' : home,
     'G' : bottom,
     '^b': pageup,
-    '^f': pagedown,
+    '^f': pagedown
 }
 
 function isEditable(element) {
@@ -122,7 +132,10 @@ window.addEventListener("keypress", keypress, false);
 
 
 
-/* KEYBOARD LINK HINTING */
+
+
+
+/* HINTS */
 
 /* based on chromium plugin code, adapted by Nibble<.gs@gmail.com> */
 var hint_num_str = '';
@@ -180,8 +193,8 @@ function setHighlight(elem, is_active) {
 
 function setHintRules() {
     var ss = document.styleSheets[0];
-    ss.insertRule('a[highlight=hint_elem] {background-color: #f2f2f2; padding: 0px; border: 1px dashed grey}', 0);
-    ss.insertRule('a[highlight=hint_active] {background-color: lime}', 0);
+    ss.insertRule('a[highlight=hint_elem] {margin-left: 20px; background-color: #ffffff; padding: 1px; border: 1px solid #cfcfcf; font-family: Envy Code R;}', 1);
+    ss.insertRule('a[highlight=hint_active] {background-color: #c9c9c9}', 0);
 }
 
 function deleteHintRules() {
@@ -249,12 +262,12 @@ function setHints() {
                 'left: ', elem_left, 'px;',
                 'top: ', elem_top, 'px;',
                 'position: absolute;',
-                'font-size: 10px;',
-                'background-color: ' + (hint_open_in_new_tab ? '#000000' : '#fcffde') + ';',
+                'background-color: ' + (hint_open_in_new_tab ? '#ededed' : '#ededed') + ';',
                 'color: #000000;',
+                'border: 1px solid #cccccc;',
                 'font-weight: normal;',
                 'font-family: Envy Code R;',
-                'border:1px dashed #ededed;',
+                'font-size: 12px;',
                 'padding: 0px 1px;',
                 'z-index: 100000;'
                     ].join('');
@@ -431,21 +444,3 @@ function get_key(evt){
     }
     return ctrl+meta+key;
 }
-
-
-
-(function() {
-	window.addEventListener("click", function(e) {
-		if (
-                      e.button == 1 // for middle click
-                   //|| e.ctrlKey   // for ctrl + click
-                   ) {
-			var new_uri = e.srcElement.href;
-			if (new_uri) {
-		]		e.stopPropagation();
-				e.preventDefault();
-				window.open(new_uri);
-			}
-		}
-	}, false);
-})();
