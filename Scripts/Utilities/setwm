@@ -25,6 +25,14 @@ commands = {
     "exec /home/mil/Code/Github/meis-wm/x-session"
 ],
 
+  "scrollwm" => [
+    "bar-start",
+    "xbindkeys",
+    "exec /home/mil/Code/Scratch/scrollwm/scrollwm"
+],
+
+
+
 
 
   "hack" => [
