@@ -23,7 +23,8 @@ extensions=(
 ["doc"]="abiword"
 ["docx"]="abiword"
 ["md"]="urxvt -e vim"
-["html"]="dwb"
+["html"]="$BROWSER"
+["htm"]="$BROWSER"
 ["xcf"]="gimp"
 )
 
