@@ -31,6 +31,14 @@ commands = {
     "exec /home/mil/Code/Scratch/scrollwm/scrollwm"
 ],
 
+  "bspwm" => [
+    "bar-start",
+    "xbindkeys  -f /home/mil/.bp",
+    "exec bspwm"
+],
+
+
+
 
 
 
@@ -59,7 +67,6 @@ commands = {
 
   "herbs" => [
     #		"xchainkeys",
-    "xbindkeys",
     "dunst",
     "exec herbstluftwm"
 ],
