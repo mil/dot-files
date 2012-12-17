@@ -114,6 +114,9 @@ XTerm*vt100.colorULMode     : True
 XTerm*vt100.showBlinkAsBold : True
 XTerm*vt100.veryBoldColors  : 6
 
+XTerm*faceName: Envy Code R
+XTerm*faceSize: 9
+
 
 
 *cursorColor: #5e5e58
