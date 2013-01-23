@@ -47,7 +47,10 @@ loop do
 
 
   #s = "\\u8#{wifi} #{battery} #{volume}\\c#{marks}\\r#{time} #{subway} #{weather}"
-  active = "| urxvt - vim "
+  authed = %x[ls /mnt/auth | wc -m].to_i > 0 ?  "Authenticated".fg(1) : "Not Authenticated"
+
+  active = "| #{authed}"
+
   s = "#{battery}#{network}#{volume}\\c#{time}\\r#{marks}#{active}"
 
 
