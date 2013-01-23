@@ -238,4 +238,4 @@ precmd() {
 		setprompt
 }
 
-fortune ~/.fortunes/fortunes
+cat ~/Notes/TODO 2> /dev/null
