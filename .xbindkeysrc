@@ -3,11 +3,11 @@
     m:0x8 + c:36
     Alt + enter 
 
-"urxvt -e 'ranger'"
+"urxvt -e 'rangerterm'"
 	m:0x8 + c:48
 	Alt + apostrophe
 
-"xdotool type `sselp`"
+"urxvt -e 'rangerterm'"
     m:0x0 + c:156
     XF86Launch1
 
@@ -132,7 +132,7 @@
 
 
 # Launcher Dmenu
-"dmenu-suggestions.rb | dmenu -h 40 -x 60 -y 350 -w 900 -fn 'Envy Code R-13' -sb '#ffffff' -nf '#2b4f00' -nb '#cfcfcf' -sf '#0052d6' -b -p 'Command' | tr -d '\n' | xargs -0 -I INPUT handler INPUT"
+"dmenu-suggestions.rb | dmenu -h 40 -b -x 40 -y 360 -w 900 -fn 'Envy Code R-13' -sb '#0073bf' -nf '#c4c4c4' -nb '#000000' -sf '#ffffff' -p 'Command' | tr -d '\n' | xargs -0 -I INPUT handler INPUT"
 	m:0x8 + c:40
 	Alt + d
 

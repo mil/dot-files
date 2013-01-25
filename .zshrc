@@ -221,7 +221,7 @@ setprompt() {
   local TTY="%F{4}%y%f"
   local EXIT="%(?..%F{202}%?%f)"
   local PRMPT="${USER}@$HOST:${TTY}: ${PWD}
-${EXIT} %F{202}»%f "
+${EXIT}%F{2}`date +%_H:%m ` %F{8}:: "
 
   if [[ "${vcs_info_msg_0_}" == "" ]]; then
     PROMPT="$PRMPT"

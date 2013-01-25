@@ -81,13 +81,13 @@ Rxvt*transparent: true
 Rxvt*shading: 100
 
 ! extensions
-URxvt.perl-ext-common       : default,matcher,clipboard,font,font-size
+URxvt.perl-ext-common       : default,matcher,clipboard,font-size
 
 URxvt.copyCommand: xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
 
-URxvt.keysym.C-Up:     perl:font-size:increase
-URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.A-Up:     perl:font-size:increase
+URxvt.keysym.A-Down:   perl:font-size:decrease
 URxvt.keysym.C-S-Up:   perl:font-size:incglobal
 URxvt.keysym.C-S-Down: perl:font-size:decglobal
 

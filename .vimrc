@@ -98,7 +98,7 @@ command XcbFunctions syn keyword Directory xcb_connect xcb_setup_roots_iterator 
 
 
 " Cursorline 
-"set cursorline
+set cursorline
 "set cursorcolumn
 
 " Mouse for Normal and Visual Mode only
