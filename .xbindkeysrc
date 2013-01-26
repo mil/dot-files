@@ -1,5 +1,5 @@
 ### Applications 
-"urxvt"
+"tabbed-urxvt"
     m:0x8 + c:36
     Alt + enter 
 
@@ -12,7 +12,7 @@
     XF86Launch1
 
 
-"surf"
+"tabbed-surf"
     m:0x8 + c:51
     Alt + backslash
 
@@ -137,12 +137,12 @@
 	Alt + d
 
 # WM Dmenu
-"cat /home/mil/Code/Stable/foo-wm/config/commands | dmenu -h 40 -x 60 -y 350 -w 900 -fn 'Envy Code R-14' -sb '#000000' -nf '#2b4f00' -nb '#cfcfcf' -sf '#ffffff' -b -p 'Foo-WM' | xargs -0 -I INPUT foo-wm-c /tmp/foo-wm.socket INPUT"
+"cat /usr/share/foo-wm/config/commands | dmenu -h 40 -x 60 -y 350 -w 900 -fn 'Envy Code R-14' -sb '#91ff00' -nf '#ffffff' -nb '#000000' -sf '#000000' -b -p 'Foo-WM' | xargs -0 -I INPUT foo-wm-c /tmp/foo-wm.socket INPUT"
   m:0x8 + c:38
   Alt + a
 
 # Jump on Dmenu
-"markselect | dmenu -x 100 -y 400 -w 700 -h 40 -fn 'Envy Code R-12' -sb '#000000' -nf '#2b4f00' -p 'Jump' -nb '#cfcfcf' | xargs -0 -I MARK foo-wm-c '/tmp/foo-wm.socket' 'jump MARK'"
+"markselect | dmenu -x 100 -y 400 -w 700 -h 40 -fn 'Envy Code R-12' -sb '#ffc400' -nf '#ffffff' -p 'Jump' -nb '#000000' -sf '#000000' | xargs -0 -I MARK foo-wm-c '/tmp/foo-wm.socket' 'jump MARK'"
   m:0x8 + c:65
   Alt + space
 
@@ -217,3 +217,6 @@ XF86MonBrightnessUp
   m:0x0 + c:169
   XF86Eject
 
+"tabbed"
+    m:0x8 + c:49
+    Alt + grave

@@ -13,13 +13,13 @@ $dmenuOptions = {
   # http://github.com/mil/dmenu-q-xywh-xft
   :h => 40,
   :x => 5,
-  :y => 24 ,
+  :y => 360 ,
   :w => 1014,
   :fn => 'Envy Code R-13',
-  :sb => '#ffffff',
-  :sf => '#000000',
-  :nb => '#cccccc',
-  :nf => '#000000'
+  :sb => '#0073bf',
+  :sf => '#ffffff',
+  :nb => '#000000',
+  :nf => '#c4c4c4'
 }
 
 
