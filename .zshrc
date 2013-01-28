@@ -238,4 +238,4 @@ precmd() {
 		setprompt
 }
 
-cat ~/Notes/TODO 2> /dev/null
+cat ~/Notes/.TODO 2> /dev/null
