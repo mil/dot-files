@@ -14,6 +14,7 @@ web=(
 ["@aw"]="https://wiki.archlinux.org/index.php?search="
 ["@so"]="http://stackoverflow.com/search?q="
 ["@gh"]="http://github.com/search?q="
+["@wa"]="http://wolframalpha.com/input?i="
 )
 extensions=(
 ["jpg"]="feh"
