@@ -100,6 +100,7 @@ export PATH
 
 ### ALIASES 
 #alias ls='ls++'
+alias q='exit'
 alias ls='ls -1 --color -F'
 alias goodnight='xset dpms force off'
 alias v='vim'
