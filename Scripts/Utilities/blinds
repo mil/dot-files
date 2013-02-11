@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+list = [
+  "hello fellow gamlers, the blinds are now at LOW HIGH LOW HIGH. yeah thats damn right LOW HIGH. wooooooohoooo woooo woo ho ho wooooo ho hohoooo. LOW HIGH. gamble on. end transmission",
+  "i am a robot. hello - oh i'm just saying that the blinds are LOW HIGH. yeah LOW HIGH, farewell friends",
+  "worship the poker club. love god. and post your blinds at LOW HIGH LOW HIGH. goodbye poker people",
+  "LOW HIGH. wooooooooho, gamble on friends. LOW HIGH. yeah right. poker club is the bomb, blowing up like vietnam"
+]
+
+say = list.sample
+say.gsub!(/LOW/, ARGV[0]).gsub!(/HIGH/, ARGV[1])
+
+%x[echo p > ~/IPC/Fifos/mplayer]
+%x[espeak -p 100 -a 200 "#{say}"]
+%x[echo p > ~/IPC/Fifos/mplayer]

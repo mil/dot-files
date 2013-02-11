@@ -28,7 +28,7 @@ commands = {
   "scrollwm" => [
     "bar-start",
     "xbindkeys",
-    "exec /home/mil/Code/Scratch/scrollwm/scrollwm"
+    "exec scrollwm"
 ],
 
   "bspwm" => [
