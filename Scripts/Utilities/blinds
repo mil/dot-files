@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 list = [
-  "hello fellow gamlers, the blinds are now at LOW HIGH LOW HIGH. yeah thats damn right LOW HIGH. wooooooohoooo woooo woo ho ho wooooo ho hohoooo. LOW HIGH. gamble on. end transmission",
-  "i am a robot. hello - oh i'm just saying that the blinds are LOW HIGH. yeah LOW HIGH, farewell friends",
-  "worship the poker club. love god. and post your blinds at LOW HIGH LOW HIGH. goodbye poker people",
-  "LOW HIGH. wooooooooho, gamble on friends. LOW HIGH. yeah right. poker club is the bomb, blowing up like vietnam"
+  "wooooooooooooooooooo LOW HIGH LOW HIGH LOW HIGH LOW HIGH yo yo goodbye",
+  "anteeeeeeeeeeeeeeeee LOW HIGH LOW HIGH LOW HIGH LOW HIGH yo yo goodbye",
+  "felllllllllllllllloow gamblers, LOW HIGH LOW HIGH yo. yeah LOW HIGH. end transmission",
+  "just sayyyyyyyyyyyinng that the blinds be LOW HIGH yo . gooooooooodbye",
+  "post yo blinds LOW HIGH LOW HIGH. goodbye poker people LOW HIGH wooooo",
+  "bliiiiiiiiiiiiiinds HIGH LOW HIGH. poker. gamble. LOW HIGH. goodbye"
 ]
 
 say = list.sample

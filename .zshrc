@@ -87,13 +87,17 @@ export PATH="/home/mil/Scripts/Utilities:$PATH"
 export PATH="/home/mil/Scripts/Wm:$PATH"
 export PATH="/home/mil/Scripts/X:$PATH"
 
-
+#RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 export rvm_ignore_gemrc_issues=1
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 PATH=$PATH:/home/mil/.gem/ruby/1.9.1/bin
 export PATH
+
+#VirtualENV Wrapper
+export WORKON_HOME=~/.virtualenvs
+source /usr/bin/virtualenvwrapper.sh
 
 
 
@@ -239,7 +243,7 @@ precmd() {
 		setprompt
 }
 
-cat ~/Notes/.TODO 2> /dev/null
+cat ~/.TODO 2> /dev/null
 
 export PERL_LOCAL_LIB_ROOT="/home/mil/perl5";
 export PERL_MB_OPT="--install_base /home/mil/perl5";
