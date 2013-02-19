@@ -37,9 +37,9 @@ end
 server = TCPServer.new('localhost', 2000)
 loop do
 	header, content = generatePage("#{Dir.getwd}/#{ARGV[0]}")
-	Thread.start(server.accept) do |session|
-		session.print(header)
-		session.print(content)
-		session.close
+	Thread.start(client = server.accept) do |session|
+    client.gets # Will be HTTP GETS/POST
+		client.print(header + content) # Respond
+    client.close
 	end
 end
