@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+ENV['DISPLAY'] = ':0'
 list = [
   "wooooooooooooooooooo LOW HIGH LOW HIGH LOW HIGH LOW HIGH yo yo goodbye",
   "anteeeeeeeeeeeeeeeee LOW HIGH LOW HIGH LOW HIGH LOW HIGH yo yo goodbye",
@@ -12,5 +13,21 @@ say = list.sample
 say.gsub!(/LOW/, ARGV[0]).gsub!(/HIGH/, ARGV[1])
 
 %x[echo p > ~/IPC/Fifos/mplayer]
-%x[espeak -p 100 -a 200 "#{say}"]
+
+#%x[dvol -i 30]
+%x[amixer set Master 30%+]
+
+%x[mpg123 -k 90 -n 20 -d 2 --loop 7 ~/.blinds.mp3]
+%x[espeak -p 100 -a 100 "post yo b l i n ds blinds blinds"]
+%x[mpg123 -k 90 -n 7 -d 2 --loop 3 ~/.blinds.mp3]
+%x[espeak -p 100 -a 100 "#{say}"]
+%x[mpg123 -k 90 -n 7 -d 2 --loop 3 ~/.blinds.mp3]
+%x[espeak -p 100 -a 100 "#{ARGV[0]} #{ARGV[1]}"]
+%x[mpg123 -k 90 -n 7 -d 2 --loop 3 ~/.blinds.mp3]
+%x[espeak -p 100 -a 100 "PCE"]
+%x[mpg123 -k 90 -n 5 -d 2 --loop 10 ~/.blinds.mp3]
+
 %x[echo p > ~/IPC/Fifos/mplayer]
+
+%x[amixer set Master 30%-]
+#%x[dvol -d 30]

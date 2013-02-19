@@ -147,7 +147,7 @@
   Alt + space
 
 # Wifi Network Listings in DMenu
-"find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | dmenu -h 40 -x 100 -y 400 -w 700 -fn 'Envy Code R-13' -sb '#ffffff' -nf '#2b4f00' -nb '#cfcfcf' -sf '#0052d6' -b -p 'Netcfg' | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK"
+"find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | dmenu -h 40 -x 100 -y 400 -w 800 -fn 'Envy Code R-11' -sb '#ffc400' -nf '#ffffff' -nb '#000000' -sf '#000000' -b -p 'Netcfg' | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK"
 Alt + w
 
 #File Browser
