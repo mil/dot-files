@@ -6,28 +6,29 @@ list = [
   "felllllllllllllllloow gamblers, LOW HIGH LOW HIGH yo. yeah LOW HIGH. end transmission",
   "just sayyyyyyyyyyyinng that the blinds be LOW HIGH yo . gooooooooodbye",
   "post yo blinds LOW HIGH LOW HIGH. goodbye poker people LOW HIGH wooooo",
-  "bliiiiiiiiiiiiiinds HIGH LOW HIGH. poker. gamble. LOW HIGH. goodbye"
+  "bliiiiiiiiiiiiiinds HIGH LOW HIGH. poker. gamble. LOW HIGH. goodbye",
+  "G A M B L E ON BRO. LOW HIGH LOW HIGH LOW HIGH, wink"
 ]
 
 say = list.sample
-say.gsub!(/LOW/, ARGV[0]).gsub!(/HIGH/, ARGV[1])
+say.gsub!(/LOW/, "#{ARGV[0]}").gsub!(/HIGH/, "#{ARGV[1]}")
 
 %x[echo p > ~/IPC/Fifos/mplayer]
 
 #%x[dvol -i 30]
-%x[amixer set Master 30%+]
+%x[amixer set Master 20%+]
 
-%x[mpg123 -k 90 -n 20 -d 2 --loop 7 ~/.blinds.mp3]
-%x[espeak -p 100 -a 100 "post yo b l i n ds blinds blinds"]
+%x[mpg123 -k 90 -n 20 -d 2 --loop 3 ~/.blinds.mp3]
+%x[espeak -k 10 -p 200 -a 100 "blinds Poker Gamble Club Poker chip Anti GaMble"]
 %x[mpg123 -k 90 -n 7 -d 2 --loop 3 ~/.blinds.mp3]
 %x[espeak -p 100 -a 100 "#{say}"]
 %x[mpg123 -k 90 -n 7 -d 2 --loop 3 ~/.blinds.mp3]
 %x[espeak -p 100 -a 100 "#{ARGV[0]} #{ARGV[1]}"]
 %x[mpg123 -k 90 -n 7 -d 2 --loop 3 ~/.blinds.mp3]
 %x[espeak -p 100 -a 100 "PCE"]
-%x[mpg123 -k 90 -n 5 -d 2 --loop 10 ~/.blinds.mp3]
+%x[mpg123 -k 90 -n 5 -d 2 --loop 13 ~/.blinds.mp3]
 
 %x[echo p > ~/IPC/Fifos/mplayer]
 
-%x[amixer set Master 30%-]
+%x[amixer set Master 20%-]
 #%x[dvol -d 30]

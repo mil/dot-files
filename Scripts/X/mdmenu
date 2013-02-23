@@ -1,30 +1,83 @@
 #!/usr/bin/env ruby
-# A simple quick and dirty dmenu file browser
-# Takes in one param of directory to begin in
-# then you can browse till you hit a file, then 
-# passes whatever file you hit to $handler.
-# Entering directories respawns dmenu
-# Also ../ may be entered to go to the previous directory
+# A dmenu display customization script
+# Assumes dmenu with q,xywh,xft patches
+# http://github.com/mil/dmenu-q-xywh-xft
 
+# Setup Screen Dimensions Info
+xr = %x[xrandr | head -n1 | cut -d, -f2 | cut -d " " -f3-5].split(" x ")
+$screen = {
+  :width => xr[0].to_i,
+  :height => xr[1].to_i
+}
 
-#Options
-$dmenuOptions = { 
-  # Assumes dmenu with q,xywh,xft patches
-  # http://github.com/mil/dmenu-q-xywh-xft
+# Setup App Dimensions Info
+xwin = %x[xwininfo -id `foo-wm-c /tmp/foo-wm.socket 'get focus' | json id`]
+
+# Defaults
+$defaults = { 
   :h => 40,
-  :x => 5,
-  :y => 360 ,
-  :w => 1014,
+  :x => 10,
+  :y => ($screen[:height] / 2) - 20,
+  :w => $screen[:width] - 20,
   :fn => 'Envy Code R-13',
   :sb => '#0073bf',
   :sf => '#ffffff',
   :nb => '#000000',
-  :nf => '#c4c4c4'
+  :nf => '#c4c4c4',
+  :p  => 'Rd Menu'
+}
+font = ((xwin.match(/Width: (\d.+)$/)[1].to_i - 20 ) > 200) ? "Envy Code R-12" : "Terminus-9"
+
+$app = {
+  :fn => font,
+  :w => xwin.match(/Width: (\d.+)$/)[1].to_i - 20,
+  :h=> (xwin.match(/Height: (\d.+)$/)[1].to_i / 11) - 1,
+  :x => xwin.match(/Absolute.+X:  (\d(.+)?)$/)[1].to_i + 10,
+  :y => xwin.match(/Absolute.+Y:  (\d(.+)?)$/)[1].to_i + 10,
+  :l => "10"
 }
 
 
-def dmenuOptsToString(optsHash, pwd)
-  returnString = "dmenu -p '#{pwd}'"
+
+#Profiles
+$profiles = {}
+$profiles["launch"] = { :p => "Launch" }
+$profiles["foowm"]  = $app.merge({
+    :p => "Foo-WM",
+    :sb => "#91ff00",
+    :sf => "#000000"
+})
+
+$profiles["jump"] = {
+  :p => "Jump",
+  :fn => "Envy Code R-12",
+  :sb => "#ffc400",
+  :nf => "#ffffff",
+  :sb => "#ffc400",
+  :sf => "#000000"
+}
+$profiles["surfURI"] = $app.merge({
+  :p => "Surf URI:"
+})
+
+$profiles.merge({
+  "netcfg" => {
+    :p => "Netcfg",
+    :fn => "Envy Code R-11",
+    :sb => "#ffc400",
+    :nf => "#ffffff",
+    :nb => "#000000",
+    :sf => "#000000"
+  },
+  "surfSearch" =>  $app.merge({
+    :p => "Surf Find:"
+  }),
+  "wifi" => {
+  }
+})
+
+def dmenuOptsToString(optsHash)
+  returnString = "dmenu "
   optsHash.each do |option, value|
     if (value.is_a? String)
       value = "'#{value}'"
@@ -34,5 +87,16 @@ def dmenuOptsToString(optsHash, pwd)
 
   return returnString
 end
-  dm = dmenuOptsToString($dmenuOptions, "surf")
-  puts %x[#{dm}]
+
+def main
+  $stdout = STDERR
+    if ($profiles[ARGV[0]] != nil) then
+      $defaults.merge!($profiles[ARGV[0]])
+    end
+
+    dm = dmenuOptsToString($defaults) 
+    $stdout = STDOUT
+    $stdout.puts %x[#{dm}]
+end
+
+main

@@ -132,22 +132,22 @@
 
 
 # Launcher Dmenu
-"dmenu-suggestions.rb | rdmenu launch | tr -d '\n' | xargs -0 -I INPUT handler INPUT"
+"dmenu-suggestions.rb | mdmenu launch | tr -d '\n' | xargs -0 -I INPUT handler INPUT"
 	m:0x8 + c:40
 	Alt + d
 
 # WM Dmenu
-"cat /usr/share/foo-wm/config/commands | rdmenu foowm | xargs -0 -I INPUT foo-wm-c /tmp/foo-wm.socket 'INPUT'"
+"cat /usr/share/foo-wm/config/commands | mdmenu foowm | xargs -0 -I INPUT foo-wm-c /tmp/foo-wm.socket 'INPUT'"
   m:0x8 + c:38
   Alt + a
 
 # Jump on Dmenu
-"markselect | rdmenu jump | xargs -0 -I MARK foo-wm-c '/tmp/foo-wm.socket' 'jump MARK'"
+"markselect | mdmenu jump | xargs -0 -I MARK foo-wm-c '/tmp/foo-wm.socket' 'jump MARK'"
   m:0x8 + c:65
   Alt + space
 
 # Wifi Network Listings in DMenu
-"find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | rdmenu netcfg | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK"
+"find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | mdmenu netcfg | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK"
 Alt + w
 
 #File Browser
