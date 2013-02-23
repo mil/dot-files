@@ -137,7 +137,7 @@
 	Alt + d
 
 # WM Dmenu
-"cat /usr/share/foo-wm/config/commands | rdmenu foowm | xargs -0 -I INPUT foo-wm-c /tmp/foo-wm.socket INPUT"
+"cat /usr/share/foo-wm/config/commands | rdmenu foowm | xargs -0 -I INPUT foo-wm-c /tmp/foo-wm.socket 'INPUT'"
   m:0x8 + c:38
   Alt + a
 
