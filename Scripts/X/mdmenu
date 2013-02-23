@@ -48,6 +48,22 @@ $profiles["foowm"]  = $app.merge({
     :sf => "#000000"
 })
 
+# Password Prompt for pwdhashX
+$profiles["domain"] = $app.merge({
+  :p => "Domain",
+  :sb => "#A2FF00",
+  :sf => "#000000"
+})
+
+$profiles["password"] = $app.merge({
+  :p => "Password",
+  :nb => "#000000",
+  :nf => "#000000",
+  :sb => "#000000",
+  :sf => "#a2ff00",
+  :l => "0"
+})
+
 $profiles["jump"] = {
   :p => "Jump",
   :fn => "Envy Code R-12",
@@ -60,20 +76,20 @@ $profiles["surfURI"] = $app.merge({
   :p => "Surf URI:"
 })
 
+$profiles["netcfg"] =  {
+  :p => "Netcfg",
+  :fn => "Envy Code R-11",
+  :sb => "#ffc400",
+  :nf => "#ffffff",
+  :nb => "#000000",
+  :sf => "#000000"
+}
+
 $profiles.merge({
-  "netcfg" => {
-    :p => "Netcfg",
-    :fn => "Envy Code R-11",
-    :sb => "#ffc400",
-    :nf => "#ffffff",
-    :nb => "#000000",
-    :sf => "#000000"
-  },
   "surfSearch" =>  $app.merge({
     :p => "Surf Find:"
   }),
-  "wifi" => {
-  }
+  "wifi" => { }
 })
 
 def dmenuOptsToString(optsHash)

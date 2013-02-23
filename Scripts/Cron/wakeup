@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-ENV['DISPLAY'] = ':0'
+ENV['DISPLAY'] = ':0.0'
 %x[xset dpms force on]
 
 Thread.new do

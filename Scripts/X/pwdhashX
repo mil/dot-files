@@ -1,53 +1,9 @@
 #!/usr/bin/env ruby
 # Gives prompt for domain and then password and runs
 # pwdhash on given domain/password combo
-
-#Options
-$dmenuOptions = { 
-  # Assumes dmenu with q,xywh,xft patches
-  # http://github.com/mil/dmenu-q-xywh-xft
-  :h => 20,
-  :x => 4,
-  :y => 22,
-  :w => 1014,
-  :fn => 'Envy Code R-9',
-  :sb => '#474747',
-  :sf => '#b7ff00',
-  :nb => '#000000',
-  :nf => '#ffffff',
-}
-
-def dmenuOptsToString(optsHash, prompt)
-  returnString = "dmenu -p '#{prompt}'"
-  optsHash.each do |option, value|
-    if (value.is_a? String)
-      value = "'#{value}'"
-    end
-    returnString = "#{returnString} -#{option} #{value}"
-  end
-
-  return returnString
-end
-
-def promptSite
-  dm = dmenuOptsToString($dmenuOptions, "Pwdhash for Site:")
-  domainList = File.open("/home/mil/.domains").read
-  domain = %x[echo "#{domainList}" |#{dm}].chomp!
-  return domain
-end
-
-def promptPassword(domain)
-  $dmenuOptions[:nf] = $dmenuOptions[:nb] #When typing password nothing appears
-  dm = dmenuOptsToString($dmenuOptions, "Password for #{domain}")
-  password = %x[echo "\n" |#{dm}].chomp!
-
-  return password
-end
-
-def main 
-  domain = promptSite
-  password = promptPassword(domain)
-  encryptedPassword = %x[pwdhash "#{domain}" "#{password}"].chomp!
-  %x[xdotool type #{encryptedPassword}]
-end
-main
+#
+domainList = File.open("/home/mil/.domains").read
+domain = %x[echo "#{domainList}" | mdmenu domain].chomp!
+password = %x[echo "\n" | mdmenu password].chomp!
+encryptedPassword = %x[pwdhash "#{domain}" "#{password}"].chomp!
+%x[xdotool type #{encryptedPassword}]
