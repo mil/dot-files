@@ -132,22 +132,22 @@
 
 
 # Launcher Dmenu
-"dmenu-suggestions.rb | dmenu -h 40 -b -x 40 -y 360 -w 900 -fn 'Envy Code R-13' -sb '#0073bf' -nf '#c4c4c4' -nb '#000000' -sf '#ffffff' -p 'Command' | tr -d '\n' | xargs -0 -I INPUT handler INPUT"
+"dmenu-suggestions.rb | rdmenu launch | tr -d '\n' | xargs -0 -I INPUT handler INPUT"
 	m:0x8 + c:40
 	Alt + d
 
 # WM Dmenu
-"cat /usr/share/foo-wm/config/commands | dmenu -h 40 -x 60 -y 350 -w 900 -fn 'Envy Code R-14' -sb '#91ff00' -nf '#ffffff' -nb '#000000' -sf '#000000' -b -p 'Foo-WM' | xargs -0 -I INPUT foo-wm-c /tmp/foo-wm.socket INPUT"
+"cat /usr/share/foo-wm/config/commands | rdmenu foowm | xargs -0 -I INPUT foo-wm-c /tmp/foo-wm.socket INPUT"
   m:0x8 + c:38
   Alt + a
 
 # Jump on Dmenu
-"markselect | dmenu -x 100 -y 400 -w 700 -h 40 -fn 'Envy Code R-12' -sb '#ffc400' -nf '#ffffff' -p 'Jump' -nb '#000000' -sf '#000000' | xargs -0 -I MARK foo-wm-c '/tmp/foo-wm.socket' 'jump MARK'"
+"markselect | rdmenu jump | xargs -0 -I MARK foo-wm-c '/tmp/foo-wm.socket' 'jump MARK'"
   m:0x8 + c:65
   Alt + space
 
 # Wifi Network Listings in DMenu
-"find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | dmenu -h 40 -x 100 -y 400 -w 800 -fn 'Envy Code R-11' -sb '#ffc400' -nf '#ffffff' -nb '#000000' -sf '#000000' -b -p 'Netcfg' | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK"
+"find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | rdmenu netcfg | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK"
 Alt + w
 
 #File Browser

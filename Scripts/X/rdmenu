@@ -3,31 +3,65 @@
 # Assumes dmenu with q,xywh,xft patches
 # http://github.com/mil/dmenu-q-xywh-xft
 
-def screen(arg) 
-  %x[xrandr | head -n1 | cut -d, -f2 | cut -d " " -f3-5].split(" x ")[arg == :width ? 0 : 1].to_i
-end
+# Setup Screen Dimensions Info
+xr = %x[xrandr | head -n1 | cut -d, -f2 | cut -d " " -f3-5].split(" x ")
+$screen = {
+  :width => xr[0].to_i,
+  :height => xr[1].to_i
+}
+
+# Setup App Dimensions Info
+$app = {}
 
 # Defaults
 $defaults = { 
   :h => 40,
   :x => 10,
-  :y => (screen(:height) / 2) - 20,
-  :w => screen(:width) - 20,
+  :y => ($screen[:height] / 2) - 20,
+  :w => $screen[:width] - 20,
   :fn => 'Envy Code R-13',
-  :sb => '#ffffff',
-  :sf => '#000000',
-  :nb => '#cccccc',
-  :nf => '#000000',
-  :p  => 'mil'
+  :sb => '#0073bf',
+  :sf => '#ffffff',
+  :nb => '#000000',
+  :nf => '#c4c4c4',
+  :p  => 'Rd Menu'
 }
 
 #Profiles
 $profiles = {
+  "launch" => {
+    :p => "Launch"
+  },
+  "foowm" => {
+    :p => "Foo-WM",
+    :fn => "Envy Code R-14",
+    :sb => "#91ff00",
+    :sf => "#000000"
+  },
+  "jump" => {
+    :p => "Jump",
+    :fn => "Envy Code R-12",
+    :sb => "#ffc400",
+    :nf => "#ffffff",
+    :sb => "#ffc400",
+    :sf => "#000000"
+  },
+  "netcfg" => {
+    :p => "Netcfg",
+    :fn => "Envy Code R-11",
+    :sb => "#ffc400",
+    :nf => "#ffffff",
+    :nb => "#000000",
+    :sf => "#000000"
+  },
   "surfURI" => {
     :p => "Surf"
   },
   "surfSearch" =>  {
     :p => "Search"
+  },
+  "wifi" => {
+
   }
 }
 
