@@ -12,7 +12,8 @@ def crawl(x, parent, id)
       crawl(y, x, id)
     end
   end
-  if (x["id"] == id) then
+
+  if (x["node"] == id) then
     if (parent == nil) then
       puts JSON tree
       exit
@@ -24,5 +25,5 @@ def crawl(x, parent, id)
 end
 
 tree = JSON.parse(%x[foo-wm-c '/tmp/foo-wm.socket' 'get tree'])
-focus = JSON.parse(%x[foo-wm-c '/tmp/foo-wm.socket' 'get focus'])["id"]
+focus = JSON.parse(%x[foo-wm-c '/tmp/foo-wm.socket' 'get focus'])["node"]
 crawl(tree, nil, focus)

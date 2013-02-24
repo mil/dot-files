@@ -58,43 +58,32 @@ loop do
   f = %x[foo-wm-c /tmp/foo-wm.socket 'get focus'].chomp!
   container = "Foo Window Manger"
   if (f == "Foo") then
-    win = "Foo Window Manager"
+    right = "Foo Window Manager"
   else
-
     c = JSON.parse %x[foo-focus-child-json]
-    client = %x[xwininfo -id #{c["id"]} | head -n2 | tail -n1].match(/"(.+)"/)[1].to_s[0..30] 
 
     d = JSON.parse %x[foo-focus-parent-json]
     layout = capFirst(d["layout"].to_s.downcase)
     children = d["children"].size.to_s
 
-    if ( (JSON %x[foo-wm-c /tmp/foo-wm.socket 'get focus'])["type"] == "container") then
-      client = client.fg(1)
-      children = children.fg(6)
-    else
+    right = "#{layout.fg(4)} <#{children.fg(5)}: "
+    center = ""
+    #right = "#{client}"
+    JSON.parse(%x[foo-focus-parent-json])["children"].each do |c|
+      if c["type"] == "client" then
+        name = %x[xptr-to-title #{c["id"]}].chomp!
+      else
+        name = "#{capFirst(c["layout"].downcase)} Set[#{c["children"].size}]"
+      end
+      name = name[0..20]
+      name = name.fg((c["node"] == foo("get focus")["node"]) ? 6 : 1)
+      right = right + name + " | "
     end
-    container = "#{layout} of ".fg(6) +  children.to_s.fg(7)
-    client = client.fg(4)
-    client = "#{container} / #{client}"
+    right = "#{right}>"
 
   end
-
-  right = "#{layout.fg(4)}" + " ["
-  center = ""
-  #right = "#{client}"
-  JSON.parse(%x[foo-focus-parent-json])["children"].each do |c|
-    if c["type"] == "client" then
-      name = %x[xptr-to-title #{c["id"]}].chomp!
-    else
-      name = "#{capFirst(c["layout"].downcase)} Set[#{c["children"].size}]"
-    end
-    name = name[0..20]
-    name = name.fg((c["id"] == foo("get focus")["id"]) ? 6 : 1)
-    right = right + name + " | "
-  end
-
   zoom = %x[foo-zoom-level].chomp!
-  right = "#{right}] Depth: #{zoom.to_s.fg(7)}"
+  center = "Z".fg(5) + " = " + "#{zoom.to_s.fg(3)}"
 
 
   s = "#{battery}#{network}#{volume}#{time}\\c#{center}\\r#{right}"

@@ -253,3 +253,6 @@ export PERL_MB_OPT="--install_base /home/mil/perl5";
 export PERL_MM_OPT="INSTALL_BASE=/home/mil/perl5";
 export PERL5LIB="/home/mil/perl5/lib/perl5/i686-linux-thread-multi:/home/mil/perl5/lib/perl5";
 export PATH="/home/mil/perl5/bin:$PATH";
+
+
+touch /tmp/bar-refresh

@@ -220,3 +220,6 @@ XF86MonBrightnessUp
 "tabbed"
     m:0x8 + c:49
     Alt + grave
+
+"touch /tmp/bar-refresh"
+  m:0x100 + b:1 (mouse)

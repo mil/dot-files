@@ -48,7 +48,7 @@ end
 #Profiles
 $profiles = {}
 $profiles["launch"] = { :p => "Launch" }
-$profiles["foowm"]  = $app.merge({
+$profiles["foowm"]  = $defaults.merge({
     :p => "Foo-WM",
     :sb => "#91ff00",
     :sf => "#000000"
