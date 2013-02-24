@@ -66,20 +66,31 @@ loop do
     layout = capFirst(d["layout"].to_s.downcase)
     children = d["children"].size.to_s
 
-    right = "#{layout.fg(4)} <#{children.fg(5)}: "
+    maxWidth = 50
+    right = "#{layout.fg(4)}" +  " / ".fg(3)
     center = ""
     #right = "#{client}"
-    JSON.parse(%x[foo-focus-parent-json])["children"].each do |c|
+    stack = JSON.parse(%x[foo-focus-parent-json])["children"]
+    stack.each_with_index do |c, i|
       if c["type"] == "client" then
         name = %x[xptr-to-title #{c["id"]}].chomp!
       else
         name = "#{capFirst(c["layout"].downcase)} Set[#{c["children"].size}]"
       end
-      name = name[0..20]
-      name = name.fg((c["node"] == foo("get focus")["node"]) ? 6 : 1)
-      right = right + name + " | "
+      foc  = foo("get focus")["node"]
+      if (c["node"] == foc) then
+        name = name[0..20].fg(6)
+        name = name + " , ".fg(3) unless c == stack.last
+      elsif ((i != 0 && foc == stack[i - 1]["node"]) || (stack[i] != stack.last && foc == stack[i + 1]["node"])) then
+        name = name[0..10].fg(1) 
+        name = name + " , ".fg(3) unless c == stack.last
+      else
+        name = ".".fg(1)
+      end
+
+      right = right + name 
     end
-    right = "#{right}>"
+    right = "#{right}"
 
   end
   zoom = %x[foo-zoom-level].chomp!
