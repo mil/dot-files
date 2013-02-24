@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'json'
 # A dmenu display customization script
 # Assumes dmenu with q,xywh,xft patches
 # http://github.com/mil/dmenu-q-xywh-xft
@@ -11,7 +12,6 @@ $screen = {
 }
 
 # Setup App Dimensions Info
-xwin = %x[xwininfo -id `foo-wm-c /tmp/foo-wm.socket 'get focus' | json id`]
 
 # Defaults
 $defaults = { 
@@ -26,18 +26,24 @@ $defaults = {
   :nf => '#c4c4c4',
   :p  => 'Rd Menu'
 }
-font = ((xwin.match(/Width: (\d.+)$/)[1].to_i - 20 ) > 200) ? "Envy Code R-12" : "Terminus-9"
 
-$app = {
-  :fn => font,
-  :w => xwin.match(/Width: (\d.+)$/)[1].to_i - 20,
-  :h=> (xwin.match(/Height: (\d.+)$/)[1].to_i / 11) - 1,
-  :x => xwin.match(/Absolute.+X:  (\d(.+)?)$/)[1].to_i + 10,
-  :y => xwin.match(/Absolute.+Y:  (\d(.+)?)$/)[1].to_i + 10,
-  :l => "10"
-}
+f = %x[foo-wm-c /tmp/foo-wm.socket 'get focus'].chomp!
+if (f != "Foo" && JSON.parse(f)["type"] != "container") then 
+  xwin = %x[xwininfo -id #{JSON.parse(f)["id"]}]
+  font = ((xwin.match(/Width: (\d.+)$/)[1].to_i - 20 ) > 200) ? "Envy Code R-12" : "Terminus-9"
 
+  $app = {
+    :fn => font,
+    :w => xwin.match(/Width: (\d.+)$/)[1].to_i - 20,
+    :h=> (xwin.match(/Height: (\d.+)$/)[1].to_i / 11) - 1,
+    :x => xwin.match(/Absolute.+X:  (\d(.+)?)$/)[1].to_i + 10,
+    :y => xwin.match(/Absolute.+Y:  (\d(.+)?)$/)[1].to_i + 10,
+    :l => "10"
+  }
 
+else
+  $app = $defaults
+end
 
 #Profiles
 $profiles = {}
@@ -113,6 +119,7 @@ def main
     dm = dmenuOptsToString($defaults) 
     $stdout = STDOUT
     $stdout.puts %x[#{dm}]
+    %x[touch /tmp/bar-refresh]
 end
 
 main

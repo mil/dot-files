@@ -6,6 +6,12 @@ xmodmap ~/.xmodmap &
 feh --bg-scale ~/.wallpaper.jpg &
 
 # setwm
+if [ -f "/usr/bin/tpb" ];
+then
+sudo tpb &
+fi &
+bar-start &
 xbindkeys &
 dunst &
-exec i3
+keynav &
+exec foo-wm

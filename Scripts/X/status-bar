@@ -47,7 +47,15 @@ loop do
 
 
   #s = "\\u8#{wifi} #{battery} #{volume}\\c#{marks}\\r#{time} #{subway} #{weather}l"
-  win = %x[xwininfo -id `foo-wm-c /tmp/foo-wm.socket 'get focus' | json id` | head -n2 | tail -n1].match(/"(.+)"/)[1].fg(4)
+  f = %x[foo-wm-c /tmp/foo-wm.socket 'get focus'].chomp!
+  if (f == "Foo") then
+    win = "Foo Window Manager"
+  elsif (JSON.parse(f)["type"] == "container") then
+    children = JSON.parse(f)["children"].size
+    win = "Container [#{children}]"
+  else
+    win = %x[xwininfo -id `foo-wm-c /tmp/foo-wm.socket 'get focus' | json id` | head -n2 | tail -n1].match(/"(.+)"/)[1].fg(4)
+  end
 
   active = "| #{win}"
 
@@ -59,6 +67,6 @@ loop do
 
   count = count + 1
   if (count > 1) then
-    sleep 20
+    %x[inotifywait /tmp/bar-refresh]
   end
 end
