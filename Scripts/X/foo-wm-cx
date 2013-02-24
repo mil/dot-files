@@ -1,0 +1,3 @@
+#!/bin/sh
+foo-wm-c "$@"
+touch /tmp/bar-refresh
