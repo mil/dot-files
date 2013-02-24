@@ -36,20 +36,20 @@ loop do
   volume = "#{volumeLabel}#{volumeValue}"
 
 
-  time = Time.now.to_s.gsub!(/:\d{2}\s.+/, '').gsub!(/(\d{2}:\d{2})/, "\\f8| \\f4\\1")
+  time = Time.now.to_s.gsub!(/:\d{2}\s.+/, '').gsub!(/(\d{2}:\d{2})/, "\\f3| \\f6\\1")
   time = "\\fr\\br #{time}\\br\\fr"
 
 
   m = JSON %x[foo-wm-c "/tmp/foo-wm.socket" "get marks"]
   marks = m["marks"].join(" // \\f4".fg(4))
 
-  marks = "\\f4\\b2 #{marks} \\br\\fr"
+  marks = "\\f5 #{marks} \\br\\fr"
 
 
-  #s = "\\u8#{wifi} #{battery} #{volume}\\c#{marks}\\r#{time} #{subway} #{weather}"
-  authed = %x[ls /mnt/auth | wc -m].to_i > 0 ?  "Authenticated".fg(1) : "Not Authenticated"
+  #s = "\\u8#{wifi} #{battery} #{volume}\\c#{marks}\\r#{time} #{subway} #{weather}l"
+  win = %x[xwininfo -id `foo-wm-c /tmp/foo-wm.socket 'get focus' | json id` | head -n2 | tail -n1].match(/"(.+)"/)[1].fg(4)
 
-  active = "| #{authed}"
+  active = "| #{win}"
 
   s = "#{battery}#{network}#{volume}\\c#{time}\\r#{marks}#{active}"
 

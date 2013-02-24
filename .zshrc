@@ -115,6 +115,8 @@ alias pacman='pacman-color'
 alias vim='vim -u ~/.vimrc'
 alias gcalc='pwdhash google.com | sed -n 2p | xargs -0 -I XXX gcalcli --user miles.sandlar@gmail.com --pw XXX'
 
+alias ssh="TERM=linux ssh"
+
 alias mwm='exec /home/mil/repos/github/mwm/mwm'
 
 
