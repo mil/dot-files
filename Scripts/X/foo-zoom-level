@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+require 'json'
+
+
+def crawl(x, count, id)
+  if (!x || x["children"] == "") then
+    return
+  end
+
+  if x["children"].size != 0 then
+    x["children"].each do |y|
+      crawl(y, count + 1, id)
+    end
+  end
+  if (x["node"] == id) then
+    puts count
+    exit
+  end
+end
+
+tree = JSON.parse(%x[foo-wm-c '/tmp/foo-wm.socket' 'get tree'])
+view = JSON.parse(%x[foo-wm-c '/tmp/foo-wm.socket' 'get view'])["node"]
+
+crawl(tree, 0, view)

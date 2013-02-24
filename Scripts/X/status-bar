@@ -15,6 +15,10 @@ class String
   end
 end
 
+def foo(x)
+  JSON.parse(%x[foo-wm-c /tmp/foo-wm.socket \'#{x}'])
+end
+
 def capFirst(a)
   return a.slice(0,1).capitalize + a.slice(1..-1)
 end
@@ -66,10 +70,8 @@ loop do
 
     if ( (JSON %x[foo-wm-c /tmp/foo-wm.socket 'get focus'])["type"] == "container") then
       client = client.fg(1)
-      layout = layout.fg(4)
       children = children.fg(6)
     else
-      layout = layout.fg(1)
     end
     container = "#{layout} of ".fg(6) +  children.to_s.fg(7)
     client = client.fg(4)
@@ -77,10 +79,23 @@ loop do
 
   end
 
-  zoom = "Zoom ".fg(5) + "|" + " 3".fg(5) + " "
-  
-  center = "#{zoom} | #{marks}"
-  right = "#{client}"
+  right = "#{layout.fg(4)}" + " ["
+  center = ""
+  #right = "#{client}"
+  JSON.parse(%x[foo-focus-parent-json])["children"].each do |c|
+    if c["type"] == "client" then
+      name = %x[xptr-to-title #{c["id"]}].chomp!
+    else
+      name = "#{capFirst(c["layout"].downcase)} Set[#{c["children"].size}]"
+    end
+    name = name[0..20]
+    name = name.fg((c["id"] == foo("get focus")["id"]) ? 6 : 1)
+    right = right + name + " | "
+  end
+
+  zoom = %x[foo-zoom-level].chomp!
+  right = "#{right}] Depth: #{zoom.to_s.fg(7)}"
+
 
   s = "#{battery}#{network}#{volume}#{time}\\c#{center}\\r#{right}"
 
