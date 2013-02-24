@@ -15,6 +15,10 @@ class String
   end
 end
 
+def capFirst(a)
+  return a.slice(0,1).capitalize + a.slice(1..-1)
+end
+
 count = 0
 loop do
   # Battery
@@ -48,18 +52,37 @@ loop do
 
   #s = "\\u8#{wifi} #{battery} #{volume}\\c#{marks}\\r#{time} #{subway} #{weather}l"
   f = %x[foo-wm-c /tmp/foo-wm.socket 'get focus'].chomp!
+  container = "Foo Window Manger"
   if (f == "Foo") then
     win = "Foo Window Manager"
-  elsif (JSON.parse(f)["type"] == "container") then
-    children = JSON.parse(f)["children"].size
-    win = "Container [#{children}]"
   else
-    win = %x[xwininfo -id `foo-wm-c /tmp/foo-wm.socket 'get focus' | json id` | head -n2 | tail -n1].match(/"(.+)"/)[1].fg(4)
+
+    c = JSON.parse %x[foo-focus-child-json]
+    client = %x[xwininfo -id #{c["id"]} | head -n2 | tail -n1].match(/"(.+)"/)[1].to_s[0..30] 
+
+    d = JSON.parse %x[foo-focus-parent-json]
+    layout = capFirst(d["layout"].to_s.downcase)
+    children = d["children"].size.to_s
+
+    if ( (JSON %x[foo-wm-c /tmp/foo-wm.socket 'get focus'])["type"] == "container") then
+      client = client.fg(1)
+      layout = layout.fg(4)
+      children = children.fg(6)
+    else
+      layout = layout.fg(1)
+    end
+    container = "#{layout} of ".fg(6) +  children.to_s.fg(7)
+    client = client.fg(4)
+    client = "#{container} / #{client}"
+
   end
 
-  active = "| #{win}"
+  zoom = "Zoom ".fg(5) + "|" + " 3".fg(5) + " "
+  
+  center = "#{zoom} | #{marks}"
+  right = "#{client}"
 
-  s = "#{battery}#{network}#{volume}\\c#{time}\\r#{marks}#{active}"
+  s = "#{battery}#{network}#{volume}#{time}\\c#{center}\\r#{right}"
 
 
   STDOUT.puts s
