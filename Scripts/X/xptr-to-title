@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+puts %x[xwininfo -id #{ARGV[0]} | head -n2 | tail -n1].match(/\"(.+)\"/)[1].to_s

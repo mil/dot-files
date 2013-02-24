@@ -1,5 +1,5 @@
 ### Applications 
-"urxvt"
+"handler urxvt"
     m:0x8 + c:36
     Alt + enter 
 
@@ -12,7 +12,7 @@
     XF86Launch1
 
 
-"surf"
+"handler surf"
     m:0x8 + c:51
     Alt + backslash
 

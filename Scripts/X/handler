@@ -42,7 +42,7 @@ if [ ${#@} == 1 ]; then
 		export isUrl=`url $@`
 		if [[ "$isUrl" == "1" ]]; then
 			#Passed a URL
-			eval "$BROWSER $@"
+			eval "$BROWSER $@" && touch /tmp/refresh-bar
 			exit
 		fi
 	fi
@@ -55,12 +55,14 @@ for arg in $@; do
 		queryString=${web["$arg"]}
 	else
 		#Just another generic arg
-		exec="$exec$arg "
+		exec="$exec$arg "&& touch /tmp/refresh-bar
 	fi
 done
 
 if   [ -n "$queryString" ]; then
-	eval $BROWSER "'$queryString$exec'"
+	eval $BROWSER "'$queryString'" 
+  exec touch /tmp/refresh-bar
 else
-	eval $exec
+	eval $exec && touch /tmp/refresh-bar
 fi
+
