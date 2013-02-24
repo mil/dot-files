@@ -16,7 +16,16 @@ class String
 end
 
 def foo(x)
-  JSON.parse(%x[foo-wm-c /tmp/foo-wm.socket \'#{x}'])
+  a = %x[foo-wm-c /tmp/foo-wm.socket \'#{x}']
+  if (a.chomp! == "Foo") then
+    return {
+      :layout => "?",
+      :children => [],
+      :node => "?"
+    }
+  else
+    JSON.parse(a)
+  end
 end
 
 def capFirst(a)
@@ -62,20 +71,32 @@ loop do
   else
     c = JSON.parse %x[foo-focus-child-json]
 
-    d = JSON.parse %x[foo-focus-parent-json]
+    begin
+      d = JSON.parse %x[foo-focus-parent-json]
+    rescue
+      d = {
+        "layout" => "?",
+        "children" => "?"
+      }
+    end
+
     layout = capFirst(d["layout"].to_s.downcase)
     children = d["children"].size.to_s
 
     maxWidth = 50
-    right = "#{layout.fg(4)}" +  " / ".fg(3)
+    right = "#{layout.fg(4)}[#{children.fg(7)}]" +  " / ".fg(3)
     center = ""
     #right = "#{client}"
-    stack = JSON.parse(%x[foo-focus-parent-json])["children"]
+    begin
+      stack = JSON.parse(%x[foo-focus-parent-json])["children"]
+    rescue
+      stack = []
+    end
     stack.each_with_index do |c, i|
       if c["type"] == "client" then
         name = %x[xptr-to-title #{c["id"]}].chomp!
       else
-        name = "#{capFirst(c["layout"].downcase)} Set[#{c["children"].size}]"
+        name = "#{c["layout"][0].upcase}-Set [#{c["children"].size}]"
       end
       foc  = foo("get focus")["node"]
       if (c["node"] == foc) then
