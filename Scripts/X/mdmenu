@@ -58,6 +58,7 @@ $profiles["foowm"]  = $defaults.merge({
 $profiles["domain"] = $app.merge({
   :p => "Domain",
   :sb => "#A2FF00",
+  :fn => "Envy Code R-11",
   :sf => "#000000"
 })
 
@@ -65,9 +66,7 @@ $profiles["password"] = $app.merge({
   :p => "Password",
   :nb => "#000000",
   :nf => "#000000",
-  :sb => "#000000",
-  :sf => "#a2ff00",
-  :l => "0"
+  :fn => "Envy Code R-11",
 })
 
 $profiles["jump"] = {

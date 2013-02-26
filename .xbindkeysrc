@@ -130,6 +130,10 @@
 	m:0x8 + c:28
 	Alt + t
 
+"foo-undo"
+  m:0x9 + c:52
+  Shift+Alt + z
+
 
 # Launcher Dmenu
 "dmenu-suggestions.rb | mdmenu launch | tr -d '\n' | xargs -0 -I INPUT handler INPUT"

@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'json'
 
+
 def unicodeSymbol(unicodeNumber)
   return ""
   return %x[echo -ne "\\uE#{unicodeNumber}"]
@@ -27,6 +28,7 @@ def foo(x)
     JSON.parse(a)
   end
 end
+
 
 def capFirst(a)
   return a.slice(0,1).capitalize + a.slice(1..-1)
@@ -100,10 +102,10 @@ loop do
       end
       foc  = foo("get focus")["node"]
       if (c["node"] == foc) then
-        name = name[0..20].fg(6)
+        name = name[0..16].fg(6)
         name = name + " , ".fg(3) unless c == stack.last
       elsif ((i != 0 && foc == stack[i - 1]["node"]) || (stack[i] != stack.last && foc == stack[i + 1]["node"])) then
-        name = name[0..10].fg(1) 
+        name = name[0..8].fg(1) 
         name = name + " , ".fg(3) unless c == stack.last
       else
         name = ".".fg(1)
@@ -116,6 +118,7 @@ loop do
   end
   zoom = %x[foo-zoom-level].chomp!
   center = "Z".fg(5) + " = " + "#{zoom.to_s.fg(3)}"
+  center = "#{center} #{marks}"
 
 
   s = "#{battery}#{network}#{volume}#{time}\\c#{center}\\r#{right}"
@@ -126,6 +129,6 @@ loop do
 
   count = count + 1
   if (count > 1) then
-    %x[inotifywait /tmp/bar-refresh]
+    %x[inotifywait -t 20 /tmp/bar-refresh]
   end
 end

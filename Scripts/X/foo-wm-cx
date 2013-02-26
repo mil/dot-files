@@ -1,3 +1,5 @@
 #!/bin/sh
 foo-wm-c "$@"
+shift
+echo "$@" >> /tmp/foo-history-a
 touch /tmp/bar-refresh
