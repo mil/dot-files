@@ -118,6 +118,24 @@
 	m:0x8 + c:30
 	Alt + u
 
+"foo-magnify -"
+	m:0x9 + c:31
+	Shift+Alt + i 
+
+"foo-magnify +"
+	m:0x9 + c:30
+	Shift+Alt + u
+
+
+
+
+"foo-magnify +"
+	m:0x9 + c:44
+	Shift+Alt + j
+
+
+
+
 
 # Killing Clients
 "foo-wm-cx  /tmp/foo-wm.socket 'kill client'"

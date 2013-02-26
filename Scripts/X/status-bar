@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'json'
 
+%x[killall status-bar]
 
 def unicodeSymbol(unicodeNumber)
   return ""
