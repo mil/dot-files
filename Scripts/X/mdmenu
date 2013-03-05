@@ -27,22 +27,28 @@ $defaults = {
   :p  => 'Rd Menu'
 }
 
-f = %x[foo-wm-c /tmp/foo-wm.socket 'get focus'].chomp!
-if (f != "Foo" && JSON.parse(f)["type"] != "container") then 
-  xwin = %x[xwininfo -id #{JSON.parse(f)["id"]}]
-  font = ((xwin.match(/Width: (\d.+)$/)[1].to_i - 20 ) > 200) ? "Envy Code R-12" : "Terminus-9"
+if (%x[pidof foo-wm].chomp! =~ /\d/) then
 
-  $app = {
-    :fn => font,
-    :w => xwin.match(/Width: (\d.+)$/)[1].to_i - 20,
-    :h=> (xwin.match(/Height: (\d.+)$/)[1].to_i / 11) - 1,
-    :x => xwin.match(/Absolute.+X:  (\d(.+)?)$/)[1].to_i + 10,
-    :y => xwin.match(/Absolute.+Y:  (\d(.+)?)$/)[1].to_i + 10,
-    :l => "10"
-  }
+  f = %x[foo-wm-c /tmp/foo-wm.socket 'get focus'].chomp!
+  if (f != "Foo" && JSON.parse(f)["type"] != "container") then 
+    xwin = %x[xwininfo -id #{JSON.parse(f)["id"]}]
+    font = ((xwin.match(/Width: (\d.+)$/)[1].to_i - 20 ) > 200) ? "Envy Code R-12" : "Terminus-9"
 
+    $app = {
+      :fn => font,
+      :w => xwin.match(/Width: (\d.+)$/)[1].to_i - 20,
+      :h=> (xwin.match(/Height: (\d.+)$/)[1].to_i / 11) - 1,
+      :x => xwin.match(/Absolute.+X:  (\d(.+)?)$/)[1].to_i + 10,
+      :y => xwin.match(/Absolute.+Y:  (\d(.+)?)$/)[1].to_i + 10,
+      :l => "10"
+    }
+
+  else
+    $app = $defaults
+  end
 else
-  $app = $defaults
+    $app = $defaults
+
 end
 
 #Profiles

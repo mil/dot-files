@@ -221,6 +221,7 @@ local FMT_BRANCH="%F{9}(%s:%F{7}%{$IT%}%r%{$ST%}%F{9}) %F{11}%B%b %K{235}%{$IT%}
 local FMT_ACTION="(%F{3}%a%f)"
 local FMT_PATH="%F{1}%R%F{2}/%S%f"
 
+export XDG_CONFIG_HOME='/home/mil/.config'
 setprompt() {
   local USER="%F{9}${terminfo[bold]}%n%f"
   local HOST="%F{4}%M%f"

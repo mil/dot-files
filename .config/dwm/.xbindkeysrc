@@ -1,0 +1,111 @@
+### Applications 
+"handler urxvt"
+    Shift+Alt + enter 
+
+#"handler surf"
+  #Shift+Alt + backslash
+
+"urxvt -e 'rangerterm'"
+	m:0x8 + c:48
+	Alt + apostrophe
+
+"urxvt -e 'rangerterm'"
+    m:0x0 + c:156
+    XF86Launch1
+
+
+"handler surf"
+    m:0x8 + c:51
+    Alt + backslash
+
+"xdotool getactivewindow windowkill"
+	m:0x9 + c:24
+	Shift+Alt + q
+
+### WM
+
+# Launcher Dmenu
+"dmenu-suggestions.rb | mdmenu launch | tr -d '\n' | xargs -0 -I INPUT handler INPUT"
+	m:0x8 + c:40
+	Alt + d
+
+# WM Dmenu
+"cat /usr/share/foo-wm/config/commands | mdmenu foowm | xargs -0 -I INPUT foo-wm-cx /tmp/foo-wm.socket 'INPUT'"
+  m:0x8 + c:38
+  Alt + a
+
+# Jump on Dmenu
+"markselect | mdmenu jump | xargs -0 -I MARK foo-wm-cx '/tmp/foo-wm.socket' 'jump MARK'"
+  m:0x8 + c:65
+  Alt + space
+
+# Wifi Network Listings in DMenu
+"find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | mdmenu netcfg | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK"
+Alt + w
+
+#File Browser
+"browse"
+Shift+Alt + f
+
+"pwdhashX"
+Shift+Alt + p
+
+
+#Brightness controls
+"sudo brightcontrol down"
+XF86MonBrightnessDown
+
+"sudo brightcontrol up"
+XF86MonBrightnessUp
+
+
+#Multimedia
+"dvol -i 2"
+	m:0x0 + c:123
+	XF86AudioRaiseVolume
+
+"dvol -d 2"
+	m:0x0 + c:122
+	XF86AudioLowerVolume
+
+"dvol -t"
+	m:0x0 + c:121
+	XF86AudioMute	
+
+"mediaControl previous"
+	m:0x0 + c:173
+	XF86AudioPrev
+"mediaControl previous"
+  m:0x0 + c:72
+  F6
+
+"mediaControl next"
+	m:0x0 + c:171
+	XF86AudioNext
+"mediaControl next"
+  m:0x0 + c:74
+  F8
+
+"mediaControl pause"
+	m:0x0 + c:172
+	XF86AudioPlay
+"mediaControl pause"
+  m:0x0 + c:73
+  F7
+  
+
+"scrot -s"
+    m:0x9 + c:13
+    Shift+Alt + 4
+
+"`sselp`"
+  m:0x8 + c:27
+  Alt + r
+
+"touchpad"
+  m:0x0 + c:169
+  XF86Eject
+
+"tabbed"
+    m:0x8 + c:49
+    Alt + grave

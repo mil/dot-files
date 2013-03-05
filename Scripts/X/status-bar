@@ -46,12 +46,12 @@ loop do
   battery = "#{batteryStatus}#{batteryValue}"
 
   # Network
-  networkLabel = " Network ".fg(1).bg(2)
+  networkLabel = " Netcfg ".fg(1).bg(2)
   networkValue = " #{%x[netcfg current].chomp!} ".fg(5)
   network = "#{networkLabel}#{networkValue}"
 
   #Volume
-  volumeLabel = " Volume ".fg(1).bg(2)
+  volumeLabel = " Vol ".fg(1).bg(2)
   volumeValue = " #{%x[amixer get Master | grep -woE '([0-9]+)\%' | head -1].chomp!} ".fg(6)
   volume = "#{volumeLabel}#{volumeValue}"
 

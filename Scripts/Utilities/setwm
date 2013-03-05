@@ -17,6 +17,9 @@ commands = {
     "x-focus-manager",
     "x-session"
 ],
+  "euclid" => [
+    "euclid-wm"
+],
 
   "meis-wm" => [
     "bar-start",
@@ -24,6 +27,14 @@ commands = {
     "exec /home/mil/Code/Github/meis-wm/meis-wm",
     "exec /home/mil/Code/Github/meis-wm/x-session"
 ],
+
+  "column" => [
+    "xbindkeys -f /home/mil/Code/Github/column-wm/.xbindkeysrc",
+    "exec /home/mil/Code/Github/column-wm/column-wm",
+    "exec /home/mil/Code/Github/column-wm/x-session"
+],
+
+
 
   "scrollwm" => [
     "bar-start",
@@ -36,11 +47,11 @@ commands = {
     "xbindkeys  -f /home/mil/.bp",
     "exec bspwm"
 ],
-
-
-
-
-
+  "wmii" => [
+    "xbindkeys",
+    "exec wmii",
+    "urxvt"
+],
 
 
   "hack" => [
@@ -55,8 +66,9 @@ commands = {
     "exec /home/mil/code/repos/github/simple-wm/simple-wm"
 ],
   "i3" => [
+    "keynav",
     #"xchainkeys",
-    "xbindkeys",
+   # "xbindkeys -f /home/mil/.i3/.xbindkeysrc",
     "dunst",
     "exec i3"
 ],
@@ -82,15 +94,18 @@ commands = {
     "exec jwm"
 ],
   "monsterwm" => [
-    "xbindkeys",
-    "exec /home/mil/code/repos/github/monsterwm/monsterwm"
+    #"xbindkeys",
+    "exec monsterwm"
 ],
-  "dwm" => [
+  "local-dwm" => [
     "xbindkeys",
     "exec /home/mil/code/scratch/c/dwm-6.0/dwm"
 ],
 
-  "system-dwm" => [ "xbindkeys", "exec dwm" ],
+  "dwm" => [ 
+    "xbindkeys -f /home/mil/.config/dwm/.xbindkeysrc", 
+    "exec dwm" 
+  ],
   "windowlab" => [
     "xbindkeys",
     "exec windowlab"
