@@ -28,12 +28,20 @@ focus_follows_mouse no
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+semicolon exec surf
+
+#Past
+bindsym $mod+x exec xdotool type `sselp`
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
+# dmenus
 bindsym $mod+d exec dmenu-suggestions.rb | mdmenu launch | tr -d '\n' | xargs -0 -I INPUT handler INPUT
+bindsym $mod+Shift+p exec pwdhashX
+bindsym $mod+Shift+w exec find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | mdmenu netcfg | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK
+
+
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -85,10 +93,10 @@ bindsym $mod+3 workspace three
 bindsym $mod+4 workspace four
 bindsym $mod+5 workspace five
 bindsym $mod+6 workspace six
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+7 workspace seven
+bindsym $mod+8 workspace eight
+bindsym $mod+9 workspace nine
+bindsym $mod+0 workspace ten
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace one
@@ -97,10 +105,10 @@ bindsym $mod+Shift+3 move container to workspace three
 bindsym $mod+Shift+4 move container to workspace four
 bindsym $mod+Shift+5 move container to workspace five
 bindsym $mod+Shift+6 move container to workspace six
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+7 move container to workspace seven
+bindsym $mod+Shift+8 move container to workspace eight
+bindsym $mod+Shift+9 move container to workspace nine
+bindsym $mod+Shift+0 move container to workspace ten
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -134,19 +142,20 @@ bindsym $mod+r mode "resize"
 bar {
         position top
         status_command i3status
-        font pango:Envy Code R 8
+        font pango:Envy Code R 9
         colors {
-          background #ffffff
+          background #f5f5f5
           statusline #000000
-          focused_workspace #ffffff #000000 #ffffff
+          focused_workspace #e6e6e6 #00369c #ffffff
           active_workspace #ffffff #999999 #ffffff
-          inactive_workspace #ffffff #dbdbdb #757575
+          inactive_workspace #ffffff #f0f0f0 #757575
           urgent_workspace #000000 #ffffff
         }
 }
 
 
 
+client.background #ffffff
 #border background text
 client.focused #67c700 #ebffd6 #000000
 client.focused_inactive #000000 #ebf4ff #404040

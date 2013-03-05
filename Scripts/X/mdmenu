@@ -47,17 +47,27 @@ if (%x[pidof foo-wm].chomp! =~ /\d/) then
     $app = $defaults
   end
 else
-    $app = $defaults
+  xwin = %x[xwininfo -id `xdotool getactivewindow`]
 
+  font = ((xwin.match(/Width: (\d.+)$/)[1].to_i - 20 ) > 200) ? "Envy Code R-12" : "Terminus-9"
+
+  $app = {
+    :fn => font,
+    :w => xwin.match(/Width: (\d.+)$/)[1].to_i - 20,
+    :h=> (xwin.match(/Height: (\d.+)$/)[1].to_i / 11) - 1,
+    :x => xwin.match(/Absolute.+X:  (\d(.+)?)$/)[1].to_i + 10,
+    :y => xwin.match(/Absolute.+Y:  (\d(.+)?)$/)[1].to_i + 10,
+    :l => "10"
+  }
 end
 
 #Profiles
 $profiles = {}
 $profiles["launch"] = { :p => "Launch" }
 $profiles["foowm"]  = $defaults.merge({
-    :p => "Foo-WM",
-    :sb => "#91ff00",
-    :sf => "#000000"
+  :p => "Foo-WM",
+  :sb => "#91ff00",
+  :sf => "#000000"
 })
 
 # Password Prompt for pwdhashX
@@ -98,8 +108,8 @@ $profiles["netcfg"] =  {
 
 $profiles.merge({
   "surfSearch" =>  $app.merge({
-    :p => "Surf Find:"
-  }),
+  :p => "Surf Find:"
+}),
   "wifi" => { }
 })
 
@@ -117,14 +127,14 @@ end
 
 def main
   $stdout = STDERR
-    if ($profiles[ARGV[0]] != nil) then
-      $defaults.merge!($profiles[ARGV[0]])
-    end
+  if ($profiles[ARGV[0]] != nil) then
+    $defaults.merge!($profiles[ARGV[0]])
+  end
 
-    dm = dmenuOptsToString($defaults) 
-    $stdout = STDOUT
-    $stdout.puts %x[#{dm}]
-    %x[touch /tmp/bar-refresh]
+  dm = dmenuOptsToString($defaults) 
+  $stdout = STDOUT
+  $stdout.puts %x[#{dm}]
+  %x[touch /tmp/bar-refresh]
 end
 
 main
