@@ -1,6 +1,8 @@
 #!/usr/bin/ruby
 ENV['PATH'].split(':').each do |directory|
-	puts %x[ls #{directory}]
+  if File.exists?(directory) then
+    puts %x[ls #{directory}]
+  end
 end
 
 puts [

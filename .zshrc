@@ -247,7 +247,7 @@ precmd() {
 		setprompt
 }
 
-cat ~/.TODO 2> /dev/null
+#cat ~/.TODO 2> /dev/null
 
 export PERL_LOCAL_LIB_ROOT="/home/mil/perl5";
 export PERL_MB_OPT="--install_base /home/mil/perl5";

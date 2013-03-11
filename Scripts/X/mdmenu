@@ -28,7 +28,6 @@ $defaults = {
 }
 
 if (%x[pidof foo-wm].chomp! =~ /\d/) then
-
   f = %x[foo-wm-c /tmp/foo-wm.socket 'get focus'].chomp!
   if (f != "Foo" && JSON.parse(f)["type"] != "container") then 
     xwin = %x[xwininfo -id #{JSON.parse(f)["id"]}]
@@ -46,7 +45,7 @@ if (%x[pidof foo-wm].chomp! =~ /\d/) then
   else
     $app = $defaults
   end
-else
+elsif (ARGV[0] == "app") then
   xwin = %x[xwininfo -id `xdotool getactivewindow`]
 
   font = ((xwin.match(/Width: (\d.+)$/)[1].to_i - 20 ) > 200) ? "Envy Code R-12" : "Terminus-9"
@@ -59,6 +58,8 @@ else
     :y => xwin.match(/Absolute.+Y:  (\d(.+)?)$/)[1].to_i + 10,
     :l => "10"
   }
+else
+  $app = $defaults
 end
 
 #Profiles

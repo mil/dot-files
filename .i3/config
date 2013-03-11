@@ -31,13 +31,13 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+semicolon exec surf
 
 #Past
-bindsym $mod+x exec xdotool type `sselp`
+#bindsym $mod+x exec xdotool type `sselp`
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # dmenus
-bindsym $mod+d exec dmenu-suggestions.rb | mdmenu launch | tr -d '\n' | xargs -0 -I INPUT handler INPUT
+bindsym $mod+d exec launchit
 bindsym $mod+Shift+p exec pwdhashX
 bindsym $mod+Shift+w exec find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | mdmenu netcfg | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK
 

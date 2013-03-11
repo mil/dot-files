@@ -1,11 +1,18 @@
 xset +fp /usr/share/fonts/local &
 xset +fp /usr/share/fonts/artwiz-fonts &
 xset fp rehash &
+xchainkeys &
 
 xmodmap ~/.xmodmap &
 feh --bg-scale ~/.wallpaper.jpg &
 
 # setwm
-keynav &
+if [ -f "/usr/bin/tpb" ];
+then
+sudo tpb &
+fi &
+bar-start &
+xbindkeys &
 dunst &
-exec i3
+keynav &
+exec foo-wm
