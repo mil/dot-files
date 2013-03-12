@@ -29,6 +29,9 @@ focus_follows_mouse no
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+semicolon exec surf
+bindsym $mod+Shift+bracketright exec dvol -i 2
+bindsym $mod+Shift+bracketleft exec dvol -d 2
+
 
 #Past
 #bindsym $mod+x exec xdotool type `sselp`
