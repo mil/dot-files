@@ -16,6 +16,8 @@ web=(
 ["@gh"]="http://github.com/search?q="
 ["@wa"]="http://wolframalpha.com/input?i="
 ["@e"]="http://search.ebay.com/search/search.dll?query="
+["@d"]="http://discogs.com/search?q="
+
 )
 extensions=(
 ["jpg"]="feh"
