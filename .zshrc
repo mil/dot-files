@@ -65,7 +65,7 @@ export HISTSIZE=2000
 export HISTFILE="$HOME/.history"
 export SAVEHIST=$HISTSIZE
 
-export EDITOR="vim -u ~/.vimrc"
+export EDITOR="vim"
 export BROWSER="surf"
 
 
@@ -106,6 +106,7 @@ source /usr/bin/virtualenvwrapper.sh
 #alias ls='ls++'
 alias q='exit'
 alias ls='ls -1 --color -F'
+alias lf='ls++'
 alias goodnight='xset dpms force off'
 alias v='vim'
 alias back='cd "$OLDPWD";pwd'
@@ -213,7 +214,7 @@ bindkey '\e[3~' delete-char
 bindkey '\e[1~' beginning-of-line
 
 
-
+local XDG_CONFIG_HOME=/home/mil/.config
 local IT="${terminfo[sitm]}${terminfo[bold]}"
 local ST="${terminfo[sgr0]}${terminfo[ritm]}"
 
@@ -221,15 +222,14 @@ local FMT_BRANCH="%F{9}(%s:%F{7}%{$IT%}%r%{$ST%}%F{9}) %F{11}%B%b %K{235}%{$IT%}
 local FMT_ACTION="(%F{3}%a%f)"
 local FMT_PATH="%F{1}%R%F{2}/%S%f"
 
-export XDG_CONFIG_HOME='/home/mil/.config'
 setprompt() {
-  local USER="%F{9}${terminfo[bold]}%n%f"
-  local HOST="%F{4}%M%f"
-  local PWD="%F{20}$($XDG_CONFIG_HOME/zsh/rzsh_path)%f"
-  local TTY="%F{4}%y%f"
+  local USER="${PR_RED}%n%f"
+  local HOST="%F{4}%M"
+  local PWD="%F{20}$($XDG_CONFIG_HOME/zsh/rzsh_path)"
+  local TTY="%F{4}%y"
   local EXIT="%(?..%F{202}%?%f)"
   local TERMWIDTH=
-  local PRMPT="${USER}@${HOST}: "
+  local PRMPT="${USER}${PR_BLUE}@${HOST} ${PR_RED}> %f"
 
   if [[ "${vcs_info_msg_0_}" == "" ]]; then
     PROMPT="$PRMPT"
@@ -247,7 +247,7 @@ precmd() {
 		setprompt
 }
 
-#cat ~/.TODO 2> /dev/null
+cat ~/.TODO 2> /dev/null
 
 export PERL_LOCAL_LIB_ROOT="/home/mil/perl5";
 export PERL_MB_OPT="--install_base /home/mil/perl5";
