@@ -1,0 +1,96 @@
+# vim:ft=yaml:
+cookies: ~/.local/share/uzbl/cookies.txt
+default_search: gg
+
+searches:
+  - j        : urxvt -cd `autojump %S` -e ranger
+  - ddg      : https://duckduckgo.com/?q=%s
+  - gg       : https://google.com/search?q=%s
+  - im       : https://google.com/search?tbm=isch&q=%s
+  - yt       : urxvt -e youtube-viewer %S
+  - wiki     : https://en.wikipedia.org/w/index.php?search=%s
+  - wb       : https://secure.wikimedia.org/wikibooks/en/wiki?search=%s
+  - aur      : https://aur.archlinux.org/packages.php?O=0&K=%s&do_Search=Go
+  - aw       : https://wiki.archlinux.org/index.php?search=%s
+  - so       : http://stackoverflow.com/search?q=%s
+  - wa       : http://wolframalpha.com/input?i=%s
+  - discogs  : http://discogs.com/search?q=%s
+  - ebay     : http://search.ebay.com/search/search.dll?query=%s
+  - stock    : https://www.google.com/finance?q=%s
+  - chromium : chromium %S
+  - private  : chromium --incognito %S
+  - ff       : firefox %S
+
+shortcuts:
+  # Window Manager
+  - down  : i3 focus down
+  - up    : i3 focus up
+  - left  : i3 focus left
+  - right : i3 focus right
+
+  # Tmux Sessions
+  - notes   : urxvt -e tmx notes
+  - music   : urxvt -e tmx music
+  - chat    : urxvt -e tmx chat
+  - network : urxvt -e tmx network
+  - system  : urxvt -e tmx system
+
+  # Audio
+  - mute     : amixer set Master 0% mute
+  - pause    : mediaControl pause
+  - next     : mediaControl next
+  - previous : mediaControl previous
+
+  # System
+  - unhook   : xset dpms force suspend
+  - lock     : i3lock -u
+  - invert   : xcalib -a -invert
+  - suspend  : sudo pm-suspend
+  - shutdown : sudo /usr/bin/systemctl hibernate
+  - reboot   : sudo /usr/bin/systemctl reboot
+  - halt     : sudo /usr/bin/systemctl poweroff
+
+  # Tools
+  - email    : urxvt -e mutt
+  - download : launch '`sselp`'
+  - auth     : urxvt -e 'vt_auth'
+  - netgood  : urxvt -e ping google.com
+  - root     : urxvt -e sudo su
+  - cron     : urxvt -e crontab -e
+  - top      : urxvt -e htop
+
+  # Bookmarks
+  - otw     : http://onethingwell.org
+  - hn      : http://news.ycombinator.com
+  - gh      : http://github.com
+  - scholar : http://scholar.vt.edu
+  - lib     : surf 'https://login.ezproxy.lib.vt.edu:2443/login?qurl=http%3A//www.lib.vt.edu/'
+  - weather : surf -s 'http://www.wunderground.com/cgi-bin/findweather/getForecast?query=24061&theprefset=conds_details&theprefvalue=0'
+
+  # Servers
+  - site5     : urxvt -e ssh miles@userbound.com
+  - dreamhost : urxvt -e ssh bladdo@bladdo.net
+
+  - ruler : screenruler
+
+  # REPLS
+  - io       : urxvt -e io 
+  - pry      : urxvt -e pry
+  - bpython  : urxvt -e bpython
+  - irb      : urxvt -e irb
+
+mimetypes:
+  - video/.*                  : mplayer %s
+  - image/.*                  : sxiv %s
+  - inode/.*                  : cd %s; st -e fish
+  - .*html                    : firefox -private -new-window file://%s
+  - .*torrent                 : st -t "bittorrent" -e rtorrent %s
+  - .*pdf                     : zathura %s
+  - .*dia-diagram             : dia %s
+  - .*postscript              : xpdf %s
+  - .*(word|excel|document).* : libreoffice %s
+  - .*                        : st -t "$(echo %s | sed 's|.*/||')" -e bash -c "edit_text %s"
+
+protocols:
+  - https?  : surf %s
+  - magnet? : urxvt -e tmx torrent

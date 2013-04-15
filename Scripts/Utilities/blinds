@@ -7,7 +7,6 @@ list = [
   "just sayyyyyyyyyyyinng that the blinds be LOW HIGH yo . gooooooooodbye",
   "post yo blinds LOW HIGH LOW HIGH. goodbye poker people LOW HIGH wooooo",
   "bliiiiiiiiiiiiiinds LOW HIGH LOW HIGH. poker. gamble. LOW HIGH. goodbye",
-  "G A M B L E ON BRO. LOW HIGH LOW HIGH LOW HIGH, wink"
 ]
 
 say = list.sample
@@ -26,6 +25,7 @@ say.gsub!(/LOW/, "#{ARGV[0]}").gsub!(/HIGH/, "#{ARGV[1]}")
 %x[espeak -p 100 -a 100 "#{ARGV[0]} #{ARGV[1]}"]
 %x[mpg123 -k 90 -n 7 -d 2 --loop 3 ~/.blinds.mp3]
 %x[espeak -p 100 -a 100 "PCE"]
+%x[espeak -p 100 -s 450 -a 100 "brough"]
 %x[mpg123 -k 90 -n 5 -d 2 --loop 13 ~/.blinds.mp3]
 
 %x[amixer set Master 30%-]

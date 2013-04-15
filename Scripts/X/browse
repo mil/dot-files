@@ -6,40 +6,13 @@
 # Entering directories respawns dmenu
 # Also ../ may be entered to go to the previous directory
 
-
 #Options
 $handler = 'handler'
 $defaultDirectory = "/home/mil"
-$dmenuOptions = { 
-  # Assumes dmenu with q,xywh,xft patches
-  # http://github.com/mil/dmenu-q-xywh-xft
-  :h => 20,
-  :x => 4,
-  :y => 22,
-  :w => 1014,
-  :fn => 'Envy Code R-9',
-  :sb => '#ffffff',
-  :sf => '#000000',
-  :nb => '#0052d6',
-  :nf => '#ffffff',
-  :l => 10
-}
-
-
-def dmenuOptsToString(optsHash, pwd)
-  returnString = "dmenu -p '#{pwd}'"
-  optsHash.each do |option, value|
-    if (value.is_a? String)
-      value = "'#{value}'"
-    end
-    returnString = "#{returnString} -#{option} #{value}"
-  end
-
-  return returnString
-end
 
 def browse(directory)
-  dm = dmenuOptsToString($dmenuOptions, directory)
+  d = directory.gsub("/home/mil", "~")
+  dm = "mdmenu browse '#{d}'"
   selectedOption = %x[ls #{directory} | #{dm}].chomp!
   if (!selectedOption) then
     exit

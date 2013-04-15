@@ -43,6 +43,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec launchit
 bindsym $mod+Shift+p exec pwdhashX
 bindsym $mod+Shift+w exec find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | mdmenu netcfg | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK
+bindsym $mod+space exec browse
 
 
 
@@ -81,7 +82,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent

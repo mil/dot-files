@@ -1,4 +1,14 @@
 #!/usr/bin/ruby
+require 'yaml'
+thing = YAML.load_file('/home/mil/.launchrc')
+["searches", "shortcuts"].each do |category|
+  thing[category].each do |s,v|
+    s.each do |s,v|
+      puts s
+    end
+  end
+end
+
 ENV['PATH'].split(':').each do |directory|
   if File.exists?(directory) then
     puts %x[ls #{directory}]

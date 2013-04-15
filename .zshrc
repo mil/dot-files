@@ -229,7 +229,7 @@ setprompt() {
   local TTY="%F{4}%y"
   local EXIT="%(?..%F{202}%?%f)"
   local TERMWIDTH=
-  local PRMPT="${USER}${PR_BLUE}@${HOST} ${PR_RED}> %f"
+  local PRMPT="${USER}${PR_BLUE}@${HOST} ${PR_RED}> %f$ST"
 
   if [[ "${vcs_info_msg_0_}" == "" ]]; then
     PROMPT="$PRMPT"
