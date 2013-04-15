@@ -1,0 +1,2 @@
+dmenu-suggestions.rb| mdmenu launch | tr -d '
+' | xargs -0 -I INPUT launch INPUT
