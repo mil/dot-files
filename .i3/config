@@ -32,6 +32,14 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+semicolon exec surf
 bindsym $mod+Shift+bracketright exec dvol -i 2
 bindsym $mod+Shift+bracketleft exec dvol -d 2
+bindsym XF86AudioRaiseVolume exec dvol -i 2
+bindsym XF86AudioLowerVolume exec dvol -d 2
+bindsym XF86AudioPrev exec mediaControl previous
+bindsym XF86AudioPlay exec mediaControl pause
+bindsym XF86AudioNext exec mediaControl next
+
+bindsym XF86MonBrightnessDown exec sudo brightcontrol down
+bindsym XF86MonBrightnessUp exec sudo brightcontrol up
 
 
 #Past
@@ -44,9 +52,6 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec launchit
 bindsym $mod+Shift+p exec pwdhashX
 bindsym $mod+Shift+w exec find /etc/network.d -maxdepth 1 -type f -printf '%f\n' | mdmenu netcfg | tr -d '\n' | xargs -0 -I NETWORK sudo netcfg NETWORK
-bindsym $mod+space exec browse
-
-
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -83,7 +88,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-#bindsym $mod+space focus mode_toggle
+bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
