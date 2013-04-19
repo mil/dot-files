@@ -108,8 +108,14 @@ $profiles["jump"] = {
   :sb => "#ffc400",
   :sf => "#000000"
 }
-$profiles["surfURI"] = $app.merge({
-  :p => "Surf URI:"
+$profiles["surf"] = $app.merge({
+  :p => "Url",
+  :y => ($screen[:height]) - 30,
+  :w => $screen[:width] - 20,
+  :h => 20,
+  :fn => "Envy Code R-10"
+
+
 })
 
 $profiles["netcfg"] =  {

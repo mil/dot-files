@@ -37,6 +37,8 @@ shortcuts:
 
   # Audio
   - mute     : amixer set Master 0% mute
+  - wuvt     : urxvt -fn "xft:Envy Code R-30" -e sleepit 10 wuvt
+  - mixer    : urxvt -e alsamixer
   - pause    : mediaControl pause
   - next     : mediaControl next
   - previous : mediaControl previous
@@ -51,6 +53,7 @@ shortcuts:
   - halt     : sudo /usr/bin/systemctl poweroff
 
   # Tools
+  - edit     : surf 'http://userbound.com/ui/mil-edit'
   - email    : urxvt -e mutt
   - download : launch '`sselp`'
   - auth     : urxvt -e 'vt_auth'
@@ -63,6 +66,7 @@ shortcuts:
   - otw     : http://onethingwell.org
   - hn      : http://news.ycombinator.com
   - gh      : http://github.com
+  - bb      : http://bitbucket.org
   - scholar : http://scholar.vt.edu
   - lib     : surf 'https://login.ezproxy.lib.vt.edu:2443/login?qurl=http%3A//www.lib.vt.edu/'
   - weather : surf -s 'http://www.wunderground.com/cgi-bin/findweather/getForecast?query=24061&theprefset=conds_details&theprefvalue=0'
@@ -71,7 +75,12 @@ shortcuts:
   - site5     : urxvt -e ssh miles@userbound.com
   - dreamhost : urxvt -e ssh bladdo@bladdo.net
 
-  - ruler : screenruler
+  # Graphics
+  - gimp   : gimp
+  - picker : gcolor2
+  - ruler  : screenruler
+
+  - c      : xdotool key c l o n e Return
 
   # REPLS
   - io       : urxvt -e io 

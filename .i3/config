@@ -25,6 +25,7 @@ font pango:Envy Code R 9
 floating_modifier Mod1
 
 focus_follows_mouse no
+floating_minimum_size 0x0
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
