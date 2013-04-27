@@ -14,7 +14,7 @@ default_orientation vertical
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font pango:Envy Code R 9
+font pango:Envy Code R 10
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
@@ -152,7 +152,7 @@ bindsym $mod+r mode "resize"
 bar {
         position top
         status_command i3status
-        font pango:Envy Code R 9
+        font pango:Envy Code R 10
         colors {
           background #f5f5f5
           statusline #000000

@@ -13,8 +13,7 @@ say = list.sample
 say.gsub!(/LOW/, "#{ARGV[0]}").gsub!(/HIGH/, "#{ARGV[1]}")
 
 
-#%x[dvol -i 30]
-%x[echo p > ~/IPC/Fifos/mplayer]
+%x[mediaControl pause]
 %x[amixer set Master 30%+]
 
 %x[mpg123 -k 90 -n 20 -d 2 --loop 4 ~/.blinds.mp3]
@@ -25,10 +24,7 @@ say.gsub!(/LOW/, "#{ARGV[0]}").gsub!(/HIGH/, "#{ARGV[1]}")
 %x[espeak -p 100 -a 100 "#{ARGV[0]} #{ARGV[1]}"]
 %x[mpg123 -k 90 -n 7 -d 2 --loop 3 ~/.blinds.mp3]
 %x[espeak -p 100 -a 100 "PCE"]
-%x[espeak -p 100 -s 450 -a 100 "brough"]
 %x[mpg123 -k 90 -n 5 -d 2 --loop 13 ~/.blinds.mp3]
 
 %x[amixer set Master 30%-]
-%x[echo p > ~/IPC/Fifos/mplayer]
-
-#%x[dvol -d 30]
+%x[mediaControl pause]
