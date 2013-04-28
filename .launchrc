@@ -13,6 +13,7 @@ searches:
   - aur      : https://aur.archlinux.org/packages.php?O=0&K=%s&do_Search=Go
   - aw       : https://wiki.archlinux.org/index.php?search=%s
   - so       : http://stackoverflow.com/search?q=%s
+  - gh       : http://github.com/search?q=%s
   - wa       : http://wolframalpha.com/input?i=%s
   - discogs  : http://discogs.com/search?q=%s
   - ebay     : http://search.ebay.com/search/search.dll?query=%s
@@ -66,7 +67,6 @@ shortcuts:
   # Bookmarks
   - otw     : http://onethingwell.org
   - hn      : http://news.ycombinator.com
-  - gh      : http://github.com
   - bb      : http://bitbucket.org
   - scholar : http://scholar.vt.edu
   - lib     : surf 'https://login.ezproxy.lib.vt.edu:2443/login?qurl=http%3A//www.lib.vt.edu/'
