@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-: "${ircdir:=$HOME/irc}"
+: "${ircdir:=$HOME/Irc}"
 : "${nick:=$USER}"
 
 # server info functions

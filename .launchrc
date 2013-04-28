@@ -21,6 +21,7 @@ searches:
   - chromium : chromium %S
   - private  : chromium --incognito %S
   - ff       : firefox %S
+  - sh       : urxvt -e %S
 
 shortcuts:
   # Window Manager

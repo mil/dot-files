@@ -1,3 +1,9 @@
 [user]
 	email = miles.sandlar@gmail.com
-	name = mil
+  name = mil
+
+[color]
+  ui = always
+
+[core]
+  editor = vim
