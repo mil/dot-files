@@ -124,12 +124,12 @@ set laststatus=2
 
 " now set it up to change the status line based on mode
 if version >= 700
-	au InsertEnter * hi StatusLine term=reverse ctermbg=4 gui=undercurl guisp=Magenta
-	au InsertEnter * silent ! insertMode & 
-	au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
-	au InsertLeave * silent ! clearMode &
+	"au InsertEnter * hi StatusLine term=reverse ctermbg=4 gui=undercurl guisp=Magenta
+	"au InsertEnter * silent ! insertMode & 
+	"au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
+"	au InsertLeave * silent ! clearMode &
 
-	au FocusLost * silent !clearMode &
+"	au FocusLost * silent !clearMode &
 
 endif
 
