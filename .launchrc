@@ -46,14 +46,15 @@ shortcuts:
   - previous : mediaControl previous
 
   # System
-  - monitor  : arandr
-  - unhook   : xset dpms force suspend
-  - lock     : i3lock -u
-  - invert   : xcalib -a -invert
-  - suspend  : sudo pm-suspend
-  - shutdown : sudo /usr/bin/systemctl hibernate
-  - reboot   : sudo /usr/bin/systemctl reboot
-  - halt     : sudo /usr/bin/systemctl poweroff
+  - monitor   : arandr
+  - viewsonic : viewsonic
+  - unhook    : xset dpms force suspend
+  - lock      : i3lock -u
+  - invert    : xcalib -a -invert
+  - suspend   : sudo pm-suspend
+  - shutdown  : sudo /usr/bin/systemctl hibernate
+  - reboot    : sudo /usr/bin/systemctl reboot
+  - halt      : sudo /usr/bin/systemctl poweroff
 
   # Tools
   - edit     : surf 'http://userbound.com/ui/mil-edit'
@@ -78,9 +79,10 @@ shortcuts:
   - dreamhost : urxvt -e ssh bladdo@bladdo.net
 
   # Graphics
-  - gimp   : gimp
-  - picker : gcolor2
-  - ruler  : screenruler
+  - gimp       : gimp
+  - picker     : gcolor2
+  - ruler      : screenruler
+  - screenshot : scrot
 
   - c      : xdotool key c l o n e Return
 
