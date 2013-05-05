@@ -60,6 +60,7 @@ shortcuts:
   - halt      : sudo /usr/bin/systemctl poweroff
 
   # Games
+  - clock   : urxvt -fn "xft:Envy Code R-20" -e tty-clock -c -s -C 2
   - tetris  : urxvt -e vitetris
 
   # Tools
