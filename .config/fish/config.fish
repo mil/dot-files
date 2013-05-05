@@ -33,7 +33,7 @@ set fish_greeting ""
 
 
 function fish_prompt
-  z --add "$PWD"
+  z --add $PWD
   set_color $fish_color_cwd
   echo -n (prompt_pwd)
   set_color normal
