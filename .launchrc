@@ -21,6 +21,8 @@ searches:
   - chromium : chromium %S
   - private  : chromium --incognito %S
   - ff       : firefox %S
+  - define   : surf -s http://www.merriam-webster.com/dictionary/%s
+  - syn      : surf -s http://www.collinsdictionary.com/dictionary/english-thesaurus/%s
   - sh       : urxvt -e %S
 
 shortcuts:
