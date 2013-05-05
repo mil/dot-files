@@ -21,7 +21,7 @@ set -x PATH /home/mil/.gem/ruby/1.9.1/bin $PATH
 
 . /home/mil/.config/fish/z.fish
 
-rvm > /dev/null
+#rvm > /dev/null
 
 
 set EDITOR vim

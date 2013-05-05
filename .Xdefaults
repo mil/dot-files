@@ -68,6 +68,7 @@ URxvt*cursorColor: orange
 URxvt.keysym.C-A-6: command:\033]710;xft:Monospace-8:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-8:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
 URxvt.keysym.C-A-7: command:\033]710;xft:Monospace-12:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-12:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
 URxvt.keysym.C-A-8: command:\033]710;xft:Monospace-10:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-10:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
+URxvt.keysym.C-A-8: command:\033]710;xft:Monospace-20:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-10:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
 URxvt.keysym.C-A-9: command:\033]710;xft:Monospace-18:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-18:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
 
 URxvt.keysym.C-A-9: command:\033]710;xft:smoothansi:style=Regular:antialias=true:hinting=true\007\033]711;xft:smoothansi:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
