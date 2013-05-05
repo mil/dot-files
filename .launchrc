@@ -3,7 +3,7 @@ cookies: ~/.local/share/uzbl/cookies.txt
 default_search: gg
 
 searches:
-  - j        : urxvt -cd `z %S` -e ranger
+  - j        : urxvt -e 'z %s & ranger'
   - ddg      : https://duckduckgo.com/?q=%s
   - gg       : https://google.com/search?q=%s
   - im       : https://google.com/search?tbm=isch&q=%s
@@ -55,6 +55,9 @@ shortcuts:
   - shutdown  : sudo /usr/bin/systemctl hibernate
   - reboot    : sudo /usr/bin/systemctl reboot
   - halt      : sudo /usr/bin/systemctl poweroff
+
+  # Games
+  - tetris  : urxvt -e vitetris
 
   # Tools
   - edit     : surf 'http://userbound.com/ui/mil-edit'
