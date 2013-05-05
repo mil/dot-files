@@ -116,7 +116,7 @@ hi LineNr		ctermfg=black		ctermbg=lightgray	cterm=none
 hi Title		guifg=blue guibg=none gui=bold
 hi Title		ctermfg=blue ctermbg=none cterm=bold
 hi Visual		guifg=white			guibg=blue			gui=none
-hi Visual		ctermfg=white		ctermbg=blue		cterm=none
+hi Visual		ctermfg=white		ctermbg=lightyellow cterm=none
 hi VisualNOS	guifg=white			guibg=black			gui=none
 hi VisualNOS	ctermfg=white		ctermbg=black		cterm=none
 hi WildMenu		guifg=white			guibg=black			gui=none

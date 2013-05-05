@@ -22,9 +22,7 @@ set -x PATH /home/mil/.gem/ruby/1.9.1/bin $PATH
 . /home/mil/.config/fish/z.fish
 . /home/mil/.config/fish/vi-mode.fish
 
-#rvm > /dev/null
-
-
+#rvm > /d
 alias j='z'
 
 
