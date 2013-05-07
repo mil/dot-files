@@ -7,7 +7,7 @@ stops = {
   "home"   => [ ["PRG", "1333"],  ["UCB", "1323"], ["TC",  "1313"] ],
   "campus" => [ ["TC",  "1100"],  ["UCB", "1101"], ["PRG", "1101"] ]
 }
-location = ARGV[0] || ((%x[sudo iwlist scan 2>&1].match(/(VT_WLAN|VT-Wireless)/)) ? "campus" : "home")
+location = ARGV[0] || ((%x[sudo /usr/sbin/iwlist scan 2>&1].match(/(VT_WLAN|VT-Wireless)/)) ? "campus" : "home")
 
 #Get next stop time for given route and stop
 def getNextTime(route, stop)

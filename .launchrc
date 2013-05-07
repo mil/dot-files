@@ -51,7 +51,7 @@ shortcuts:
   # System
   - monitor   : arandr
   - viewsonic : viewsonic
-  - unhook    : xset dpms force suspend
+  - goodnight : xset dpms force suspend
   - lock      : i3lock -u
   - invert    : xcalib -a -invert
   - suspend   : sudo pm-suspend
