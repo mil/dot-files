@@ -6,11 +6,20 @@ require 'json'
 # or with dim dmenu2
 
 # Setup Screen Dimensions Info
-xr = %x[xrandr | head -n1 | cut -d, -f2 | cut -d " " -f3-5].split(" x ")
+if (!File.exists?('#{Dir.home}/.screen_dimensions')) then
+  xr = %x[xrandr | head -n1 | cut -d, -f2 | cut -d " " -f3-5].split(" x ")
+  File.open("#{Dir.home}/.screen_dimensions", 'w+') { |f|
+    f.write("#{xr[0]}x#{xr[1]}")
+  }
+end
+dimensions = IO.read("#{Dir.home}/.screen_dimensions").to_s.chomp!.split('x')
 $screen = {
-  :width => xr[0].to_i,
-  :height => xr[1].to_i
+  :width => dimensions[0].to_i,
+  :height => dimensions[1].to_i
 }
+
+
+
 
 # Setup App Dimensions Info
 

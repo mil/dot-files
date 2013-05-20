@@ -11,6 +11,7 @@ xmodmap ~/.xmodmap &
 feh --bg-scale ~/.wallpaper.jpg &
 
 # setwm
-keynav &
-dunst &
-exec i3
+bar-start &
+xbindkeys &
+exec /home/mil/Code/Github/meis-wm/meis-wm &
+exec /home/mil/Code/Github/meis-wm/x-session

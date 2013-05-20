@@ -26,6 +26,8 @@ searches:
   - sh       : urxvt -e %S
 
 shortcuts:
+  - config : urxvt -e vim /home/mil/.launchrc
+
   # Window Manager
   - down  : i3 focus down
   - up    : i3 focus up
@@ -38,6 +40,13 @@ shortcuts:
   - chat    : urxvt -e tmx chat
   - network : urxvt -e tmx network
   - system  : urxvt -e tmx system
+
+  # Alarm Clock
+  - wakeup  : wakeup
+  - crontab : urxvt -e crontab -e
+  - cron    : urxvt -e crontab -e
+
+
 
   # Audio
   - mute     : amixer set Master 0% mute
@@ -92,6 +101,9 @@ shortcuts:
   - screenshot : scrot
 
   - c      : xdotool key c l o n e Return
+
+  # Research
+  - test     : http://127.0.0.1:4567
 
   # REPLS
   - io       : urxvt -e io 

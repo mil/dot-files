@@ -30,10 +30,10 @@ set -x PATH /home/mil/.gem/ruby/2.0.0/bin $PATH
 alias j='z'
 
 
-set EDITOR vim
-set GIT_EDITOR vim
-set BROWSER surf
-set TZ America/New_York
+setenv EDITOR vim
+setenv GIT_EDITOR vim
+setenv BROWSER surf
+setenv TZ America/New_York
 
 set fish_greeting ""
 
