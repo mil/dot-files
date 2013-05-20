@@ -38,40 +38,7 @@ $defaults = {
   :p  => 'Rd Menu'
 }
 
-if (%x[pidof foo-wm].chomp! =~ /\d/) then
-  f = %x[foo-wm-c /tmp/foo-wm.socket 'get focus'].chomp!
-  if (f != "Foo" && JSON.parse(f)["type"] != "container") then 
-    xwin = %x[xwininfo -id #{JSON.parse(f)["id"]}]
-    font = ((xwin.match(/Width: (\d.+)$/)[1].to_i - 20 ) > 200) ? "Envy Code R-12" : "Terminus-9"
-
-    $app = {
-      :fn => font,
-      :w => xwin.match(/Width: (\d.+)$/)[1].to_i - 20,
-      :h=> (xwin.match(/Height: (\d.+)$/)[1].to_i / 11) - 1,
-      :x => xwin.match(/Absolute.+X:  (\d(.+)?)$/)[1].to_i + 10,
-      :y => xwin.match(/Absolute.+Y:  (\d(.+)?)$/)[1].to_i + 10,
-      :l => "10"
-    }
-
-  else
-    $app = $defaults
-  end
-elsif (ARGV[0] == "app") then
-  xwin = %x[xwininfo -id `xdotool getactivewindow`]
-
-  font = ((xwin.match(/Width: (\d.+)$/)[1].to_i - 20 ) > 200) ? "Envy Code R-12" : "Terminus-9"
-
-  $app = {
-    :fn => font,
-    :w => xwin.match(/Width: (\d.+)$/)[1].to_i - 20,
-    :h=> (xwin.match(/Height: (\d.+)$/)[1].to_i / 11) - 1,
-    :x => xwin.match(/Absolute.+X:  (\d(.+)?)$/)[1].to_i + 10,
-    :y => xwin.match(/Absolute.+Y:  (\d(.+)?)$/)[1].to_i + 10,
-    :l => "10"
-  }
-else
-  $app = $defaults
-end
+$app = $defaults
 
 #Profiles
 $profiles = {}
@@ -168,7 +135,6 @@ def main
   dm = dmenuOptsToString($defaults) 
   $stdout = STDOUT
   $stdout.puts %x[#{dm}]
-  %x[touch /tmp/bar-refresh]
 end
 
 main
