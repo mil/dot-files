@@ -1,5 +1,5 @@
 ### Applications 
-"handler urxvt"
+"urxvt"
     m:0x8 + c:36
     Alt + enter 
 

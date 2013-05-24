@@ -24,6 +24,7 @@ searches:
   - define   : surf -s http://www.merriam-webster.com/dictionary/%s
   - syn      : surf -s http://www.collinsdictionary.com/dictionary/english-thesaurus/%s
   - sh       : urxvt -e %S
+  - kill     : killall %S
 
 shortcuts:
   - config : urxvt -e vim /home/mil/.launchrc
