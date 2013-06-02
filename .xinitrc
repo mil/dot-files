@@ -1,7 +1,7 @@
 xset +fp /usr/share/fonts/local &
 xset +fp /usr/share/fonts/artwiz-fonts &
 xset fp rehash &
-xchainkeys &
+#xchainkeys &
 autocutsel &
 #devilspie &
 compton &
