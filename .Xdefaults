@@ -97,7 +97,7 @@ URxvt.keysym.A-v: perl:clipboard:paste
 
 URxvt.borderColor: #000000
 URxvt.externalBorder: 1
-URxvt.thickness: 15
+URxvt.thickness: 1
 URxvt.visualBell: True
 
 URxvt.scrollstyle: plain
