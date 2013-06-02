@@ -80,6 +80,7 @@ Xft.hintstyle: hintful
 Rxvt*transparent: true
 Rxvt*shading: 100
 
+
 ! extensions
 URxvt.perl-ext-common       : default,matcher,clipboard,font-size
 
@@ -93,6 +94,10 @@ URxvt.keysym.C-S-Down: perl:font-size:decglobal
 
 URxvt.keysym.A-c: perl:clipboard:copy
 URxvt.keysym.A-v: perl:clipboard:paste
+
+URxvt.borderColor: #000000
+URxvt.externalBorder: 1
+URxvt.thickness: 15
 
 ! Open URLS
 URxvt.perl-ext-common:  default,url-select
