@@ -95,7 +95,7 @@ URxvt.keysym.C-S-Down: perl:font-size:decglobal
 URxvt.keysym.A-c: perl:clipboard:copy
 URxvt.keysym.A-v: perl:clipboard:paste
 
-URxvt.borderColor: #000000
+URxvt.borderColor: #cfcfcf
 URxvt.externalBorder: 1
 URxvt.thickness: 1
 URxvt.visualBell: True
@@ -103,7 +103,7 @@ URxvt.visualBell: True
 URxvt.scrollstyle: plain
 URxvt.scrollBar_floating: True
 URxvt.lineSpace: 1
-URxvt.letterSpace: -1
+URxvt.letterSpace: 0
 !URxvt.buffered: True
 URxvt.highlightColor: #fffeaa
 URxvt.scrollColor: #cfcfcf
@@ -117,8 +117,8 @@ URxvt.fadeColor: #000000
 URxvt.pointerColor2: #ababab
 URxvt.pointerColor: #cfcfcf
 
-URxvt*cursorColor: #cfcfcf
-URxvt.cursorBlink: True
+URxvt*cursorColor: #000000
+URxvt.cursorBlink: False
 
 URxvt*scrollBar_align: bottom
 URxvt*skipBuiltinGlyphs: True
