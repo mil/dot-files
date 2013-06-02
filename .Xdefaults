@@ -50,7 +50,7 @@ Rxvt.scrollstyle            : plain
 
 ! Fonts
 ! *font: xft:Terminus-10
-*font: xft:Envy Code R-10
+*font: xft:Envy Code R-11
 *hinting: true
 Xft.hintstyle:hintslight
 
@@ -62,9 +62,7 @@ URxvt.keysym.C-A-1: command:\033]710;xft:terminus-1:style=Regular;terminus-12:st
 URxvt.keysym.C-A-2: command:\033]710;xft:EnvyCodeR-12:style=Regular:antialias=true:hinting=true\007\033]711;xft:EnvyCodeR-12:style=Bold:antialias=true:hinting=true\007
 URxvt.keysym.C-A-3: command:\033]710;xft:Monospace-10:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-10:style=Bold:antialias=true:hinting=true\007:
 URxvt.keysym.C-A-4: command:\033]710;xft:Terminus-10:style=Regular:antialias=true:hinting=true\007\033]711;xft:Terminus-12:style=Bold:antialias=true:hinting=true\007
-URxvt*cursorBlink : true 
 URxvt.keysym.C-A-5: command:\033]710;xft:Monospace-11:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-11:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
-URxvt*cursorColor: orange
 URxvt.keysym.C-A-6: command:\033]710;xft:Monospace-8:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-8:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
 URxvt.keysym.C-A-7: command:\033]710;xft:Monospace-9:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-9:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
 URxvt.keysym.C-A-8: command:\033]710;xft:Monospace-10:style=Regular:antialias=true:hinting=true\007\033]711;xft:Monospace-10:style=Bold:antialias=true:hinting=true\007:letterSpace=-1
@@ -79,6 +77,8 @@ Xft.hintstyle: hintful
 
 Rxvt*transparent: true
 Rxvt*shading: 100
+
+
 
 
 ! extensions
@@ -98,6 +98,33 @@ URxvt.keysym.A-v: perl:clipboard:paste
 URxvt.borderColor: #000000
 URxvt.externalBorder: 1
 URxvt.thickness: 15
+URxvt.visualBell: True
+
+URxvt.scrollstyle: plain
+URxvt.scrollBar_floating: True
+URxvt.lineSpace: 1
+URxvt.letterSpace: -1
+!URxvt.buffered: True
+URxvt.highlightColor: #fffeaa
+URxvt.scrollColor: #cfcfcf
+
+
+URxvt.fading: 20
+URxvt.fadeColor: #000000
+
+
+URxvt.pointerColor2: #ababab
+URxvt.pointerColor: #cfcfcf
+
+URxvt*cursorColor: #cfcfcf
+URxvt.cursorBlink: True
+
+URxvt*scrollBar_align: bottom
+URxvt*skipBuiltinGlyphs: True
+
+URxvt*pointerBlankDelay: 2
+URxvt*pointerBlank: True
+
 
 ! Open URLS
 URxvt.perl-ext-common:  default,url-select
