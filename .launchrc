@@ -94,6 +94,9 @@ shortcuts:
   - site5     : urxvt -e ssh miles@userbound.com
   - dreamhost : urxvt -e ssh bladdo@bladdo.net
   - bci       : urxvt -e bci
+  - x300      : urxvt -e ssh mil@x300
+  - x40       : urxvt -e ssh mil@x40
+  - sys13     : urxvt -e ssh mil@sys13
 
   # Graphics
   - gimp       : gimp
