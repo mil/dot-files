@@ -107,6 +107,7 @@ URxvt.letterSpace: -1
 !URxvt.buffered: True
 URxvt.highlightColor: #fffeaa
 URxvt.scrollColor: #cfcfcf
+URxvt.termName: xterm-color
 
 
 URxvt.fading: 20

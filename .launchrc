@@ -25,6 +25,7 @@ searches:
   - syn      : surf -s http://www.collinsdictionary.com/dictionary/english-thesaurus/%s
   - sh       : urxvt -e %S
   - kill     : killall %S
+  - man      : urxvt -e man %s
 
 shortcuts:
   - config : urxvt -e vim /home/mil/.launchrc
@@ -46,8 +47,6 @@ shortcuts:
   - wakeup  : wakeup
   - crontab : urxvt -e crontab -e
   - cron    : urxvt -e crontab -e
-
-
 
   # Audio
   - mute     : amixer set Master 0% mute
@@ -94,6 +93,7 @@ shortcuts:
   # Servers
   - site5     : urxvt -e ssh miles@userbound.com
   - dreamhost : urxvt -e ssh bladdo@bladdo.net
+  - bci       : urxvt -e bci
 
   # Graphics
   - gimp       : gimp
