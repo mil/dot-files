@@ -23,7 +23,7 @@ commands = {
 
   "meis-wm" => [
     "bar-start",
-    "xbindkeys",
+    "sxhkdrc -c /home/mil/.config/sxhkd/sxhkdrc",
     "exec /home/mil/Code/Github/meis-wm/meis-wm",
     "exec /home/mil/Code/Github/meis-wm/x-session"
 ],

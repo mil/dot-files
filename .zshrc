@@ -95,6 +95,9 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:/home/mil/.gem/ruby/1.9.1/bin
 export PATH
 
+PATH=$PATH:/home/mil/.gem/ruby/2.0.0/bin
+export PATH
+
 #VirtualENV Wrapper
 #export WORKON_HOME=~/.virtualenvs
 #source /usr/bin/virtualenvwrapper.sh

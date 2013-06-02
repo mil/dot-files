@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 xrandr --output LVDS1 --off --output VGA1 --auto
 foo-wm-c "/tmp/foo-wm.socket" "dimensions 1920 1080"
 foo-wm-c "/tmp/foo-wm.socket" "zoom 1"

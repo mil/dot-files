@@ -1,5 +1,4 @@
-
-dified TMUX start script from:
+#!/usr/bin/env sh
 #     http://forums.gentoo.org/viewtopic-t-836006-start-0.html
 #
 # Store it to `~/bin/tmx` and issue `chmod +x`.

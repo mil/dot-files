@@ -64,89 +64,56 @@ hi FoldColumn	guifg=black			guibg=gray			gui=none
 hi FoldColumn	ctermfg=black		ctermbg=gray		cterm=none
 
 " Syntax
-hi Number		guifg=#0000d0		guibg=none gui=none
 hi Number		ctermfg=blue		ctermbg=none cterm=none
-hi Char			guifg=#0000d0		guibg=none gui=none
 hi Char			ctermfg=blue		ctermbg=none cterm=none
-hi String		guifg=#0000d0		guibg=none gui=none
 hi String		ctermfg=blue		ctermbg=none cterm=none
-hi Boolean		guifg=#0000d0		guibg=none gui=none
 hi Boolean		ctermfg=blue		ctermbg=none cterm=none
-hi Constant		guifg=darkred		guibg=none gui=none
 hi Constant		ctermfg=darkred		ctermbg=none cterm=none
 
-hi Statement	guifg=darkred		guibg=none gui=bold
 hi Statement	ctermfg=darkred		ctermbg=none cterm=bold
-hi Comment		guifg=#006000		guibg=#f5fff5		gui=none
 hi Comment		ctermfg=darkgreen	ctermbg=none cterm=none
-hi Identifier	guifg=blue guibg=none gui=none
-hi Identifier	ctermfg=darkmagenta	ctermbg=none cterm=none
-hi Function		guifg=darkmagenta	guibg=none gui=bold
+hi Identifier	ctermfg=darkblue ctermbg=none cterm=none
 hi Function		ctermfg=darkmagenta	ctermbg=none cterm=bold
-hi PreProc		guifg=darkmagenta 	guibg=none gui=bold
+
 "In Markdown the ==== of headingsk
 hi PreProc		ctermfg=gray ctermbg=none cterm=bold 
-hi Type			guifg=darkblue		guibg=none gui=bold
 hi Type			ctermfg=darkblue	ctermbg=none cterm=bold
 
 "\n, \0, %d, %s, etc...
-hi Special		guifg=darkred		guibg=none gui=none
 hi Special		ctermfg=darkred		ctermbg=none cterm=none
 
 " Tree
-hi Directory	guifg=darkmagenta	guibg=white			gui=bold
 hi Directory	ctermfg=darkmagenta	ctermbg=white		cterm=bold
 
 " Message
-hi ModeMsg		guifg=black			guibg=white			gui=none
 hi ModeMsg		ctermfg=black		ctermbg=white		cterm=none
-hi MoreMsg		guifg=black			guibg=white			gui=none
 hi MoreMsg		ctermfg=black		ctermbg=white		cterm=none
-hi WarningMsg	guifg=red			guibg=white			gui=none
 hi WarningMsg	ctermfg=red			ctermbg=white		cterm=none
-hi ErrorMsg		guifg=white			guibg=red			gui=none
 hi ErrorMsg		ctermfg=white		ctermbg=red			cterm=none
-hi Question		guifg=black			guibg=white			gui=none
 hi Question		ctermfg=black		ctermbg=white		cterm=none
 
-hi VertSplit	guifg=black			guibg=black			gui=none
 hi VertSplit	ctermfg=black		ctermbg=black		cterm=none
-hi LineNr		guifg=black			guibg=lightgray		gui=none
 hi LineNr		ctermfg=black		ctermbg=lightgray	cterm=none
-hi Title		guifg=blue guibg=none gui=bold
 hi Title		ctermfg=blue ctermbg=none cterm=bold
-hi Visual		guifg=white			guibg=blue			gui=none
-hi Visual		ctermfg=white		ctermbg=blue		cterm=none
-hi VisualNOS	guifg=white			guibg=black			gui=none
+hi Visual		ctermfg=white		ctermbg=lightyellow cterm=none
 hi VisualNOS	ctermfg=white		ctermbg=black		cterm=none
-hi WildMenu		guifg=white			guibg=black			gui=none
 hi WildMenu		ctermfg=white		ctermbg=black		cterm=none
 
 "Define, def
-hi Underlined	guifg=darkmagenta	guibg=white			gui=underline
 hi Underlined	ctermfg=darkmagenta	ctermbg=white		cterm=underline
-hi Error		guifg=red			guibg=white			gui=none
 hi Error		ctermfg=red			ctermbg=white		cterm=none
-hi Todo			guifg=black			guibg=white			gui=none
 hi Todo			ctermfg=black		ctermbg=white		cterm=none
-hi SignColumn	guifg=black			guibg=white			gui=none
 hi SignColumn	ctermfg=black		ctermbg=white		cterm=none
 
 if version >= 700
   "Pmenu
-  hi Pmenu							guibg=gray
   hi Pmenu							ctermbg=gray
-  hi PmenuSel	guifg=white			guibg=black
   hi PmenuSel	ctermfg=white		ctermbg=black
-  hi PmenuSbar						guibg=gray
   hi PmenuSbar						ctermbg=gray
 
   "Tab
-  hi TabLine		guifg=gray		guibg=#505050		gui=none
   hi TabLine		ctermfg=gray	ctermbg=darkgray	cterm=none
-  hi TabLineFill	guifg=gray		guibg=gray			gui=none
   hi TabLineFill	ctermfg=gray	ctermbg=gray		cterm=none
-  hi TabLineSel		guifg=white		guibg=black			gui=none
   hi TabLineSel		ctermfg=white	ctermbg=black		cterm=none
 endif
 

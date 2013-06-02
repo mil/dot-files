@@ -3,7 +3,7 @@ cookies: ~/.local/share/uzbl/cookies.txt
 default_search: gg
 
 searches:
-  - j        : urxvt -cd `z %S` -e ranger
+  - j        : urxvt -e 'z %s & ranger'
   - ddg      : https://duckduckgo.com/?q=%s
   - gg       : https://google.com/search?q=%s
   - im       : https://google.com/search?tbm=isch&q=%s
@@ -21,9 +21,15 @@ searches:
   - chromium : chromium %S
   - private  : chromium --incognito %S
   - ff       : firefox %S
+  - define   : surf -s http://www.merriam-webster.com/dictionary/%s
+  - syn      : surf -s http://www.collinsdictionary.com/dictionary/english-thesaurus/%s
   - sh       : urxvt -e %S
+  - kill     : killall %S
+  - man      : urxvt -e man %s
 
 shortcuts:
+  - config : urxvt -e vim /home/mil/.launchrc
+
   # Window Manager
   - down  : i3 focus down
   - up    : i3 focus up
@@ -37,23 +43,34 @@ shortcuts:
   - network : urxvt -e tmx network
   - system  : urxvt -e tmx system
 
+  # Alarm Clock
+  - wakeup  : wakeup
+  - crontab : urxvt -e crontab -e
+  - cron    : urxvt -e crontab -e
+
   # Audio
   - mute     : amixer set Master 0% mute
   - wuvt     : urxvt -fn "xft:Envy Code R-30" -e sleepit 10 wuvt
+  - bt       : urxvt -fn "xft:Envy Code R-30" -e sleepit 10 bt
   - mixer    : urxvt -e alsamixer
   - pause    : mediaControl pause
   - next     : mediaControl next
   - previous : mediaControl previous
 
   # System
-  - monitor  : arandr
-  - unhook   : xset dpms force suspend
-  - lock     : i3lock -u
-  - invert   : xcalib -a -invert
-  - suspend  : sudo pm-suspend
-  - shutdown : sudo /usr/bin/systemctl hibernate
-  - reboot   : sudo /usr/bin/systemctl reboot
-  - halt     : sudo /usr/bin/systemctl poweroff
+  - monitor   : arandr
+  - viewsonic : viewsonic
+  - goodnight : xset dpms force suspend
+  - lock      : i3lock -u
+  - invert    : xcalib -a -invert
+  - suspend   : sudo pm-suspend
+  - shutdown  : sudo /usr/bin/systemctl hibernate
+  - reboot    : sudo /usr/bin/systemctl reboot
+  - halt      : sudo /usr/bin/systemctl poweroff
+
+  # Games
+  - clock   : urxvt -fn "xft:Envy Code R-20" -e tty-clock -c -s -C 2
+  - tetris  : urxvt -e vitetris
 
   # Tools
   - edit     : surf 'http://userbound.com/ui/mil-edit'
@@ -76,13 +93,18 @@ shortcuts:
   # Servers
   - site5     : urxvt -e ssh miles@userbound.com
   - dreamhost : urxvt -e ssh bladdo@bladdo.net
+  - bci       : urxvt -e bci
 
   # Graphics
-  - gimp   : gimp
-  - picker : gcolor2
-  - ruler  : screenruler
+  - gimp       : gimp
+  - picker     : gcolor2
+  - ruler      : screenruler
+  - screenshot : scrot
 
   - c      : xdotool key c l o n e Return
+
+  # Research
+  - test     : http://127.0.0.1:4567
 
   # REPLS
   - io       : urxvt -e io 
