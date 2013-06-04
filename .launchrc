@@ -99,6 +99,7 @@ shortcuts:
   - sys13     : urxvt -e ssh mil@sys13
 
   # Graphics
+  - calibrate  : urxvt -e dispwin
   - gimp       : gimp
   - picker     : gcolor2
   - ruler      : screenruler
