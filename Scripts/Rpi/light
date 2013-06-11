@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-if (%x[hostname].chomp! == "alarmpi") then
+if (%x[hostname].chomp! == "pi") then
   int = ARGV[0] == "on" ? 1 : 0
-  %x[gpio mode 25 out]
+  %x[gpio -g mode 25 out]
   %x[gpio -g write 25 #{int}]
 else
   %x[ssh -t mil@pi '/home/mil/Scripts/Rpi/light #{ARGV[0]}']
