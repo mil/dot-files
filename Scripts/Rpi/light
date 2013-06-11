@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+int = ARGV[0] == "on" ? 1 : 0
+%x[gpio -g write 25 #{int}]
