@@ -59,6 +59,7 @@ shortcuts:
 
   # System
   - monitor   : arandr
+  - remap     : xmodmap ~/.xmodmap
   - viewsonic : viewsonic
   - goodnight : xset dpms force suspend
   - lock      : i3lock -u
