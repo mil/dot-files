@@ -110,8 +110,8 @@ URxvt.scrollColor: #cfcfcf
 URxvt.termName: xterm-color
 
 
-URxvt.fading: 20
-URxvt.fadeColor: #000000
+!URxvt.fading: 20
+!URxvt.fadeColor: #000000
 
 
 URxvt.pointerColor2: #ababab

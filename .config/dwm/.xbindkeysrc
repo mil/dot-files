@@ -1,6 +1,9 @@
 ### Applications 
-"handler urxvt"
-    Shift+Alt + enter 
+"urxvt"
+  Alt + enter 
+
+"urxvt"
+  Mod4  + Return
 
 #"handler surf"
   #Shift+Alt + backslash
@@ -25,7 +28,7 @@
 ### WM
 
 # Launcher Dmenu
-"dmenu-suggestions.rb | mdmenu launch | tr -d '\n' | xargs -0 -I INPUT handler INPUT"
+"launchit"
 	m:0x8 + c:40
 	Alt + d
 

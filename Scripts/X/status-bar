@@ -130,6 +130,7 @@ loop do
 
   count = count + 1
   if (count > 1) then
-    %x[inotifywait -t 20 /tmp/bar-refresh]
+    sleep 20
+    #%x[inotifywait -t 20 /tmp/bar-refresh]
   end
 end
