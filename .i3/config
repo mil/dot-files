@@ -41,6 +41,8 @@ bindsym XF86AudioNext exec mediaControl next
 bindsym XF86MonBrightnessDown exec sudo brightcontrol down
 bindsym XF86MonBrightnessUp exec sudo brightcontrol up
 bindsym XF86Launch1 exec xset dpms force suspend
+bindsym Next exec light on
+bindsym Prior exec light off
 
 
 #Past
