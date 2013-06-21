@@ -20,6 +20,9 @@ alt + {f, shift + f}
 alt + semicolon
   foo-wm-cx /tmp/foo-wm.socket containerize
 
+alt + {v,b,n,m}
+  foo-wm-cx /tmp/foo-wm.socket 'layout {vertical,horizontal,grid,max}'
+
 # Foo-WM Zooms
 alt + {i,u}
   foo-wm-cx /tmp/foo-wm.socket 'zoom {-1,1}'
