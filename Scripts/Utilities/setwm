@@ -3,7 +3,7 @@ xinit = "/home/mil/.xinitrc"
 commands = {
   "foowm" => [
     "if [ -f \"/usr/bin/tpb\" ];\nthen\nsudo tpb &\nfi",
-    "bar-start", "xbindkeys", "dunst", "keynav",
+    "bar-start", "sxhkd -c ~/.sxhkd-foo", "dunst", "keynav",
     "exec foo-wm"
 ],
   "dev" => [
