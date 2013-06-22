@@ -95,6 +95,12 @@ loop do
     rescue
       stack = []
     end
+
+    # Bar Colors
+    focus = 6
+    unfocus = 3
+
+
     stack.each_with_index do |c, i|
       if c["type"] == "client" then
         name = %x[xptr-to-title #{c["id"]}].chomp!
@@ -103,11 +109,11 @@ loop do
       end
       foc  = foo("get focus")["node"]
       if (c["node"] == foc) then
-        name = name[0..16].fg(6)
-        name = name + " , ".fg(3) unless c == stack.last
+        name = name[0..130].fg(focus)
+        name = name + " , ".fg(unfocus) unless c == stack.last
       elsif ((i != 0 && foc == stack[i - 1]["node"]) || (stack[i] != stack.last && foc == stack[i + 1]["node"])) then
         name = name[0..8].fg(1) 
-        name = name + " , ".fg(3) unless c == stack.last
+        name = name + " , ".fg(unfocus) unless c == stack.last
       else
         name = ".".fg(1)
       end
@@ -130,7 +136,7 @@ loop do
 
   count = count + 1
   if (count > 1) then
-    sleep 20
-    #%x[inotifywait -t 20 /tmp/bar-refresh]
+    #sleep 20
+    %x[inotifywait -t 20 /tmp/bar-refresh]
   end
 end
