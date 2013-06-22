@@ -15,6 +15,10 @@ class String
   def bg(i)
     return "\\b#{i}#{self}\\br"
   end
+
+  def ul(i)
+    return "\\u#{i}#{self}\\ur"
+  end
 end
 
 def foo(x)
@@ -65,6 +69,12 @@ loop do
 
   marks = "\\f5 #{marks} \\br\\fr"
 
+  z_icons = ""
+  zoom = %x[foo-zoom-level].chomp!
+  zoom.to_i.times do  |t|
+    z_icons = z_icons + "+".fg(3).bg(2).ul(5)
+  end
+  
 
   #s = "\\u8#{wifi} #{battery} #{volume}\\c#{marks}\\r#{time} #{subway} #{weather}l"
   f = %x[foo-wm-c /tmp/foo-wm.socket 'get focus'].chomp!
@@ -83,11 +93,13 @@ loop do
       }
     end
 
-    layout = capFirst(d["layout"].to_s.downcase)
+    layout = " " + capFirst(d["layout"].to_s.downcase) + " "
     children = d["children"].size.to_s
 
     maxWidth = 50
-    right = "#{layout.fg(4)}[#{children.fg(7)}]" +  " / ".fg(3)
+    layout_type = " #{layout} ".bg(2).fg(4).ul(6)
+    number_children = " #{children} ".bg(9).ul(3).fg(2)
+    right = "#{number_children}#{layout_type}"
     center = ""
     #right = "#{client}"
     begin
@@ -98,34 +110,26 @@ loop do
 
     # Bar Colors
     focus = 6
+    surrounding = 4
     unfocus = 3
-
-
+    last = ""
     stack.each_with_index do |c, i|
       if c["type"] == "client" then
         name = %x[xptr-to-title #{c["id"]}].chomp!
       else
         name = "#{c["layout"][0].upcase}-Set [#{c["children"].size}]"
       end
+
       foc  = foo("get focus")["node"]
       if (c["node"] == foc) then
-        name = name[0..130].fg(focus)
-        name = name + " , ".fg(unfocus) unless c == stack.last
-      elsif ((i != 0 && foc == stack[i - 1]["node"]) || (stack[i] != stack.last && foc == stack[i + 1]["node"])) then
-        name = name[0..8].fg(1) 
-        name = name + " , ".fg(unfocus) unless c == stack.last
-      else
-        name = ".".fg(1)
+        last =  " #{name[0..50]} ".bg(2).ul(4).fg(9)
       end
 
-      right = right + name 
     end
-    right = "#{right}"
+    right = "#{right}#{last}#{z_icons}"
 
   end
-  zoom = %x[foo-zoom-level].chomp!
-  center = "Z".fg(5) + " = " + "#{zoom.to_s.fg(3)}"
-  center = "#{center} #{marks}"
+  center = marks
 
 
   s = "#{battery}#{network}#{volume}#{time}\\c#{center}\\r#{right}"
