@@ -71,9 +71,13 @@ loop do
 
   z_icons = ""
   zoom = %x[foo-zoom-level].chomp!
-  zoom.to_i.times do  |t|
-    z_icons = z_icons + "+".fg(3).bg(2).ul(5)
+  for i in 1..zoom.to_i do
+    z_icons = " #{z_icons}" if (i == 1)
+    z_icons = z_icons + "+"    
+    z_icons = "#{z_icons} " if (i  == zoom.to_i)  
+
   end
+    z_icons = z_icons.fg(3).bg(2).ul(5)
   
 
   #s = "\\u8#{wifi} #{battery} #{volume}\\c#{marks}\\r#{time} #{subway} #{weather}l"
@@ -116,15 +120,21 @@ loop do
     stack.each_with_index do |c, i|
       if c["type"] == "client" then
         name = %x[xptr-to-title #{c["id"]}].chomp!
-      else
-        name = "#{c["layout"][0].upcase}-Set [#{c["children"].size}]"
-      end
+
 
       foc  = foo("get focus")["node"]
       if (c["node"] == foc) then
-        last =  " #{name[0..50]} ".bg(2).ul(4).fg(9)
+        icon =  " > ".bg(2).fg(4).ul(3)
+        last =  "#{icon}#{(" " + name[0..50] + " ").ul(5)}"
       end
 
+      else
+        chil = " #{c["children"].size.to_s} ".fg(3).bg(4)
+        name = 
+        name = "#{chil}#{c["layout"][0].upcase}-Set #{c["children"].size}"
+
+        
+      end
     end
     right = "#{right}#{last}#{z_icons}"
 
