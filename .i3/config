@@ -156,15 +156,16 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+  i3bar_command /usr/bin/i3bar-icons
         position top
         status_command i3status
         font pango:Envy Code R 10
         colors {
-          background #f5f5f5
+          background #f8f8f8
           statusline #000000
-          focused_workspace #e6e6e6 #00369c #ffffff
+          focused_workspace #000000 #d6ecff #000000
           active_workspace #ffffff #999999 #ffffff
-          inactive_workspace #ffffff #f0f0f0 #757575
+          inactive_workspace #a6a6a6 #f0f0f0 #757575
           urgent_workspace #000000 #ffffff
         }
 }
