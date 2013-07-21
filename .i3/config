@@ -23,6 +23,9 @@ font pango:Envy Code R 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier Mod1
+new_window pixel 1 
+new_float normal
+hide_edge_borders both
 
 focus_follows_mouse no
 floating_minimum_size 0x0
@@ -96,6 +99,9 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+assign [title="bci"] ten
+assign [title="x300"] ten
+
 # focus the child container
 #bindsym $mod+d focus child
 
@@ -160,11 +166,12 @@ bar {
         status_command i3status
         font pango:Envy Code R 10
         colors {
-          background #f5f5f5
+          background #f8f8f8
           statusline #000000
-          focused_workspace #e6e6e6 #00369c #ffffff
+          separator #666666
+          focused_workspace #000000 #d6ecff #000000
           active_workspace #ffffff #999999 #ffffff
-          inactive_workspace #ffffff #f0f0f0 #757575
+          inactive_workspace #a6a6a6 #f0f0f0 #757575
           urgent_workspace #000000 #ffffff
         }
 }
