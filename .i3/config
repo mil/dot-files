@@ -141,20 +141,20 @@ bindsym $mod+p exec scad_preview
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+# Pressing left will shrink the window’s width.
+# Pressing right will grow the window’s width.
+# Pressing up will shrink the window’s height.
+# Pressing down will grow the window’s height.
+  bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+# back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -162,25 +162,24 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        position top
-        status_command i3status
-        font pango:Envy Code R 10
-        colors {
-          background #f8f8f8
-          statusline #000000
-          separator #666666
-          focused_workspace #000000 #d6ecff #000000
-          active_workspace #ffffff #999999 #ffffff
-          inactive_workspace #a6a6a6 #f0f0f0 #757575
-          urgent_workspace #000000 #ffffff
-        }
+  position top
+    status_command i3status
+    font pango:Envy Code R 10
+    colors {
+      background #f8f8f8
+        statusline #000000
+        separator #666666
+        focused_workspace #000000 #d6ecff #000000
+        active_workspace #ffffff #999999 #ffffff
+        inactive_workspace #a6a6a6 #f0f0f0 #757575
+        urgent_workspace #000000 #ffffff
+    }
 }
 
 
 
-client.background #ffffff
 #border background text
-client.focused #67c700 #ebffd6 #000000
-client.focused_inactive #000000 #ebf4ff #404040
-client.unfocused #4a4a4a #e3e3e3 #696969
-client.urgent #000000 #000000 #ffffff
+client.focused #000000 #ebffd6 #000000 #000000
+client.focused_inactive #000000 #ebf4ff #404040 #000000
+client.unfocused #4a4a4a #e3e3e3 #696969 #000000
+client.urgent #000000 #000000 #ffffff #000000
