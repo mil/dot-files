@@ -88,6 +88,8 @@ export PATH="/home/mil/Scripts/Wm:$PATH"
 export PATH="/home/mil/Scripts/X:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
 
+export PATH="/usr/local/heroku/bin:$PATH"
+
 #RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 export rvm_ignore_gemrc_issues=1

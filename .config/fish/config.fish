@@ -11,6 +11,7 @@ set -x PATH /home/mil/Scripts/Utilities $PATH
 set -x PATH /home/mil/Scripts/Rpi $PATH
 set -x PATH /home/mil/Scripts/Wm $PATH
 set -x PATH /home/mil/Scripts/X $PATH
+set -x PATH /usr/local/heroku/bin $PATH
 
 set -x PATH /usr/local/heroku/bin $PATH
 

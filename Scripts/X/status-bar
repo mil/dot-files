@@ -51,7 +51,13 @@ loop do
 
   # Network
   networkLabel = " Netcfg ".fg(1).bg(2)
-  networkValue = " #{%x[netcfg current].chomp!} ".fg(5)
+  networkValue = ""
+  if (%x[which netcfg 2>&1].include? "no netcfg") then
+    networkValue = ""
+  else
+    networkValue = " #{%x[netcfg current].chomp!} ".fg(5)
+  end
+
   network = "#{networkLabel}#{networkValue}"
 
   #Volume
