@@ -26,6 +26,7 @@ searches:
   - sh       : urxvt -e %S
   - kill     : killall %S
   - man      : urxvt -e man %s
+  - cd       : urxvt -e ranger %S
 
 shortcuts:
   - config : urxvt -e vim /home/mil/.launchrc
@@ -76,6 +77,7 @@ shortcuts:
   - tetris  : urxvt -e vitetris
 
   # Tools
+  - code     : urxvt -e ranger /home/mil/Code
   - edit     : surf 'http://userbound.com/ui/mil-edit'
   - email    : urxvt -e mutt
   - download : launch '`sselp`'
@@ -107,11 +109,12 @@ shortcuts:
   - picker     : gcolor2
   - ruler      : screenruler
   - screenshot : scrot
-
   - c      : xdotool key c l o n e Return
 
-  # Research
-  - test     : http://127.0.0.1:4567
+  # Skanote
+  - skanote-dev : chromium --app=http://localhost:9292
+  - skanote     : chromium --app=http://morning-plains-8512.herokuapp.com
+
 
   # REPLS
   - io       : urxvt -e io 
