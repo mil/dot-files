@@ -16,6 +16,7 @@ searches:
   - gh       : http://github.com/search?q=%s
   - wa       : http://wolframalpha.com/input?i=%s
   - discogs  : http://discogs.com/search?q=%s
+  - ud       : http://urbandictionary.com/define.php?term=%s
   - ebay     : http://search.ebay.com/search/search.dll?query=%s
   - stock    : https://www.google.com/finance?q=%s
   - chromium : chromium %S
