@@ -89,11 +89,11 @@ set wildmenu "Tab completion status bar
 " now set it up to change the status line based on mode
 if version >= 700
 	au InsertEnter * hi StatusLine term=reverse ctermbg=2 gui=undercurl guisp=Magenta
-	"au InsertEnter * silent ! insertMode & 
+	au InsertEnter * silent ! insertMode & 
 	au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=7 gui=bold,reverse
-"	au InsertLeave * silent ! clearMode &
+  au InsertLeave * silent ! clearMode &
 
-"	au FocusLost * silent !clearMode &
+  au FocusLost * silent !clearMode &
 endif
 :hi ModeMsg ctermbg=0 ctermfg=7 gui=bold
 
