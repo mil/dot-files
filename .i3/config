@@ -14,7 +14,7 @@ default_orientation vertical
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font pango:Envy Code R 11
+font pango:Envy Code R 10
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
@@ -23,9 +23,8 @@ font pango:Envy Code R 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier Mod1
-new_window pixel 1 
+#new_window pixel 1 
 new_float normal
-hide_edge_borders both
 
 focus_follows_mouse no
 floating_minimum_size 0x0
@@ -164,7 +163,7 @@ bindsym $mod+r mode "resize"
 bar {
   position top
     status_command i3status
-    font pango:Envy Code R 10
+    font pango:Envy Code R 9
     colors {
       background #f8f8f8
         statusline #000000

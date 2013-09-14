@@ -40,7 +40,7 @@ shortcuts:
 
   # Tmux Sessions
   - notes   : urxvt -e tmx notes
-  - music   : urxvt -e tmx music
+  - music   : urxvt -e dtach -A /home/mil/IPC/Sockets/music fish -c dvtm
   - chat    : urxvt -e tmx chat
   - network : urxvt -e tmx network
   - system  : urxvt -e tmx system
@@ -115,6 +115,8 @@ shortcuts:
   # Skanote
   - skanote-dev : chromium --app=http://localhost:9292
   - skanote     : chromium --app=http://morning-plains-8512.herokuapp.com
+
+  - ranger      : urxvt -e ranger
 
 
   # REPLS
