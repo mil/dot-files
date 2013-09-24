@@ -1,2 +1,3 @@
 # Write your default config options here!
 input=file=/home/mil/IPC/Fifos/mplayer
+#af-add=volnorm=1.25:0.75

@@ -29,6 +29,7 @@ searches:
   - kill     : killall %S
   - man      : urxvt -e man %s
   - cd       : urxvt -e ranger %S
+  - weather  : surf -s http://asciiw.com/%s
 
 shortcuts:
   - config : urxvt -e vim /home/mil/.launchrc
@@ -42,6 +43,7 @@ shortcuts:
   # Tmux Sessions
   - notes   : urxvt -e tmx notes
   - music   : urxvt -e dtach -A /home/mil/IPC/Sockets/music fish -c dvtm
+  - torrent : urxvt -e dtach -A /home/mil/IPC/Sockets/torrent fish -c dvtm
   - chat    : urxvt -e tmx chat
   - network : urxvt -e tmx network
   - system  : urxvt -e tmx system
@@ -77,6 +79,7 @@ shortcuts:
   # Games
   - clock   : urxvt -fn "xft:Envy Code R-20" -e tty-clock -c -s -C 2
   - tetris  : urxvt -e vitetris
+  - word    : abiword
 
   # Tools
   - code     : urxvt -e ranger /home/mil/Code
@@ -95,7 +98,6 @@ shortcuts:
   - bb      : http://bitbucket.org
   - scholar : http://scholar.vt.edu
   - lib     : surf 'https://login.ezproxy.lib.vt.edu:2443/login?qurl=http%3A//www.lib.vt.edu/'
-  - weather : surf -s 'http://www.wunderground.com/cgi-bin/findweather/getForecast?query=24061&theprefset=conds_details&theprefvalue=0'
 
   # Servers
   - site5     : urxvt -e ssh miles@userbound.com
