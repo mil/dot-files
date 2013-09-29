@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+require 'io/console'
+$fifo = '/home/mil/IPC/Fifos/mplayer'
+puts "mpctrl :: sending commands to #{$fifo}"
+commands = {
+  'j' => 'seek -NUM',
+  'k' => 'seek +NUM',
+  'd' => 'speed_incr -0.01',
+  'f' => 'speed_incr +0.01',
+  'e' => 'speed_incr -0.15',
+  'r' => 'speed_incr +0.15',
+  'm' => 'mute',
+  'u' => ['seek -1', 'speed_incr +10', 'seek +1', 'speed_incr -10']
+}
+
+buff = ''
+num = 1 
+loop do
+  c = STDIN.getch
+  e = ""
+  if (c == '\\') then
+    exit
+  elsif (c.match(/[[:digit:]]/)) then
+    num = c.match(/[[:digit:]]/)[0]
+    e = "SET\n"
+  else
+    command = commands[c]
+    if command.class == Array then
+      print "--> "
+      command.each do |co|
+        %x[echo #{co} > #{$fifo}]
+        print "[#{co}] "
+      end
+      print "\n"
+    else
+      cc = command.gsub("NUM", num.to_s)
+      %x[echo #{cc} > #{$fifo}]
+      puts cc
+    end
+    buff = ''
+  end
+  print "#{num}> #{e}"
+end
