@@ -4,4 +4,5 @@ keycode 66 = Escape
 keycode 62 = Right
 keycode 166 = Prior
 keycode 167 = Next
+keycode 119 = bar
 !keycode 32 = Alt_L
