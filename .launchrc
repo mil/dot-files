@@ -69,7 +69,7 @@ shortcuts:
   - viewsonic : viewsonic
   - morning   : light on
   - goodnight : xset dpms force suspend && light off
-  - lock      : i3lock -u
+  - lock      : slock
   - invert    : xcalib -a -invert
   - suspend   : sudo pm-suspend
   - shutdown  : sudo /usr/bin/systemctl hibernate

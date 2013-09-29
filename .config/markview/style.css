@@ -43,7 +43,7 @@ h6 {
 	font-size: 15px;
 }
 
-ul {
+ul li ul {
 	border: 1px dotted gray;
 	margin: 5px;
 	
