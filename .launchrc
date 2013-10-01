@@ -30,6 +30,7 @@ searches:
   - man      : urxvt -e man %s
   - cd       : urxvt -e ranger %S
   - weather  : surf -s http://asciiw.com/%s
+  - workspace : workspace %s
 
 shortcuts:
   - config : urxvt -e vim /home/mil/.launchrc
