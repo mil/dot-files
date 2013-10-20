@@ -50,11 +50,10 @@ Rxvt.scrollstyle            : plain
 
 ! Fonts
 ! *font: xft:Terminus-10
-*font: xft:Inconsolata-10
+*font: xft:Envy Code R-9
 ! *font: xft:Envy Code R-10
 *hinting: false
 Xft.hintstyle:hintslight
-
 
 
 
@@ -78,8 +77,7 @@ Xft.hintstyle: hintful
 
 Rxvt*transparent: true
 Rxvt*shading: 100
-
-
+URxvt.termName: rxvt-256color
 
 
 ! extensions
@@ -108,8 +106,6 @@ URxvt.letterSpace: 0
 !URxvt.buffered: True
 URxvt.highlightColor: #fffeaa
 URxvt.scrollColor: #cfcfcf
-URxvt.termName: xterm-color
-
 
 !URxvt.fading: 20
 !URxvt.fadeColor: #000000
@@ -140,6 +136,7 @@ URxvt.underlineURLs: true
 ! XTERM 
 XTerm*vt100.metaSendsEscape : True
 XTerm*vt100.saveLines       : 8192
+
 
 ! appearance
 XTerm*vt100.colorMode       : True

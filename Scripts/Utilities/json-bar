@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+require 'json'
+x = [
+  {
+    "name" => "time",
+    "full_text" => %x[date].chomp!,
+    "color" => "#171717" 
+  },
+  {
+    "name" => "ethernet",
+    "separator" => true,
+    "color" => "#171717" 
+  }
+].to_json
+
+puts '{ "version": 1 }'
+puts "["
+puts "[]"
+
+
+loop do
+  puts "," + x
+  sleep 1
+  $STDOUT.flush
+end
