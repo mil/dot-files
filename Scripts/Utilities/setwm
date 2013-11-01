@@ -17,6 +17,9 @@ commands = {
     "x-focus-manager",
     "x-session"
 ],
+  "alopex" => [
+    "alopex"
+],
   "euclid" => [
     "euclid-wm"
 ],

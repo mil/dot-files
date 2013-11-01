@@ -1,17 +1,21 @@
 #!/usr/bin/env ruby
 require 'json'
-x = [
-  {
-    "name" => "time",
-    "full_text" => %x[date].chomp!,
-    "color" => "#171717" 
-  },
-  {
-    "name" => "ethernet",
-    "separator" => true,
-    "color" => "#171717" 
-  }
-].to_json
+
+def information
+  [
+    {
+      "name" => "time",
+      "full_text" => %x[date].chomp!,
+      "color" => "#171717" 
+    },
+  #  {
+  #    "name" => "bus",
+  #    "full_text" => %x[bt 2> /tmp/err].chomp!,
+  #    "separator" => true,
+  #    "color" => "#171717" 
+  #  }
+  ].to_json
+end
 
 puts '{ "version": 1 }'
 puts "["
@@ -19,7 +23,7 @@ puts "[]"
 
 
 loop do
-  puts "," + x
-  sleep 1
-  $STDOUT.flush
+  puts "," + information
+  sleep 20
+  STDOUT.flush
 end

@@ -2,10 +2,10 @@
 # Shares internet from wlan0 through eth0
 case "$1" in 
     start)
-ifconfig eth0 up
-ifconfig eth0 10.0.0.1
-iptables --table nat --append POSTROUTING --out-interface eth1 -j MASQUERADE
-iptables --append FORWARD --in-interface eth0 -j ACCEPT
+ifconfig enp2s1 up
+ifconfig enp2s1 11.0.0.1
+iptables --table nat --append POSTROUTING --out-interface enp2s1 -j MASQUERADE
+iptables --append FORWARD --in-interface enp2s1 -j ACCEPT
 echo 1 > /proc/sys/net/ipv4/ip_forward
 echo "set other computers in the range of"
 echo "10.0.0.0 255.255.255.0"
@@ -14,8 +14,8 @@ echo "dns 10.0.0.1"   % this is actually my router, use yours, or another dns se
 ;;
     stop)
 echo 0 > /proc/sys/net/ipv4/ip_forward
-ifconfig eth0 down
-iptables --table nat --delete POSTROUTING --out-interface wlan0 -j MASQUERADE
+ifconfig enp2s1 down
+iptables --table nat --delete POSTROUTING --out-interface wlp2s2 -j MASQUERADE
 ;;
     *)
 echo "usage: $0 {start|stop}"
