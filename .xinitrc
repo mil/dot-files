@@ -4,7 +4,7 @@ xset fp rehash &
 #xchainkeys &
 autocutsel &
 #devilspie &
-compton &
+#compton &
 unclutter &
 xrdb /home/mil/.Xresources &
 
