@@ -25,7 +25,7 @@ $screen = {
 
 # Defaults
 $defaults = { 
-  :dim => 0.5,
+  #:dim => 0.5,
   :h => 40,
   :x => 10,
   :y => ($screen[:height] / 2) - 20,
