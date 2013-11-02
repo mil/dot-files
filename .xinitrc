@@ -5,7 +5,7 @@ xset fp rehash &
 autocutsel &
 #devilspie &
 #compton &
-unclutter &
+#unclutter &
 xrdb /home/mil/.Xresources &
 
 xmodmap ~/.xmodmap &
