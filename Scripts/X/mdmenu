@@ -7,10 +7,7 @@ require 'json'
 
 # Setup Screen Dimensions Info
 if (!File.exists?('#{Dir.home}/.screen_dimensions')) then
-  xr = %x[xrandr | head -n1 | cut -d, -f2 | cut -d " " -f3-5].split(" x ")
-  File.open("#{Dir.home}/.screen_dimensions", 'w+') { |f|
-    f.write("#{xr[0]}x#{xr[1]}")
-  }
+  %x[write_dimensions]
 end
 dimensions = IO.read("#{Dir.home}/.screen_dimensions").to_s.chomp!.split('x')
 $screen = {
