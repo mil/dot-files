@@ -68,6 +68,7 @@ shortcuts:
   - monitor   : arandr
   - remap     : xmodmap ~/.xmodmap
   - viewsonic : viewsonic
+  - dualscreen : dualscreen
   - morning   : light on
   - goodnight : xset dpms force suspend && light off
   - lock      : slock

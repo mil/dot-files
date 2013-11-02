@@ -24,15 +24,16 @@ $screen = {
 $defaults = { 
   #:dim => 0.5,
   :h => 40,
-  :x => 10,
+  :x => 40,
   :y => ($screen[:height] / 2) - 20,
-  :w => $screen[:width] - 20,
+  :w => $screen[:width] - 80,
   :fn => 'Envy Code R-13',
   :sb => '#0073bf',
   :sf => '#ffffff',
   :nb => '#000000',
   :nf => '#c4c4c4',
-  :p  => 'Rd Menu'
+  :p  => 'Rd Menu',
+  :o => 0.4
 }
 
 $app = $defaults
