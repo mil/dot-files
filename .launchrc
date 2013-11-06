@@ -1,6 +1,6 @@
 # vim:ft=yaml:
 cookies: ~/.local/share/uzbl/cookies.txt
-default_search: gg
+default_search: ddg
 
 searches:
   - j        : urxvt -e 'z %s & ranger'
@@ -63,6 +63,10 @@ shortcuts:
   - next     : mediaControl next
   - previous : mediaControl previous
   - dj       : urxvt -e mpctrl
+
+  # Locations
+  - campus : campus
+  - home   : home
 
   # System
   - monitor   : arandr
