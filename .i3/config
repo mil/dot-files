@@ -11,11 +11,10 @@
 
 set $mod Mod1
 default_orientation vertical
-new_window pixel 1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font pango:Envy Code R 9
+font pango:Envy Code R 10
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
@@ -40,11 +39,13 @@ bindsym $mod+Shift+Left exec dvol -t
 
 bindsym XF86AudioRaiseVolume exec dvol -i 2
 bindsym XF86AudioLowerVolume exec dvol -d 2
-bindsym XF86AudioMuteVolume exec dvol -t
+bindsym XF86AudioMute exec dvol -t
 
 bindsym XF86AudioPrev exec mediaControl previous
 bindsym XF86AudioPlay exec mediaControl pause
 bindsym XF86AudioNext exec mediaControl next
+
+bindsym XF86Eject exec touchpad
 
 bindsym XF86MonBrightnessDown exec sudo brightcontrol down
 bindsym XF86MonBrightnessUp exec sudo brightcontrol up
@@ -167,7 +168,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
   position top
-    #status_command json-bar
+    status_command json-bar
     font pango:Envy Code R 9
     colors {
       background #f8f8f8
