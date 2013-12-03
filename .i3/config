@@ -11,10 +11,11 @@
 
 set $mod Mod1
 default_orientation vertical
+new_window pixel 1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font pango:Envy Code R 10
+font pango:Envy Code R 9
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
@@ -166,7 +167,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
   position top
-    status_command json-bar
+    #status_command json-bar
     font pango:Envy Code R 9
     colors {
       background #f8f8f8
