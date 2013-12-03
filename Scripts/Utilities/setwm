@@ -75,6 +75,12 @@ commands = {
     "dunst",
     "exec i3"
 ],
+"pekwm" => [
+"exec pekwm"
+],
+"echinus" => [
+  "keynav", "dunst", "exec echinus"
+],
   "sawfish" => [
     "xbindkeys",
     "exec sawfish"
