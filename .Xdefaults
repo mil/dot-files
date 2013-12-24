@@ -50,8 +50,8 @@ Rxvt.scrollstyle            : plain
 
 ! Fonts
 ! *font: xft:Terminus-10
-*font: xft:Envy Code R-12
-! *font: xft:Envy Code R-10
+#*font: xft:Envy Code R-12
+ *font: xft:Monospace-11
 *hinting: false
 Xft.hintstyle:hintslight
 

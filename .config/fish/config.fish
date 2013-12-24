@@ -12,6 +12,7 @@ set -x PATH /home/mil/Scripts/Rpi $PATH
 set -x PATH /home/mil/Scripts/Wm $PATH
 set -x PATH /home/mil/Scripts/X $PATH
 set -x PATH /usr/local/heroku/bin $PATH
+set -x PATH /home/mil/.cabal/bin $PATH
 
 set -x PATH /usr/local/heroku/bin $PATH
 
@@ -51,3 +52,5 @@ function fish_prompt
   set_color normal
   echo -n ' > '
 end
+
+cat ~/.todo
