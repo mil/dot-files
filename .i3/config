@@ -31,6 +31,7 @@ floating_minimum_size 0x0
 
 # start a terminal
 bindsym $mod+Return exec xcwd | xargs urxvt -cd
+bindsym $mod+Control+Return exec xcwd | xargs urxvt -e ranger
 bindsym $mod+Shift+Return exec urxvt
 bindsym $mod+semicolon exec surf
 
