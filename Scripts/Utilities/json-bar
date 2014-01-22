@@ -1,13 +1,31 @@
 #!/usr/bin/env ruby
 require 'json'
 
+def battery
+  buff = %x[battery].chomp!.split(' ')
+  state = buff[0]
+  percent = buff[1]
+  percent + " | " + state[0].upcase
+end
+
 def information
   [
+  #  {
+  #    "name" => "time",
+  #    "full_text" => %x[date].chomp!,
+  #    "color" => "#171717" 
+  #  },
+  #
+  #
     {
-      "name" => "time",
-      "full_text" => %x[date].chomp!,
-      "color" => "#171717" 
-    },
+      "name" => "battery",
+      "full_text" => battery,
+      "color" => "#171717"
+    }
+
+
+
+
   #  {
   #    "name" => "bus",
   #    "full_text" => %x[bt 2> /tmp/err].chomp!,
@@ -24,6 +42,6 @@ puts "[]"
 
 loop do
   puts "," + information
-  sleep 20
   STDOUT.flush
+  sleep 40
 end

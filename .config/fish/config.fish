@@ -17,6 +17,9 @@ set -x PATH /home/mil/.cabal/bin $PATH
 set -x PATH /usr/local/heroku/bin $PATH
 
 
+# CPAN
+set -x PATH /usr/bin/core_perl $PATH
+
 
 # Color Wrapper
 set -x PATH /usr/lib/cw $PATH

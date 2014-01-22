@@ -170,7 +170,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
   position top
-    #status_command json-bar
+    status_command json-bar
     font pango:Envy Code R 9
     colors {
       background #f8f8f8
