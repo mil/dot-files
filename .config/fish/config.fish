@@ -30,6 +30,7 @@ bash $HOME/.rvm/scripts/rvm
 set -x PATH /home/mil/.rvm/bin $PATH
 set -x PATH /home/mil/.gem/ruby/1.9.1/bin $PATH
 set -x PATH /home/mil/.gem/ruby/2.0.0/bin $PATH
+set -x PATH /home/mil/.gem/ruby/2.1.0/bin $PATH
 set -x PATH /home/mil/.aws-eb/eb/linux/python3 $PATH
 
 . /home/mil/.config/fish/z.fish
