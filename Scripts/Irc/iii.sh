@@ -7,7 +7,7 @@
 # and redirects input to the in file
 
 : "${n:=$USER}"             # the user's nickname
-: "${i:=$HOME/irc}"         # root irc dir
+: "${i:=$HOME/Irc}"         # root irc dir
 : "${s:=irc.freenode.net}"  # server
 : "${c:=""}"                # channel
 : "${m:=12}"                # max nick lenght

@@ -46,6 +46,7 @@ shortcuts:
   - notes   : urxvt -e tmx notes
   - music   : urxvt -e dtach -A /home/mil/IPC/Sockets/music fish -c dvtm
   - torrent : urxvt -e dtach -A /home/mil/IPC/Sockets/torrent fish -c dvtm
+  - irc     : urxvt -e dtach -A /home/mil/IPC/Sockets/irc fish -c dvtm
   - chat    : urxvt -e tmx chat
   - network : urxvt -e tmx network
   - system  : urxvt -e tmx system
