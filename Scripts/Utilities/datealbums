@@ -39,13 +39,15 @@ discogs_releases = art.releases
 rename_folders = ARGV
 clear
 rename_folders.each do |folder_name|
+  match_name = folder_name.gsub(artist_name, "") if match_name != folder_name
 
   closest_match    = nil
   closest_distance = 0
   discogs_releases.each do |release|
+    distance = matcher.getDistance(release.title, match_name)
 
-    distance = matcher.getDistance(release.title, folder_name)
     if (distance > closest_distance)
+      next if !release
       closest_distance = distance
       closest_match    = release
     end
@@ -63,7 +65,7 @@ rename_folders.each do |folder_name|
     if Dir.exist?(new_name)
       puts "x Folder already exists\n".color(:green)
     else
-      FileUtils.mv(folder_name, new_name)
+      FileUtils.mv("#{Dir.pwd}/#{folder_name}", "#{Dir.pwd}/#{new_name}")
       print "^ ".color(:green)
     end 
   else
