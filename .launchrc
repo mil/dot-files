@@ -47,7 +47,7 @@ shortcuts:
   - music   : urxvt -e dtach -A /home/mil/IPC/Sockets/music fish -c dvtm
   - torrent : urxvt -e dtach -A /home/mil/IPC/Sockets/torrent fish -c dvtm
   - irc     : urxvt -e dtach -A /home/mil/IPC/Sockets/irc fish -c dvtm
-  - chat    : urxvt -e tmx chat
+  - chat    : urxvt -e dtach -A /home/mil/IPC/Sockets/chat fish -c pidgin
   - network : urxvt -e tmx network
   - system  : urxvt -e tmx system
 
@@ -61,6 +61,7 @@ shortcuts:
   - wuvt     : urxvt -fn "xft:Envy Code R-30" -e sleepit 10 wuvt
   - bt       : urxvt -fn "xft:Envy Code R-30" -e sleepit 10 bt
   - mixer    : urxvt -e alsamixer
+  - eq       : urxvt -e alsamixer -D equal
   - pause    : mediaControl pause
   - next     : mediaControl next
   - previous : mediaControl previous

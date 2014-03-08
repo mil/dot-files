@@ -101,6 +101,10 @@ export PATH
 PATH=$PATH:/home/mil/.gem/ruby/2.0.0/bin
 export PATH
 
+
+PATH=$PATH:/home/mil/.gem/ruby/2.1.0/bin
+export PATH
+
 #VirtualENV Wrapper
 #export WORKON_HOME=~/.virtualenvs
 #source /usr/bin/virtualenvwrapper.sh

@@ -71,6 +71,7 @@ bindsym $mod+Shift+p exec pwdhashX
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+
 # change focus
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -82,6 +83,10 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+l move right
+
+bindsym $mod+u border none
+bindsym $mod+i border 1pixel
+bindsym $mod+o border normal
 
 # split in horizontal orientation
 #bindsym $mod+h split h
@@ -144,7 +149,9 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 
-bindsym $mod+p exec scad_preview
+
+
+
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
