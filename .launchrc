@@ -121,6 +121,7 @@ shortcuts:
   # Graphics
   - calibrate  : urxvt -e dispwin
   - gimp       : gimp
+  - phatch     : phatch
   - picker     : gcolor2
   - ruler      : screenruler
   - screenshot : scrot
