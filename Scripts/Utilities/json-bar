@@ -7,6 +7,10 @@ def battery
   percent = buff[1]
   percent + " | " + state[0].upcase
 end
+def temp
+  n = File.read("/sys/class/thermal/thermal_zone0/temp").chomp!.to_i / 1000
+  return n.to_s + "°C"
+end
 
 def information
   [
@@ -18,10 +22,19 @@ def information
   #
   #
     {
+      "name" => "temp",
+      "full_text" => temp,
+      "color" => "#171717"
+    },
+    {
       "name" => "battery",
       "full_text" => battery,
       "color" => "#171717"
     }
+
+
+
+
 
 
 
