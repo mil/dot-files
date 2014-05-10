@@ -9,8 +9,18 @@ def battery
 end
 def temp
   n = File.read("/sys/class/thermal/thermal_zone0/temp").chomp!.to_i / 1000
+  #return "" + 
   return n.to_s + "°C"
 end
+
+def network
+  l = %x[netctl list].split("\n").select { 
+    |n| n if n[0] == "*"
+  }
+  l.first.gsub!("* ", "")
+  "☊" + l.first
+end
+
 
 def information
   [
@@ -27,10 +37,19 @@ def information
       "color" => "#171717"
     },
     {
+      "name" => "network",
+      "full_text" => network,
+      "color" => "#171717"
+    },
+
+
+
+    {
       "name" => "battery",
       "full_text" => battery,
       "color" => "#171717"
     }
+
 
 
 

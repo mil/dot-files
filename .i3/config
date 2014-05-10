@@ -178,7 +178,7 @@ bindsym $mod+r mode "resize"
 bar {
   position top
     status_command json-bar
-    font pango:Envy Code R 9
+    font pango:Envy Code R, Stlarch 9
     colors {
       background #f8f8f8
         statusline #000000

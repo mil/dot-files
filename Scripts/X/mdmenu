@@ -33,7 +33,7 @@ $defaults = {
   :nb => '#000000',
   :nf => '#c4c4c4',
   :p  => 'Rd Menu',
-  :o => 0.4
+  :o => 0.95
 }
 
 $app = $defaults
