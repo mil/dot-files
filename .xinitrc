@@ -6,7 +6,7 @@ autocutsel &
 #devilspie &
 compton &
 #unclutter &
-xrdb /home/mil/.Xresources &
+xrdb /home/mil/.Xdefaults &
 
 xmodmap ~/.xmodmap &
 feh --bg-scale ~/.wallpaper.jpg &
