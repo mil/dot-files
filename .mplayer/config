@@ -2,3 +2,5 @@
 input=file=/home/mil/IPC/Fifos/mplayer
 #cache=4000
 #af-add=volnorm=1.25:0.75
+[extension.mp4]
+demuxer=mov

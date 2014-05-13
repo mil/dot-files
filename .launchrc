@@ -15,7 +15,10 @@ searches:
   - so       : http://stackoverflow.com/search?q=%s
   - gh       : http://github.com/search?q=%s
   - wa       : http://wolframalpha.com/input?i=%s
+
   - discogs  : http://discogs.com/search?q=%s
+  - rym      : http://rateyourmusic.com/search?searchtype=a&searchterm=%s
+
   - sep      : http://plato.stanford.edu/search/searcher.py?query=%s
   - ud       : http://urbandictionary.com/define.php?term=%s
   - ebay     : http://search.ebay.com/search/search.dll?query=%s
@@ -104,6 +107,7 @@ shortcuts:
   - top      : urxvt -e htop
 
   # Bookmarks
+  - bookmarks : urxvt -e ranger /home/mil/Code/Bitbucket/bookmarks
   - otw     : http://onethingwell.org
   - hn      : http://news.ycombinator.com
   - bb      : http://bitbucket.org
