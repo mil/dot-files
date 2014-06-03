@@ -67,7 +67,7 @@ Shorthands:
   sys13     : ssh mil@sys13
 
 
-  config : urxvt -e vim /home/mil/.launchrc
+  config : urxvt -e vim /home/mil/.lunchcfg.yaml
   # Window Manager
   down  : i3 focus down
   up    : i3 focus up

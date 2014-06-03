@@ -14,7 +14,7 @@ default_orientation vertical
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font pango:Envy Code R 9
+font xft: Envy Code R 10
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
@@ -183,9 +183,11 @@ bar {
       background #ffffff
         statusline #000000
         separator #666666
-        focused_workspace #005faf #005faf #ffffff
+
+#client.focused #000000 ##000000 #000000
+        focused_workspace #000000 #d6ecff #000000
         active_workspace #ffffff #999999 #ffffff
-        inactive_workspace #a6a6a6 #f0f0f0 #757575
+        inactive_workspace #000000 #e8e8e8 #757575
         urgent_workspace #000000 #ffffff
     }
 }
@@ -193,7 +195,11 @@ bar {
 
 
 #border background text
-client.focused #005faf #005faf #eeeeee #2e9ef4
-client.focused_inactive #f2ffe5 #f2ffe5 #404040 #000000
+#client.focused #cfcfcf #0036ff #ffffff #ecffd8
+#client.focused_inactive #f2ffe5 #eeffe4 #000000 #000000
+
+client.focused #000000 #ebffd6 #000000 #000000
+client.focused_inactive #000000 #ebf4ff #404040 #000000
 client.unfocused #4a4a4a #e3e3e3 #696969 #000000
 client.urgent #000000 #000000 #ffffff #000000
+
