@@ -23,17 +23,18 @@ $screen = {
 # Defaults
 $defaults = { 
   #:dim => 0.5,
-  :h => 40,
+  :h => 50,
   :x => 40,
   :y => ($screen[:height] / 2) - 20,
   :w => $screen[:width] - 80,
-  :fn => 'Envy Code R-13',
+  :fn => 'Envy Code R-14',
   :sb => '#0073bf',
   :sf => '#ffffff',
   :nb => '#000000',
   :nf => '#c4c4c4',
   :p  => 'Rd Menu',
-  :o => 0.95
+  :o => 0.9,
+  :dim => 0.6
 }
 
 $app = $defaults
@@ -41,7 +42,7 @@ $app = $defaults
 #Profiles
 $profiles = {}
 $profiles["launch"] = { 
-  :p => "Launch",
+  :p => ">",
   :sb => "#003eef",
   :nb => "#efefef",
   :nf => "#000000",
