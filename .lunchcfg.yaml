@@ -1,0 +1,159 @@
+# Query Strings may be composed of
+# a sequence of (multiple) filters/handlers
+
+# Psuedo Syntax:
+# shorthand | handler filter | filter handler 
+
+
+Handlers:
+  default   : surf
+
+  # Non-URI Based handlers
+  surf     : surf %s
+  chr      : chromium %s
+  private  : chromium --incognito %s
+  ff       : firefox %s
+
+  # URI-Based Handlers
+  https?    : surf %s
+  xml       : newsreader %s
+
+  # Termial Handlers
+  sh        : urxvt -e %s
+
+
+Filters:
+  default  : gg
+
+  # Searches Queries
+  ddg      : https://duckduckgo.com/?q=%s
+  gg       : https://google.com/search?q=%s
+  im       : https://google.com/search?tbm=isch&q=%s
+  wiki     : https://en.wikipedia.org/w/index.php?search=%s
+  wb       : https://secure.wikimedia.org/wikibooks/en/wiki?search=%s
+  aur      : https://aur.archlinux.org/packages.php?O=0&K=%s&do_Search=Go
+  aw       : https://wiki.archlinux.org/index.php?search=%s
+  so       : https://stackoverflow.com/search?q=%s
+  gh       : https://github.com/search?q=%s
+  wa       : https://wolframalpha.com/input?i=%s
+  discogs  : https://discogs.com/search?q=%s
+  rym      : https://rateyourmusic.com/search?searchterm=%s&searchtype=a
+  sep      : https://plato.stanford.edu/search/searcher.py?query=%s
+  ud       : https://urbandictionary.com/define.php?term=%s
+  ebay     : https://search.ebay.com/search/search.dll?query=%s
+  stock    : https://www.google.com/finance?q=%s
+  define   : http://www.merriam-webster.com/dictionary/%s
+  syn      : http://www.collinsdictionary.com/dictionary/english-thesaurus/%s
+  weather  : https://asciiw.com/%s
+
+  yt        : youtube-viewer %s
+  j         : z %s & ranger
+  kill      : killall %s
+  man       : man %s
+  cd        : ranger %s
+  workspace : workspace %s
+
+
+
+
+Shorthands:
+  chromium  : chromium
+
+
+  site5     : ssh miles@userbound.com
+  dreamhost : ssh bladdo@bladdo.net
+  x300      : ssh mil@x300
+  x40       : ssh mil@x40
+  sys13     : ssh mil@sys13
+
+
+  config : urxvt -e vim /home/mil/.launchrc
+  # Window Manager
+  down  : i3 focus down
+  up    : i3 focus up
+  left  : i3 focus left
+  right : i3 focus right
+
+  # Tmux Sessions
+  notes   : urxvt -e tmx notes
+  music   : urxvt -e dtach -A /home/mil/IPC/Sockets/music fish -c dvtm
+  torrent : urxvt -e dtach -A /home/mil/IPC/Sockets/torrent fish -c dvtm
+  irc     : urxvt -e dtach -A /home/mil/IPC/Sockets/irc fish -c dvtm
+  chat    : urxvt -e dtach -A /home/mil/IPC/Sockets/chat fish -c pidgin
+  network : urxvt -e tmx network
+  system  : urxvt -e tmx system
+
+  # Alarm Clock
+  wakeup  : wakeup
+  crontab : urxvt -e crontab -e
+  cron    : urxvt -e crontab -e
+
+  # Audio
+  mute     : amixer set Master 0% mute
+  wuvt     : urxvt -fn "xft:Envy Code R-30" -e sleepit 10 wuvt
+  bt       : urxvt -fn "xft:Envy Code R-30" -e sleepit 10 bt
+  mixer    : urxvt -e alsamixer
+  eq       : urxvt -e alsamixer -D equal
+  pause    : mediaControl pause
+  next     : mediaControl next
+  previous : mediaControl previous
+  dj       : urxvt -e mpctrl
+
+  # Locations
+  campus : campus
+  home   : home
+
+  # System
+  monitor   : arandr
+  remap     : xmodmap ~/.xmodmap
+  viewsonic : viewsonic
+  dualscreen : dualscreen
+  morning   : light on
+  goodnight : xset dpms force suspend && light off
+  lock      : slock
+  invert    : xcalib -a -invert
+  suspend   : sudo pm-suspend
+  shutdown  : sudo /usr/bin/systemctl hibernate
+  reboot    : sudo /usr/bin/systemctl reboot
+  halt      : sudo /usr/bin/systemctl poweroff
+
+  fans      : fans
+
+  # Games
+  clock   : urxvt -fn "xft:Envy Code R-20" -e tty-clock -c -s -C 2
+  tetris  : urxvt -e vitetris
+  word    : abiword
+
+  # Tools
+  code     : urxvt -e ranger /home/mil/Code
+  edit     : surf 'http://userbound.com/ui/mil-edit'
+  email    : urxvt -e mutt
+  download : launch '`sselp`'
+  auth     : urxvt -e 'vt_auth'
+  netgood  : urxvt -e ping google.com
+  root     : urxvt -e sudo su
+  cron     : urxvt -e crontab -e
+  top      : urxvt -e htop
+
+  # Bookmarks
+  bookmarks : urxvt -e ranger /home/mil/Code/Bitbucket/bookmarks
+  otw     : http://onethingwell.org
+  hn      : http://news.ycombinator.com
+  bb      : http://bitbucket.org
+  scholar : http://scholar.vt.edu
+  lib     : surf 'https://login.ezproxy.lib.vt.edu:2443/login?qurl=http%3A//www.lib.vt.edu/'
+
+  # Graphics
+  calibrate  : urxvt -e dispwin
+  gimp       : gimp
+  phatch     : phatch
+  picker     : gcolor2
+  ruler      : xmeasure | tr -d '\n' | xargs -I INF zenity --info --text='INF'
+  screenshot : scrot
+  c          : xdotool key c l o n e Return
+
+  # Skanote
+  skanote-dev : chromium --app=http://localhost:9292
+  skanote     : chromium --app=http://morning-plains-8512.herokuapp.com
+
+  ranger      : urxvt -e ranger

@@ -1,2 +1,2 @@
 #!/bin/bash
-status-bar | bar
+status-bar | bar -d

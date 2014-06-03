@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+require 'yaml'
+
+$config_file = "#{ENV['HOME']}/.lunchcfg.yaml"
+$config = YAML.load_file $config_file
+
+args = ARGV.flat_map do |arg|
+  arg.split(" ").length > 1 ? arg.split(" ") : arg
+end
+
+# Executing shorthands
+if $config['Shorthands'].keys.include? args[0]
+  %x[#{$config['Shorthands'][args[0]]}]
+else
+  # Determine Filters 
+  $filter = $config['Filters'][$config['Filters']['default']] 
+  args.each_with_index do |arg, i|
+    if $config['Filters'].keys.include? arg
+      args.delete_at i
+      $filter = $config['Filters'][arg]
+    end
+  end
+
+  # Determine Handlers
+  $handler = $config['Handlers'][$config['Handlers']['default']] if !$handler
+  args.each_with_index do |arg, i|
+    if $config['Handlers'].keys.include? arg
+      $filter = "%s" if arg == "sh"
+      args.delete_at i
+      $handler = $config['Handlers'][arg]
+    end
+  end
+
+  args_output = args.join($filter.include?("://") ? "%20" : " ")
+  command = $filter.gsub '%s', args_output
+  command = "'#{command }'" if $filter.include?("://")
+  %x[#{$handler.gsub '%s', command}]
+end
