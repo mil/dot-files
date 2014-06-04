@@ -29,6 +29,8 @@ Filters:
   ddg      : https://duckduckgo.com/?q=%s
   gg       : https://google.com/search?q=%s
   im       : https://google.com/search?tbm=isch&q=%s
+  maps     : https://maps.google.com/maps?q=%s
+
   wiki     : https://en.wikipedia.org/w/index.php?search=%s
   wb       : https://secure.wikimedia.org/wikibooks/en/wiki?search=%s
   aur      : https://aur.archlinux.org/packages.php?O=0&K=%s&do_Search=Go
