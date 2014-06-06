@@ -4,43 +4,36 @@ require 'uri'
 
 # http://stackoverflow.com/questions/1805761/check-if-url-is-valid-ruby
 String.class_eval do
-    def is_valid_url?
-        uri = URI.parse self
-        uri.kind_of? URI::HTTP
-    rescue URI::InvalidURIError
-        false
-    end
+  def is_valid_url?
+    uri = URI.parse self
+    uri.kind_of? URI::HTTP
+  rescue URI::InvalidURIError
+    false
+  end
 end
 
 $config_file = "#{ENV['HOME']}/.lunchcfg.yaml"
 $config = YAML.load_file $config_file
 
+# Load args
 args = ARGV.flat_map do |arg|
   arg.split(" ").length > 1 ? arg.split(" ") : arg
 end
 
 # Executing shorthands
-if ($config['Shorthands'].keys.include? args[0]) && !$config['Shorthands'][args[0]].is_valid_url?
+if args.length == 1 && !args[0].is_valid_url?
   %x[#{$config['Shorthands'][args[0]]}]
   exit
 end
 
-# Determine Filters 
-$filter = $config['Filters'][$config['Filters']['default']] 
+
+# Determine Filter and Handler
 args.each_with_index do |arg, i|
   if $config['Filters'].keys.include? arg
     args.delete_at i
     $filter = $config['Filters'][arg]
   end
 end
-
-if $config['Shorthands'][args[0]].is_valid_url?
-  $filter = '%s'
-  args[0] = $config['Shorthands'][args[0]]
-end
-
-# Determine Handlers
-$handler = $config['Handlers'][$config['Handlers']['default']] if !$handler
 args.each_with_index do |arg, i|
   if $config['Handlers'].keys.include? arg
     $filter = "%s" if arg == "sh"
@@ -48,8 +41,20 @@ args.each_with_index do |arg, i|
     $handler = $config['Handlers'][arg]
   end
 end
+if !$filter then
+  if !$handler then
+    $filter = $config['Filters'][$config['Filters']['default']] 
+  elsif $handler
+    $filter = "%s"
+  end
+end
+if !$handler
+  $handler = $config['Handlers'][$config['Handlers']['default']] 
+end
+
 
 args_output = args.join($filter.include?("://") ? "%20" : " ")
+
 if args_output.is_valid_url?
   %x[#{$handler.gsub '%s', args_output}]
 else

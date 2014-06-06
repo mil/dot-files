@@ -38,6 +38,8 @@ bindsym $mod+semicolon exec surf
 bindsym $mod+Shift+Up exec dvol -i 2
 bindsym $mod+Shift+Down exec dvol -d 2
 bindsym $mod+Shift+Left exec dvol -t
+bindsym $mod+Shift+U bar mode toggle
+
 
 bindsym XF86AudioRaiseVolume exec dvol -i 2
 bindsym XF86AudioLowerVolume exec dvol -d 2
@@ -186,8 +188,8 @@ bar {
 
 #client.focused #000000 ##000000 #000000
         focused_workspace #000000 #d6ecff #000000
-        active_workspace #ffffff #999999 #ffffff
-        inactive_workspace #000000 #e8e8e8 #757575
+        active_workspace #000000 #999999 #ffffff
+        inactive_workspace #888888 #e8e8e8 #757575
         urgent_workspace #000000 #ffffff
     }
 }

@@ -5,22 +5,29 @@
 # shorthand | handler filter | filter handler 
 
 
-Handlers:
-  default   : surf
+# %s = payload
+# %f = filtered payload
 
+Handlers:
   # Non-URI Based handlers
-  surf     : surf %s
-  chr      : chromium %s
-  private  : chromium --incognito %s
-  ff       : firefox %s
+  default   : surf
+  surf      : surf %s
+  chr       : chromium %s
+  private   : chromium --incognito %s
+  ff        : firefox %s
+
+  # Termial Handlers
+  sh        : urxvt -e %s
+  yt        : youtube-viewer %s
+  j         : urxvt -e z %s & ranger
+  kill      : killall %s
+  man       : urxvt -e man %s
+  cd        : ranger %s
+  workspace : fish -c "workspace %s"
 
   # URI-Based Handlers
   https?    : surf %s
   xml       : newsreader %s
-
-  # Termial Handlers
-  sh        : urxvt -e %s
-
 
 Filters:
   default  : gg
@@ -47,15 +54,6 @@ Filters:
   define   : http://www.merriam-webster.com/dictionary/%s
   syn      : http://www.collinsdictionary.com/dictionary/english-thesaurus/%s
   weather  : https://asciiw.com/%s
-
-  yt        : youtube-viewer %s
-  j         : z %s & ranger
-  kill      : killall %s
-  man       : man %s
-  cd        : ranger %s
-  workspace : workspace %s
-
-
 
 
 Shorthands:
