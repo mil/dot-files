@@ -18,8 +18,9 @@ Handlers:
 
   # Termial Handlers
   sh        : urxvt -e %s
-  yt        : youtube-viewer %s
-  j         : urxvt -e z %s & ranger
+  yt        : urxvt -e youtube-viewer %s
+  j         : urxvt -cd (j %s) -e ranger
+  ranger    : urxvt -cd %s -e ranger
   kill      : killall %s
   man       : urxvt -e man %s
   cd        : ranger %s
@@ -53,7 +54,7 @@ Filters:
   stock    : https://www.google.com/finance?q=%s
   define   : http://www.merriam-webster.com/dictionary/%s
   syn      : http://www.collinsdictionary.com/dictionary/english-thesaurus/%s
-  weather  : https://asciiw.com/%s
+  weather  : http://asciiw.com/?%s
 
 
 Shorthands:
@@ -139,6 +140,7 @@ Shorthands:
   bookmarks : urxvt -e ranger /home/mil/Code/Bitbucket/bookmarks
   otw     : http://onethingwell.org
   hn      : http://news.ycombinator.com
+  gh      : http://geekhack.org
   bb      : http://bitbucket.org
   scholar : http://scholar.vt.edu
   lib     : surf 'https://login.ezproxy.lib.vt.edu:2443/login?qurl=http%3A//www.lib.vt.edu/'

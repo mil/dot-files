@@ -22,8 +22,13 @@ end
 
 # Executing shorthands
 if args.length == 1 && !args[0].is_valid_url?
-  %x[#{$config['Shorthands'][args[0]]}]
-  exit
+  cmd = $config['Shorthands'][args[0]]
+  if cmd.is_valid_url?
+    args[0] = cmd
+  else
+    %x[#{cmd}]
+    exit
+  end
 end
 
 
