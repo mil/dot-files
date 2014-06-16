@@ -1,11 +1,9 @@
 #!/usr/bin/ruby
 require 'yaml'
-thing = YAML.load_file('/home/mil/.launchrc')
-["searches", "shortcuts"].each do |category|
+thing = YAML.load_file('/home/mil/.lunchcfg.yaml')
+["Handlers", "Searches", "Shorthands"].each do |category|
   thing[category].each do |s,v|
-    s.each do |s,v|
-      puts s
-    end
+    puts s
   end
 end
 
