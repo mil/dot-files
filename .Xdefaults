@@ -81,7 +81,17 @@ URxvt.termName: rxvt-256color
 
 
 ! extensions
-URxvt.perl-ext-common       : default,matcher,clipboard,font-size
+URxvt.perl-ext-common       : default,matcher,clipboard,font-size,keyboard-select,url-select
+
+
+URxvt.keysym.M-q: perl:url-select:select_next
+URxvt.url-select.launcher: surf
+URxvt.url-select.underline: true
+
+
+
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
 
 URxvt.copyCommand: xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
@@ -122,15 +132,6 @@ URxvt*skipBuiltinGlyphs: True
 
 URxvt*pointerBlankDelay: 2
 URxvt*pointerBlank: True
-
-
-! Open URLS
-URxvt.perl-ext-common:  default,url-select
-URxvt.urlLauncher:      /usr/bin/chromium
-URxvt.matcher.button:   1
-URxvt.keysym.M-U:  perl:matcher:last
-URxvt.keysym.M-I:  perl:matcher:list
-URxvt.underlineURLs: true
 
 
 ! XTERM 
@@ -209,3 +210,6 @@ XTerm*faceSize: 9
 ! --- end of terminal colors section -------------------------------------------
 ! ------------------------------------------------------------------------------
 !
+
+
+

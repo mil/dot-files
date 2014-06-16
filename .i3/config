@@ -54,8 +54,8 @@ bindsym XF86Eject exec touchpad
 bindsym XF86MonBrightnessDown exec sudo brightcontrol down
 bindsym XF86MonBrightnessUp exec sudo brightcontrol up
 bindsym XF86Launch1 exec xset dpms force suspend
-bindsym Next exec light on
-bindsym Prior exec light off
+bindsym Next exec i3 focus right
+bindsym Prior exec i3 focus left
 
 
 #Past
@@ -85,6 +85,15 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+l move right
+
+
+# move focused window
+bindsym $mod+Down move down
+bindsym $mod+Up move up
+bindsym $mod+Left move left
+bindsym $mod+Right move right
+
+
 
 bindsym $mod+u border none
 bindsym $mod+i border 1pixel
@@ -184,7 +193,7 @@ bar {
     colors {
       background #ffffff
         statusline #000000
-        separator #666666
+        separator #cfcfcf
 
 #client.focused #000000 ##000000 #000000
         focused_workspace #000000 #d6ecff #000000

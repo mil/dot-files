@@ -3,14 +3,12 @@ require 'json'
 
 def battery
   buff = %x[battery].chomp!.split(' ')
-  state = buff[0]
-  percent = buff[1]
-  percent + " | " + state[0].upcase
+  " " + buff[1] + " "
 end
 def temp
   n = File.read("/sys/class/thermal/thermal_zone0/temp").chomp!.to_i / 1000
   #return "" + 
-  return n.to_s + "°C"
+  return " " + n.to_s + "°C "
 end
 
 def network
@@ -18,7 +16,7 @@ def network
     |n| n if n[0] == "*"
   }
   l.first.gsub!("* ", "")
-  "☊" + l.first
+  " " + l.first + " "
 end
 
 
@@ -41,9 +39,6 @@ def information
       "full_text" => network,
       "color" => "#171717"
     },
-
-
-
     {
       "name" => "battery",
       "full_text" => battery,

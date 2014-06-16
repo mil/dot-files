@@ -4,6 +4,9 @@
 # Psuedo Syntax:
 # shorthand | handler filter | filter handler 
 
+# When args[].length == 0
+Default_Query: http://userbound.com
+
 Handlers:
   # Non-URI Based handlers
   default   : surf
@@ -22,7 +25,7 @@ Handlers:
   cd        : ranger %s
   workspace : fish -c "workspace %s"
 
-Filters:
+Searches:
   default  : gg
 
   # Searches Queries
@@ -63,7 +66,8 @@ Shorthands:
   chromium  : chromium
   firefox   : firefox
 
-  # Location
+  # Location / Convienent
+  email    : urxvt -e mutt
   campus   : campus
   home     : home
   wuvt     : urxvt -fn "xft:Envy Code R-30" -e sleepit 10 wuvt
@@ -91,21 +95,36 @@ Shorthands:
   previous : mediaControl previous
   dj       : urxvt -e mpctrl
 
-  # System
-  mntrs     : arandr
-  remap     : xmodmap ~/.xmodmap
-  viewsonic : viewsonic
+  # Displays
+  mntrs      : arandr
+  viewsonic  : viewsonic
+  lcd        : lcd
   dualscreen : dualscreen
-  morning   : light on
-  goodnight : xset dpms force suspend && light off
-  lock      : slock
-  invert    : xcalib -a -invert
+  goodnight  : xset dpms force suspend
+  lock       : slock
+  invert     : xcalib -a -invert
+
+  # Design
+  calibrate  : urxvt -e dispwin
+  gimp       : gimp
+  phatch     : phatch
+  picker     : gcolor2
+  ruler      : xmeasure | tr -d '\n' | xargs -I INF zenity --info --text='INF'
+  screenshot : scrot
+
+  # Skanote
+  skanote-dev : chromium --app=http://localhost:9292
+  skanote     : chromium --app=http://morning-plains-8512.herokuapp.com'
+
+  # Misc System
+  root      : urxvt -e sudo su
+  remap     : xmodmap ~/.xmodmap
+  fans      : fans
   suspend   : sudo pm-suspend
   shutdown  : sudo /usr/bin/systemctl hibernate
   reboot    : sudo /usr/bin/systemctl reboot
   halt      : sudo /usr/bin/systemctl poweroff
 
-  fans      : fans
 
   # Games
   clock   : urxvt -fn "xft:Envy Code R-20" -e tty-clock -c -s -C 2
@@ -113,36 +132,12 @@ Shorthands:
   word    : abiword
 
   # Tools
-  code     : urxvt -e ranger /home/mil/Code
-  edit     : surf 'http://userbound.com/ui/mil-edit'
-  email    : urxvt -e mutt
-  download : launch '`sselp`'
-  auth     : urxvt -e 'vt_auth'
-  netgood  : urxvt -e ping google.com
-  root     : urxvt -e sudo su
-  cron     : urxvt -e crontab -e
-  top      : urxvt -e htop
 
   # Bookmarks
   bookmarks : urxvt -e ranger /home/mil/Code/Bitbucket/bookmarks
-  otw     : http://onethingwell.org
-  hn      : http://news.ycombinator.com
-  gh      : http://geekhack.org
-  bb      : http://bitbucket.org
-  scholar : http://scholar.vt.edu
-  lib     : surf 'https://login.ezproxy.lib.vt.edu:2443/login?qurl=http%3A//www.lib.vt.edu/'
-
-  # Graphics
-  calibrate  : urxvt -e dispwin
-  gimp       : gimp
-  phatch     : phatch
-  picker     : gcolor2
-  ruler      : xmeasure | tr -d '\n' | xargs -I INF zenity --info --text='INF'
-  screenshot : scrot
-  c          : xdotool key c l o n e Return
-
-  # Skanote
-  skanote-dev : chromium --app=http://localhost:9292
-  skanote     : chromium --app=http://morning-plains-8512.herokuapp.com
-
-  ranger      : urxvt -e ranger
+  otw       : http://onethingwell.org
+  hn        : http://news.ycombinator.com
+  gh        : http://geekhack.org
+  bb        : http://bitbucket.org
+  scholar   : http://scholar.vt.edu
+  lib       : surf 'https://login.ezproxy.lib.vt.edu:2443/login?qurl=http%3A//www.lib.vt.edu/'

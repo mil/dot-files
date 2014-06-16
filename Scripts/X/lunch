@@ -20,6 +20,11 @@ args = ARGV.flat_map do |arg|
   arg.split(" ").length > 1 ? arg.split(" ") : arg
 end
 
+if args.length == 0 then
+  args = $config['Default_Query'].split(" ") 
+end
+
+
 # Executing shorthands
 if args.length == 1 && !args[0].is_valid_url?
   cmd = $config['Shorthands'][args[0]]
@@ -31,39 +36,34 @@ if args.length == 1 && !args[0].is_valid_url?
   end
 end
 
-
-# Determine Filter and Handler
+# Not a single word query -- so set Search and Handler if possible
 args.each_with_index do |arg, i|
-  if $config['Filters'].keys.include? arg
+  if $config['Searches'].keys.include? arg
     args.delete_at i
-    $filter = $config['Filters'][arg]
+    $search = $config['Searches'][arg]
   end
 end
 args.each_with_index do |arg, i|
   if $config['Handlers'].keys.include? arg
-    $filter = "%s" if arg == "sh"
+    $search = "%s" if arg == "sh"
     args.delete_at i
     $handler = $config['Handlers'][arg]
   end
 end
-if !$filter then
-  if !$handler then
-    $filter = $config['Filters'][$config['Filters']['default']] 
-  elsif $handler
-    $filter = "%s"
-  end
+
+if !$search
+  $search = $handler ?  "%s" : $config['Searches'][$config['Searches']['default']] 
 end
 if !$handler
   $handler = $config['Handlers'][$config['Handlers']['default']] 
 end
 
-
-args_output = args.join($filter.include?("://") ? "%20" : " ")
-
+args_output = args.join($search.include?("://") ? "%20" : " ")
 if args_output.is_valid_url?
-  %x[#{$handler.gsub '%s', args_output}]
+  $exec_command = $handler.gsub '%s', args_output
 else
-  command = $filter.gsub '%s', args_output
-  command = "'#{command }'" if $filter.include?("://")
-  %x[#{$handler.gsub '%s', command}]
+  $exec_command = $search.gsub '%s', args_output
+  $exec_command = $handler.gsub '%s', $exec_command
 end
+
+%x[#{$exec_command}]
