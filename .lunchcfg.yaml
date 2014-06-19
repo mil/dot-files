@@ -139,5 +139,6 @@ Shorthands:
   hn        : http://news.ycombinator.com
   gh        : http://geekhack.org
   bb        : http://bitbucket.org
+  bb        : http://bitbucket.org
   scholar   : http://scholar.vt.edu
   lib       : surf 'https://login.ezproxy.lib.vt.edu:2443/login?qurl=http%3A//www.lib.vt.edu/'
