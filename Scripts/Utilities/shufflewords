@@ -14,12 +14,10 @@ return_string = ""
 i = 0
 while shuffled.length > 0 do
   return_string += shuffled.pop + " "
-  puts return_string
   i += 1
   if i == 4 then
     i = 0
-    puts return_string
     return_string = return_string + "\n"
   end
 end
-
+puts return_string
