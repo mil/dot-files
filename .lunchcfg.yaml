@@ -22,6 +22,7 @@ Handlers:
   ranger    : urxvt -cd %s -e ranger
   kill      : killall %s
   man       : urxvt -e man %s
+  lyrics    : urxvt -e lrc %s
   cd        : ranger %s
   workspace : fish -c "workspace %s"
 
