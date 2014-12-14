@@ -3,7 +3,7 @@
 ARGV.each_with_index do |arg, i|
   if (i == 0) then
     puts "Adding given ARGS to #{Dir.pwd}/#{ARGV[0]}"
-  elsif (arg.match /.+\.(mp3|acc|m4a|flac)$/) then
+  elsif (arg.match /.+\.(mp3|acc|m4a|flac|wav)$/) then
     puts "Adding #{arg} to playlist"
     %x[echo "#{arg}" >> \'#{Dir.pwd}/#{ARGV[0]}\']
   end
