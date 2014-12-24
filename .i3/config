@@ -190,17 +190,17 @@ bar {
   position top
     status_command json-bar
     font pango:Envy Code R, Stlarch 9
-    colors {
-      background #ffffff
-        statusline #000000
-        separator #cfcfcf
-
-#client.focused #000000 ##000000 #000000
-        focused_workspace #000000 #d6ecff #000000
-        active_workspace #000000 #999999 #ffffff
-        inactive_workspace #888888 #e8e8e8 #757575
-        urgent_workspace #000000 #ffffff
-    }
+#    colors {
+#      background #ffffff
+#        statusline #000000
+#        separator #cfcfcf
+#
+##client.focused #000000 ##000000 #000000
+#        focused_workspace #000000 #d6ecff #000000
+#        active_workspace #000000 #999999 #ffffff
+#        inactive_workspace #888888 #e8e8e8 #757575
+#        urgent_workspace #000000 #ffffff
+#    }
 }
 
 
@@ -209,8 +209,8 @@ bar {
 #client.focused #cfcfcf #0036ff #ffffff #ecffd8
 #client.focused_inactive #f2ffe5 #eeffe4 #000000 #000000
 
-client.focused #000000 #ebffd6 #000000 #000000
-client.focused_inactive #000000 #ebf4ff #404040 #000000
-client.unfocused #4a4a4a #e3e3e3 #696969 #000000
-client.urgent #000000 #000000 #ffffff #000000
+#client.focused #000000 #ebffd6 #000000 #000000
+#client.focused_inactive #000000 #ebf4ff #404040 #000000
+#client.unfocused #4a4a4a #e3e3e3 #696969 #000000
+#client.urgent #000000 #000000 #ffffff #000000
 
