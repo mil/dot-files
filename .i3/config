@@ -14,7 +14,6 @@ default_orientation vertical
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font xft: Envy Code R 10
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
@@ -189,28 +188,25 @@ bindsym $mod+r mode "resize"
 bar {
   position top
     status_command json-bar
-    font pango:Envy Code R, Stlarch 9
-#    colors {
-#      background #ffffff
-#        statusline #000000
-#        separator #cfcfcf
-#
-##client.focused #000000 ##000000 #000000
-#        focused_workspace #000000 #d6ecff #000000
-#        active_workspace #000000 #999999 #ffffff
-#        inactive_workspace #888888 #e8e8e8 #757575
-#        urgent_workspace #000000 #ffffff
-#    }
+    font pango:Envy Code R, Stlarch 10
+    colors {
+      background #e7e7e7
+        statusline #888888
+        separator #000000
+
+        #border bg text
+        #client.focused #000000 ##000000 #000000
+        focused_workspace #888888 #1d1d1d #ffffff
+        active_workspace #000000 #999999 #ffffff
+        inactive_workspace #e7e7e7 #dddddd #757575
+        urgent_workspace #000000 #ffffff
+    }
 }
 
 
 
-#border background text
-#client.focused #cfcfcf #0036ff #ffffff #ecffd8
-#client.focused_inactive #f2ffe5 #eeffe4 #000000 #000000
-
-#client.focused #000000 #ebffd6 #000000 #000000
-#client.focused_inactive #000000 #ebf4ff #404040 #000000
-#client.unfocused #4a4a4a #e3e3e3 #696969 #000000
-#client.urgent #000000 #000000 #ffffff #000000
-
+font xft: Envy Code R 10
+client.focused #000000 #d5ffca #000000 #000000
+client.focused_inactive #000000 #dde9ff #404040 #000000
+client.unfocused #4a4a4a #d4d4d4 #696969 #000000
+client.urgent #000000 #000000 #ffffff #000000

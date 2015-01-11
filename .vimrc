@@ -74,6 +74,7 @@ set directory=~/.vim/tmp
 
 " Fix the * Clipboard
 set clipboard=unnamed
+set paste
 
 set wildmenu "Tab completion status bar
 
