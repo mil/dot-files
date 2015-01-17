@@ -25,9 +25,11 @@ if args.length == 0 then
 end
 
 
+shorthand = false
 # Executing shorthands
 if args.length == 1 && !args[0].is_valid_url? && $config['Shorthands'][args[0]]
   cmd = $config['Shorthands'][args[0]]
+  shorthand = true
   args = cmd.split(' ')
 end
 
@@ -40,6 +42,16 @@ args.each_with_index do |arg, i|
     $search = $config['Searches'][arg]
   end
 end
+
+p $search
+
+if (!shorthand && $search && !$search.match("http")) then
+  $exec_command = $search.gsub '%s', args.join(" ")
+  %x[#{$exec_command}]
+  exit
+end
+
+
 args.each_with_index do |arg, i|
   if $config['Handlers'].keys.include? arg
     $search = "%s" if arg == "sh"
