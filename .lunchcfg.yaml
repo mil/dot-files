@@ -56,7 +56,7 @@ Searches:
 
 
 Shorthands:
-  config      : sh vim /home/mil/.launchrc
+  config      : sh vim /home/mil/.lunchcfg.yaml
   site5       : sh ssh miles@userbound.com
   dreamhost   : sh ssh bladdo@bladdo.net
   x300        : sh ssh mil@x300
@@ -104,19 +104,20 @@ Shorthands:
   home        : sh home
 
   # System
-  monitor     : s arandr
-  remap       : s xmodmap ~/.xmodmap
-  viewsonic   : s viewsonic
-  dualscreen  : s dualscreen
-  morning     : s light on
-  goodnight   : s xset dpms force suspend && light off
-  lock        : s slock
-  invert      : s xcalib -a -invert
-  suspend     : s sudo pm-suspend
-  shutdown    : s sudo /usr/bin/systemctl hibernate
-  reboot      : s sudo /usr/bin/systemctl reboot
-  halt        : s sudo /usr/bin/systemctl poweroff
-  fans        : s fans
+  monitor      : s arandr
+  remap        : s xmodmap ~/.xmodmap
+  viewsonic    : s viewsonic
+  dualscreen   : s dualscreen
+  singlescreen : s singlescreen
+  morning      : s light on
+  goodnight    : s xset dpms force suspend && light off
+  lock         : s slock
+  invert       : s xcalib -a -invert
+  suspend      : s sudo pm-suspend
+  shutdown     : s sudo /usr/bin/systemctl hibernate
+  reboot       : s sudo /usr/bin/systemctl reboot
+  halt         : s sudo /usr/bin/systemctl poweroff
+  fans         : s fans
 
   # Games
   clock       : s urxvt -fn "xft:Envy Code R-20" -e tty-clock -c -s -C 2

@@ -39,6 +39,7 @@ set -x PATH /home/mil/.aws-eb/eb/linux/python3 $PATH
 
 #rvm > /d
 alias j='z'
+alias lsp='find (pwd)'
 alias bd='cd ../'
 
 
