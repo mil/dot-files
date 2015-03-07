@@ -128,6 +128,7 @@ Shorthands:
   code        : s ranger /home/mil/Code
   edit        : s surf 'http://userbound.com/ui/mil-edit'
   email       : s urxvt -e mutt
+  webmail     : s chromium --incognito http://userbound.com/webmail
   download    : s launch '`sselp`'
   auth        : s 'vt_auth'
   netgood     : s ping google.com
