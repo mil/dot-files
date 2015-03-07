@@ -12,6 +12,7 @@ def crawl(x, count, id)
       crawl(y, count + 1, id)
     end
   end
+  puts "#{x["node"]} vs #{id}"
   if (x["node"] == id) then
     puts count
     exit

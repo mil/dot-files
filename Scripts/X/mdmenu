@@ -7,7 +7,8 @@ require 'json'
 
 # Setup Screen Dimensions Info
 if (!File.exists?('#{Dir.home}/.screen_dimensions')) then
-  %x[write_dimensions]
+  #%x[write_dimensions]
+  %x[echo '1440x900' > #{Dir.home}/.screen_dimensions]
 end
 dimensions = IO.read("#{Dir.home}/.screen_dimensions").to_s.chomp!.split('x')
 $screen = {

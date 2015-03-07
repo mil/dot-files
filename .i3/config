@@ -190,15 +190,15 @@ bar {
     status_command json-bar
     font pango:Envy Code R, Stlarch 10
     colors {
-      background #e7e7e7
-        statusline #888888
-        separator #000000
+      background #dadada
+        statusline #cfcfcf
+        separator #6b6b6b
 
         #border bg text
         #client.focused #000000 ##000000 #000000
-        focused_workspace #888888 #1d1d1d #ffffff
-        active_workspace #000000 #999999 #ffffff
-        inactive_workspace #e7e7e7 #dddddd #757575
+        focused_workspace #000000 #e9ffe1 #000000
+        active_workspace #000000 #999999 #000000
+        inactive_workspace #000000 #dddddd #000000
         urgent_workspace #000000 #ffffff
     }
 }
@@ -210,3 +210,4 @@ client.focused #000000 #d5ffca #000000 #000000
 client.focused_inactive #000000 #dde9ff #404040 #000000
 client.unfocused #4a4a4a #d4d4d4 #696969 #000000
 client.urgent #000000 #000000 #ffffff #000000
+

@@ -1,74 +1,140 @@
 #!/usr/bin/env ruby
 require 'json'
 
-def battery
-  buff = %x[battery].chomp!.split(' ')
-  " " + buff[1] + " "
-end
-def temp
-  n = File.read("/sys/class/thermal/thermal_zone0/temp").chomp!.to_i / 1000
-  #return "" + 
-  return " " + n.to_s + "°C "
-end
-
-def network
-  l = %x[netctl list].split("\n").select { 
-    |n| n if n[0] == "*"
-  }
-  l.first.gsub!("* ", "")
-  " " + l.first + " "
+class String
+  def fg(c)
+    "<span fgcolor='#{c}'>#{self}</span>"
+  end
+  def bg(c)
+    "<span bgcolor='#{c}'>#{self}</span>"
+  end
+  def underline
+    "<span rise='3000' underline='single' font_weight='ultrabold'>#{self}</span>"
+  end
+  def size(c)
+    "<span size='#{c}'>#{self}</span>"
+  end
 end
 
+class Info_Fetchers
+  def weather
+    "Raining 57°C"
+  end
+  def battery
+    %x[acpi -V|head -n 1].scan(/\d+%/)[0]
+  end
+  def processor_temp 
+    n = File.read("/sys/class/thermal/thermal_zone0/temp").chomp!.to_i / 1000
+    #return "" + 
+    return n.to_s + "°C"
+  end
 
-def information
+  def network
+    l = %x[netctl list].split("\n").select { 
+      |n| n if n[0] == "*"
+    }
+    l.first.gsub!("* ", "")
+    "" + l.first + " "
+  end
+  def volume_level 
+    "#{%x[amixer get Master | grep -woE '([0-9]+)\%' | head -1].chomp!}"
+  end
+  def time
+    date = Time.now
+    " #{date.strftime('%m/%d/%l:%M%p').gsub!(' ', '')}"
+  end
+  def email
+    "✉"
+  end
+end
+
+
+
+def generate_bar_json(fetchers)
   [
-  #  {
-  #    "name" => "time",
-  #    "full_text" => %x[date].chomp!,
-  #    "color" => "#171717" 
-  #  },
-  #
-  #
     {
-      "name" => "temp",
-      "full_text" => temp,
-      "color" => "#171717"
+      :symbol => "♫",
+      :fg => "#5200fd",
+      :bg => "#ffffff",
+      :text => fetchers.volume_level
+    },
+
+    {
+      :symbol => "⧗",
+      :fg => "#680018",
+      :bg => "#ffffff",
+      :text => fetchers.processor_temp
+    },
+
+    {
+      :symbol => "⌁ ",
+      :fg => "#530067",
+      :bg => "#ffffff",
+      :text => fetchers.network
+    },
+
+    {
+      :symbol => "⌥",
+      :fg => "#188200",
+      :bg => "#ffffff",
+      :text => fetchers.battery
+    },
+
+    {
+      :symbol => "⧗",
+      :fg => "#a1a700",
+      :bg => "#ffffff",
+      :text => fetchers.time
     },
     {
-      "name" => "network",
-      "full_text" => network,
-      "color" => "#171717"
-    },
-    {
-      "name" => "battery",
-      "full_text" => battery,
-      "color" => "#171717"
+      :symbol => "☂",
+      :fg => "#005e61",
+      :bg => "#ffffff",
+      :text => fetchers.weather
     }
 
 
 
 
 
+    #{
+    #  "name" => "time",
+    #  "full_text" => time,
+    #  "color" => "#2c4000"
+    #},
+    #{
+    #  "name" => "email",
+    #  "full_text" => email,
+    #  "color" => "#171717"
+    #}
+  ].map do |f|
+    text = [
+       "<span underline='single' underline_color='#cfcfcf'>",
+      "#{" #{f[:symbol]} ".size("larger").fg(f[:bg]).bg(f[:fg]).underline}",
+      "#{" #{f[:text]} ".fg(f[:fg]).bg(f[:bg])}",
+      "</span>"
+    ].join
 
-
-
-
-  #  {
-  #    "name" => "bus",
-  #    "full_text" => %x[bt 2> /tmp/err].chomp!,
-  #    "separator" => true,
-  #    "color" => "#171717" 
-  #  }
-  ].to_json
+    f.merge({
+      :separator => false,
+      :separator_block_width => 10,
+      :align => 'center',
+      :full_text => text 
+    })
+  end.to_json
 end
 
-puts '{ "version": 1 }'
-puts "["
-puts "[]"
+def init
+  puts '{ "version": 1 }'
+  puts "["
+  puts "[]"
+  fetchers = Info_Fetchers.new
 
-
-loop do
-  puts "," + information
-  STDOUT.flush
-  sleep 40
+  loop do
+    puts "," + generate_bar_json(fetchers)
+    STDOUT.flush
+    sleep 40
+  end
 end
+
+init

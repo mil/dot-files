@@ -10,16 +10,28 @@ end
 
 class String
   def fg(i)
-    return "\\f#{i}#{self}\\fr"
+    return "%{F#{i}}#{self}%{F#{i}}"
   end
   def bg(i)
-    return "\\b#{i}#{self}\\br"
+    return "%{B#{i}}#{self}%{B#{i}}"
   end
 
   def ul(i)
-    return "\\u#{i}#{self}\\ur"
+    return "%{U#{i}}#{self}%{U#{i}}"
+  end
+
+  def center
+    return "%{c}#{self}%{c}"
+  end
+  def right 
+    return "%{r}#{self}%{r}"
+  end
+
+  def capFirst
+    return self.slice(0,1).capitalize + self.slice(1..-1)
   end
 end
+
 
 def foo(x)
   a = %x[foo-wm-c /tmp/foo-wm.socket \'#{x}']
@@ -35,46 +47,25 @@ def foo(x)
 end
 
 
-def capFirst(a)
-  return a.slice(0,1).capitalize + a.slice(1..-1)
-end
-
 count = 0
 loop do
   # Battery
   batteryStatus = `battery status`.chomp!
-  f = 3
+  f = "#cfcfcf"
   f = 4 if batteryStatus == "Charging"
   batteryStatus = " #{batteryStatus} ".fg(1).bg(2)
   batteryValue = " #{`battery percentage`.chomp!} ".fg(f)
   battery = "#{batteryStatus}#{batteryValue}"
 
-  # Network
-  networkLabel = " Netcfg ".fg(1).bg(2)
-  networkValue = ""
-  if (%x[which netcfg 2>&1].include? "no netcfg") then
-    networkValue = ""
-  else
-    networkValue = " #{%x[netcfg current].chomp!} ".fg(5)
-  end
 
-  network = "#{networkLabel}#{networkValue}"
-
-  #Volume
+    #Volume
   volumeLabel = " Vol ".fg(1).bg(2)
   volumeValue = " #{%x[amixer get Master | grep -woE '([0-9]+)\%' | head -1].chomp!} ".fg(6)
   volume = "#{volumeLabel}#{volumeValue}"
 
 
-  time = Time.now.to_s.gsub!(/:\d{2}\s.+/, '').gsub!(/(\d{2}:\d{2})/, "\\f3| \\f6\\1")
-  time = "\\fr\\br #{time}\\br\\fr"
+  time = Time.now.to_s.gsub!(/:\d{2}\s.+/, '').fg("#cfcfcf").center
 
-
-  #m = JSON %x[foo-wm-c "/tmp/foo-wm.socket" "get marks"]
-  #marks = m["marks"].join(" // \\f4".fg(4))
-  marks = ""
-
-  marks = "\\f5 #{marks} \\br\\fr"
 
   z_icons = ""
   zoom = %x[foo-zoom-level].chomp!
@@ -82,74 +73,15 @@ loop do
     z_icons = " #{z_icons}" if (i == 1)
     z_icons = z_icons + "+"    
     z_icons = "#{z_icons} " if (i  == zoom.to_i)  
-
   end
     z_icons = z_icons.fg(3).bg(2).ul(5)
   
 
-  #s = "\\u8#{wifi} #{battery} #{volume}\\c#{marks}\\r#{time} #{subway} #{weather}l"
-  f = %x[foo-wm-c /tmp/foo-wm.socket 'get focus'].chomp!
-  container = "Foo Window Manger"
-  if (f == "Foo") then
-    right = "Foo Window Manager"
-  else
-    c = JSON.parse %x[foo-focus-child-json]
-
-    begin
-      d = JSON.parse %x[foo-focus-parent-json]
-    rescue
-      d = {
-        "layout" => "?",
-        "children" => "?"
-      }
-    end
-
-    layout = " " + capFirst(d["layout"].to_s.downcase) + " "
-    children = d["children"].size.to_s
-
-    maxWidth = 50
-    layout_type = " #{layout} ".bg(2).fg(4).ul(6)
-    number_children = " #{children} ".bg(9).ul(3).fg(2)
-    right = "#{number_children}#{layout_type}"
-    center = ""
-    #right = "#{client}"
-    begin
-      stack = JSON.parse(%x[foo-focus-parent-json])["children"]
-    rescue
-      stack = []
-    end
-
-    # Bar Colors
-    focus = 6
-    surrounding = 4
-    unfocus = 3
-    last = ""
-    stack.each_with_index do |c, i|
-      if c["type"] == "client" then
-        name = %x[xptr-to-title #{c["id"]}].chomp!
+  focus = %x[foo-wm-c /tmp/foo-wm.socket 'get focus'].chomp!
+  foo_status = focus.right
 
 
-      foc  = foo("get focus")["node"]
-      if (c["node"] == foc) then
-        icon =  " > ".bg(2).fg(4).ul(3)
-        last =  "#{icon}#{(" " + name[0..50] + " ").ul(5)}"
-      end
-
-      else
-        chil = " #{c["children"].size.to_s} ".fg(3).bg(4)
-        name = 
-        name = "#{chil}#{c["layout"][0].upcase}-Set #{c["children"].size}"
-
-        
-      end
-    end
-    right = "#{right}#{last}#{z_icons}"
-
-  end
-  center = marks
-
-
-  s = "#{battery}#{network}#{volume}#{time}\\c#{center}\\r#{right}"
+  s = "#{battery}#{volume}#{time}#{foo_status}"
 
 
   STDOUT.puts s
