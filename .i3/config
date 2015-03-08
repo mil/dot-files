@@ -188,7 +188,7 @@ bindsym $mod+r mode "resize"
 bar {
   position top
     status_command json-bar
-    font pango:Envy Code R, Stlarch 10
+    font pango:Envy Code R 10
     colors {
       background #efefef
         statusline #cfcfcf
@@ -196,9 +196,9 @@ bar {
 
         #border bg text
         #client.focused #000000 ##000000 #000000
-        focused_workspace #000000 #e9ffe1 #000000
+        focused_workspace #5200fd #5200fd #ffffff
         active_workspace #000000 #999999 #000000
-        inactive_workspace #000000 #dddddd #000000
+        inactive_workspace #cfcfcf #cfcfcf #000000
         urgent_workspace #000000 #ffffff
     }
 }
