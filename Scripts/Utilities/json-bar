@@ -1,18 +1,9 @@
 #!/usr/bin/env ruby
 require 'json'
 
-class String
-  def fg(c)
-    "<span fgcolor='#{c}'>#{self}</span>"
-  end
-  def bg(c)
-    "<span bgcolor='#{c}'>#{self}</span>"
-  end
-end
-
 class Info_Fetchers
   def weather
-    %x[weather 78758].gsub(/F$/,'°F')
+    %x[weather 78758].split(':')[1].gsub(/F$/,'°F').gsub(' ', '')
   end
   def battery
     %x[acpi -V|head -n 1].scan(/\d+%/)[0]
@@ -24,90 +15,70 @@ class Info_Fetchers
   end
 
   def network
-    l = %x[netctl list].split("\n").select { 
-      |n| n if n[0] == "*"
-    }
-    l.first.gsub!("* ", "")
-    "" + l.first + " "
+    %x[netctl list].split("\n").select { |n| 
+      n if n[0] == "*"
+    }.first.gsub("* ", "")
   end
   def volume_level 
     "#{%x[amixer get Master | grep -woE '([0-9]+)\%' | head -1].chomp!}"
   end
   def time
     date = Time.now
-    date.strftime('%b %d%l:%M%p').gsub(/^ /, "")
+    date.strftime('%l:%M%p').gsub(/^ /, "").downcase
   end
   def email
     "✉"
   end
 end
 
-
-
 def generate_bar_json(fetchers)
   [
-    [
-      {
-        :symbol => "⧗",
-        :fg => "#dc0000",
-        :bg => "#ffffff",
-        :text => fetchers.time
-      },
-      {
-        :symbol => "☂",
-        :fg => "#c84d00",
-        :bg => "#ffffff",
-        :text => fetchers.weather
-      }
-    ],
+    {
+      :symbol => "⧗",
+      :color => "#dc0000",
+      :text => fetchers.time
+    },
+    {
+      :symbol => "☂",
+      :color => "#c84d00",
+      :text => fetchers.weather
+    },
+    {
+      :symbol => "↬",
+      :color => "#530067",
+      :text => fetchers.network
+    },   
+    {
+      :symbol => "♫",
+      :color => "#5200fd",
+      :text => fetchers.volume_level
+    },
+    {
+      :symbol => "⌥",
+      :color => "#188200",
+      :text => fetchers.battery
+    }
+  ].map do |f|
+    text = [
+       "<span rise='-110000' size='large' underline_color='#ffffff' underline='double'>",
+      "<span bgcolor='#{f[:color]}' fgcolor='#ffffff'> #{f[:symbol]} </span>",
+      "</span>",
 
-    [
-      {
-        :symbol => "↬",
-        :fg => "#530067",
-        :bg => "#ffffff",
-        :text => fetchers.network
-      },   
-      {
-        :symbol => "♫",
-        :fg => "#5200fd",
-        :bg => "#ffffff",
-        :text => fetchers.volume_level
-      },
-      {
-        :symbol => "⌥",
-        :fg => "#188200",
-        :bg => "#ffffff",
-        :text => fetchers.battery
-      }
-    ]
-  ].each_with_index.map do |group, i|
-
-
-    block = ""
-    group.each do |f|
-      text = [
-         "<span rise='-110000' size='large' underline_color='#ffffff' underline='double'>",
-        "#{" #{f[:symbol]} ".fg(f[:bg]).bg(f[:fg])}",
-        "</span>",
-
-        "<span rise='-109900' size='10000' underline='double' underline_color='#ececec'>",
-        "#{" #{f[:text]} ".fg("#000000").bg(f[:bg])}",
-        "</span>"
-        #,
-        # "<span letter_spacing='500' font_stretch='ultracondensed' rise='2000' size='1000' underline_color='#ffffff' underline='none'>",
-        #"#{"|".fg(f[:fg]).bg(f[:fg])}",
-        #"</span>"
-      ].join
-      block = "#{block}#{text}"
-    end
+      "<span rise='-109900' size='8900' underline='double' underline_color='#ececec'>",
+      "<span fgcolor='#2b2b2b' bgcolor='#f9f9f9'> #{f[:text]} </span>",
+      "</span>"
+      #,
+      # "<span letter_spacing='500' font_stretch='ultracondensed' rise='2000' size='1000' underline_color='#ffffff' underline='none'>",
+      #"#{"|".fg(f[:fg]).bg(f[:fg])}",
+      #"</span>"
+    ].join
 
     {
-      :separator => true,
-      :separator_block_width => 20,
+      :separator => false,
+      :separator_block_width => 10,
       :align => 'left',
-      :min_width => 100,
-      :full_text => block
+      :min_width => 0,
+      :full_text => text
     }
   end.to_json
 end

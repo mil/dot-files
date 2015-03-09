@@ -190,7 +190,7 @@ bar {
     status_command json-bar
     font pango:Envy Code R 10
     colors {
-      background #efefef
+      background #ffffff
         statusline #cfcfcf
         separator #cfcfcf
 
