@@ -206,7 +206,7 @@ bar {
 
 
 font xft: Envy Code R 10
-client.focused #000000 #d5ffca #000000 #000000
+client.focused #888888 #d5ffca #000000 #000000
 client.focused_inactive #000000 #dde9ff #404040 #000000
 client.unfocused #4a4a4a #d4d4d4 #696969 #000000
 client.urgent #000000 #000000 #ffffff #000000
