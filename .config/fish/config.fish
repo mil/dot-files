@@ -46,7 +46,7 @@ alias bd='cd ../'
 setenv EDITOR vim
 setenv GIT_EDITOR vim
 setenv BROWSER surf
-setenv TZ America/New_York
+setenv TZ America/Chicago
 
 set fish_greeting ""
 
@@ -55,7 +55,7 @@ set fish_greeting ""
 set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showstashstate 'yes'
 set __fish_git_prompt_showupstream 'yes'
-set __fish_git_prompt_color_branch yellow
+set __fish_git_prompt_color_branch red
 
 # Status Chars
 set __fish_git_prompt_char_dirtystate '☡'
