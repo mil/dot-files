@@ -1,0 +1,41 @@
+lunch_lists:
+  sh_shorthands:
+    handled_by: applications
+    default_handler: sh
+    entries:
+      wakeup: wakeup
+
+      # media controls
+      pause: mediaControl pause
+      next: mediaControl next
+      previous: mediaControl previous
+
+      # mute unmute
+      mute: amixer set Master 0% mute
+
+      # system
+      monitor: arandr
+      remap: xmodmap ~/.xmodmap
+      viewsonic: viewsonic
+      dualscreen: dualscreen
+      singlescreen: singlescreen
+      morning: light on
+      goodnight: xset dpms force suspend && light off
+      lock: slock
+      invert: xcalib -a -invert
+      suspend: sudo pm-suspend
+      shutdown: sudo /usr/bin/systemctl hibernate
+      reboot: sudo /usr/bin/systemctl reboot
+      halt: sudo /usr/bin/systemctl poweroff
+      fans: fans
+      ranger: ranger
+
+      # graphics
+      gimp: gimp
+      phatch: phatch
+      picker: gcolor2
+      ruler: xmeasure | tr -d '\n' | xargs -I INF zenity --info --text='INF'
+      screenshot: scrot
+
+      # misc
+      word: abiword

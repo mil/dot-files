@@ -1,0 +1,11 @@
+lunch_lists:
+  bookmark_shorthands:
+    handled_by: applications
+    deafault_handler: surf
+
+    entries:
+      otw: http://onethingwell.org
+      hn: http://news.ycombinator.com
+      bb: http://bitbucket.org
+      scholar: http://scholar.vt.edu
+      webmail: http://userbound.com/webmail

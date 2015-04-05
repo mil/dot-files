@@ -1,0 +1,13 @@
+lunch_lists:
+  query_cl:
+    handled_by: applications
+    default_handler: term
+
+    entries:
+      yt: youtube-viewer %s
+      j: z %s & ranger
+      man: urxvt -e man %s
+      cd: urxvt -e ranger %s
+      kill: killall %s
+      workspace: workspace %s
+      ssh: ssh %s

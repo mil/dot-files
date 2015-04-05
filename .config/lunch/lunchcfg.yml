@@ -1,0 +1,17 @@
+root_handler:
+  lunch_list: applications
+  default_handler: surf
+
+lunch_menu:
+  - query_web
+  - query_cl
+
+  - ssh_shorthands
+  - edit_shorthands
+  - wm_shorthands
+  - term_shorthands
+  - ssh_shorthands
+  - sh_shorthands
+  - bookmark_shorthands
+
+  - applications

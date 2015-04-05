@@ -1,0 +1,10 @@
+lunch_lists:
+  wm_shorthands:
+    handled_by: query_cl
+    default_handler: sh
+
+    entries:
+      down: i3 focus down
+      up: i3 focus up
+      left: i3 focus left
+      right: i3 focus right

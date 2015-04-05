@@ -1,0 +1,16 @@
+lunch_lists:
+  term_shorthands:
+    handled_by: applications
+    default_handler: term
+    entries:
+      music: dtach -A /home/mil/IPC/Sockets/music fish -c dvtm
+      crontab: crontab -e
+      cron: crontab -e
+      mixer: alsamixer
+      eq: alsamixer -D equal
+      dj: mpctrl
+      tetris: vitetris
+      email: mutt
+      root: sudo su
+      top: htop
+      calibrate: dispwin
