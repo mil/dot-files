@@ -1,4 +1,4 @@
-set nocompatible                " choose no compatibility with 
+set nocompatible                " choose no compatibility with
 "set legacy vi
 
 set ttyfast
@@ -18,7 +18,7 @@ set backspace=indent,eol,start  " backspace through everything in insert mode
 set textwidth=0
 set wrapmargin=0
 
-set tabstop=2 
+set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
@@ -118,6 +118,12 @@ set statusline+=\ %P    "percent through file
 set foldlevel=3000
 "set mouse=a
 "
-"highlight OverLength ctermbg=none ctermfg=red
-"match OverLength /\%81v.\+/
+
+" Show trailing whitespace and spaces before a tab:
+highlight ExtraWhitespace ctermbg=green guibg=green
+match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+highlight OverLength ctermbg=red ctermfg=white
+2match OverLength /\%81v.\+/
+
 

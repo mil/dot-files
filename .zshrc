@@ -243,3 +243,6 @@ export PATH="/home/mil/perl5/bin:$PATH";
 
 
 touch /tmp/bar-refresh
+
+# added by travis gem
+[ -f /home/mil/.travis/travis.sh ] && source /home/mil/.travis/travis.sh
