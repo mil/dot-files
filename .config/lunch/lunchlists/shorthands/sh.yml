@@ -28,7 +28,6 @@ lunch_lists:
       reboot: sudo /usr/bin/systemctl reboot
       halt: sudo /usr/bin/systemctl poweroff
       fans: fans
-      ranger: ranger
 
       # graphics
       gimp: gimp
@@ -36,6 +35,7 @@ lunch_lists:
       picker: gcolor2
       ruler: xmeasure | tr -d '\n' | xargs -I INF zenity --info --text='INF'
       screenshot: scrot
+      xzoom: xzoom
 
       # misc
       word: abiword

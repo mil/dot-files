@@ -1,7 +1,0 @@
-lunch_lists:
-  edit_shorthands:
-    handled_by: terminal
-    deafault_handler: editor
-
-    entries:
-      config: /home/mil/.lunchcfg.yaml

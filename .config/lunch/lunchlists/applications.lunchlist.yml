@@ -1,13 +1,17 @@
 lunch_lists:
   applications:
     # no 'handled_by', or 'default_handler' for top level!
+    root_default_handler: surf
 
     entries:
       surf: surf '%s'
+
       chr: chromium '%s'
+      chromium: chromium '%s'
       private: chromium --incognito '%s'
+
+
       ff: firefox '%s'
       xml: newsreader '%s'
-
-      term: urxvt -e %s
+      term: urxvt -e sh -c '%s'
       sh: exec %s

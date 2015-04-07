@@ -212,3 +212,7 @@ client.unfocused #4a4a4a #d4d4d4 #696969 #000000
 client.urgent #000000 #000000 #ffffff #000000
 client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 
+
+
+for_window [title="NEWLAUNCHER"] floating enable; border none; resize 10 10 move center center
+for_window [title="xzoom"] floating enable

@@ -6,6 +6,10 @@ lunch_lists:
     entries:
       otw: http://onethingwell.org
       hn: http://news.ycombinator.com
-      bb: http://bitbucket.org
-      scholar: http://scholar.vt.edu
+      bc: http://bandcamp.com
+
       webmail: http://userbound.com/webmail
+
+      pay_electric: https://coautilities.com
+      pay_internet: https://coautilities.com
+      pay_rent: https://coautilities.com

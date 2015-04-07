@@ -35,7 +35,9 @@ $defaults = {
   :nf => '#c4c4c4',
   :p  => 'Rd Menu',
   :o => 0.9,
-  :dim => 0.6
+  :dim => 0.6,
+  :uh => 1,
+  :uc => "#000000"
 }
 
 $app = $defaults
@@ -43,7 +45,7 @@ $app = $defaults
 #Profiles
 $profiles = {}
 $profiles["launch"] = { 
-  :p => ">",
+  :p => "→",
   :sb => "#003eef",
   :nb => "#efefef",
   :nf => "#000000",
@@ -111,7 +113,7 @@ $profiles.merge({
 })
 
 def dmenuOptsToString(optsHash)
-  returnString = "dmenu "
+  returnString = "dmenu"
   optsHash.each do |option, value|
     if (value.is_a? String)
       value = "'#{value}'"
