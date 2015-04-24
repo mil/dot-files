@@ -44,6 +44,7 @@ alias j='z'
 alias lsp='find (pwd)'
 alias bd='cd ../'
 alias x='startx'
+alias chromium='chromium --user-data-dir=/tmp/chromium-(uuidgen)'
 
 
 setenv EDITOR vim
