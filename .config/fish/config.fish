@@ -13,6 +13,7 @@ set -x PATH /home/mil/Scripts/Wm $PATH
 set -x PATH /home/mil/Scripts/X $PATH
 set -x PATH /usr/local/heroku/bin $PATH
 set -x PATH /home/mil/.cabal/bin $PATH
+set -x PATH /home/mil/.node_modules/*/bin $PATH
 set -x PATH /home/mil/Code/Bitbucket/the-snazzy-desktop/webapp/node_modules/nodemon/bin $PATH
 
 set -x PATH /usr/local/heroku/bin $PATH
