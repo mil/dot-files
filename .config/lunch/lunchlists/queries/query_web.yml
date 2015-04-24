@@ -1,0 +1,29 @@
+lunch_lists:
+  query_web:
+    handled_by: applications
+    deafault_handler: surf
+
+    entries:
+      ddg: https://duckduckgo.com/?q=%s
+      gg: https://google.com/search?q=%s
+      im: https://google.com/search?tbm=isch&q=%s
+      wiki: https://en.wikipedia.org/w/index.php?search=%s
+      wb: https://secure.wikimedia.org/wikibooks/en/wiki?search=%s
+      mdn: https://developer.mozilla.org/en-US/search?q=%s
+      aur: https://aur.archlinux.org/packages.php?O=0&K=%s&do_Search=Go
+      aw: https://wiki.archlinux.org/index.php?search=%s
+      so: http://stackoverflow.com/search?q=%s
+      gh: http://github.com/search?q=%s
+      wa: http://wolframalpha.com/input?i=%s
+      discogs: http://discogs.com/search?q=%s
+      rym: http://rateyourmusic.com/search?searchtype=a&searchterm=%s
+      sep: http://plato.stanford.edu/search/searcher.py?query=%s
+      ud: http://urbandictionary.com/define.php?term=%s
+      ebay: http://search.ebay.com/search/search.dll?query=%s
+      stock: https://www.google.com/finance?q=%s
+      define: http://www.merriam-webster.com/dictionary/%s
+      syn: http://www.collinsdictionary.com/dictionary/english-thesaurus/%s
+      weather: http://asciiw.com/%s
+      wu: http://wunderground.com/%s
+      npms : https://www.npmjs.com/search?q=%s
+      amazon: http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=%s
