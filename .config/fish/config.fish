@@ -21,6 +21,7 @@ set -x PATH /usr/local/heroku/bin $PATH
 
 # CPAN
 set -x PATH /usr/bin/core_perl $PATH
+set -x PATH /usr/bin/vendor_perl $PATH
 
 
 # Color Wrapper

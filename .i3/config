@@ -187,7 +187,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
   position top
-    status_command json-bar
+    status_command $HOME/Scripts/Utilities/json-bar
     font pango:Envy Code R 10
     colors {
       background #ffffff

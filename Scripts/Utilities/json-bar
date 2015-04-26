@@ -35,7 +35,7 @@ end
 def generate_bar_json(fetchers)
   [
     {
-      :symbol => "⧗",
+      :symbol => "T",
       :color => "#dc0000",
       :text => fetchers.time
     },
@@ -45,7 +45,7 @@ def generate_bar_json(fetchers)
       :text => fetchers.weather
     },
     {
-      :symbol => "↬",
+      :symbol => ">",
       :color => "#530067",
       :text => fetchers.network
     },   
@@ -55,17 +55,17 @@ def generate_bar_json(fetchers)
       :text => fetchers.volume_level
     },
     {
-      :symbol => "⌥",
+      :symbol => "B",
       :color => "#188200",
       :text => fetchers.battery
     }
   ].map do |f|
     text = [
-      "<span rise='10000'  size='large' underline_color='#ffffff' underline='double'>",
+      "<span size='small' underline_color='#ffffff' underline='double'>",
       "<span bgcolor='#{f[:color]}' fgcolor='#ffffff'> #{f[:symbol]} </span>",
       "</span>",
 
-      "<span rise='10000' size='8900' underline='double' underline_color='#ececec'>",
+      "<span underline='double' underline_color='#ececec'>",
       "<span fgcolor='#2b2b2b' bgcolor='#f9f9f9'> #{f[:text]} </span>",
       "</span>"
       #,
@@ -79,7 +79,8 @@ def generate_bar_json(fetchers)
       :separator_block_width => 10,
       :align => 'left',
       :min_width => 0,
-      :full_text => text
+      :full_text => text,
+      :markup => 'pango'
     }
   end.to_json
 end

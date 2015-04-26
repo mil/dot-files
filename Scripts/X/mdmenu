@@ -113,7 +113,7 @@ $profiles.merge({
 })
 
 def dmenuOptsToString(optsHash)
-  returnString = "dmenu"
+  returnString = "dmenu -z"
   optsHash.each do |option, value|
     if (value.is_a? String)
       value = "'#{value}'"
