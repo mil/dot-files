@@ -23,7 +23,7 @@ lunch_lists:
       stock: https://www.google.com/finance?q=%s
       define: http://www.merriam-webster.com/dictionary/%s
       syn: http://www.collinsdictionary.com/dictionary/english-thesaurus/%s
-      weather: http://asciiw.com/%s
+      asciiw: http://asciiw.com/%s
       wu: http://wunderground.com/%s
       npms : https://www.npmjs.com/search?q=%s
       amazon: http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=%s

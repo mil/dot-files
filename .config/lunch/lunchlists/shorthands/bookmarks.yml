@@ -8,6 +8,7 @@ lunch_lists:
       hn: http://news.ycombinator.com
       bc: http://bandcamp.com
 
+      weather: http://www.wunderground.com/weather-forecast/78758
       webmail: http://userbound.com/webmail
 
       pay_electric: https://coautilities.com
