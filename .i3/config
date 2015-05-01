@@ -216,3 +216,4 @@ client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 
 for_window [title="NEWLAUNCHER"] floating enable; border none; resize 10 10 move center center
 for_window [title="xzoom"] floating enable
+for_window [class="URxvt"] border none

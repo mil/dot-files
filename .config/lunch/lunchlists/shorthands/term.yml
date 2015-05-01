@@ -14,3 +14,4 @@ lunch_lists:
       root: sudo su
       top: htop
       calibrate: dispwin
+      synctime: sudo ntpd -qg
