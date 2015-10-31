@@ -90,8 +90,8 @@ cat ~/.todo
 
 set fish_function_path $fish_function_path /home/mil/.config/fish/plugin-foreign-env/functions
 
-set NVM_DIR ~/.nvm
 function nvm
+	set NVM_DIR ~/.nvm
 	fenv source $NVM_DIR/nvm.sh \; nvm $argv
 end
 
