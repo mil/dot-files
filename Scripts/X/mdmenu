@@ -35,9 +35,7 @@ $defaults = {
   :nf => '#c4c4c4',
   :p  => 'Rd Menu',
   :o => 0.9,
-  :dim => 0.6,
-  :uh => 1,
-  :uc => "#000000"
+  :dim => 0.6
 }
 
 $app = $defaults
@@ -81,7 +79,6 @@ $profiles["browse"] = $app.merge({
 $profiles["jump"] = {
   :p => "Jump",
   :fn => "Envy Code R-12",
-  :sb => "#ffc400",
   :nf => "#ffffff",
   :sb => "#ffc400",
   :sf => "#000000"
@@ -135,8 +132,10 @@ def main
   end
 
   dm = dmenuOptsToString($defaults) 
+	puts dm
   $stdout = STDOUT
   $stdout.puts %x[#{dm}]
+  $stdout.flush
 end
 
 main

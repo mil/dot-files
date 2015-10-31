@@ -1,5 +1,4 @@
-# Scripts Directory
-set -x PATH /home/mil/Scripts/Binaries $PATH
+# Scripts Directory set -x PATH /home/mil/Scripts/Binaries $PATH
 set -x PATH /home/mil/Scripts/Cron $PATH
 set -x PATH /home/mil/Scripts/Data $PATH
 set -x PATH /home/mil/Scripts/Downloaded $PATH
@@ -71,18 +70,28 @@ set __fish_git_prompt_char_stashstate '↩'
 set __fish_git_prompt_char_upstream_ahead '↑'
 set __fish_git_prompt_char_upstream_behind '↓'
 
-function fish_right_prompt
-  printf '%s' (__fish_git_prompt) 
-end 
-function fish_prompt
-  set last_status $status
-  set_color $fish_color_cwd
-  printf '%s→ ' (prompt_pwd)
-  set_color normal
-  set_color normal
-  z --add $PWD
-  set_color $fish_color_cwd
-  set_color normal
-end
+#function fish_right_prompt
+#  printf '%s' (__fish_git_prompt)
+#end
+
+#function fish_prompt
+#  set last_status $status
+#  set_color $fish_color_cwd
+#  printf '%s→ ' (prompt_pwd)
+#  set_color normal
+#  set_color normal
+#  #z --add $PWD
+#  #set_color $fish_color_cwd
+#  #set_color normal
+#end
 
 cat ~/.todo
+
+
+set fish_function_path $fish_function_path /home/mil/.config/fish/plugin-foreign-env/functions
+
+set NVM_DIR ~/.nvm
+function nvm
+	fenv source $NVM_DIR/nvm.sh \; nvm $argv
+end
+
