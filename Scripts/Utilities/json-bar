@@ -3,8 +3,7 @@ require 'json'
 
 class Info_Fetchers
   def weather
-    weather = %x[weather 78758].split(':')
-    weather.length == 0 ?  "unknown" : weather[1].gsub(/F$/,'°F').gsub(' ', '')
+    %x[weather 78758].gsub(':', ',').gsub(/F$/,'°F')
   end
   def battery
     %x[acpi -V|head -n 1].scan(/\d+%/)[0]
@@ -34,11 +33,11 @@ end
 
 def generate_bar_json(fetchers)
   [
-    {
-      :symbol => "T",
-      :color => "#dc0000",
-      :text => fetchers.time
-    },
+    #{
+    #  :symbol => "T",
+    #  :color => "#dc0000",
+    #  :text => fetchers.time
+    #},
     {
       :symbol => "☂",
       :color => "#c84d00",

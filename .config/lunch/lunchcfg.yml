@@ -3,6 +3,7 @@ lunch_menu:
   - query_cl
 
   - ssh_shorthands
+  - curl_shorthands 
   - wm_shorthands
   - term_shorthands
   - ssh_shorthands

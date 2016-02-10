@@ -11,5 +11,6 @@ lunch_lists:
       kill: killall %s
       workspace: workspace %s
       ssh: ssh %s
+      curl: curl %s
       ranger: ranger %s
       fish: 'cd %s; fish'

@@ -9,3 +9,4 @@ lunch_lists:
       ssh_x300: mil@x300
       ssh_x40: mil@x40
       ssh_pi: mil@pi
+      audioclient: root@audioclient

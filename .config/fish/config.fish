@@ -45,7 +45,7 @@ alias s='lunch'
 alias j='z'
 alias lsp='find (pwd)'
 alias bd='cd ../'
-alias x='startx'
+alias x='nvm use v5.0.0; startx'
 alias chromium='chromium --user-data-dir=/tmp/chromium-(uuidgen)'
 
 
