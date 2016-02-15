@@ -1,5 +1,15 @@
 " Install pathogen
- execute pathogen#infect()
+execute pathogen#infect()
+
+
+" Rainbow Parens
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+\   'ctermfgs': ['16', '17', '18', '25'],
+\   'operators': '_,_',
+\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold']
+\}
+
 
 "Encoding
 set encoding=utf-8
@@ -99,5 +109,8 @@ highlight OverLength ctermbg=red ctermfg=white
 match OverLength /\%81v.\+/
 
 
-:hi Insert ctermbg=2
 
+command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
+
+
+:hi Insert ctermbg=2
