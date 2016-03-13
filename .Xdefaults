@@ -53,9 +53,6 @@ Rxvt.scrollstyle            : plain
 *font: xft:Envy Code R-10
 # *font: xft:Monospace-11
 *hinting: false
-Xft.hintstyle:hintslight
-
-
 
 ! Change fonts on demand
 URxvt.keysym.C-A-1: command:\033]710;xft:terminus-1:style=Regular;terminus-12:style=Bold:antialias=true:hinting=true\007
@@ -72,8 +69,8 @@ URxvt.keysym.C-A-9: command:\033]710;xft:smoothansi:style=Regular:antialias=true
 
 
 Xft.dpi: 96
-Xft.hinting: 1
-Xft.hintstyle: hintful
+Xft.hinting: 20
+Xft.hintstyle: none
 
 Rxvt*transparent: true
 Rxvt*shading: 100
@@ -111,8 +108,8 @@ URxvt.visualBell: True
 
 URxvt.scrollstyle: plain
 URxvt.scrollBar_floating: True
-URxvt.lineSpace: 1
-URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.letterSpace: -1
 !URxvt.buffered: True
 URxvt.highlightColor: #fffeaa
 URxvt.scrollColor: #cfcfcf
@@ -147,7 +144,7 @@ XTerm*vt100.showBlinkAsBold : True
 XTerm*vt100.veryBoldColors  : 6
 
 XTerm*faceName: Envy Code R
-XTerm*faceSize: 9
+XTerm*faceSize: 7
 
 
 

@@ -8,6 +8,9 @@ compton &
 #unclutter &
 xrdb /home/mil/.Xdefaults &
 
+ID=`xinput list | grep -Eio 'touchpad\s*id\=[0-9]{1,2}' | grep -Eo '[0-9]{1,2}'`
+xinput disable $ID
+
 xmodmap ~/.xmodmap &
 feh --bg-scale ~/.wallpaper.jpg &
 

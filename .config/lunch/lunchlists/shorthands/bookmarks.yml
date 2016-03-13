@@ -15,4 +15,12 @@ lunch_lists:
       pay_internet: https://coautilities.com
       pay_rent: https://imtresidential.residentportal.com/resident_portal/?module=authentication&action=view_login
 
+
       guis: http://toastytech.com/guis/index.html
+
+      # Docs
+      clju: https://funcool.github.io/clojurescript-unraveled/
+
+      # VCS
+      bb: http://bitbucket.org
+      gh: http://github.com

@@ -188,7 +188,7 @@ bindsym $mod+r mode "resize"
 bar {
   position top
     status_command $HOME/Scripts/Utilities/json-bar
-    font pango:Envy Code R 10
+    font pango:Envy Code R 9
     colors {
       background #ffffff
         statusline #cfcfcf
@@ -205,7 +205,7 @@ bar {
 
 
 
-font xft: Envy Code R 10
+font xft: Envy Code R 9
 client.focused #888888 #d5ffca #000000 #000000
 client.focused_inactive #000000 #dde9ff #404040 #000000
 client.unfocused #4a4a4a #d4d4d4 #696969 #000000
@@ -214,6 +214,12 @@ client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 
 
 
+for_window [title="Pinboard - Save a Bookmark"] floating enable
+
 for_window [title="NEWLAUNCHER"] floating enable; border none; resize 10 10 move center center
 for_window [title="xzoom"] floating enable
-for_window [class="URxvt"] border none
+#for_window [class="URxvt"] border none
+#for_window [class=".*"] title_format "<span fgcolor='#888888' bgcolor='#cfcfcf'> ↳ </span> %title"
+for_window [class=".*"] title_format "<span bgcolor='#e8e8e8' fgcolor='#6e6e6e'><b></b></span> <span letter_spacing='-100'>%title</span>"
+
+bindsym $mod+p title_format "Important | %title"

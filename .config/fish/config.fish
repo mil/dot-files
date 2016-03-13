@@ -48,6 +48,11 @@ alias bd='cd ../'
 alias x='nvm use v5.0.0; startx'
 alias chromium='chromium --user-data-dir=/tmp/chromium-(uuidgen)'
 
+alias t='tree'
+alias t1='tree -L 1'
+alias t2='tree -L 2'
+alias t3='tree -L 3'
+
 
 setenv EDITOR vim
 setenv GIT_EDITOR vim

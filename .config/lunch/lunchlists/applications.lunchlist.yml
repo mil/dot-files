@@ -9,6 +9,7 @@ lunch_lists:
       chr: chromium '%s'
       chromium: chromium '%s'
       private: chromium --incognito '%s'
+      chrome: google-chrome-stable '%s'
 
 
       ff: firefox '%s'

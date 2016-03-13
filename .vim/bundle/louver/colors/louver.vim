@@ -86,11 +86,11 @@ hi Special		ctermfg=darkred		ctermbg=none cterm=none
 hi Directory	ctermfg=darkmagenta	ctermbg=white		cterm=bold
 
 " Message
-hi ModeMsg		ctermfg=black		ctermbg=white		cterm=none
-hi MoreMsg		ctermfg=black		ctermbg=white		cterm=none
-hi WarningMsg	ctermfg=red			ctermbg=white		cterm=none
-hi ErrorMsg		ctermfg=white		ctermbg=red			cterm=none
-hi Question		ctermfg=black		ctermbg=white		cterm=none
+"hi ModeMsg		ctermfg=black		ctermbg=none cterm=none
+"hi MoreMsg		ctermfg=black		ctermbg=none cterm=none
+"hi WarningMsg	ctermfg=red			ctermbg=none cterm=none
+"hi ErrorMsg		ctermfg=white		ctermbg=none cterm=none
+"hi Question		ctermfg=black		ctermbg=none cterm=none
 
 hi VertSplit	ctermfg=black		ctermbg=black		cterm=none
 hi LineNr		ctermfg=black		ctermbg=lightgray	cterm=none

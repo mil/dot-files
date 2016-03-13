@@ -110,7 +110,11 @@ match OverLength /\%81v.\+/
 
 
 
+command! EnablePiggieback :Piggieback (adzerk.boot-cljs-repl/repl-env)
 command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
+
+au BufRead,BufNewFile *.boot setfiletype clojure
+
 
 
 :hi Insert ctermbg=2
