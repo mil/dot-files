@@ -1,0 +1,76 @@
+#!/usr/bin/env node
+var process = require('child_process');
+var fs = require('fs');
+var path = require('path');
+const uuid = '0000-03E8';
+const mount_dir = '/mnt/cf';
+const copy_to_dir = '/home/mil/Mixtapes/0.Daily_Log';
+
+
+function get_dirs(srcpath) {
+  return fs.readdirSync(srcpath).filter(function(file) {
+    return fs.statSync(path.join(srcpath, file)).isDirectory();
+  });
+}
+
+function get_folder_db_handle(dir_string) {
+	var d = dir_string.match(/.+-(db[^_]+)(_.)?/);
+	if (d !== null && typeof d === "object") {
+		return d[1];
+	} else {
+		return 'NULL';
+	}
+}
+
+function filter_to_last_db_dirs(dirs_array) {
+	var handle_to_dirs_obj = 
+		dirs_array
+			.filter(function(dir) { return dir.match(/\d{2}-\d{2}-\d{2}-db+/); })
+			.reduce(function(accum, dir_name) {
+				var handle = get_folder_db_handle(dir_name);
+
+				if (typeof accum !== "object") { accum = {}; }
+
+				if (!(handle in accum)) {
+					accum[handle] = [ dir_name ];
+				} else {
+					accum[handle].push(dir_name);
+				}
+
+				return accum;
+			});
+
+	return Object.keys(handle_to_dirs_obj).map(function(k) {
+		var arr = handle_to_dirs_obj[k];
+		return arr[arr.length-1];
+	});
+}
+
+function copy_tracks() {
+	console.log("Copying Tracks");
+	process.execSync(`sudo mount -U ${uuid} ${mount_dir}`);
+
+	var from_folders = filter_to_last_db_dirs(get_dirs(mount_dir))
+	var tracks = from_folders.map(function(f) {
+		var handle = get_folder_db_handle(f);
+		var target_dir = `${mount_dir}/${f}`;
+		var cp_files = fs.readdirSync(target_dir)
+			.filter(function(s) {
+				var matches = s.match(new RegExp(handle + ".*\.WAV"));
+				return !!matches;
+			})
+			.map(function(s) {
+				return `${target_dir}/${s}`;
+			});		
+		return cp_files;
+	});
+	var tracks = [].concat.apply([], tracks);	
+	for (t in tracks) {
+		console.log(`${tracks[t]} => ${copy_to_dir}`);
+		process.execSync(`cp -u ${tracks[t]} ${copy_to_dir}`);
+	}
+
+	process.execSync(`sudo umount ${mount_dir}`);
+}
+
+copy_tracks();

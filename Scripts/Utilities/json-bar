@@ -33,11 +33,11 @@ end
 
 def generate_bar_json(fetchers)
   [
-    #{
-    #  :symbol => "T",
-    #  :color => "#dc0000",
-    #  :text => fetchers.time
-    #},
+    {
+      :symbol => "T",
+      :color => "#dc0000",
+      :text => fetchers.time
+    },
     {
       :symbol => "☂",
       :color => "#c84d00",
