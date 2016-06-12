@@ -1,7 +1,7 @@
 # Install
 git clone git@github.com:mil/dot-files
 cd dot-files
-rsync -r . --exclude README ~/
+rsync -r . --exclude README --exclude .git ~/
 
 # Log out and back into shell then:
 install-extra-packages
