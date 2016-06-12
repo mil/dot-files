@@ -1,0 +1,6 @@
+lunch_lists:
+  curl_shorthands:
+    handled_by: query_cl
+    default_handler: curl
+    entries:
+      light: bedroom
