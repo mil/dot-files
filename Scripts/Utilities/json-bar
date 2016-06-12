@@ -15,9 +15,7 @@ class Info_Fetchers
   end
 
   def network
-    ((%x[netctl list].split("\n").select { |n| 
-      n if n[0] == "*"
-    }.first) || "offline").gsub("* ", "")
+    %x[wicd-cli -d --wireless | grep Essid:].split(":")[1].chomp
   end
   def volume_level 
     "#{%x[amixer get Master | grep -woE '([0-9]+)\%' | head -1].chomp!}"
