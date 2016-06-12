@@ -6,7 +6,7 @@ autocutsel &
 #devilspie &
 compton &
 #unclutter &
-xrdb /home/mil/.resources &
+xrdb /home/mil/.Xresources &
 
 ID=`xinput list | grep -Eio 'touchpad\s*id\=[0-9]{1,2}' | grep -Eo '[0-9]{1,2}'`
 xinput disable $ID
