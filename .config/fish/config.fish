@@ -1,15 +1,15 @@
-# Scripts Directory set -x PATH /home/mil/Scripts/Binaries $PATH
-set -x PATH /home/mil/Scripts/Cron $PATH
-set -x PATH /home/mil/Scripts/Data $PATH
-set -x PATH /home/mil/Scripts/Downloaded $PATH
-set -x PATH /home/mil/Scripts/Irc $PATH
-set -x PATH /home/mil/Scripts/Misc $PATH
-set -x PATH /home/mil/Scripts/Symlinks $PATH
-set -x PATH /home/mil/Scripts/System $PATH
-set -x PATH /home/mil/Scripts/Utilities $PATH
-set -x PATH /home/mil/Scripts/Rpi $PATH
-set -x PATH /home/mil/Scripts/Wm $PATH
-set -x PATH /home/mil/Scripts/X $PATH
+# .bin Directory set -x PATH /home/mil/Scripts/Binaries $PATH
+set -x PATH /home/mil/.bin/Cron $PATH
+set -x PATH /home/mil/.bin/Data $PATH
+set -x PATH /home/mil/.bin/Downloaded $PATH
+set -x PATH /home/mil/.bin/Irc $PATH
+set -x PATH /home/mil/.bin/Misc $PATH
+set -x PATH /home/mil/.bin/Symlinks $PATH
+set -x PATH /home/mil/.bin/System $PATH
+set -x PATH /home/mil/.bin/Utilities $PATH
+set -x PATH /home/mil/.bin/Rpi $PATH
+set -x PATH /home/mil/.bin/Wm $PATH
+set -x PATH /home/mil/.bin/X $PATH
 set -x PATH /usr/local/heroku/bin $PATH
 set -x PATH /home/mil/.cabal/bin $PATH
 set -x PATH /home/mil/.node_modules/*/bin $PATH
