@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
 require 'json'
 
+def command?(command)
+ system("which #{ command} > /dev/null 2>&1")
+end
+
+
 class Info_Fetchers
   def weather
     %x[weather 78758].gsub(':', ',').gsub(/F$/,'°F')
@@ -15,7 +20,8 @@ class Info_Fetchers
   end
 
   def network
-    %x[wicd-cli -d --wireless | grep Essid:].split(":")[1].chomp
+		command?("wicd-cli") ?
+			%x[wicd-cli -d --wireless | grep Essid:].split(":")[1].chomp : "VM"
   end
   def volume_level 
     "#{%x[amixer get Master | grep -woE '([0-9]+)\%' | head -1].chomp!}"

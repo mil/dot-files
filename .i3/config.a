@@ -1,0 +1,17 @@
+bar {
+  position top
+    status_command "$HOME/.bin/Utilities/json-bar"
+    font pango:Envy Code R 9
+    colors { background #ffffff
+        statusline #cfcfcf
+        separator #cfcfcf
+
+        #border bg text
+        #client.focused #000000 ##000000 #000000
+        focused_workspace #5200fd #5200fd #ffffff
+        active_workspace #000000 #999999 #000000
+        inactive_workspace #cfcfcf #cfcfcf #000000
+        urgent_workspace #000000 #ffffff
+    }
+}
+font xft: Envy Code R 9

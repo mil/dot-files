@@ -95,7 +95,7 @@ hi Directory	ctermfg=darkmagenta	ctermbg=white		cterm=bold
 hi VertSplit	ctermfg=black		ctermbg=black		cterm=NONE
 hi LineNr		ctermfg=black		ctermbg=lightgray	cterm=NONE
 hi Title		ctermfg=blue ctermbg=NONE cterm=bold
-hi Visual		ctermfg=white		ctermbg=lightyellow cterm=NONE
+hi Visual		ctermfg=white		ctermbg=yellow cterm=NONE
 hi VisualNOS	ctermfg=white		ctermbg=black		cterm=NONE
 hi WildMenu		ctermfg=white		ctermbg=black		cterm=NONE
 

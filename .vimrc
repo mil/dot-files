@@ -39,7 +39,6 @@ set hlsearch " highlight matches
 set incsearch " incremental searching
 set ignorecase " searches are case insensitive...
 set smartcase " ... unless they contain at least one capital letter
-set smartindent
 set number " show line numbers!
 set ai " auto identing
 
@@ -73,8 +72,6 @@ set directory=~/.vim/tmp
 
 " Fix the * Clipboard
 set clipboard=unnamed
-set paste
-
 
 if version >= 700
 	au InsertEnter * hi StatusLine term=reverse ctermbg=2
@@ -114,7 +111,5 @@ command! EnablePiggieback :Piggieback (adzerk.boot-cljs-repl/repl-env)
 command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
 
 au BufRead,BufNewFile *.boot setfiletype clojure
-
-
 
 :hi Insert ctermbg=2

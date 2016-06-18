@@ -45,13 +45,16 @@ alias s='lunch'
 alias j='z'
 alias lsp='find (pwd)'
 alias bd='cd ../'
-alias x='nvm use v5.0.0; startx'
+alias x='setup-configs; nvm use v5.0.0; startx'
 alias chromium='chromium --user-data-dir=/tmp/chromium-(uuidgen)'
 
 alias t='tree'
 alias t1='tree -L 1'
 alias t2='tree -L 2'
 alias t3='tree -L 3'
+alias cb='git rev-parse --abbrev-ref HEAD'
+alias bbd='git for-each-ref --sort=-committerdate refs/heads/'
+alias tc='set GIT_COMMITER_DATE (date); git commit --ammend --date (date)'
 
 
 setenv EDITOR vim

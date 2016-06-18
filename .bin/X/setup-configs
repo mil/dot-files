@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+$h = %x[hostname].chomp!
+
+
+# Assumes filename.base files and then appends filename.hostname
+[
+	"/home/mil/.i3/config",
+	"/home/mil/.Xresources"
+].each do |f|
+	if File.exists?("#{f}.#{$h}") then
+		d = "#{f}.base #{f}.#{$h}"
+		%x[cat #{d} > #{f}]
+	else
+		d = "#{f}.base"
+		%x[cat  #{d} > #{f}]
+	end
+end

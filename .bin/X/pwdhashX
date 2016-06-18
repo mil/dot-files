@@ -3,7 +3,7 @@
 # pwdhash on given domain/password combo
 #
 domainList = File.open("/home/mil/.domains").read
-domain = %x[echo "#{domainList}" | dmenu -b ].chomp!
-password = %x[echo "\n" | dmenu -b -nb black -nf black ].chomp!
+domain = %x[echo "#{domainList}" | rofi -dmenu ].chomp!
+password = %x[echo "\n" | rofi -dmenu -password ].chomp!
 encryptedPassword = %x[pwdhash "#{domain}" "#{password}"].chomp!
 %x[xdotool type #{encryptedPassword}]
