@@ -4,8 +4,7 @@ lunch_lists:
     root_default_handler: surf
 
     entries:
-      surf: surf '%s'
-
+      surf: randomstring | xargs -I AAA surf -sg -c '/tmp/surfcookies-AAA' '%s'
       chr: chromium '%s'
       chromium: chromium '%s'
       private: chromium --incognito '%s'

@@ -54,7 +54,7 @@ alias t2='tree -L 2'
 alias t3='tree -L 3'
 alias cb='git rev-parse --abbrev-ref HEAD'
 alias bbd='git for-each-ref --sort=-committerdate refs/heads/'
-alias tc='set GIT_COMMITER_DATE (date); git commit --ammend --date (date)'
+alias tc='set GIT_COMMITER_DATE (date); git commit --amend --date (date)'
 
 
 setenv EDITOR vim

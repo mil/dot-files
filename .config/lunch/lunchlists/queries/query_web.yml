@@ -1,7 +1,7 @@
 lunch_lists:
   query_web:
     handled_by: applications
-    deafault_handler: surf
+    default_handler: surf
 
     entries:
       ddg: https://duckduckgo.com/?q=%s
