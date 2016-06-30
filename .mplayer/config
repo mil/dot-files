@@ -1,4 +1,4 @@
 # Write your default config options here!
-input=file=/home/mil/IPC/Fifos/mplayer
+input=file=/home/mil/.mplayer/fifo
 #cache=4000
 #af-add=volnorm=1.25:0.75

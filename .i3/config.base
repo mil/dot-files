@@ -45,9 +45,13 @@ bindsym XF86AudioRaiseVolume exec dvol -i 2
 bindsym XF86AudioLowerVolume exec dvol -d 2
 bindsym XF86AudioMute exec dvol -t
 
-bindsym XF86AudioPrev exec mediaControl previous
-bindsym XF86AudioPlay exec mediaControl pause
-bindsym XF86AudioNext exec mediaControl next
+# mixtapes
+bindsym $mod+backslash exec urxvt -e mplayerclipboard
+bindsym $mod+bracketleft exec echo "pt -1" > ~/.mplayer/fifo
+bindsym $mod+bracketright exec echo "pt 1" > ~/.mplayer/fifo
+
+
+
 
 bindsym XF86Eject exec touchpad
 
