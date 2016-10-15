@@ -203,3 +203,20 @@ client.focused_inactive #000000 #5a5a5a #ffffff #000000
 client.unfocused #4a4a4a #d4d4d4 #696969 #000000
 client.urgent #000000 #000000 #ffffff #000000
 client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
+bar {
+  position top
+    status_command "$HOME/.bin/Utilities/json-bar"
+    font pango:Envy Code R 9
+    colors { background #ffffff
+        statusline #cfcfcf
+        separator #cfcfcf
+
+        #border bg text
+        #client.focused #000000 ##000000 #000000
+        focused_workspace #5200fd #5200fd #ffffff
+        active_workspace #000000 #999999 #000000
+        inactive_workspace #cfcfcf #cfcfcf #000000
+        urgent_workspace #000000 #ffffff
+    }
+}
+font xft: Envy Code R 9
