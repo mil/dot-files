@@ -26,16 +26,6 @@ set -x PATH /usr/bin/vendor_perl $PATH
 # Color Wrapper
 set -x PATH /usr/lib/cw $PATH
 
-# RVM
-set rvm_ignore_gemrc_issues 1
-bash $HOME/.rvm/scripts/rvm
-set -x PATH /home/mil/.rvm/bin $PATH
-set -x PATH /home/mil/.gem/ruby/1.9.1/bin $PATH
-set -x PATH /home/mil/.gem/ruby/2.0.0/bin $PATH
-set -x PATH /home/mil/.gem/ruby/2.1.0/bin $PATH
-set -x PATH /home/mil/.gem/ruby/2.2.0/bin $PATH
-set -x PATH /home/mil/.aws-eb/eb/linux/python3 $PATH
-
 . /home/mil/.config/fish/z.fish
 . /home/mil/.config/fish/vi-mode.fish
 
