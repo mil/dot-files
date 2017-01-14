@@ -10,22 +10,9 @@ set -x PATH /home/mil/.bin/Utilities $PATH
 set -x PATH /home/mil/.bin/Rpi $PATH
 set -x PATH /home/mil/.bin/Wm $PATH
 set -x PATH /home/mil/.bin/X $PATH
-set -x PATH /usr/local/heroku/bin $PATH
-set -x PATH /home/mil/.cabal/bin $PATH
 set -x PATH /home/mil/.node_modules/*/bin $PATH
-set -x PATH /home/mil/Code/Bitbucket/the-snazzy-desktop/webapp/node_modules/nodemon/bin $PATH
-
-set -x PATH /usr/local/heroku/bin $PATH
-
-
-# CPAN
-set -x PATH /usr/bin/core_perl $PATH
-set -x PATH /usr/bin/vendor_perl $PATH
-
 
 # Color Wrapper
-set -x PATH /usr/lib/cw $PATH
-
 . /home/mil/.config/fish/z.fish
 . /home/mil/.config/fish/vi-mode.fish
 
@@ -83,7 +70,7 @@ set __fish_git_prompt_char_upstream_behind '↓'
 #  #set_color normal
 #end
 
-cat ~/.todo
+#cat ~/.todo
 
 
 set fish_function_path $fish_function_path /home/mil/.config/fish/plugin-foreign-env/functions
@@ -93,3 +80,7 @@ function nvm
 	fenv source $NVM_DIR/nvm.sh \; nvm $argv
 end
 
+
+export TERM='xterm-256color'
+fish_vi_key_bindings
+clear

@@ -34,16 +34,18 @@ bindsym $mod+Control+Return exec xcwd | xargs urxvt -e ranger
 bindsym $mod+Shift+Return exec urxvt
 bindsym $mod+semicolon exec surf
 
-bindsym $mod+Shift+Up exec dvol -i 2
-bindsym $mod+Shift+Down exec dvol -d 2
-bindsym $mod+Shift+Left exec dvol -t
+bindsym $mod+Shift+Up exec /home/mil/.bin/Downloaded/dvol -i 2
+bindsym $mod+Shift+Down exec /home/mil/.bin/Downloaded/dvol -d 2
+bindsym $mod+Shift+Left exec /home/mil/.bin/Downloaded/dvol -t
+bindsym XF86AudioRaiseVolume exec /home/mil/.bin/Downloaded/dvol -i 2
+bindsym XF86AudioLowerVolume exec /home/mil/.bin/Downloaded/dvol -d 2
+bindsym XF86AudioMute exec /home/mil/.bin/Downloaded/dvol -t
+
+
 bindsym $mod+Shift+U bar mode toggle
 
 bindsym --release $mod+Shift+C exec scrot -s
 
-bindsym XF86AudioRaiseVolume exec dvol -i 2
-bindsym XF86AudioLowerVolume exec dvol -d 2
-bindsym XF86AudioMute exec dvol -t
 
 # mixtapes
 bindsym $mod+backslash exec urxvt -e mplayerclipboard
@@ -69,9 +71,9 @@ bindsym Prior exec i3 focus left
 bindsym $mod+Shift+q kill
 
 # dmenus
-bindsym $mod+d exec launchit
+bindsym $mod+d exec /home/mil/.bin/X/launchit
+bindsym $mod+Shift+p exec /home/mil/.bin/X/pwdhashX
 bindsym $mod+m exec rofi -show window
-bindsym $mod+Shift+p exec pwdhashX
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -205,10 +207,11 @@ client.urgent #000000 #000000 #ffffff #000000
 client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 bar {
   position top
-    status_command "$HOME/.bin/Utilities/json-bar"
-    font pango:Envy Code R 9
-    colors { background #ffffff
-        statusline #cfcfcf
+    status_command echo '{"version":1}[[],'; xtitle -s -f '[{"full_text": "%S"}],'
+    font pango:Hack 8
+    colors { 
+      background #ffffff
+        statusline #000000
         separator #cfcfcf
 
         #border bg text
@@ -219,4 +222,9 @@ bar {
         urgent_workspace #000000 #ffffff
     }
 }
-font xft: Envy Code R 9
+font xft: Hack 9
+
+exec xmodmap ~/.xmodmap
+exec feh --bg-scale ~/.wallpaper.jpg
+exec xrdb /home/mil/.Xresources
+exec keynav
