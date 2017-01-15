@@ -32,6 +32,7 @@ floating_minimum_size 0x0
 bindsym $mod+Return exec xcwd | xargs urxvt -cd
 bindsym $mod+Control+Return exec xcwd | xargs urxvt -e ranger
 bindsym $mod+Shift+Return exec urxvt
+bindsym --release $mod+Shift+P exec --no-startup-id /home/mil/.bin/X/pwdhashX
 bindsym $mod+semicolon exec surf
 
 bindsym $mod+Shift+Up exec /home/mil/.bin/Downloaded/dvol -i 2
@@ -72,7 +73,7 @@ bindsym $mod+Shift+q kill
 
 # dmenus
 bindsym $mod+d exec /home/mil/.bin/X/launchit
-bindsym $mod+Shift+p exec /home/mil/.bin/X/pwdhashX
+#bindsym $mod+Shift+p exec /home/mil/.bin/X/pwdhashX
 bindsym $mod+m exec rofi -show window
 
 # There also is the (new) i3-dmenu-desktop which only displays applications

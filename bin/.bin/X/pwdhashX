@@ -1,9 +1,5 @@
-#!/usr/bin/env ruby
-# Gives prompt for domain and then password and runs
-# pwdhash on given domain/password combo
-#
-domainList = File.open("/home/mil/.domains").read
-domain = %x[echo "#{domainList}" | rofi -dmenu ].chomp!
-password = %x[echo "\n" | rofi -dmenu -password ].chomp!
-encryptedPassword = %x[pwdhash "#{domain}" "#{password}"].chomp!
-%x[xdotool type #{encryptedPassword}]
+#!/usr/bin/env bash
+DOMAIN=$(cat /home/mil/.domains | rofi -dmenu  | tr -d '\n')
+PASS=$(echo 'Enter pass' | dmenu -b -nf "#ffffff" -nb "#ffffff" | tr -d '\n')
+ENCP=$(/home/mil/.bin/Utilities/pwdhash $DOMAIN $PASS | tr -d '\n')
+xdotool type --clearmodifiers "$ENCP"

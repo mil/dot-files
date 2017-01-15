@@ -94,6 +94,7 @@ set statusline+=\ %P    "percent through file
 
 
 map <C-C> :Eval<CR>
+map <C-X> :Eval (stop)<CR>
 
 set foldlevel=3000
 
