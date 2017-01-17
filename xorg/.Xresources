@@ -86,6 +86,8 @@ Rxvt.keysym.C-Home          : \033[1;5H
 Rxvt.keysym.C-End           : \033[1;5F
 Rxvt.keysym.C-S-Home        : \033[1;6H
 Rxvt.keysym.C-S-End         : \033[1;6F
+
+Rxvt.keysym.C-k:       command:\033c
 ! ---------------------------
 
 
