@@ -229,3 +229,5 @@ exec xmodmap ~/.xmodmap
 exec feh --bg-scale ~/.wallpaper.jpg
 exec xrdb /home/mil/.Xresources
 exec keynav
+exec xrandr --newmode "3840x2160x29.98"  262.750000  3840 3888 3920 4000  2160 2163 2167 2191  +HSync -VSync
+exec redshift -o -l 0:0 -b 0.8 -t 6500:6500
