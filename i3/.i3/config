@@ -119,6 +119,10 @@ bar {
 }
 font xft: Hack 9
 
+# For Windows
+for_window [title="prefs"] floating enable
+for_window [title="iemgui"] floating enable
+
 
 # Startup
 exec xmodmap ~/.xmodmap
