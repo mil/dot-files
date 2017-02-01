@@ -12,10 +12,9 @@ hide_edge_borders vertical
 # 
 #
 # Applications
-bindsym $mod+Return exec xcwd | xargs urxvt -cd
-bindsym $mod+Control+Return exec xcwd | xargs urxvt -e ranger
+bindsym $mod+Return exec /home/mil/.bin/Downloaded/pwdurxvt
 bindsym $mod+Shift+Return exec urxvt
-bindsym $mod+semicolon exec firefox
+bindsym $mod+apostrophe exec /home/mil/.bin/X/s
 #
 #
 # Volume & Special Keys
@@ -31,7 +30,8 @@ bindsym Prior exec i3 focus left
 #
 #
 # Menus
-bindsym $mod+d exec /home/mil/.bin/X/launchit
+bindsym $mod+d exec rofi -show run
+bindsym $mod+shift+D exec echo "Enter search string" | rofi -dmenu | xargs -I ARGS /home/mil/.bin/X/surf-search ARGS
 bindsym --release $mod+Shift+P exec --no-startup-id /home/mil/.bin/X/pwdhashX
 bindsym $mod+m exec rofi -show window
 #

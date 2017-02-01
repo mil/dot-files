@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+surf -sgpINu "`cat ~/.ua`" $1

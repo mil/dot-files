@@ -17,8 +17,6 @@ set -x PATH /home/mil/.node_modules/*/bin $PATH
 . /home/mil/.config/fish/vi-mode.fish
 
 #rvm > /d
-alias l='lunch'
-alias s='lunch'
 alias j='z'
 alias lsp='find (pwd)'
 alias bd='cd ../'
