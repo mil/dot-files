@@ -33,7 +33,7 @@ bindsym Prior exec i3 focus left
 # Menus
 bindsym $mod+d exec /home/mil/.bin/X/launchit
 bindsym --release $mod+Shift+P exec --no-startup-id /home/mil/.bin/X/pwdhashX
-bindsym $mod+m exec rofi -show window
+bindsym $mod+m exec rofi -show window -columns 1
 #
 #
 # Windows
@@ -74,6 +74,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Quit i3???' -b 'Yes, exit i3
 # Misc
 bindsym --release $mod+Shift+C exec scrot -s
 bindsym $mod+Shift+U bar mode toggle
+bindsym $mod+comma exec /home/mil/.bin/X/toggle_date_enabled
 #
 #
 # Workspaces
@@ -106,8 +107,8 @@ client.urgent #000000 #000000 #ffffff #000000
 client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 bar {
   position top
-    status_command echo '{"version":1}[[],'; xtitle -s -f '[{"full_text": "%S"}],'
-    font pango:Hack 8
+    status_command status-bar
+    font pango:Hack 13
     colors { 
       background #ffffff
         statusline #000000
@@ -118,7 +119,7 @@ bar {
         urgent_workspace #000000 #ffffff
     }
 }
-font xft: Hack 9
+font xft: Hack 12
 
 # For Windows
 for_window [title="prefs"] floating enable

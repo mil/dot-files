@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+de = File.read('/home/mil/.date_enabled').chomp!
+new_text = (de == "true" ? "false" : "true")
+%x[echo #{new_text} > /home/mil/.date_enabled]
+%x[i3-msg restart]
