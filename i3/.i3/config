@@ -107,8 +107,8 @@ client.urgent #000000 #000000 #ffffff #000000
 client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 bar {
   position top
-    status_command status-bar
-    font pango:Hack 13
+    status_command /home/mil/.bin/X/status-bar
+    font pango:Hack 8
     colors { 
       background #ffffff
         statusline #000000
@@ -119,7 +119,7 @@ bar {
         urgent_workspace #000000 #ffffff
     }
 }
-font xft: Hack 12
+font xft: Hack 9
 
 # For Windows
 for_window [title="prefs"] floating enable
