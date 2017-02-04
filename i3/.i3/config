@@ -33,7 +33,7 @@ bindsym Prior exec i3 focus left
 bindsym $mod+d exec rofi -show run
 bindsym $mod+shift+D exec echo "Enter search string" | rofi -dmenu | xargs -I ARGS /home/mil/.bin/X/surf-search ARGS
 bindsym --release $mod+Shift+P exec --no-startup-id /home/mil/.bin/X/pwdhashX
-bindsym $mod+m exec rofi -show window
+bindsym $mod+m exec rofi -show window -columns 1
 #
 #
 # Windows
@@ -74,6 +74,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Quit i3???' -b 'Yes, exit i3
 # Misc
 bindsym --release $mod+Shift+C exec scrot -s
 bindsym $mod+Shift+U bar mode toggle
+bindsym $mod+comma exec /home/mil/.bin/X/toggle_date_enabled
 #
 #
 # Workspaces
@@ -106,7 +107,7 @@ client.urgent #000000 #000000 #ffffff #000000
 client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 bar {
   position top
-    status_command echo '{"version":1}[[],'; xtitle -s -f '[{"full_text": "%S"}],'
+    status_command /home/mil/.bin/X/status-bar
     font pango:Hack 8
     colors { 
       background #ffffff
@@ -119,6 +120,10 @@ bar {
     }
 }
 font xft: Hack 9
+
+# For Windows
+for_window [title="prefs"] floating enable
+for_window [title="iemgui"] floating enable
 
 
 # Startup

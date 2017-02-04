@@ -1,6 +1,5 @@
 " Install pathogen
-execute pathogen#infect()
-
+execute pathogen#infect() 
 
 " Rainbow Parens
 let g:rainbow_active = 1
@@ -52,6 +51,8 @@ map <up> <c-w>-
 map <down> <c-w>+
 map <right> <c-w>>
 map <left> <c-w><
+
+nnoremap gp `[v`]
 
 
 " Colorscheme Related
@@ -114,4 +115,9 @@ command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwhee
 au BufRead,BufNewFile *.boot setfiletype clojure
 hi MatchParen cterm=none ctermbg=green ctermfg=black
 
+
 :hi Insert ctermbg=2
+:hi Search ctermbg=Yellow
+:hi IncSearch ctermbg=Cyan
+:hi Pmenu ctermbg=Yellow
+:hi PmenuSel ctermbg=Green

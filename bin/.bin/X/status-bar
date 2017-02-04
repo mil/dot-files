@@ -1,95 +1,49 @@
 #!/usr/bin/env ruby
-require 'json'
+require 'pty'
 
-%x[killall status-bar]
-
-def unicodeSymbol(unicodeNumber)
-  return ""
-  return %x[echo -ne "\\uE#{unicodeNumber}"]
-end
-
-class String
-  def fg(i)
-    return "%{F#{i}}#{self}%{F#{i}}"
-  end
-  def bg(i)
-    return "%{B#{i}}#{self}%{B#{i}}"
-  end
-
-  def ul(i)
-    return "%{U#{i}}#{self}%{U#{i}}"
-  end
-
-  def center
-    return "%{c}#{self}%{c}"
-  end
-  def right 
-    return "%{r}#{self}%{r}"
-  end
-
-  def capFirst
-    return self.slice(0,1).capitalize + self.slice(1..-1)
-  end
-end
+$title = "X"
+$date = "X"
+$date_enabled = File.read('/home/mil/.date_enabled').chomp! == "true"
 
 
-def foo(x)
-  a = %x[foo-wm-c /tmp/foo-wm.socket \'#{x}']
-  if (a.chomp! == "Foo") then
-    return {
-      :layout => "?",
-      :children => [],
-      :node => "?"
-    }
-  else
-    JSON.parse(a)
-  end
-end
+def refresh_bar
+  date_markup = [ "<span fgcolor='#888888'>", $date, " </span>" ]
+  title_markup = [ "<span bgcolor='#e8e8e8'> ", $title, " </span> " ]
+  date_markup = [] if !$date_enabled
 
-
-count = 0
-loop do
-  # Battery
-  batteryStatus = `battery status`.chomp!
-  f = "#cfcfcf"
-  f = 4 if batteryStatus == "Charging"
-  batteryStatus = " #{batteryStatus} ".fg(1).bg(2)
-  batteryValue = " #{`battery percentage`.chomp!} ".fg(f)
-  battery = "#{batteryStatus}#{batteryValue}"
-
-
-    #Volume
-  volumeLabel = " Vol ".fg(1).bg(2)
-  volumeValue = " #{%x[amixer get Master | grep -woE '([0-9]+)\%' | head -1].chomp!} ".fg(6)
-  volume = "#{volumeLabel}#{volumeValue}"
-
-
-  time = Time.now.to_s.gsub!(/:\d{2}\s.+/, '').fg("#cfcfcf").center
-
-
-  z_icons = ""
-  zoom = %x[foo-zoom-level].chomp!
-  for i in 1..zoom.to_i do
-    z_icons = " #{z_icons}" if (i == 1)
-    z_icons = z_icons + "+"    
-    z_icons = "#{z_icons} " if (i  == zoom.to_i)  
-  end
-    z_icons = z_icons.fg(3).bg(2).ul(5)
-  
-
-  focus = %x[foo-wm-c /tmp/foo-wm.socket 'get focus'].chomp!
-  foo_status = focus.right
-
-
-  s = "#{battery}#{volume}#{time}#{foo_status}"
-
-
-  STDOUT.puts s
+  STDOUT.puts (title_markup | date_markup).join("").gsub("\n", "")
   STDOUT.flush
 
-  count = count + 1
-  if (count > 1) then
-    #sleep 20
-    %x[inotifywait -t 20 /tmp/bar-refresh]
+end
+
+def poll_xtitle 
+  cmd = "xtitle -s" 
+  begin
+    PTY.spawn( cmd ) do |stdout, stdin, pid|
+      begin
+        stdout.each { |line| 
+          $title = line.chomp!
+          refresh_bar
+        }
+      rescue Errno::EIO
+        puts "Errno:EIO error, but this probably just means " +
+              "that the process has finished giving output"
+      end
+    end
+  rescue PTY::ChildExited
+    puts "The child process exited!"
   end
 end
+
+def poll_date
+  Thread.new {
+    loop do
+      $date = %x[date +"%I:%M%p"].chomp!
+      refresh_bar
+      sleep 60
+    end
+  }
+end
+
+poll_date
+poll_xtitle
