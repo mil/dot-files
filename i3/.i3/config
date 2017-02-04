@@ -119,7 +119,7 @@ bar {
         urgent_workspace #000000 #ffffff
     }
 }
-font xft: Hack 9
+font pango:Hack 9
 
 # For Windows
 for_window [title="prefs"] floating enable

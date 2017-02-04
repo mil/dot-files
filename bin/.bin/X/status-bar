@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'pty'
+require 'json'
 
 $title = "X"
 $date = "X"
@@ -11,9 +12,11 @@ def refresh_bar
   title_markup = [ "<span bgcolor='#e8e8e8'> ", $title, " </span> " ]
   date_markup = [] if !$date_enabled
 
-  STDOUT.puts (title_markup | date_markup).join("").gsub("\n", "")
+  STDOUT.puts "," + ([{
+    :markup => 'pango',
+    :full_text => (title_markup | date_markup).join("").gsub("\n", "")
+  }]).to_json 
   STDOUT.flush
-
 end
 
 def poll_xtitle 
@@ -45,5 +48,13 @@ def poll_date
   }
 end
 
+def init_msg
+  STDOUT.puts '{ "version": 1 }'
+  STDOUT.puts "["
+  STDOUT.puts "[]"
+  STDOUT.flush
+end
+
+init_msg
 poll_date
 poll_xtitle
