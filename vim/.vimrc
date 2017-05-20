@@ -67,9 +67,9 @@ set mouse=nv
 
 
 " Backup Dir
-set backup
-set backupdir=~/.vim/backup
-set directory=~/.vim/tmp  
+"set backup
+"set backupdir=~/.vim/backup
+"set directory=~/.vim/tmp  
 
 " Fix the * Clipboard
 set clipboard=unnamed

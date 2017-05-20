@@ -133,7 +133,7 @@ URxvt*pointerBlank: True
 ! ---------------------------
 URxvt.perl-ext-common: default,resize-font
 
-urxvt.font: xft:Hack:pixelsize=22
+urxvt.font: xft:Hack:pixelsize=14
 URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-equal
 URxvt.resize-font.reset: C-plus
