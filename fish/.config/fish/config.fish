@@ -79,6 +79,15 @@ function nvm
 end
 
 
+export GOPATH='/home/mil/Go'
+set PATH $PATH /home/mil/Go/bin
 export TERM='xterm-256color'
 fish_vi_key_bindings
 clear
+
+# Start X at login
+if status --is-login
+    if test -z "$DISPLAY" -a $XDG_VTNR = 1
+        startx -- -keeptty
+    end
+end

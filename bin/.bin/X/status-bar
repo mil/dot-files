@@ -8,8 +8,8 @@ $date_enabled = File.read('/home/mil/.date_enabled').chomp! == "true"
 
 
 def refresh_bar
-  date_markup = [ "<span fgcolor='#888888'>", $date, " </span>" ]
-  title_markup = [ "<span bgcolor='#e8e8e8'> ", $title, " </span> " ]
+  date_markup = [ "<span fgcolor='#000000'>", $date, " </span>" ]
+  title_markup = [ "<span > ", $title, " |</span> " ]
   date_markup = [] if !$date_enabled
 
   STDOUT.puts "," + ([{

@@ -14,7 +14,7 @@ hide_edge_borders vertical
 # Applications
 bindsym $mod+Return exec /home/mil/.bin/Downloaded/pwdurxvt
 bindsym $mod+Shift+Return exec urxvt
-bindsym $mod+apostrophe exec /home/mil/.bin/X/s
+bindsym $mod+apostrophe exec firefox
 #
 #
 # Volume & Special Keys
@@ -30,7 +30,7 @@ bindsym Prior exec i3 focus left
 #
 #
 # Menus
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec dmenu_run -b
 bindsym $mod+shift+D exec echo "Enter search string" | rofi -dmenu | xargs -I ARGS /home/mil/.bin/X/surf-search ARGS
 bindsym --release $mod+Shift+P exec --no-startup-id /home/mil/.bin/X/pwdhashX
 bindsym $mod+m exec rofi -show window -columns 1
@@ -110,12 +110,12 @@ bar {
     status_command /home/mil/.bin/X/status-bar
     font pango:Hack 8
     colors { 
-      background #ffffff
+      background #cfcfcf
         statusline #000000
         separator #cfcfcf
         focused_workspace #5200fd #5200fd #ffffff
         active_workspace #000000 #999999 #000000
-        inactive_workspace #cfcfcf #cfcfcf #000000
+        inactive_workspace #888888 #e8e8e8 #000000
         urgent_workspace #000000 #ffffff
     }
 }

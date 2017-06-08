@@ -121,3 +121,14 @@ hi MatchParen cterm=none ctermbg=green ctermfg=black
 :hi IncSearch ctermbg=Cyan
 :hi Pmenu ctermbg=Yellow
 :hi PmenuSel ctermbg=Green
+:hi SpecialKey ctermbg=none ctermfg=gray
+
+let g:sclangTerm = "urxvt"
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+
+
+let g:go_fmt_command = "goimports"
+
+
+"set list
+"set listchars=tab:+>
