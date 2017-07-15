@@ -15,12 +15,12 @@ bindsym $mod+apostrophe exec firefox
 
 
 # Volume & Special Keys
-bindsym $mod+Shift+Up exec /home/mil/.bin/Downloaded/dvol -i 2
-bindsym $mod+Shift+Down exec /home/mil/.bin/Downloaded/dvol -d 2
-bindsym $mod+Shift+Left exec /home/mil/.bin/Downloaded/dvol -t
-bindsym XF86AudioRaiseVolume exec /home/mil/.bin/Downloaded/dvol -i 2
-bindsym XF86AudioLowerVolume exec /home/mil/.bin/Downloaded/dvol -d 2
-bindsym XF86AudioMute exec /home/mil/.bin/Downloaded/dvol -t
+bindsym $mod+Shift+Up exec /home/mil/.bin/dvol -i 2
+bindsym $mod+Shift+Down exec /home/mil/.bin/dvol -d 2
+bindsym $mod+Shift+Left exec /home/mil/.bin/dvol -t
+bindsym XF86AudioRaiseVolume exec /home/mil/.bin/dvol -i 2
+bindsym XF86AudioLowerVolume exec /home/mil/.bin/dvol -d 2
+bindsym XF86AudioMute exec /home/mil/.bin/dvol -t
 bindsym XF86Launch1 exec xset dpms force suspend
 bindsym Next exec i3 focus right
 bindsym Prior exec i3 focus left
