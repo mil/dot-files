@@ -7,6 +7,7 @@ setenv TZ America/Chicago
 
 # Path & aliases
 set -x PATH /home/mil/.bin $PATH
+set -x PATH /usr/lib/surfraw $PATH
 alias cb='git rev-parse --abbrev-ref HEAD'
 alias tc='set GIT_COMMITER_DATE (date); git commit --amend --date (date)'
 
