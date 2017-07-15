@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-require 'json'
-x = %x[foo-wm-c '/tmp/foo-wm.socket' 'get focus']
-id = JSON[x]['id']
-%x[surf -e #{id}]

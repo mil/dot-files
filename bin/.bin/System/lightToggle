@@ -1,8 +1,0 @@
-#!/bin/bash
-setleds -D $1caps < /dev/tty1
-setleds -D $1caps < /dev/tty2
-setleds -D $1caps < /dev/tty3
-setleds -D $1caps < /dev/tty4
-setleds -D $1caps < /dev/tty5
-setleds -D $1caps < /dev/tty6
-setleds -D $1caps < /dev/tty7

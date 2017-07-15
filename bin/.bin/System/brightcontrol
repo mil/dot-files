@@ -1,8 +1,0 @@
-#!/bin/bash
-if test "$1" = 'up'; then
-	echo $(((`cat /sys/class/backlight/apple_backlight/brightness`) + 1)) > /sys/class/backlight/apple_backlight/brightness
-elif test "$1" = 'down'; then
-	echo $(((`cat /sys/class/backlight/apple_backlight/brightness`) - 1)) > /sys/class/backlight/apple_backlight/brightness
-else 
-	echo "syntax is: brightcontrol up|down"
-fi

@@ -129,6 +129,8 @@ let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 
 let g:go_fmt_command = "goimports"
 
+set noswapfile
+
 
 "set list
 "set listchars=tab:+>

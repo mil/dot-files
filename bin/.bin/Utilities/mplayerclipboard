@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-cd /home/mil/Mixtapes/0.Daily_Log
-mplayer $(sselp)

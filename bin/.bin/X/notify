@@ -1,2 +1,0 @@
-#!/bin/bash
-xargs -0 -I XXX notify-send XXX

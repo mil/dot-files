@@ -1,3 +1,0 @@
-#!/bin/bash
-#xcalib -green 1 10.0 100 -a
-sudo lightToggle +

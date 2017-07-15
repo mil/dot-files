@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-SEARCH=`echo $@ | tr [:blank:] +`
-SITE="http://google.com/search?q=$SEARCH"
-surf -sgpINu "`cat ~/.ua`" $SITE

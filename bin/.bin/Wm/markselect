@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-# Prints out a new line sepearted list of marks
-# Can be used in dmenu like:
-# ./markselect | dmenu | xargs -0 -I mark foo-wm-c '/tmp/foo-wm.socket' 'jump MARK'
-require 'json'
-m = JSON %x[foo-wm-c "/tmp/foo-wm.socket" "get marks"]
-puts m["marks"].join("\n")

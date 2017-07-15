@@ -1,3 +1,0 @@
-#!/usr/bin/env ruby
-puts %x[#{ARGV[1]}]
-%x{sleep #{ARGV[0]}}

@@ -8,15 +8,12 @@ focus_follows_mouse no
 floating_minimum_size 100x100
 hide_edge_borders vertical
 
-# Keybindings
-# 
-#
 # Applications
-bindsym $mod+Return exec /home/mil/.bin/Downloaded/pwdurxvt
+bindsym $mod+Return exec urxvt -cd `xcwd`
 bindsym $mod+Shift+Return exec urxvt
 bindsym $mod+apostrophe exec firefox
-#
-#
+
+
 # Volume & Special Keys
 bindsym $mod+Shift+Up exec /home/mil/.bin/Downloaded/dvol -i 2
 bindsym $mod+Shift+Down exec /home/mil/.bin/Downloaded/dvol -d 2
@@ -27,35 +24,36 @@ bindsym XF86AudioMute exec /home/mil/.bin/Downloaded/dvol -t
 bindsym XF86Launch1 exec xset dpms force suspend
 bindsym Next exec i3 focus right
 bindsym Prior exec i3 focus left
-#
-#
+
+
 # Menus
 bindsym $mod+d exec dmenu_run -b
-bindsym $mod+shift+D exec echo "Enter search string" | rofi -dmenu | xargs -I ARGS /home/mil/.bin/X/surf-search ARGS
 bindsym --release $mod+Shift+P exec --no-startup-id /home/mil/.bin/X/pwdhashX
-bindsym $mod+m exec rofi -show window -columns 1
-#
-#
-# Windows
-# Focus
+
+# Windows Focus
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+h focus left
 bindsym $mod+l focus right
 bindsym $mod+a focus parent
-# Shift
+
+# Windows Shift
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+l move right
-# Border
+
+# Windows Border
 bindsym $mod+u border none
 bindsym $mod+i border 1pixel
 bindsym $mod+o border normal
+
 # Kill
 bindsym $mod+Shift+q kill
+
 # Fullscreen
 bindsym $mod+f fullscreen
+
 # Layout Modes
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -64,19 +62,19 @@ bindsym $mod+v split vertical
 # Floating
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
-#
-#
+
+
 # Quit
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Quit i3???' -b 'Yes, exit i3' 'i3-msg exit'"
-#
-#
+
+
 # Misc
 bindsym --release $mod+Shift+C exec scrot -s
 bindsym $mod+Shift+U bar mode toggle
 bindsym $mod+comma exec /home/mil/.bin/X/toggle_date_enabled
-#
-#
+
+
 # Workspaces
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -107,7 +105,7 @@ client.urgent #000000 #000000 #ffffff #000000
 client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 bar {
   position top
-    status_command /home/mil/.bin/X/status-bar
+    status_command /home/mil/.bin/status-bar
     font pango:Hack 8
     colors { 
       background #cfcfcf
@@ -124,7 +122,6 @@ font pango:Hack 9
 # For Windows
 for_window [title="prefs"] floating enable
 for_window [title="iemgui"] floating enable
-
 
 # Startup
 exec xmodmap ~/.xmodmap

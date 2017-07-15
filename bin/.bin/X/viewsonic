@@ -1,9 +1,0 @@
-#!/usr/bin/env sh
-xrandr --output LVDS1 --off --output VGA1 --auto --gamma 1:1:1 --brightness 1
-#foo-wm-c "/tmp/foo-wm.socket" "dimensions 1920 1080"
-#foo-wm-c "/tmp/foo-wm.socket" "zoom 1"
-#foo-wm-c "/tmp/foo-wm.socket" "zoom -1"
-killall keynav
-keynav
-killall bar
-bar-start

@@ -1,2 +1,0 @@
-#!/bin/bash
-mplayer -quiet -msglevel all=0 identify "$1" > /home/mil/.mplayer/log
