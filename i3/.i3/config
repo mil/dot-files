@@ -28,7 +28,7 @@ bindsym Prior exec i3 focus left
 
 # Menus
 bindsym $mod+d exec dmenu_run -b
-bindsym --release $mod+Shift+P exec --no-startup-id /home/mil/.bin/X/pwdhashX
+bindsym --release $mod+Shift+P exec --no-startup-id /home/mil/.bin/pwdhashX
 
 # Windows Focus
 bindsym $mod+j focus down

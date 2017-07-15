@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-DOMAIN=$(cat /home/mil/.domains | dmenu -b | tr -d '\n')
-PASS=$(echo 'Enter pass' | dmenu -b -nf "#ffffff" -nb "#ffffff" | tr -d '\n')
-ENCP=$(/home/mil/.bin/Utilities/pwdhash $DOMAIN $PASS | tr -d '\n')
+DOMAIN=$(echo 'Domain:' | dmenu -b | tr -d '\n')
+PASS=$(echo 'Password:' | dmenu -b -nf "#e8e8e8" -nb "#e8e8e8" | tr -d '\n')
+ENCP=$(/home/mil/.bin/pwdhash $DOMAIN $PASS | tr -d '\n')
 xdotool type --clearmodifiers "$ENCP"
