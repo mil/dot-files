@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
+
 # Restow all configs
-stow -t $(ls)
+stow -t ~ $(ls -d */)
