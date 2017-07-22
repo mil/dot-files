@@ -1,0 +1,25 @@
+preview_images false
+auto_image false
+draw_borders true
+set_draw_borders
+set preview_images
+use_mouse 0
+show_lnum 0
+editor vim
+
+accept_cookie 0
+accept_bad_cookie 0
+use_cookie 0
+show_cookie 1
+
+no_referer 1
+save_hist 0
+use_history 0
+history 0
+
+wrap_search 1
+
+extbrowser4 firefox
+extbrowser3 mpv
+extbrowser2 surf
+extbrowser echo %s | xclip -i

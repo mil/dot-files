@@ -5,6 +5,10 @@ vim/.vim/backup
 vim/.vim/tmp
 vim/.vim/.netrwhist
 
+w3m/.w3m/w3mtmp*
+w3m/.w3m/cookie
+w3m/.w3m/history
+
 ranger/.config/ranger/bookmarks
 ranger/.config/ranger/history
 ranger/.config/ranger/tagged

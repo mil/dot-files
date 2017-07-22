@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# https://gist.github.com/hnrch/3041943
+pkgs=$(pacman -Qei | awk '/^Name/ { name=$3 } /^Groups/ { if ( $3 != "base" && $3 != "base-devel" ) { print name } }')
+count=$(echo $pkgs | wc -w)
+
+echo "$count Packages:"
+echo $pkgs

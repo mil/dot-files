@@ -88,4 +88,4 @@ if [ ! -e "$PIPE" ]; then
 fi
 
 #Feed the pipe!
-(echo "$VOL % testing" | dzen2-gdbar -s o -ss 1 -sw 4 -l "$VOL ^i(${ICON}) " -fg "$BAR_FG" -bg "$BAR_BG" -w "$BAR_WIDTH" ; sleep "$SECS") > "$PIPE"
+(echo "$VOL % testing" | gdbar -s o -ss 1 -sw 4 -l "$VOL ^i(${ICON}) " -fg "$BAR_FG" -bg "$BAR_BG" -w "$BAR_WIDTH" ; sleep "$SECS") > "$PIPE"

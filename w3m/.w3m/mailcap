@@ -1,0 +1,3 @@
+image/*;        sxiv %s
+application/pdf;        zathura %s
+application/x-pdf;        zathura %s

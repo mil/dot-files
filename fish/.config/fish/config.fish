@@ -31,4 +31,5 @@ if status --is-login
 end
 set fish_greeting ""
 clear
-cat ~/.todo
+#cat ~/.todo
+cal

@@ -2,19 +2,21 @@
 require 'pty'
 require 'json'
 
-$title = "X"
-$date = "X"
+$title = ""
+$date = ""
+$battery = ""
 $date_enabled = File.read('/home/mil/.date_enabled').chomp! == "true"
 
 
 def refresh_bar
-  date_markup = [ "<span fgcolor='#000000'>", $date, " </span>" ]
-  title_markup = [ "<span > ", $title, " |</span> " ]
-  date_markup = [] if !$date_enabled
+  items = []
+  items.push($title) if $title != ""
+  items.push($battery) if $battery != ""
+  items.push($date) if $date_enabled && $date != ""
 
   STDOUT.puts "," + ([{
     :markup => 'pango',
-    :full_text => (title_markup | date_markup).join("").gsub("\n", "")
+    :full_text => items.join(" | ").gsub("\n", "")
   }]).to_json 
   STDOUT.flush
 end
@@ -48,7 +50,17 @@ def poll_date
   }
 end
 
-def init_msg
+def poll_battery
+  Thread.new {
+    loop do
+      $battery = %x[battery].chomp!.match(/(\d|\.|%)+/)[0] 
+      refresh_bar
+      sleep 60
+    end
+  }
+end
+
+def init_msg 
   STDOUT.puts '{ "version": 1 }'
   STDOUT.puts "["
   STDOUT.puts "[]"
@@ -56,5 +68,6 @@ def init_msg
 end
 
 init_msg
+poll_battery
 poll_date
 poll_xtitle
