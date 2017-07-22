@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+if [ -z "$1" ]
+then
+  echo "provide files"
+  exit
+fi
+
+sudo umount /mnt/clip
+sudo mkdir -p /mnt/clip
+sudo mount /dev/disk/by-uuid/6097-96EF /mnt/clip
+sudo cp -avi $@ /mnt/clip
+sudo umount /mnt/clip
+sync
