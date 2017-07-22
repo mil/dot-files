@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-echo $@
-
-sudo umount /mnt/clip
-sudo mkdir -p /mnt/clip
-sudo mount /dev/disk/by-uuid/6097-96EF /mnt/clip
-
