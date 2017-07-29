@@ -10,7 +10,8 @@ Xft.dpi: 96
 Xft.hinting: 20
 Xft.hintstyle: none
 
-*cursorColor: #5e5e58
+*cursorColor: #e8e8e8
+
 *background: #ffffff
 *foreground: #000000
 ! ---------------------

@@ -3,5 +3,15 @@
 pkgs=$(pacman -Qei | awk '/^Name/ { name=$3 } /^Groups/ { if ( $3 != "base" && $3 != "base-devel" ) { print name } }')
 count=$(echo $pkgs | wc -w)
 
-echo "$count Packages:"
-echo $pkgs
+aur=$(pacman -Qm | cut -d' ' -f1 | paste -sd " ")
+aurcount=$(echo $aur | wc -w)
+
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+echo "$bold$count Total Packages:"
+echo $normal$pkgs
+echo 
+
+echo "$bold$aurcount AUR Packages:"
+echo $normal$aur

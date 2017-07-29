@@ -12,6 +12,10 @@ hide_edge_borders vertical
 bindsym $mod+Return exec urxvt -cd `xcwd`
 bindsym $mod+Shift+Return exec urxvt
 
+
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
+
 # Volume & Special Keys
 bindsym $mod+Shift+Up exec /home/mil/.bin/dvol -i 2
 bindsym $mod+Shift+Down exec /home/mil/.bin/dvol -d 2
@@ -120,8 +124,10 @@ for_window [title="prefs"] floating enable
 for_window [title="iemgui"] floating enable
 
 # Startup
+exec /home/mil/.bin/trackball
+exec /home/mil/.bin/yubi off
 exec xmodmap ~/.xmodmap
 exec feh --bg-scale ~/.wallpaper.jpg
 exec xrdb /home/mil/.Xresources
 exec --no-startup-id keynav
-exec redshift -o -l 0:0 -b 0.8 -t 6500:6500
+#exec /usr/bin/redshift -o -l 0:0 -b 0.8 -t 6500:6500

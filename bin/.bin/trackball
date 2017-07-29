@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+xinput set-prop "Logitech USB Trackball" "libinput Scroll Method Enabled" "0" "0" "1"
+xinput set-prop "Logitech USB Trackball" "libinput Horizontal Scroll Enabled" "0"
+xinput set-prop "Logitech USB Trackball" "libinput Drag Lock Buttons" "8"
+xinput set-prop "Logitech USB Trackball" "libinput Button Scrolling Button" "8"

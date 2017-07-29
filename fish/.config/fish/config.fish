@@ -32,4 +32,8 @@ end
 set fish_greeting ""
 clear
 #cat ~/.todo
-cal
+cal -j
+
+gpg-connect-agent /bye
+gpg-connect-agent updatestartuptty /bye > /dev/null
+set SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
