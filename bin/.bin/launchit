@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-lunch --token-list | rofi -dmenu | tr -d '
-' | xargs lunch
