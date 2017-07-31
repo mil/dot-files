@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+# yep, all to set a variable
+echo $PATH |\
+tr " " "\n" |\
+xargs -I G ls -1 G |\
+tr " " "\\n" |\
+sort |\
+uniq |\
+dmenu -b |\
+xargs -I CMD fish -c 'set -x SURFRAW_graphical true; CMD'

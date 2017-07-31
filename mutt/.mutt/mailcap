@@ -1,1 +1,2 @@
 text/html; w3m %s; nametemplate=%s.html; copiousoutput;
+image/jpeg; sxiv %s

@@ -7,16 +7,16 @@ setenv TZ America/Chicago
 
 # Path & aliases
 set -x PATH /home/mil/.bin $PATH
-if test -d /home/mil/.bin2
-  set -x PATH /home/mil/.bin2 $PATH
-end
 set -x PATH /usr/lib/surfraw $PATH
+set -x SURFRAW_graphical false
 alias cb='git rev-parse --abbrev-ref HEAD'
 alias tc='set GIT_COMMITER_DATE (date); git commit --amend --date (date)'
 
 # Go-related
-export GOPATH='/home/mil/Go'
-set PATH $PATH /home/mil/Go/bin
+if test -d /home/mil/Go
+  export GOPATH='/home/mil/Go'
+  set PATH $PATH /home/mil/Go/bin
+end
 
 # Vi input
 . /home/mil/.config/fish/vi-mode.fish
@@ -32,6 +32,8 @@ if status --is-login
         startx -- -keeptty
     end
 end
+
+
 set fish_greeting ""
 clear
 #cat ~/.todo
@@ -40,3 +42,7 @@ cal -j
 gpg-connect-agent /bye
 gpg-connect-agent updatestartuptty /bye > /dev/null
 set SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+
+if test -d /home/mil/.config/fish_additional
+  source /home/mil/.config/fish_additional/config.fish
+end

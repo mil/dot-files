@@ -27,7 +27,7 @@ bindsym XF86Launch1 exec xset dpms force suspend
 
 
 # Menus
-bindsym $mod+d exec dmenu_run -b
+bindsym $mod+d exec dm
 bindsym --release $mod+Shift+P exec --no-startup-id /home/mil/.bin/pwdhashX
 
 # Windows Focus
