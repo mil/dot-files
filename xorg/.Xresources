@@ -17,6 +17,7 @@ Xft.hintstyle: none
 ! ---------------------
 
 
+
 ! X Color Scheme
 ! ---------------------------
 ! black
@@ -135,6 +136,7 @@ URxvt*pointerBlank: True
 URxvt.perl-ext-common: default,resize-font
 
 urxvt.font: xft:Hack:pixelsize=14
+
 URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-equal
 URxvt.resize-font.reset: C-plus
@@ -149,31 +151,7 @@ URxvt.keysym.A-v: perl:clipboard:paste
 
 
 
-! XTerm Misc
-! ---------------------------
-XTerm*vt100.metaSendsEscape : True
-XTerm*vt100.saveLines       : 8192
-XTerm*vt100.colorMode       : True
-XTerm*vt100.colorBDMode     : True
-XTerm*vt100.colorULMode     : True
-XTerm*vt100.showBlinkAsBold : True
-XTerm*vt100.veryBoldColors  : 6
 
-XTerm*faceName: Envy Code R
-XTerm*faceSize: 7
-! ---------------------------
-
-! Rofi
-! ---------------------------
-rofi.font: Envy Code R 10
-
-! Rofi
-rofi.color-enabled: true
-rofi.color-normal: #ffffff,#525d76,#f5f5f5,#5294e2,#ffffff
-rofi.color-urgent: #ffffff,#dc322f,#f5f5f5,#5294e2,#dc322f
-rofi.color-active: #ffffff,#c2cad0,#f5f5f5,#5294e2,#c2cad0
-rofi.color-window: #ffffff,#000000,#f5f5f5a
-rofi.p: '>'
-rofi.separator-style: solid
-rofi.width: 66
-rofi.columns: 20
+#ifdef SRVR_music
+  urxvt.font: xft:Hack:pixelsize=24
+#endif

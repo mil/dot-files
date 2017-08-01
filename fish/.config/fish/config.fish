@@ -33,16 +33,18 @@ if status --is-login
     end
 end
 
-
+# At start
 set fish_greeting ""
-clear
-#cat ~/.todo
-cal -j
+if not set --query SSH_CLIENT
+  cal -j
+end
 
+# GPG-Related
 gpg-connect-agent /bye
 gpg-connect-agent updatestartuptty /bye > /dev/null
-set SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
 
+# Additional
 if test -d /home/mil/.config/fish_additional
   source /home/mil/.config/fish_additional/config.fish
 end
