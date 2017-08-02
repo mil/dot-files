@@ -122,7 +122,9 @@ bar {
         urgent_workspace #000000 #ffffff
     }
 }
-font pango:Hack 8
+# Overrides in xresources
+set_from_resource $i3font i3wm.i3font pango:Hack 9.5
+font $i3font
 
 # For Windows
 for_window [title="prefs"] floating enable

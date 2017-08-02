@@ -149,9 +149,7 @@ URxvt.keysym.A-c: perl:clipboard:copy
 URxvt.keysym.A-v: perl:clipboard:paste
 ! ----------------------------
 
-
-
-
 #ifdef SRVR_music
   urxvt.font: xft:Hack:pixelsize=24
+  *i3font: pango:Hack 8
 #endif
