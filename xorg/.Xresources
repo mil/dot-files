@@ -23,7 +23,7 @@ Xft.hintstyle: none
 ! black
 *color0: #000000
 ! bright_black
-*color8: #000000
+*color8: #888888
 ! red
 *color1: #c30e23
 ! bright_red
@@ -53,10 +53,6 @@ Xft.hintstyle: none
 ! bright_white
 *color15: #000000
 ! ---------------------------
-
-
-
-
 
 ! URXVT XTerm Keycode Compat
 ! ---------------------------
@@ -88,8 +84,7 @@ Rxvt.keysym.C-Home          : \033[1;5H
 Rxvt.keysym.C-End           : \033[1;5F
 Rxvt.keysym.C-S-Home        : \033[1;6H
 Rxvt.keysym.C-S-End         : \033[1;6F
-
-Rxvt.keysym.C-k:       command:\033c
+Rxvt.keysym.C-k             : command:\033c
 ! ---------------------------
 
 
@@ -101,50 +96,38 @@ Rxvt.scrollstyle            : plain
 Rxvt*transparent: true
 Rxvt*shading: 100
 URxvt.termName: rxvt-256color
-
 URxvt.borderColor: #cfcfcf
 URxvt.externalBorder: 1
 URxvt.internalBorder: 0
 URxvt.thickness: 1
 URxvt.visualBell: True
-
 URxvt.scrollstyle: plain
 URxvt.scrollBar_floating: True
 URxvt.lineSpace: 0
 URxvt.letterSpace: -1
 URxvt.highlightColor: #fffeaa
 URxvt.scrollColor: #cfcfcf
-
 URxvt.pointerColor2: #ababab
 URxvt.pointerColor: #cfcfcf
-
 URxvt*cursorColor: #000000
 URxvt.cursorBlink: False
-
 URxvt*scrollBar_align: bottom
 URxvt*skipBuiltinGlyphs: True
-
 URxvt*pointerBlankDelay: 2
 URxvt*pointerBlank: True
-
-! ---------------------------
-
-
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+urxvt.font: xft:Hack:pixelsize=14
 
 ! URXVT Extensions
 ! ---------------------------
 URxvt.perl-ext-common: default,resize-font
-
-urxvt.font: xft:Hack:pixelsize=14
-
 URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-equal
 URxvt.resize-font.reset: C-plus
 URxvt.resize-font.show: C-question
-
 URxvt.copyCommand: xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
-
 URxvt.keysym.A-c: perl:clipboard:copy
 URxvt.keysym.A-v: perl:clipboard:paste
 ! ----------------------------
