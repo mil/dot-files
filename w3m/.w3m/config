@@ -7,6 +7,7 @@ use_mouse 0
 show_lnum 0
 editor vim
 wrap_search 1
+confirm_qq 0
 
 no_referer 1
 save_hist 0

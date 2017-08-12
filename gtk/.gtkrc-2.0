@@ -1,0 +1,14 @@
+# -- THEME AUTO-WRITTEN DO NOT EDIT
+include "/usr/share/themes/Xfce-dawn/gtk-2.0/gtkrc"
+
+style "user-font" {
+	font_name = "Sans 14"
+}
+
+widget_class "*" style "user-font"
+
+gtk-font-name="Sans 14"
+
+include "/home/mil/.gtkrc.mine"
+
+# -- THEME AUTO-WRITTEN DO NOT EDIT

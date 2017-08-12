@@ -75,10 +75,19 @@ hi CursorLine   ctermbg=lightgray
 " Fix the * Clipboard
 set clipboard=unnamed
 
+
 if version >= 700
 	au InsertEnter * hi StatusLine term=reverse ctermbg=4 ctermfg=white
 	au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=7
 endif
+hi MatchParen cterm=none ctermbg=green ctermfg=black
+hi Insert ctermbg=2
+hi Search ctermbg=Yellow
+hi IncSearch ctermbg=Cyan
+hi Pmenu ctermbg=White
+hi PmenuSel ctermbg=Green
+hi SpecialKey ctermbg=none ctermfg=gray
+
 
 " Status Bar
 set laststatus=2  " always show the status bar
@@ -108,21 +117,10 @@ match ExtraWhitespace /\s\+$\| \+\ze\t/
 highlight OverLength ctermbg=red ctermfg=white
 match OverLength /\%81v.\+/
 
-
-
 command! EnablePiggieback :Piggieback (adzerk.boot-cljs-repl/repl-env)
 command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
 
 au BufRead,BufNewFile *.boot setfiletype clojure
-hi MatchParen cterm=none ctermbg=green ctermfg=black
-
-
-:hi Insert ctermbg=2
-:hi Search ctermbg=Yellow
-:hi IncSearch ctermbg=Cyan
-:hi Pmenu ctermbg=Yellow
-:hi PmenuSel ctermbg=Green
-:hi SpecialKey ctermbg=none ctermfg=gray
 
 let g:sclangTerm = "urxvt"
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
@@ -132,6 +130,5 @@ let g:go_fmt_command = "goimports"
 
 set noswapfile
 
-
 "set list
-"set listchars=tab:+>
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
