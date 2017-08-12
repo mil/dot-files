@@ -19,7 +19,6 @@ if test -d /home/mil/Go
 end
 
 # Vi input
-. /home/mil/.config/fish/vi-mode.fish
 fish_vi_key_bindings
 
 # For compat
@@ -47,4 +46,9 @@ set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
 # Additional
 if test -d /home/mil/.config/fish_additional
   source /home/mil/.config/fish_additional/config.fish
+end
+
+# Additional / Work
+if test -d /home/mil/.config/fish_work
+  source /home/mil/.config/fish_work/config.fish
 end
