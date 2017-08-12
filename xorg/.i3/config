@@ -32,7 +32,8 @@ bindsym $mod+slash exec  oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/1
 
 
 # Menus
-bindsym $mod+d exec "dmenu_path | dmenu -b | xargs -I CMD fish -c 'set -x SURFRAW_graphical true; CMD'"
+bindsym $mod+d exec "dmenu_path | dmenu -fn 'Hack-20' -b -p 'Run:' | xargs -I CMD fish -c 'set -x SURFRAW_graphical true; set -x FROM_DMENU true; CMD'"
+bindsym $mod+Shift+d exec "cat ~/.bookmarks | cut -d ' ' -f1 | awk 'NF' | dmenu -fn 'Hack-20' -b -p 'Bookmark:' | xargs -I NAME grep -E '^NAME\s' ~/.bookmarks | tr ' ' '\n' | tail -n 1 | xargs -I URL firefox URL"
 bindsym --release $mod+Shift+P exec --no-startup-id /home/mil/.bin/pwdhashX
 
 # Windows Focus
