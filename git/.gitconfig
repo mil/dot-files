@@ -1,10 +1,8 @@
 [user]
 	email = m@userbound.com
   name = mil
-
 [color]
   ui = always
-
 [core]
   editor = vim
 [push]
