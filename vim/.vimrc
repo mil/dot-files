@@ -65,6 +65,7 @@ set listchars=tab:+-
 set cursorline
 set mouse=nv
 
+hi CursorLine   ctermbg=lightgray
 
 " Backup Dir
 "set backup
@@ -75,7 +76,7 @@ set mouse=nv
 set clipboard=unnamed
 
 if version >= 700
-	au InsertEnter * hi StatusLine term=reverse ctermbg=2
+	au InsertEnter * hi StatusLine term=reverse ctermbg=4 ctermfg=white
 	au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=7
 endif
 
