@@ -35,7 +35,8 @@ end
 # At start
 set fish_greeting ""
 if not set --query SSH_CLIENT
-  cal -j
+  #cal -j
+  dayssince (cat ~/.since) | figlet | color "bold blue"
 end
 
 # GPG-Related
