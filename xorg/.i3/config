@@ -143,4 +143,5 @@ exec xmodmap ~/.xmodmap
 exec feh --bg-scale ~/.wallpaper.jpg
 exec --no-startup-id keynav
 exec xrdb ~/.Xresources
+exec xmodmap ~/.Xmodmapd
 #exec redshift -l 43.07:-89.38
