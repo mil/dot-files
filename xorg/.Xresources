@@ -121,7 +121,7 @@ urxvt.font: xft:Hack:pixelsize=14
 
 ! URXVT Extensions
 ! ---------------------------
-URxvt.perl-ext-common: default,resize-font
+URxvt.perl-ext-common: default,resize-font,keyboard-select
 URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-equal
 URxvt.resize-font.reset: C-plus
@@ -129,7 +129,7 @@ URxvt.resize-font.show: C-question
 URxvt.copyCommand: xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
 URxvt.keysym.A-c: perl:clipboard:copy
-URxvt.keysym.A-v: perl:clipboard:paste
+URxvt.keysym.A-z: perl:keyboard-select:activate
 ! ----------------------------
 
 #ifdef SRVR_music
