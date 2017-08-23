@@ -1,1 +1,4 @@
-#ao=jack
+zoom=true
+nocache=true
+framedrop=true
+scale=true
