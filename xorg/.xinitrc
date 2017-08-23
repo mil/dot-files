@@ -4,4 +4,13 @@ if [[ $HOSTNAME = music ]]; then
   # 4k
 fi
 
+if [[ $HOSTNAME = chip]]; then
+  xmodmap ~/.Xmodmapd
+fi
+
+
+
+
+
+
 exec i3
