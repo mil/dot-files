@@ -133,6 +133,7 @@ URxvt.keysym.A-v: perl:clipboard:paste
 ! ----------------------------
 
 #ifdef SRVR_music
-  urxvt.font: xft:Hack:pixelsize=24
-  *i3font: pango:Hack 8
+  urxvt.font: xft:Hack:pixelsize=15
+  *i3font: pango:Hack 9
+  *i3barfont: pango:Hack 8
 #endif

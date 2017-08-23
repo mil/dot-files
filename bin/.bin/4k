@@ -1,6 +1,6 @@
 #!/usr/bin/bash
-xrandr --newmode "3840x2160x29.98"  262.750000  3840 3888 3920 4000  2160 2163 2167 2191  +HSync -VSync
-xrandr --addmode DP1 "3840x2160x29.98"
-xrandr --output DP1 --mode "3840x2160x29.98" --output LVDS1 --off
+xrandr --newmode "4k"  262.750000  3840 3888 3920 4000  2160 2163 2167 2191  +HSync -VSync
+xrandr --addmode DP-1-1 "4k"
+xrandr --output DP-1-1 --mode "4k" --output LVDS1 --off
 killall keynav
 keynav & disown

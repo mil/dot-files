@@ -5,7 +5,8 @@ require 'json'
 $title = ""
 $date = ""
 $battery = ""
-$date_enabled = File.read('/home/mil/.date_enabled').chomp! == "true"
+$user = %x[whoami].chomp!
+$date_enabled = File.read("/home/#{$user}/.date_enabled").chomp! == "true"
 
 
 def refresh_bar

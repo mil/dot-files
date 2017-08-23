@@ -1,2 +1,3 @@
 #!/usr/bin/env sh
-xrandr --output LVDS1 --mode 1440x900 --output VGA1 --mode 1920x1080 --above LVDS1 --pos 0x0 --gamma 1:1:1 --brightness 0.88
+#xrandr --output LVDS1 --mode 1440x900 --output VGA1 --mode 1920x1080 --above LVDS1 --pos 0x0 --gamma 1:1:1 --brightness 0.88
+xrandr --output LVDS-1 --above DP-1-1 --pos 0x0

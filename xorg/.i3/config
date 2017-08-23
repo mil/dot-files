@@ -17,12 +17,12 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
 
 # Volume & Special Keys
-bindsym $mod+Shift+Up exec /home/mil/.bin/dvol -i 2
-bindsym $mod+Shift+Down exec /home/mil/.bin/dvol -d 2
-bindsym $mod+Shift+Left exec /home/mil/.bin/dvol -t
-bindsym XF86AudioRaiseVolume exec /home/mil/.bin/dvol -i 2
-bindsym XF86AudioLowerVolume exec /home/mil/.bin/dvol -d 2
-bindsym XF86AudioMute exec /home/mil/.bin/dvol -t
+bindsym $mod+Shift+Up dvol -i 2
+bindsym $mod+Shift+Down dvol -d 2
+bindsym $mod+Shift+Left dvol -t
+bindsym XF86AudioRaiseVolume exec dvol -i 2
+bindsym XF86AudioLowerVolume exec dvol -d 2
+bindsym XF86AudioMute exec dvol -t
 bindsym XF86Launch1 exec xset dpms force suspend
 
 # Trackball right small to ctrl-e
@@ -34,7 +34,7 @@ bindsym $mod+slash exec  oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/1
 # Menus
 bindsym $mod+d exec "dmenu_path | dmenu -fn 'Hack-20' -b -p 'Run:' | xargs -I CMD fish -c 'set -x SURFRAW_graphical true; set -x FROM_DMENU true; CMD'"
 bindsym $mod+Shift+d exec "cat ~/.bookmarks | cut -d ' ' -f1 | awk 'NF' | dmenu -fn 'Hack-20' -b -p 'Bookmark:' | xargs -I NAME grep -E '^NAME\s' ~/.bookmarks | tr ' ' '\n' | tail -n 1 | xargs -I URL firefox URL"
-bindsym --release $mod+Shift+P exec --no-startup-id /home/mil/.bin/pwdhashX
+bindsym --release $mod+Shift+P exec --no-startup-id pwdhashX
 
 # Windows Focus
 bindsym $mod+j focus down
@@ -78,7 +78,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Quit i3???' -b 'Yes, exit i3
 # Misc
 bindsym --release $mod+Shift+C exec scrot -s
 bindsym $mod+Shift+U bar mode toggle
-bindsym $mod+comma exec /home/mil/.bin/toggle_date_enabled
+bindsym $mod+comma exec toggle_date_enabled
 
 
 # Workspaces
@@ -103,7 +103,15 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
+
+
+
+# Xresources
+set_from_resource $i3font i3wm.i3font pango:Hack 9.5
+set_from_resource $i3barfont i3wm.i3font pango:Hack 8
+
 # Theme
+font $i3font
 client.focused #000000 #005b88 #ffffff #000000
 client.focused_inactive #000000 #5a5a5a #ffffff #000000
 client.unfocused #4a4a4a #d4d4d4 #696969 #000000
@@ -111,8 +119,8 @@ client.urgent #000000 #000000 #ffffff #000000
 client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 bar {
   position top
-    status_command /home/mil/.bin/status-bar
-    font pango:Hack 8
+    status_command status-bar
+    font $i3barfont
     colors { 
       background #cfcfcf
         statusline #000000
@@ -123,19 +131,16 @@ bar {
         urgent_workspace #000000 #ffffff
     }
 }
-# Overrides in xresources
-set_from_resource $i3font i3wm.i3font pango:Hack 9.5
-font $i3font
 
 # For Windows
 for_window [title="prefs"] floating enable
 for_window [title="iemgui"] floating enable
 
 # Startup
-exec /home/mil/.bin/trackball
-exec /home/mil/.bin/yubi off
+exec trackball
+exec yubi off
 exec xmodmap ~/.xmodmap
 exec feh --bg-scale ~/.wallpaper.jpg
-exec xrdb /home/mil/.Xresources
 exec --no-startup-id keynav
-#exec /usr/bin/redshift -o -l 0:0 -b 0.8 -t 6500:6500
+exec xrdb ~/.Xresources
+#exec redshift -l 43.07:-89.38
