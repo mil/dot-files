@@ -20,6 +20,7 @@ end
 
 # Vi input
 fish_vi_key_bindings
+fish_vi_mode
 
 # For compat
 export TERM='xterm-256color'
@@ -36,6 +37,7 @@ end
 set fish_greeting ""
 if not set --query SSH_CLIENT
   #cal -j
+  clear
   dayssince (cat ~/.since) | figlet | color "bold blue"
 end
 

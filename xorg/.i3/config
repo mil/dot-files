@@ -17,12 +17,12 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
 
 # Volume & Special Keys
-bindsym $mod+Shift+Up dvol -i 2
-bindsym $mod+Shift+Down dvol -d 2
-bindsym $mod+Shift+Left dvol -t
-bindsym XF86AudioRaiseVolume exec dvol -i 2
-bindsym XF86AudioLowerVolume exec dvol -d 2
-bindsym XF86AudioMute exec dvol -t
+bindsym $mod+Shift+Up exec ~/.bin/dvol -i 2
+bindsym $mod+Shift+Down exc ~/.bin/dvol -d 2
+bindsym $mod+Shift+Left exec ~/.bin/dvol -t
+bindsym XF86AudioRaiseVolume exec ~/.bin/dvol -i 2
+bindsym XF86AudioLowerVolume exec ~/.bin/dvol -d 2
+bindsym XF86AudioMute exec ~/.bin/dvol -t
 bindsym XF86Launch1 exec xset dpms force suspend
 
 # Trackball right small to ctrl-e
@@ -34,7 +34,7 @@ bindsym $mod+slash exec  oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/1
 # Menus
 bindsym $mod+d exec "dmenu_path | dmenu -fn 'Hack-20' -b -p 'Run:' | xargs -I CMD fish -c 'set -x SURFRAW_graphical true; set -x FROM_DMENU true; CMD'"
 bindsym $mod+Shift+d exec "cat ~/.bookmarks | cut -d ' ' -f1 | awk 'NF' | dmenu -fn 'Hack-20' -b -p 'Bookmark:' | xargs -I NAME grep -E '^NAME\s' ~/.bookmarks | tr ' ' '\n' | tail -n 1 | xargs -I URL firefox URL"
-bindsym --release $mod+Shift+P exec --no-startup-id pwdhashX
+bindsym --release $mod+Shift+P exec --no-startup-id ~/.bin/pwdhashX
 
 # Windows Focus
 bindsym $mod+j focus down
@@ -119,7 +119,7 @@ client.urgent #000000 #000000 #ffffff #000000
 client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 bar {
   position top
-    status_command status-bar
+    status_command ~/.bin/status-bar
     font $i3barfont
     colors { 
       background #cfcfcf
@@ -137,8 +137,8 @@ for_window [title="prefs"] floating enable
 for_window [title="iemgui"] floating enable
 
 # Startup
-exec trackball
-exec yubi off
+exec ~/.bin/trackball
+exec ~/.bin/yubi off
 exec xmodmap ~/.xmodmap
 exec feh --bg-scale ~/.wallpaper.jpg
 exec --no-startup-id keynav
