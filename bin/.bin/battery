@@ -21,6 +21,14 @@ def getStatus
   end
 end
 
+hostname = %x[hostname].chomp!
+
+if (hostname == "chip") then
+  puts %x[sudo battery.sh | grep gauge | tr " " "\n" | tail -n 1].chomp!
+  exit
+end
+
+
 if (ARGV[0] == "percentage") then
   puts getPercentage
 elsif (ARGV[0] == "status") then

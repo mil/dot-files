@@ -138,7 +138,7 @@ URxvt.keysym.A-v: perl:clipboard:paste
   *i3barfont: pango:Hack 8
 #endif
 #ifdef SRVR_chip
-  urxvt.font: xft:Mono:pixelsize=15
-  *i3font: pango:Dejavu sans mono 8
-  *i3barfont: pango:Dejavu sans mono 8
+  urxvt.font: xft:Hack:pixelsize=12
+  *i3font: pango:Dejavu sans mono 7
+  *i3barfont: pango:Dejavu sans mono 7
 #endif
