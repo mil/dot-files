@@ -25,12 +25,6 @@ bindsym XF86AudioLowerVolume exec ~/.bin/dvol -d 2
 bindsym XF86AudioMute exec ~/.bin/dvol -t
 bindsym XF86Launch1 exec xset dpms force suspend
 
-# Trackball right small to ctrl-e
-bindsym --whole-window button9 exec "xdotool key ctrl+e"
-bindsym $mod+period exec  oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/0
-bindsym $mod+slash exec  oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/1
-
-
 # Menus
 bindsym $mod+d exec "dmenu_path | dmenu -fn 'Hack-20' -b -p 'Run:' | xargs -I CMD fish -c 'set -x SURFRAW_graphical true; set -x FROM_DMENU true; CMD'"
 bindsym $mod+Shift+d exec "cat ~/.bookmarks | cut -d ' ' -f1 | awk 'NF' | dmenu -fn 'Hack-20' -b -p 'Bookmark:' | xargs -I NAME grep -E '^NAME\s' ~/.bookmarks | tr ' ' '\n' | tail -n 1 | xargs -I URL firefox URL"
@@ -71,7 +65,7 @@ bindsym $mod+space focus mode_toggle
 
 
 # Quit
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r exec cat ~/.i3/config ~/.i3/supplement_`hostname` > /tmp/i3-tmpconfig; restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Quit i3???' -b 'Yes, exit i3' 'i3-msg exit'"
 
 
@@ -103,38 +97,33 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-
-
-
 # Xresources
-set_from_resource $i3font i3wm.i3font pango:Hack 9.5
-set_from_resource $i3barfont i3wm.i3font pango:Hack 8
+#set_from_resource $i3font i3wm.i3font pango:Hack 9.5
+#set_from_resource $i3barfont i3wm.i3font pango:Hack 8
+
+bindsym $mod+r mode resize
+mode "resize" {
+  bindsym h resize shrink width 10 px or 10 ppt
+  bindsym k resize grow height 10 px or 10 ppt
+  bindsym j resize shrink height 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+
 
 # Theme
-font $i3font
 client.focused #000000 #005b88 #ffffff #000000
 client.focused_inactive #000000 #5a5a5a #ffffff #000000
 client.unfocused #4a4a4a #d4d4d4 #696969 #000000
 client.urgent #000000 #000000 #ffffff #000000
 client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
-bar {
-  position top
-    status_command ~/.bin/status-bar
-    font $i3barfont
-    colors { 
-      background #cfcfcf
-        statusline #000000
-        separator #cfcfcf
-        focused_workspace #5200fd #5200fd #ffffff
-        active_workspace #000000 #999999 #000000
-        inactive_workspace #888888 #e8e8e8 #000000
-        urgent_workspace #000000 #ffffff
-    }
-}
 
-# For Windows
-for_window [title="prefs"] floating enable
-for_window [title="iemgui"] floating enable
 
 # Startup
 exec ~/.bin/trackball
