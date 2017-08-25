@@ -115,8 +115,6 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 
-
-
 # Theme
 client.focused #000000 #005b88 #ffffff #000000
 client.focused_inactive #000000 #5a5a5a #ffffff #000000
@@ -124,13 +122,29 @@ client.unfocused #4a4a4a #d4d4d4 #696969 #000000
 client.urgent #000000 #000000 #ffffff #000000
 client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 
+font pango: Dejavu sans mono 8
+bar {
+  position top
+    status_command ~/.bin/status-bar
+    font pango: Dejavu sans mono 8
+    colors { 
+      background #cfcfcf
+        statusline #000000
+        separator #cfcfcf
+        focused_workspace #5200fd #5200fd #ffffff
+        active_workspace #000000 #999999 #000000
+        inactive_workspace #888888 #e8e8e8 #000000
+        urgent_workspace #000000 #ffffff
+    }
+}
+
 
 # Startup
 exec ~/.bin/trackball
 exec ~/.bin/yubi off
-exec xmodmap ~/.xmodmap
 exec feh --bg-scale ~/.wallpaper.jpg
 exec --no-startup-id keynav
 exec xrdb ~/.Xresources
-exec xmodmap ~/.Xmodmapd
+exec xmodmap ~/.xmodmap
+exec xmodmap ~/.xmodmap_chip
 #exec redshift -l 43.07:-89.38

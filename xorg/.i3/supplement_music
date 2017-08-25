@@ -1,18 +1,20 @@
+# vi:syntax=conf
+
 font pango: Hack 10
-bar {
-  position top
-    status_command ~/.bin/status-bar
-    font pango:Hack 9
-    colors { 
-      background #cfcfcf
-        statusline #000000
-        separator #cfcfcf
-        focused_workspace #5200fd #5200fd #ffffff
-        active_workspace #000000 #999999 #000000
-        inactive_workspace #888888 #e8e8e8 #000000
-        urgent_workspace #000000 #ffffff
-    }
-}
+#bar {
+#  position top
+#    status_command ~/.bin/status-bar
+#    font pango:Hack 9
+#    colors { 
+#      background #cfcfcf
+#        statusline #000000
+#        separator #cfcfcf
+#        focused_workspace #5200fd #5200fd #ffffff
+#        active_workspace #000000 #999999 #000000
+#        inactive_workspace #888888 #e8e8e8 #000000
+#        urgent_workspace #000000 #ffffff
+#    }
+#}
 
 
 for_window [title="prefs"] floating enable
@@ -23,4 +25,3 @@ for_window [title="iemgui"] floating enable
 bindsym --whole-window button9 exec "xdotool key ctrl+e"
 bindsym $mod+period exec  oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/0
 bindsym $mod+slash exec  oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/1
-

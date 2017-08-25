@@ -24,7 +24,11 @@ end
 hostname = %x[hostname].chomp!
 
 if (hostname == "chip") then
-  puts %x[sudo battery.sh | grep gauge | tr " " "\n" | tail -n 1].chomp!
+  dead = 3280
+  full = 4200
+  now = %x[cat /usr/lib/pocketchip-batt/voltage]
+  percentage = 100 * (now - dead).to_f / (full - dead).to_f
+  puts "#{percentage}%"
   exit
 end
 
