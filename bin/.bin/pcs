@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+item = %x[xinput list | grep '1c25000']
+id = item.match(/id=(\d+)/)
+exit if !id || id.length < 1 
+$id = id[1]
+
+if ARGV[0] == "on"
+  %x[xinput enable #{$id}]
+elsif ARGV[0] == "off"
+  %x[xinput disable #{$id}]
+else
+  exit
+end
+
+puts "pcs #{ARGV[0]}"

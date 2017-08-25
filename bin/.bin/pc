@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+if [[ $HOSTNAME = chip ]]; then
+  xmodmap ~/.xmodmap_chip
+fi
