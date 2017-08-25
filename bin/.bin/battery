@@ -26,7 +26,7 @@ hostname = %x[hostname].chomp!
 if (hostname == "chip") then
   dead = 3280
   full = 4200
-  now = %x[cat /usr/lib/pocketchip-batt/voltage]
+  now = %x[cat /usr/lib/pocketchip-batt/voltage].to_f
   percentage = 100 * (now - dead).to_f / (full - dead).to_f
   puts "#{percentage}%"
   exit
