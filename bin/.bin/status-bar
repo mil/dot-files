@@ -17,7 +17,7 @@ def refresh_bar
   items.push($date) if $date_enabled && $date != ""
 
   STDOUT.puts "," + ([{
-    :full_text => items.join("|").gsub("\n", "")
+    :full_text => items.join(" | ").gsub("\n", "")
   }]).to_json 
   STDOUT.flush
 end
