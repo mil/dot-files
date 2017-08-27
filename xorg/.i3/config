@@ -145,6 +145,6 @@ exec ~/.bin/yubi off
 exec feh --bg-scale ~/.wallpaper.jpg
 exec --no-startup-id keynav
 exec xrdb ~/.Xresources
-exec pcs off
+exec ~/.bin/pcs off
 exec pc
 #exec redshift -l 43.07:-89.38

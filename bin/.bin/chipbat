@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+dead=3280
+full=4200
+now=`cat /usr/lib/pocketchip-batt/voltage`
+a=`echo $now - $dead | bc`
+b=`echo $full - $dead | bc`
+pct=`echo "scale=2; 100 * ($a / $b)" | bc`
+echo "$pct"

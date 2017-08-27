@@ -61,7 +61,7 @@ def poll_battery
       if $hostname == "chip" then
         $battery = %x[bash /home/chip/.bin/chipbat].chomp!
       else
-        $battery = %x[battery]
+        $battery = %x[battery].chomp!.match(/(\d|\.|%)+/)[0] 
       end
       refresh_bar
       sleep 60
