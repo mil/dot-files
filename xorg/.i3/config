@@ -17,9 +17,6 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
 
 # Volume & Special Keys
-bindsym $mod+Shift+Up exec ~/.bin/dvol -i 2
-bindsym $mod+Shift+Down exc ~/.bin/dvol -d 2
-bindsym $mod+Shift+Left exec ~/.bin/dvol -t
 bindsym XF86AudioRaiseVolume exec ~/.bin/dvol -i 2
 bindsym XF86AudioLowerVolume exec ~/.bin/dvol -d 2
 bindsym XF86AudioMute exec ~/.bin/dvol -t
@@ -158,5 +155,5 @@ exec feh --bg-scale ~/.wallpaper.jpg
 exec --no-startup-id keynav
 exec xrdb ~/.Xresources
 exec ~/.bin/pcs off
-exec pc
+exec ~/.bin/pc
 #exec redshift -l 43.07:-89.38
