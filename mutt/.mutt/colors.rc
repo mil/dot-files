@@ -24,7 +24,7 @@ color index color124 color223 "~F" # flagged
 color index color202 color230 "~N | ~O"
 color index color90 color182 ~T
 color index color18 color250 ~D
-color sidebar_new color202 color230
+#color sidebar_new color202 color230
 color header color18 color153 .
 color signature brightblack default
 color attachment color90 color225 

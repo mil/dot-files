@@ -6,18 +6,18 @@ $title = ""
 $date = ""
 $battery = ""
 $user = %x[whoami].chomp!
+$hostname = %x[hostname].chomp!
 $date_enabled = File.read("/home/#{$user}/.date_enabled").chomp! == "true"
 
 
 def refresh_bar
   items = []
   items.push($title) if $title != ""
-  items.push($battery) if $battery != ""
+  items.push($battery)  if $battery != ""
   items.push($date) if $date_enabled && $date != ""
 
   STDOUT.puts "," + ([{
-    :markup => 'pango',
-    :full_text => items.join(" | ").gsub("\n", "")
+    :full_text => items.join("|").gsub("\n", "")
   }]).to_json 
   STDOUT.flush
 end
@@ -29,6 +29,9 @@ def poll_xtitle
       begin
         stdout.each { |line| 
           $title = line.chomp!
+          if $hostname == "chip"
+            $title = $title[0..20]
+          end
           refresh_bar
         }
       rescue Errno::EIO
@@ -51,10 +54,15 @@ def poll_date
   }
 end
 
+
 def poll_battery
   Thread.new {
     loop do
-      $battery = %x[battery].chomp!.match(/(\d|\.|%)+/)[0] 
+      if $hostname == "chip" then
+        $battery = %x[bash /home/chip/.bin/chipbat].chomp!
+      else
+        $battery = %x[battery]
+      end
       refresh_bar
       sleep 60
     end
