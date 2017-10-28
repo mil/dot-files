@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+nomad status $1 | grep Allocations -C2 | tail -n1 | tr " " "\n" | head -n1

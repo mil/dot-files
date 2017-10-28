@@ -6,3 +6,5 @@ keycode 119 = backslash bar
 keycode 9 = Escape asciitilde grave 
 !keysym Menu = Hyper_L
 !keycode 32 = Alt_L
+!
+

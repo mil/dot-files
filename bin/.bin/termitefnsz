@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+c = File.read("/home/mil/.config/termite/config.base").split("\n")
+c.pop
+all_but_last_line = c.join("\n")
+
+
+puts all_but_last_line
+size = 10 + ARGV[0].to_i
+line = "font = Hack #{size}"
+out = all_but_last_line + "\n" + line
+File.write("/home/mil/.config/termite/config",  out)

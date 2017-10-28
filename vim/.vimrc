@@ -65,6 +65,7 @@ set listchars=tab:+-
 set cursorline
 set mouse=nv
 
+hi clear CursorLine
 hi CursorLine   ctermbg=lightgray
 
 " Backup Dir
@@ -73,12 +74,12 @@ hi CursorLine   ctermbg=lightgray
 "set directory=~/.vim/tmp  
 
 " Fix the * Clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 
 if version >= 700
-	au InsertEnter * hi StatusLine term=reverse ctermbg=4 ctermfg=white
-	au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=7
+	au InsertEnter * hi StatusLine term=reverse ctermbg=green ctermfg=white
+	au InsertLeave * hi StatusLine term=reverse ctermbg=blue 
 endif
 hi MatchParen cterm=none ctermbg=green ctermfg=black
 hi Insert ctermbg=2
@@ -130,5 +131,9 @@ let g:go_fmt_command = "goimports"
 
 set noswapfile
 
+"let g:hcl_fmt_autosave = 0
+"let g:tf_fmt_autosave = 0
+"let g:nomad_fmt_autosave = 0
+"
 "set list
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<

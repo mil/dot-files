@@ -7,7 +7,7 @@ fi
 
 sudo umount /mnt/clip
 sudo mkdir -p /mnt/clip
-sudo mount /dev/disk/by-uuid/6097-96EF /mnt/clip
-sudo cp -avi $@ /mnt/clip
+sudo mount /dev/disk/by-uuid/E8DC-A886 /mnt/clip
+sudo cp -ravi $@ /mnt/clip/MUSIC
 sudo umount /mnt/clip
 sync

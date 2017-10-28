@@ -9,8 +9,8 @@ floating_minimum_size 100x100
 hide_edge_borders vertical
 
 # Applications
-bindsym $mod+Return exec urxvt -cd `xcwd`
-bindsym $mod+Shift+Return exec urxvt
+bindsym $mod+Return exec termite -d `xcwd`
+bindsym $mod+Shift+Return exec termite
 
 
 bindsym $mod+minus scratchpad show
@@ -20,6 +20,25 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym XF86AudioRaiseVolume exec ~/.bin/dvol -i 2
 bindsym XF86AudioLowerVolume exec ~/.bin/dvol -d 2
 bindsym XF86AudioMute exec ~/.bin/dvol -t
+
+bindsym $mod+Shift+Up exec ~/.bin/dvol -i 2
+bindsym $mod+Shift+Down exec ~/.bin/dvol -d 2
+bindsym $mod+Shift+Left exec ~/.bin/dvol -t
+
+
+bindsym $mod+Control+1 exec ~/.bin/termitefnsz 1
+bindsym $mod+Control+2 exec ~/.bin/termitefnsz 2
+bindsym $mod+Control+3 exec ~/.bin/termitefnsz 3
+bindsym $mod+Control+4 exec ~/.bin/termitefnsz 4
+bindsym $mod+Control+5 exec ~/.bin/termitefnsz 5
+bindsym $mod+Control+6 exec ~/.bin/termitefnsz 6
+bindsym $mod+Control+7 exec ~/.bin/termitefnsz 7
+bindsym $mod+Control+8 exec ~/.bin/termitefnsz 8
+bindsym $mod+Control+9 exec ~/.bin/termitefnsz 9
+bindsym $mod+Control+0 exec ~/.bin/termitefnsz 10
+
+
+
 bindsym XF86Launch1 exec xset dpms force suspend
 
 # Menus
@@ -45,10 +64,10 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+l move right
 
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+#bindsym $mod+Shift+Left move left
+#bindsym $mod+Shift+Down move down
+#bindsym $mod+Shift+Up move up
+#bindsym $mod+Shift+Right move right
 
 
 
@@ -124,6 +143,21 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 
+
+bindsym $mod+n mode vi
+bindsym --release $mod+n mode default
+mode "vi" {
+  bindsym space exec xdotool click 3
+  #bindsym j exec xdotool click 5
+  #bindsym k exec xdotool click 4
+  
+  bindsym --release j exec xdotool key Down
+  bindsym --release k exec xdotool key Up
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+
 # Theme
 client.focused #000000 #005b88 #ffffff #000000
 client.focused_inactive #000000 #5a5a5a #ffffff #000000
@@ -132,21 +166,6 @@ client.urgent #000000 #000000 #ffffff #000000
 #client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 
 font pango: Dejavu sans mono 8
-bar {
-  position top
-    status_command ~/.bin/status-bar
-    font pango: Dejavu sans mono 8
-    colors { 
-      background #cfcfcf
-        statusline #000000
-        separator #cfcfcf
-        focused_workspace #5200fd #5200fd #ffffff
-        active_workspace #000000 #999999 #000000
-        inactive_workspace #888888 #e8e8e8 #000000
-        urgent_workspace #000000 #ffffff
-    }
-}
-
 
 # Startup
 exec ~/.bin/trackball

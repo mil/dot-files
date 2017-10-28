@@ -1,21 +1,35 @@
 # Env vars
 setenv EDITOR vim
 setenv GIT_EDITOR vim
-setenv BROWSER w3m
+setenv BROWSER firefox
 setenv PAGER w3m
 setenv TZ America/Chicago
 
 # Path & aliases
 set -x PATH ~/.bin $PATH
+set -x PATH $GOPATH/bin $PATH
 set -x PATH /usr/lib/surfraw $PATH
 set -x SURFRAW_graphical false
+
+set -x LS_COLORS 'di=01;34'
+alias cv='xclip -o'
 alias cb='git rev-parse --abbrev-ref HEAD'
 alias tc='set GIT_COMMITER_DATE (date); git commit --amend --date (date)'
+alias ff='firefox'
+alias tf='terraform'
+alias no='nomad'
+alias scmit='mktemp -p .; git add .; git commit -am "scrap"; git push origin master'
+
+source /usr/share/autojump/autojump.fish
 
 # Go-related
 if test -d ~/Go
   export GOPATH='~/Go'
   set PATH $PATH ~/Go/bin
+end
+if test -d ~/.Go
+  export GOPATH='~/.Go'
+  set PATH $PATH ~/.Go/bin
 end
 
 # For compat
@@ -34,11 +48,12 @@ set fish_greeting ""
 if not set --query SSH_CLIENT
   # Vi input
   fish_vi_key_bindings
-  fish_vi_mode
+  #fish_vi_mode
 
   #cal -j
   clear
-  dayssince (cat ~/.since) | figlet | color "bold blue"
+  cat ~/.todo
+  dayssince (cat ~/.since) | color "bold blue"
 end
 
 # GPG-Related

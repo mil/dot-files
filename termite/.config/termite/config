@@ -1,0 +1,99 @@
+[colors]
+foreground      = #101010
+foreground_bold = #151515
+cursor          = #888888
+background      = #FFFFFF
+
+## 16 color space
+#
+## Black, Gray, Silver, White
+color0  = #000000
+color8  = #e7e7e7
+color7  = #e8e8e8
+color15 = #ffffff
+
+# Red
+color1  = #dd1204
+color9  = #dd1204
+
+# Green
+color2  = #00C918
+color10 = #00C918
+
+# Yellow
+color3  = #888888
+color11 = #ABA800
+
+# Blue
+color4  = #3777E6
+color12 = #3777E6
+
+# Purple
+color5  = #AD00A1
+color13 = #AD00A1
+
+# Teal
+color6  = #1FAAAA
+color14 = #1FAAAA
+#
+## Extra colors
+#color16 = #FD8900
+#color17 = #CC6633
+#color18 = #E0E0E0
+#color19 = #D0D0D0
+#color20 = #000000
+#color21 = #151515
+#
+#
+#
+##[colors]
+### Base16 Summerfruit Dark
+### Author: Christopher Corley (http://christop.club/)
+##
+##foreground      = #D0D0D0
+##foreground_bold = #E0E0E0
+##cursor          = #ffffff
+##background      = #151515
+##
+### 16 color space
+##
+### Black, Gray, Silver, White
+##color0  = #151515
+##color8  = #505050
+##color7  = #D0D0D0
+##color15 = #FFFFFF
+##
+### Red
+##color1  = #FF0086
+##color9  = #FF0086
+##
+### Green
+##color2  = #00C918
+##color10 = #00C918
+##
+### Yellow
+##color3  = #ABA800
+##color11 = #ABA800
+##
+### Blue
+##color4  = #3777E6
+##color12 = #3777E6
+##
+### Purple
+##color5  = #AD00A1
+##color13 = #AD00A1
+##
+### Teal
+##color6  = #1FAAAA
+##color14 = #1FAAAA
+##
+### Extra colors
+##color16 = #FD8900
+##color17 = #CC6633
+##color18 = #202020
+##color19 = #303030
+##color20 = #B0B0B0
+##color21 = #E0E0E0
+
+[options]
+font = Hack 19

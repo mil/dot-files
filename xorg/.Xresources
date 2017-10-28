@@ -16,8 +16,6 @@ Xft.hintstyle: none
 *foreground: #000000
 ! ---------------------
 
-
-
 ! X Color Scheme
 ! ---------------------------
 ! black
@@ -43,7 +41,7 @@ Xft.hintstyle: none
 ! magenta
 *color5: #ae0ec3
 ! bright_magenta
-*color13: #da2ff0
+*color13: #000000
 ! cyan
 *color6: #0ec3ae
 ! bright_cyan
@@ -97,9 +95,9 @@ Rxvt*transparent: true
 Rxvt*shading: 100
 URxvt.termName: rxvt-256color
 URxvt.borderColor: #cfcfcf
-URxvt.externalBorder: 1
-URxvt.internalBorder: 0
-URxvt.thickness: 1
+URxvt.externalBorder: 0
+URxvt.internalBorder: 2
+URxvt.thickness: 2
 URxvt.visualBell: True
 URxvt.scrollstyle: plain
 URxvt.scrollBar_floating: True
@@ -122,6 +120,10 @@ urxvt.font: xft:Hack:pixelsize=14
 ! URXVT Extensions
 ! ---------------------------
 URxvt.perl-ext-common: default,resize-font,keyboard-select
+
+URxvt.keysym.C-9: command:\033]710;xft:Hack:size=14:antialias=true\007
+URxvt.keysym.C-0: command:\033]710;xft:Hack:size=20:antialias=true\007
+urxvt.font: xft:Hack:pixelsize=20
 URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-equal
 URxvt.resize-font.reset: C-plus
@@ -133,8 +135,9 @@ URxvt.keysym.A-v: perl:clipboard:paste
 URxvt.keysym.A-z: perl:keyboard-select:activate
 ! ----------------------------
 
-#ifdef SRVR_music
-  urxvt.font: xft:Hack:pixelsize=15
+#ifdef SRVR_h
+! urxvt.font: xft:Hack:pixelsize=12
+  urxvt.font: xft:Hack:pixelsize=12
 !  *i3font: pango:Hack 9
 !  *i3barfont: pango:Hack 8
 #endif
