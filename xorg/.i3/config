@@ -42,8 +42,8 @@ bindsym $mod+Control+0 exec ~/.bin/termitefnsz 10
 bindsym XF86Launch1 exec xset dpms force suspend
 
 # Menus
-bindsym $mod+d exec "dmenu_path | dmenu -fn 'Hack-20' -b -p 'Run:' | xargs -I CMD fish -c 'set -x SURFRAW_graphical true; set -x FROM_DMENU true; CMD'"
-bindsym $mod+Shift+d exec "cat ~/.bookmarks | cut -d ' ' -f1 | awk 'NF' | dmenu -fn 'Hack-20' -b -p 'Bookmark:' | xargs -I NAME grep -E '^NAME\s' ~/.bookmarks | tr ' ' '\n' | tail -n 1 | xargs -I URL firefox URL"
+bindsym $mod+d exec "dmenu_path | dmenu -fn 'Hack-20' -b -p 'Run:' | xargs -I CMD fish -c 'set -x SURFRAW_graphical true; set -x FROM_DMENU true; CMD' | sh"
+bindsym $mod+Shift+d exec "cat ~/.bookmarks | cut -d ' ' -f1 | awk 'NF' | dmenu -fn 'Hack-20' -b -p 'Bookmark:' | xargs -I NAME grep -E '^NAME\s' ~/.bookmarks | tr ' ' '\n' | tail -n 1 | xargs -I URL firefox URL | sh"
 bindsym --release $mod+Shift+P exec --no-startup-id ~/.bin/pwdhashX
 
 # Windows Focus
