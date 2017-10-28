@@ -36,6 +36,16 @@ end
 export TERM='xterm-256color'
 set fish_function_path $fish_function_path ~/.config/fish/plugin-foreign-env/functions
 
+# Fish title
+function fish_title
+  set -x pwd (dirs +0 | xargs)
+  if test -z $argv[1]
+    dirs +0
+  else
+    echo $argv[1] "($pwd)"
+  end
+end
+
 # Start X at login
 if status --is-login
     if test -z "$DISPLAY" -a $XDG_VTNR = 1
