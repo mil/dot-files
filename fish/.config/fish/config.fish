@@ -18,6 +18,7 @@ alias tc='set GIT_COMMITER_DATE (date); git commit --amend --date (date)'
 alias ff='firefox'
 alias tf='terraform'
 alias no='nomad'
+alias pk='packer-io'
 alias scmit='mktemp -p .; git add .; git commit -am "scrap"; git push origin master'
 
 source /usr/share/autojump/autojump.fish

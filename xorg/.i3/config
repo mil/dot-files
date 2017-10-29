@@ -26,19 +26,6 @@ bindsym $mod+Shift+Down exec ~/.bin/dvol -d 2
 bindsym $mod+Shift+Left exec ~/.bin/dvol -t
 
 
-bindsym $mod+Control+1 exec ~/.bin/termitefnsz 1
-bindsym $mod+Control+2 exec ~/.bin/termitefnsz 2
-bindsym $mod+Control+3 exec ~/.bin/termitefnsz 3
-bindsym $mod+Control+4 exec ~/.bin/termitefnsz 4
-bindsym $mod+Control+5 exec ~/.bin/termitefnsz 5
-bindsym $mod+Control+6 exec ~/.bin/termitefnsz 6
-bindsym $mod+Control+7 exec ~/.bin/termitefnsz 7
-bindsym $mod+Control+8 exec ~/.bin/termitefnsz 8
-bindsym $mod+Control+9 exec ~/.bin/termitefnsz 9
-bindsym $mod+Control+0 exec ~/.bin/termitefnsz 10
-
-
-
 bindsym XF86Launch1 exec xset dpms force suspend
 
 # Menus

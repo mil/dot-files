@@ -3,9 +3,11 @@ c = File.read("/home/mil/.config/termite/config.base").split("\n")
 c.pop
 all_but_last_line = c.join("\n")
 
+$base = 10
+$plus = ARGV[0].to_i
 
-puts all_but_last_line
-size = 10 + ARGV[0].to_i
+size = $base + $plus
+puts "Set font size #{size} (#{$base} + #{$plus})"
 line = "font = Hack #{size}"
 out = all_but_last_line + "\n" + line
 File.write("/home/mil/.config/termite/config",  out)
