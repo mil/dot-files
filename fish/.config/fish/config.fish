@@ -7,7 +7,6 @@ setenv TZ America/Chicago
 
 # Path & aliases
 set -x PATH ~/.bin $PATH
-set -x PATH $GOPATH/bin $PATH
 set -x PATH /usr/lib/surfraw $PATH
 set -x SURFRAW_graphical false
 
@@ -25,12 +24,12 @@ source /usr/share/autojump/autojump.fish
 
 # Go-related
 if test -d ~/Go
-  export GOPATH='~/Go'
-  set PATH $PATH ~/Go/bin
+  export GOPATH='/home/mil/Go'
+  set PATH $PATH $GOPATH/bin
 end
 if test -d ~/.Go
-  export GOPATH='~/.Go'
-  set PATH $PATH ~/.Go/bin
+  export GOPATH='/home/mil/.Go'
+  set PATH $PATH $GOPATH/bin
 end
 
 # For compat
