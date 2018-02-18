@@ -1,13 +1,13 @@
 " Install pathogen
-execute pathogen#infect() 
+execute pathogen#infect()
 
 " Rainbow Parens
 let g:rainbow_active = 1
 let g:rainbow_conf = {
-\   'ctermfgs': ['16', '17', '18', '25'],
-\   'operators': '_,_',
-\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold']
-\}
+      \   'ctermfgs': ['16', '17', '18', '25'],
+      \   'operators': '_,_',
+      \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold']
+      \}
 
 
 "Encoding
@@ -41,7 +41,6 @@ set smartcase " ... unless they contain at least one capital letter
 set number " show line numbers!
 set ai " auto identing
 
-
 " Maps arrows keys to move status bar/splits
 imap <up> <nop>
 imap <down> <nop>
@@ -53,7 +52,6 @@ map <right> <c-w>>
 map <left> <c-w><
 
 nnoremap gp `[v`]
-
 
 " Colorscheme Related
 set t_Co=256
@@ -71,15 +69,15 @@ hi CursorLine   ctermbg=lightgray
 " Backup Dir
 "set backup
 "set backupdir=~/.vim/backup
-"set directory=~/.vim/tmp  
+"set directory=~/.vim/tmp
+set noswapfile
 
 " Fix the * Clipboard
 set clipboard=unnamedplus
 
-
 if version >= 700
-	au InsertEnter * hi StatusLine term=reverse ctermbg=green ctermfg=white
-	au InsertLeave * hi StatusLine term=reverse ctermbg=blue 
+  au InsertEnter * hi StatusLine term=reverse ctermbg=green ctermfg=white
+  au InsertLeave * hi StatusLine term=reverse ctermbg=blue
 endif
 hi MatchParen cterm=none ctermbg=green ctermfg=black
 hi Insert ctermbg=2
@@ -88,7 +86,6 @@ hi IncSearch ctermbg=Cyan
 hi Pmenu ctermbg=White
 hi PmenuSel ctermbg=Green
 hi SpecialKey ctermbg=none ctermfg=gray
-
 
 " Status Bar
 set laststatus=2  " always show the status bar
@@ -103,39 +100,31 @@ set statusline+=%=      "left/right separator
 set statusline+=%c,     "cursor column
 set statusline+=%l/%L   "cursor line/total lines
 set statusline+=\ %P    "percent through file
+set statusline+=%m      "modified flag
 
-
-map <C-C> :Eval<CR>
-map <C-X> :Eval (stop)<CR>
-
-set foldlevel=3000
 
 " Show trailing whitespace and spaces before a tab:
+" Shows over 80cols as red
+"set list
 highlight ExtraWhitespace ctermbg=green guibg=green
 match ExtraWhitespace /\s\+$\| \+\ze\t/
+set colorcolumn=80
+set textwidth=80
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set foldlevel=3000
 
-" Shows over 80cols as red
-highlight OverLength ctermbg=red ctermfg=white
-match OverLength /\%81v.\+/
 
-command! EnablePiggieback :Piggieback (adzerk.boot-cljs-repl/repl-env)
-command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
-
-au BufRead,BufNewFile *.boot setfiletype clojure
-
-let g:sclangTerm = "urxvt"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TF
+let g:terraform_fmt_on_save = 1
+" Go
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-
-
 let g:go_fmt_command = "goimports"
 source ~/.vim/bundle/vim-go/autoload/go/doc.vim
-
-
-set noswapfile
-
-"let g:hcl_fmt_autosave = 0
-"let g:tf_fmt_autosave = 0
-"let g:nomad_fmt_autosave = 0
-"
-"set list
-set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+" SC
+let g:sclangTerm = "termite -e"
+let g:scFlash = 1
+au Filetype supercollider nnoremap <buffer> <C-C> :call SClang_block()<CR>
+au Filetype supercollider inoremap <buffer> <C-C> :call SClang_block()<CR>a
+au Filetype supercollider vnoremap <buffer> <C-C> :call SClang_send()<CR>
+au Filetype supercollider nnoremap <buffer> <C-S> :call SClangHardstop()<CR>

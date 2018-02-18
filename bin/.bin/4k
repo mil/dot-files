@@ -1,7 +1,10 @@
 #!/usr/bin/bash
-xrandr --newmode "4k"  262.750000  3840 3888 3920 4000  2160 2163 2167 2191  +HSync -VSync
-xrandr --addmode DP-1 "4k"
-xrandr --output DP-1 --mode "4k" --output LVDS1 --off
+
+DP=DP-1
+
+xrandr --newmode "4kk"  262.750000  3840 3888 3920 4000  2160 2163 2167 2191  +HSync -VSync
+xrandr --addmode $DP "4kk"
+xrandr --output $DP --mode "4kk" --output LVDS1 --off
 
 
 killall keynav

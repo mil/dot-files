@@ -6,8 +6,8 @@ vim/.vim/tmp
 vim/.vim/.netrwhist
 
 w3m/.w3m/w3mtmp*
-w3m/.w3m/cookie
-w3m/.w3m/history
+w3m/.w3m/cookie*
+w3m/.w3m/history*
 w3m/.w3m/w3msrc*
 w3m/.w3m/w3mcache*
 

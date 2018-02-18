@@ -1,24 +1,24 @@
-preview_images false
-auto_image false
-draw_borders true
-set_draw_borders
-set preview_images
-use_mouse 0
-show_lnum 0
+#preview_images false
+#auto_image false
+#draw_borders true
+#set_draw_borders
+#set preview_images
+#use_mouse 0
+#show_lnum 0
 editor vim
-wrap_search 1
-confirm_qq 0
-
-no_referer 1
-save_hist 0
-use_history 0
-history 0
-accept_cookie 0
-accept_bad_cookie 0
-use_cookie 0
-show_cookie 1
-
-extbrowser5 firefox
+#wrap_search 1
+#confirm_qq 0
+#
+#no_referer 1
+#save_hist 0
+#use_history 0
+#history 0
+#accept_cookie 0
+#accept_bad_cookie 0
+#use_cookie 0
+#show_cookie 1
+#
+extbrowser5 firefox-esr
 extbrowser4 chromium
 extbrowser3 mpv
 extbrowser2 surf -s

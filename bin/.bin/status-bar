@@ -1,24 +1,75 @@
 #!/usr/bin/env ruby
+# encoding: utf-8
 require 'pty'
 require 'json'
 
 $title = ""
+$memory = ""
 $date = ""
+$weather = ""
 $battery = ""
 $user = %x[whoami].chomp!
 $hostname = %x[hostname].chomp!
+#$weather = ''
 $date_enabled = File.read("/home/#{$user}/.date_enabled").chomp! == "true"
+$clip_l = false
+$clip_r = false
+$clip = "noclip"
+
+def poll_clipmeter
+  Thread.new do
+    cmd = "oscdump osc.udp://:9202" 
+    begin
+      PTY.spawn( cmd ) do |stdout, stdin, pid|
+        begin
+          stdout.each { |line| 
+            if line[1] == "l"
+              $clip_l = line[2] == "1"
+            end
+            if line[1] == "r"
+              $clip_r = line[2] == "1"
+            end
+
+            new_str = ""
+            [
+              {side: 'L', is_clipping: $clip_l },
+              {side: 'R', is_clipping: $clip_r }
+            ].each do |x|
+              bg_color = x[:is_clipping] ? "red": "black"
+              fg_color = x[:is_clipping] ? "black": "white"
+              content = "<span color='#{fg_color}' background='#{bg_color}'> #{x[:side]} </span>"
+              new_str = "#{new_str}#{content}"
+            end
+            $clip = new_str
+
+            refresh_bar
+          }
+        end
+      end
+    end
+  end
+end
 
 
 def refresh_bar
   items = []
   items.push($title) if $title != ""
   items.push($battery)  if $battery != ""
+  items.push($memory)  if $memory != ""
+  #items.push($weather)  if $weather != ""
   items.push($date) if $date_enabled && $date != ""
+  items.push($clip) 
+
 
   STDOUT.puts "," + ([{
-    :full_text => items.join(" | ").gsub("\n", "")
+    :full_text => [
+      "<span color='#000000' >",
+      items.join(" | ").gsub("\n", ""),
+      "</span>"
+    ].join(""),
+    :markup => :pango
   }]).to_json 
+
   STDOUT.flush
 end
 
@@ -29,9 +80,7 @@ def poll_xtitle
       begin
         stdout.each { |line| 
           $title = line.chomp!
-          if $hostname == "chip"
-            $title = $title[0..20]
-          end
+          $title.gsub!(/ - VIM$/, "")
           refresh_bar
         }
       rescue Errno::EIO
@@ -44,39 +93,53 @@ def poll_xtitle
   end
 end
 
-def poll_date
-  Thread.new {
-    loop do
-      $date = %x[date +"%I:%M%p"].chomp!
-      refresh_bar
-      sleep 60
-    end
-  }
+def update_weather
+  d = %x[weather '']
+  $weather = [
+   #"<span rise='-15000' size='large' underline_color='#ffffff' underline='double'>",
+   #d[0],
+   #"</span>",
+   d[2..d.length - 2],
+   "°F"
+  ].join("")
+end
+
+def update_battery
+  $battery = %x[battery].chomp!.match(/(\d|\.|%)+/)[0] 
+end
+
+def update_date
+  $date = %x[date +"%I:%M%p"].chomp!
+end
+
+def update_memory
+  mem = %x[free -ht | tail -n1 | sed -r "s/\\s+/\\n/g" | tail -n3 | head -n2 | tac].split("\n")
+  $memory= "#{mem[0]}/#{mem[1]}"
 end
 
 
-def poll_battery
-  Thread.new {
-    loop do
-      if $hostname == "chip" then
-        $battery = %x[bash /home/chip/.bin/chipbat].chomp!
-      else
-        $battery = %x[battery].chomp!.match(/(\d|\.|%)+/)[0] 
-      end
-      refresh_bar
-      sleep 60
-    end
-  }
+def updates
+  update_date
+  #update_weather
+  update_battery
+  update_memory
 end
 
 def init_msg 
   STDOUT.puts '{ "version": 1 }'
   STDOUT.puts "["
-  STDOUT.puts "[]"
+  STDOUT.puts "[]" 
   STDOUT.flush
 end
 
 init_msg
-poll_battery
-poll_date
+updates
+poll_clipmeter
+Thread.new {
+  loop do
+    updates
+    refresh_bar
+    sleep 60
+  end
+}
 poll_xtitle

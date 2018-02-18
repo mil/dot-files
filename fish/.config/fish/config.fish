@@ -38,9 +38,9 @@ set fish_function_path $fish_function_path ~/.config/fish/plugin-foreign-env/fun
 
 # Fish title
 function fish_title
-  set -x pwd (dirs +0 | xargs)
+  set -x pwd (dirs  | xargs)
   if test -z $argv[1]
-    dirs +0
+    dirs
   else
     echo $argv[1] "($pwd)"
   end

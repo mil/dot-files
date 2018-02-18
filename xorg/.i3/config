@@ -13,6 +13,10 @@ bindsym $mod+Return exec termite -d `xcwd`
 bindsym $mod+Shift+Return exec termite
 
 
+bindsym --whole-window button9 exec "xdotool key ctrl+e"
+bindsym $mod+period exec "oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/0"
+bindsym $mod+slash exec "oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/1"
+
 bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
 
@@ -29,7 +33,7 @@ bindsym $mod+Shift+Left exec ~/.bin/dvol -t
 bindsym XF86Launch1 exec xset dpms force suspend
 
 # Menus
-bindsym $mod+d exec "dmenu_path | dmenu -fn 'Hack-20' -b -p 'Run:' | xargs -I CMD fish -c 'set -x SURFRAW_graphical true; set -x FROM_DMENU true; CMD' | sh"
+bindsym $mod+d exec "dmenu_path | dmenu -fn 'Dina-10' -b -p 'Run:' | xargs -I CMD fish -c 'set -x SURFRAW_graphical true; set -x FROM_DMENU true; CMD' | sh"
 bindsym $mod+Shift+d exec "cat ~/.bookmarks | cut -d ' ' -f1 | awk 'NF' | dmenu -fn 'Hack-20' -b -p 'Bookmark:' | xargs -I NAME grep -E '^NAME\s' ~/.bookmarks | tr ' ' '\n' | tail -n 1 | xargs -I URL firefox URL | sh"
 bindsym --release $mod+Shift+P exec --no-startup-id ~/.bin/pwdhashX
 
@@ -138,7 +142,7 @@ mode "vi" {
   #bindsym j exec xdotool click 5
   #bindsym k exec xdotool click 4
   
-  bindsym --release j exec xdotool key Down
+  bindsym --release j exec xdotool key down
   bindsym --release k exec xdotool key Up
   bindsym Return mode "default"
   bindsym Escape mode "default"
@@ -157,7 +161,7 @@ font pango: Dejavu sans mono 8
 # Startup
 exec ~/.bin/trackball
 exec ~/.bin/yubi off
-exec feh --bg-scale ~/.wallpaper.jpg
+exec xsetroot -mod 2 2 -fg '#888888' -bg '#ffffff'
 exec --no-startup-id keynav
 exec xrdb ~/.Xresources
 exec ~/.bin/pcs off
