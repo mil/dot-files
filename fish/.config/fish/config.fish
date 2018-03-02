@@ -20,6 +20,11 @@ alias no='nomad'
 alias pk='packer-io'
 alias scmit='mktemp -p .; git add .; git commit -am "scrap"; git push origin master'
 
+alias pf='set -x PAGER cat'
+alias po='set -x PAGER w3m'
+
+alias ga='git annex'
+
 source /usr/share/autojump/autojump.fish
 
 # Go-related
@@ -35,6 +40,7 @@ end
 # For compat
 export TERM='xterm-256color'
 set fish_function_path $fish_function_path ~/.config/fish/plugin-foreign-env/functions
+eval (dircolors -c)
 
 # Fish title
 function fish_title

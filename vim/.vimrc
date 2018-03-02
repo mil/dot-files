@@ -128,3 +128,8 @@ au Filetype supercollider nnoremap <buffer> <C-C> :call SClang_block()<CR>
 au Filetype supercollider inoremap <buffer> <C-C> :call SClang_block()<CR>a
 au Filetype supercollider vnoremap <buffer> <C-C> :call SClang_send()<CR>
 au Filetype supercollider nnoremap <buffer> <C-S> :call SClangHardstop()<CR>
+
+
+command! -nargs=1 Silent execute ':silent !'.<q-args> | execute ':redraw!'
+autocmd BufWritePost /home/mil/Mixtapes/Programming/*.sc Silent oscsend localhost 57120 /reloadProgramming
+autocmd BufWritePost /home/mil/Mixtapes/Library/*.sc Silent oscsend localhost 57120 /reloadLibrary

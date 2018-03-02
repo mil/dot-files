@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Term::ANSIColor; 
+use Term::ANSIColor;
 
 my $color=shift;
 while (<>) {
