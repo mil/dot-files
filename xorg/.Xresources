@@ -135,14 +135,8 @@ URxvt.keysym.A-v: perl:clipboard:paste
 URxvt.keysym.A-z: perl:keyboard-select:activate
 ! ----------------------------
 
-#ifdef SRVR_h
-! urxvt.font: xft:Hack:pixelsize=12
-  urxvt.font: xft:Hack:pixelsize=12
-!  *i3font: pango:Hack 9
-!  *i3barfont: pango:Hack 8
-#endif
-#ifdef SRVR_chip
-  urxvt.font: xft:Hack:pixelsize=12
-!  *i3font: pango:Dejavu sans mono 7
-!  *i3barfont: pango:Dejavu sans mono 7
+*i3font: pango:xos4 Terminus,FontAwesome 8
+
+#ifdef SRVR_music
+  *i3font: pango:xos4 Terminus,FontAwesome 8
 #endif

@@ -6,4 +6,11 @@
 [core]
   editor = vim
 [push]
-	default = upstream
+  default = upstream
+
+
+[alias]
+  c = checkout
+  m = commit
+  s = status
+  b = branch

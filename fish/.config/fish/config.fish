@@ -23,7 +23,14 @@ alias scmit='mktemp -p .; git add .; git commit -am "scrap"; git push origin mas
 alias pf='set -x PAGER cat'
 alias po='set -x PAGER w3m'
 
+function um; udisksctl mount -b /dev/disk/by-label/$argv; end
+function uu; umount /run/media/mil/$argv; end
+
+
+alias g='git'
+
 alias ga='git annex'
+alias gd='cd (git rev-parse --show-toplevel)'
 
 source /usr/share/autojump/autojump.fish
 
