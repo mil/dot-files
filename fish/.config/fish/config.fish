@@ -26,11 +26,13 @@ alias po='set -x PAGER w3m'
 function um; udisksctl mount -b /dev/disk/by-label/$argv; end
 function uu; umount /run/media/mil/$argv; end
 
-
+alias h='hg'
 alias g='git'
+alias m='make'
+alias r='ranger'
 
 alias ga='git annex'
-alias gd='cd (git rev-parse --show-toplevel)'
+alias gd='cd (git rev-parse --show-toplevel 2>/dev/null; or hg root)'
 
 source /usr/share/autojump/autojump.fish
 

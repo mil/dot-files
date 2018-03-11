@@ -1,5 +1,5 @@
-#preview_images false
-#auto_image false
+preview_images false
+auto_image false
 #draw_borders true
 #set_draw_borders
 #set preview_images
@@ -18,8 +18,8 @@ editor vim
 #use_cookie 0
 #show_cookie 1
 #
-extbrowser5 firefox-esr
-extbrowser4 chromium
-extbrowser3 mpv
-extbrowser2 surf -s
+#extbrowser5 firefox-esr
+#extbrowser4 chromium
+#extbrowser3 mpv
+#extbrowser2 surf -s
 extbrowser echo %s | xclip -i

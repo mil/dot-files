@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+echo ""
+cat - | tr -d " " | sed 's/,/,$/g' | column -t -s$
+echo ""

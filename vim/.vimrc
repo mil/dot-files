@@ -109,7 +109,7 @@ set statusline+=%m      "modified flag
 highlight ExtraWhitespace ctermbg=green guibg=green
 match ExtraWhitespace /\s\+$\| \+\ze\t/
 set colorcolumn=80
-set textwidth=80
+"set textwidth=80
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set foldlevel=3000
 
@@ -129,7 +129,16 @@ au Filetype supercollider inoremap <buffer> <C-C> :call SClang_block()<CR>a
 au Filetype supercollider vnoremap <buffer> <C-C> :call SClang_send()<CR>
 au Filetype supercollider nnoremap <buffer> <C-S> :call SClangHardstop()<CR>
 
-
 command! -nargs=1 Silent execute ':silent !'.<q-args> | execute ':redraw!'
 autocmd BufWritePost /home/mil/Mixtapes/Programming/*.sc Silent oscsend localhost 57120 /reloadProgramming
 autocmd BufWritePost /home/mil/Mixtapes/Library/*.sc Silent oscsend localhost 57120 /reloadLibrary
+
+map <C-o> mzvi[:!colfmt<CR>vi[:>><CR>:redraw!<CR>`z
+map fd mzvi[:!colfmt<CR>vi[:>><CR>:redraw!<CR>`z
+map ff :w! <CR>
+
+map ft  :Silent oscsend localhost 57120 /runTests<CR>
+map fr :w! <CR> :Silent oscsend localhost 57120 /reloadProgramming<CR>
+map fe :w! <CR> :Silent oscsend localhost 57120 /reloadLibrary<CR>
+
+set incsearch
