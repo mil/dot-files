@@ -1,13 +1,17 @@
 preview_images false
 auto_image false
+clear_buffer 0
 #draw_borders true
 #set_draw_borders
 #set preview_images
 #use_mouse 0
 #show_lnum 0
 editor vim
+frame 0
+
+
 #wrap_search 1
-#confirm_qq 0
+confirm_qq 0
 #
 #no_referer 1
 #save_hist 0

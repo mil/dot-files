@@ -2,7 +2,7 @@
 setenv EDITOR vim
 setenv GIT_EDITOR vim
 setenv BROWSER firefox
-setenv PAGER w3m
+setenv PAGER 'w3m -X'
 setenv TZ America/Chicago
 
 # Path & aliases
@@ -20,8 +20,11 @@ alias no='nomad'
 alias pk='packer-io'
 alias scmit='mktemp -p .; git add .; git commit -am "scrap"; git push origin master'
 
+alias nm='w3m -X'
+
+alias w3m='w3m -X'
 alias pf='set -x PAGER cat'
-alias po='set -x PAGER w3m'
+alias po='set -x PAGER w3m -X'
 
 function um; udisksctl mount -b /dev/disk/by-label/$argv; end
 function uu; umount /run/media/mil/$argv; end
@@ -30,6 +33,7 @@ alias h='hg'
 alias g='git'
 alias m='make'
 alias r='ranger'
+alias b='w3m'
 
 alias ga='git annex'
 alias gd='cd (git rev-parse --show-toplevel 2>/dev/null; or hg root)'

@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-echo ""
-cat - | tr -d " " | sed 's/,/,$/g' | column -t -s$
-echo ""
+cat - | tr -d " " | sed 's/^$/NEWLINE/g' | sed 's/,/,$/g' | column -t -s$ | tr -d "NEWLINE" | sed 's/[ \t]*$//' 
+# (Last sed part is about removing trailing whitespace)

@@ -13,6 +13,10 @@ bindsym $mod+Return exec termite -d `xcwd`
 bindsym $mod+Shift+Return exec termite
 
 
+bindsym $mod+n mark swap
+bindsym $mod+m swap container with mark swap
+
+
 bindsym --whole-window button9 exec "xdotool key ctrl+e"
 bindsym $mod+period exec "oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/0"
 bindsym $mod+slash exec "oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/1"
