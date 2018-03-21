@@ -85,7 +85,7 @@ command! -nargs=1 Silent execute ':silent !'.<q-args> | execute ':redraw!'
 autocmd BufWritePost /home/mil/Mixtapes/Programming/*.sc Silent oscsend localhost 57120 /reloadProgramming
 autocmd BufWritePost /home/mil/Mixtapes/Library/*.sc Silent oscsend localhost 57120 /reloadLibrary
 
-map <C-o> mzvi[:!colfmt<CR>vi[:>><CR>:redraw!<CR>`z
+map <C-j> mzvi[:!colfmt<CR>vi[:>><CR>:redraw!<CR>`z
 map fd mzvi[:!colfmt<CR>vi[:>><CR>:redraw!<CR>`z
 map ff :w! <CR>
 
