@@ -9,7 +9,7 @@ floating_minimum_size 100x100
 hide_edge_borders vertical
 
 # Applications
-bindsym $mod+Return exec termite -d `xcwd`
+bindsym $mod+Return exec termite -d `xcwd` 
 bindsym $mod+Shift+Return exec termite
 
 

@@ -82,8 +82,9 @@ map <right> <c-w>>
 map <left> <c-w><
 
 command! -nargs=1 Silent execute ':silent !'.<q-args> | execute ':redraw!'
-autocmd BufWritePost /home/mil/Mixtapes/Programming/*.sc Silent oscsend localhost 57120 /reloadProgramming
-autocmd BufWritePost /home/mil/Mixtapes/Library/*.sc Silent oscsend localhost 57120 /reloadLibrary
+autocmd BufWritePost /home/mil/Mixtapes/*.sc Silent oscsend localhost 57120 /reloadFile s %:p
+
+"autocmd BufWritePost /home/mil/Mixtapes/Library/*.sc Silent oscsend localhost 57120 /reloadLibrary
 
 map <C-j> mzvi[:!colfmt<CR>vi[:>><CR>:redraw!<CR>`z
 map fd mzvi[:!colfmt<CR>vi[:>><CR>:redraw!<CR>`z
@@ -92,3 +93,5 @@ map ff :w! <CR>
 map ft  :Silent oscsend localhost 57120 /runTests<CR>
 map fr :w! <CR> :Silent oscsend localhost 57120 /reloadProgramming<CR>
 map fe :w! <CR> :Silent oscsend localhost 57120 /reloadLibrary<CR>
+
+set t_te=

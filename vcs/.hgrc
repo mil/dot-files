@@ -46,9 +46,10 @@ minsize = 0.5
 patterns = re:.*\.(wav|WAV)$ Wav/* Samples/*
 
 [templates]
-wbrch = '{label("log.branch", ifeq(branch, "default", "", branch))}'
+wbrch = '{label("log.branch", ifeq(branch, "default", "default", branch))}'
 wcset = '{label("changeset.{phase}", rev)}'
 wuser = '{label("grep.user", author|user)}'
+wparents = '{label("log.parents", parents)}'
 wdate = '{label("log.date", date(date, "%h %d, %A at %l:%M%p"))}'
 #sub = '{ifeq(date(now, "%s") - date(date, "%s") / 60 / 60 / 24), 1, "TRUE", "FALSE")}'
 wtags = '{label("log.tag", if(tags," {tags}"))}'
@@ -56,7 +57,7 @@ wbook = '{bookmarks % "{ifeq(bookmark, currentbookmark,
                              label('log.activebookmark', bookmark),
                              label('log.bookmark', bookmark))} "}'
 wdesc = '{label(ifcontains(rev, revset('parents()'), 'desc'), desc|firstline)}'
-changeset = '{wbrch}{wcset} {wuser} {wtags} {wbook} ({wdate})\n{wdesc}\n\n'
+changeset = '{wcset} {wuser} ({wbrch}) {wtags} {wbook} ({wdate})\n{wdesc}\n\n'
 
 
 [committemplate]
