@@ -9,9 +9,8 @@ floating_minimum_size 100x100
 hide_edge_borders vertical
 
 # Applications
-bindsym $mod+Return exec termite -d `xcwd` 
-bindsym $mod+Shift+Return exec termite
-
+bindsym $mod+Return exec "xcwd > /tmp/lastdir && st -e fish -C 'cd (cat /tmp/lastdir); rm -f /tmp/lastdir'"
+bindsym $mod+Shift+Return exec st
 
 bindsym $mod+n mark swap
 bindsym $mod+m swap container with mark swap

@@ -95,3 +95,10 @@ map fr :w! <CR> :Silent oscsend localhost 57120 /reloadProgramming<CR>
 map fe :w! <CR> :Silent oscsend localhost 57120 /reloadLibrary<CR>
 
 set t_te=
+
+function! SourceIfExists(file)
+  if filereadable(expand(a:file))
+    exe 'source' a:file
+  endif
+endfunction
+call SourceIfExists("~/.vimrc_additional")

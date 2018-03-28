@@ -38,6 +38,9 @@ alias b='w3m'
 alias ga='git annex'
 alias gd='cd (git rev-parse --show-toplevel 2>/dev/null; or hg root)'
 
+# One-off
+set fish_color_selection 'black'  '--bold'  '--background=grey'
+
 source /usr/share/autojump/autojump.fish
 
 # Go-related
@@ -82,7 +85,6 @@ if not set --query SSH_CLIENT
   #cal -j
   clear
   cat ~/.todo
-  dayssince (cat ~/.since) | color "bold blue"
 end
 
 # GPG-Related

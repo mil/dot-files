@@ -134,7 +134,7 @@ end
 
 init_msg
 updates
-poll_clipmeter
+#poll_clipmeter
 Thread.new {
   loop do
     updates
