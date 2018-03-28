@@ -14,7 +14,7 @@ $hostname = %x[hostname].chomp!
 $date_enabled = File.read("/home/#{$user}/.date_enabled").chomp! == "true"
 $clip_l = false
 $clip_r = false
-$clip = "noclip"
+$clip = ""
 
 def poll_clipmeter
   Thread.new do
@@ -58,7 +58,7 @@ def refresh_bar
   items.push($memory)  if $memory != ""
   #items.push($weather)  if $weather != ""
   items.push($date) if $date_enabled && $date != ""
-  items.push($clip) 
+  #items.push($clip) 
 
 
   STDOUT.puts "," + ([{

@@ -38,8 +38,11 @@ alias b='w3m'
 alias ga='git annex'
 alias gd='cd (git rev-parse --show-toplevel 2>/dev/null; or hg root)'
 
-# One-off
+# Set color
 set fish_color_selection 'black'  '--bold'  '--background=grey'
+set fish_color_search_match 'bryellow'  '--background=grey'
+set fish_pager_color_progress 'brwhite'  '--background=grey'
+set fish_pager_color_prefix 'red'  '--bold'  '--underline'
 
 source /usr/share/autojump/autojump.fish
 
