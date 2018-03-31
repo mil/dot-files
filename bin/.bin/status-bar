@@ -11,37 +11,35 @@ $battery = ""
 $user = %x[whoami].chomp!
 $hostname = %x[hostname].chomp!
 #$weather = ''
-$date_enabled = File.read("/home/#{$user}/.date_enabled").chomp! == "true"
-$clip_l = false
-$clip_r = false
+
+$date_f = "/home/#{$user}/.bar_date_enabled"
+$clip_f = "/home/#{$user}/.bar_clip_enabled"
+File.write($date_f, "true") if !File.exist?($date_f)
+File.write($clip_f, "true") if !File.exists?($clip_f)
+$date_enabled = File.read("/home/#{$user}/.bar_date_enabled").chomp! == "true"
+$clip_enabled = File.read("/home/#{$user}/.bar_clip_enabled").chomp! == "true"
+
 $clip = ""
 
 def poll_clipmeter
   Thread.new do
-    cmd = "oscdump osc.udp://:9202" 
+    cmd = "oscdump osc.udp://:9209"
+
     begin
       PTY.spawn( cmd ) do |stdout, stdin, pid|
         begin
-          stdout.each { |line| 
-            if line[1] == "l"
-              $clip_l = line[2] == "1"
-            end
-            if line[1] == "r"
-              $clip_r = line[2] == "1"
-            end
-
+          stdout.each { |line|
+            clip_l = line[2] == "1" if  line[1] == "l"
+            clip_r = line[2] == "1" if line[1] == "r"
             new_str = ""
-            [
-              {side: 'L', is_clipping: $clip_l },
-              {side: 'R', is_clipping: $clip_r }
-            ].each do |x|
+            sides = [ {side: 'L', is_clipping: clip_l }, {side: 'R', is_clipping: clip_r } ]
+            sides.each do |x|
               bg_color = x[:is_clipping] ? "red": "black"
               fg_color = x[:is_clipping] ? "black": "white"
               content = "<span color='#{fg_color}' background='#{bg_color}'> #{x[:side]} </span>"
               new_str = "#{new_str}#{content}"
             end
             $clip = new_str
-
             refresh_bar
           }
         end
@@ -58,8 +56,7 @@ def refresh_bar
   items.push($memory)  if $memory != ""
   #items.push($weather)  if $weather != ""
   items.push($date) if $date_enabled && $date != ""
-  #items.push($clip) 
-
+  items.push($clip) if $clip_enabled 
 
   STDOUT.puts "," + ([{
     :full_text => [
@@ -134,7 +131,7 @@ end
 
 init_msg
 updates
-#poll_clipmeter
+poll_clipmeter
 Thread.new {
   loop do
     updates

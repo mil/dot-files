@@ -1,8 +1,0 @@
-#!/usr/bin/env ruby
-
-usr = %x[whoami].chomp!
-puts usr
-de = File.read("/home/#{usr}/.date_enabled").chomp!
-new_text = (de == "true" ? "false" : "true")
-%x[echo #{new_text} > /home/#{usr}/.date_enabled]
-%x[i3-msg restart]

@@ -12,6 +12,10 @@ hide_edge_borders vertical
 bindsym $mod+Return exec "xcwd > /tmp/lastdir && st -e fish -C 'cd (cat /tmp/lastdir); rm -f /tmp/lastdir'"
 bindsym $mod+Shift+Return exec st
 
+
+# Ocr selection
+bindsym --release $mod+Shift+U exec "maim -s > /tmp/imgsel.png; st -e fish -C 'tesseract /tmp/imgsel.png stdout | vim -R -'"
+
 bindsym $mod+n mark swap
 bindsym $mod+m swap container with mark swap
 
@@ -36,7 +40,13 @@ bindsym $mod+Shift+Left exec ~/.bin/dvol -t
 bindsym XF86Launch1 exec xset dpms force suspend
 
 # Menus
-bindsym $mod+d exec "dmenu_path | dmenu -fn 'Dina-10' -b -p 'Run:' | xargs -I CMD fish -c 'set -x SURFRAW_graphical true; set -x FROM_DMENU true; CMD' | sh"
+bindsym --whole-window $mod+d exec "fish -c '\
+  killall dmenu; \
+  set -x FROM_DMENU true; \
+  set -x SURFRAW_graphical true; \
+  dmenu_path | dmenu -p Run -b | sh \
+  '"
+
 bindsym $mod+Shift+d exec "cat ~/.bookmarks | cut -d ' ' -f1 | awk 'NF' | dmenu -fn 'Hack-20' -b -p 'Bookmark:' | xargs -I NAME grep -E '^NAME\s' ~/.bookmarks | tr ' ' '\n' | tail -n 1 | xargs -I URL firefox URL | sh"
 bindsym --release $mod+Shift+P exec --no-startup-id ~/.bin/pwdhashX
 
@@ -91,8 +101,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Quit i3???' -b 'Yes, exit i3
 
 # Misc
 bindsym --release $mod+Shift+C exec scrot -s
-bindsym $mod+Shift+U bar mode toggle
-bindsym $mod+comma exec toggle_date_enabled
+#bindsym $mod+Shift+U bar mode toggle
+bindsym $mod+comma exec "toggle_bar_item date"
+bindsym $mod+Shift+comma exec "toggle_bar_item clip"
 
 # Workspaces
 bindsym $mod+1 workspace number 1; exec oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/1
@@ -144,6 +155,8 @@ exec --no-startup-id keynav
 exec xrdb ~/.Xresources
 exec ~/.bin/pcs off
 exec ~/.bin/pc
+exec autocutsel
+exec autocutsel -selection PRIMARY
 exec xmodmap ~/.xmodmap
 #exec redshift -l 43.07:-89.38
 
