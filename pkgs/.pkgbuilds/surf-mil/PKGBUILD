@@ -1,0 +1,45 @@
+_pkgname=surf-mil
+pkgname=surf-mil
+s=surf-mil
+pkgver=2.0.r53.g81f0452
+pkgrel=1
+pkgdesc="a WebKit based browser"
+arch=('i686' 'x86_64')
+url="http://surf.suckless.org/"
+license=('custom:MIT/X')
+depends=('webkit2gtk' 'gcr' 'xorg-xprop')
+makedepends=('git')
+optdepends=('dmenu: url bar and search'
+            'ca-certificates: SSL verification'
+            'st: default terminal for the download handler'
+            'curl: default download handler'
+            'mpv: default video player')
+provides=("$s")
+conflicts=("$s")
+source=("$s::git+https://git.suckless.org/surf"
+        'config.h')
+md5sums=('SKIP'
+         'SKIP')
+
+pkgver() {
+  cd "$s"
+  git describe --long --tags | sed -r 's/([^-]*-g)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd "$s"
+  cp "$srcdir/config.h" .
+}
+
+build() {
+  cd "$s"
+  make PREFIX=/usr DESTDIR="$pkgdir"
+}
+
+package() {
+  cd "$s"
+  make PREFIX=/usr DESTDIR="$pkgdir" install
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$s/LICENSE"
+}
+
+# vim:set ts=2 sw=2 et:
