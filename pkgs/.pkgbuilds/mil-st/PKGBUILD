@@ -2,7 +2,7 @@
 # Past Maintainer: Gaetan Bisson <bisson@archlinux.org>
 # Contributor: Scytrin dai Kinthra <scytrin@gmail.com>
 
-pkgname=st-mil # Forked from st-git
+pkgname=mil-st # Forked from st-git
 _pkgname=st
 pkgver=0.8.1.3.g041912a
 pkgrel=1

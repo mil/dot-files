@@ -1,0 +1,24 @@
+# Maintainer: miles
+
+pkgname=mil-mstat
+pkgver=1
+pkgrel=0
+arch=('x86_64' 'i686')
+depends=('go')
+options=('!strip' '!emptydirs')
+_gourl=github.com/hypebeast/go-osc
+_gourl2=github.com/c9s/goprocinfo
+
+build() {
+  export GOROOT=/usr/lib/go
+  export GOPATH="$srcdir"
+  go get ${_gourl}/...
+  go get ${_gourl2}/...
+  cp ../mstat.go .
+  go build mstat.go
+}
+
+package() {
+  mkdir -p "$pkgdir/usr/bin"
+  install -p -m755 "$srcdir/mstat" "$pkgdir/usr/bin"
+}

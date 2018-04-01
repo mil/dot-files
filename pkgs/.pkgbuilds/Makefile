@@ -1,17 +1,24 @@
 default:
 	nodefault
 
-clean: clean-st clean-surf
+clean: clean-st clean-surf clean-mstat
 
 clean-st:
-	rm -fr st-mil/st/ st-mil/*.tar.xz
+	rm -fr mil-st/st/ mil-st/*.tar.xz
 clean-surf:
-	rm -fr surf-mil/surf-mil/ surf-mil/*.tar.xz
+	rm -fr mil-surf/mil-surf/ mil-surf/*.tar.xz
+clean-mstat:
+	rm -fr mil-mstat/src mil-mstat/pkg mil-mstat/*.tar.xz
 
 surf: clean-surf
-	cd surf-mil && makepkg --clean -f
-	cd surf-mil && sudo pacman --noconfirm -U surf-mil-*
+	cd mil-surf && makepkg --clean -f
+	cd mil-surf && sudo pacman --noconfirm -U mil-surf-*
 
 st: clean-st
-	cd st-mil && makepkg --clean -f
-	cd st-mil && sudo pacman --noconfirm -U st-mil-*
+	cd mil-st && makepkg --clean -f
+	cd mil-st && sudo pacman --noconfirm -U mil-st-*
+
+mstat: clean-mstat
+	cd mil-mstat && makepkg --clean -f
+	cd mil-mstat && sudo pacman --noconfirm -U mil-mstat-*
+

@@ -1,6 +1,6 @@
-_pkgname=surf-mil
-pkgname=surf-mil
-s=surf-mil
+_pkgname=mil-surf
+pkgname=mil-surf
+s=mil-surf
 pkgver=2.0.r53.g81f0452
 pkgrel=1
 pkgdesc="a WebKit based browser"
