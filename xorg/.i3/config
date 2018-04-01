@@ -102,8 +102,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Quit i3???' -b 'Yes, exit i3
 # Misc
 bindsym --release $mod+Shift+C exec scrot -s
 #bindsym $mod+Shift+U bar mode toggle
-bindsym $mod+comma exec "toggle_bar_item date"
-bindsym $mod+Shift+comma exec "toggle_bar_item clip"
+bindsym $mod+comma exec "oscsend osc.udp://127.0.0.1:9988 /mode_toggle"
 
 # Workspaces
 bindsym $mod+1 workspace number 1; exec oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/1
@@ -164,7 +163,7 @@ set_from_resource $i3font i3wm.i3font
 font $i3font # From xresources
 bar {
   position top
-    status_command ~/.bin/status-bar
+    status_command xtitle -s | mstat
     font $i3font
     colors {
       background #cfcfcf
