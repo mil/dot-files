@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+X=`mktemp --suffix .sc`
+echo "$@.help" > $X
+sclang $X
