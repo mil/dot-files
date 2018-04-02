@@ -99,6 +99,8 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Quit i3???' -b 'Yes, exit i3' 'i3-msg exit'"
 
+bindsym $mod+c exec "killall mplayer"
+
 # Misc
 bindsym --release $mod+Shift+C exec scrot -s
 #bindsym $mod+Shift+U bar mode toggle

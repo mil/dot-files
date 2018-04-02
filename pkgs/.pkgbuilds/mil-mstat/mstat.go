@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -57,14 +58,17 @@ func update_status() {
 		items = []string{stdinline, info_battery(), info_memusage(), info_date()}
 	}
 
-	json_pre := ",[{\"full_text\":\""
-	json_post := "\", \"markup\":\"pango\"}]"
+	type JsonStruct struct {
+		Text   string `json:"full_text"`
+		Markup string `json:"markup"`
+	}
+
 	line := strings.Join(items, " | ")
-	line = strings.Join(
-		[]string{json_pre, line /*" (", string(mode), ")",*/, json_post},
+	asJson, _ := json.Marshal(&JsonStruct{Text: line, Markup: "pango"})
+	fmt.Println(strings.Join(
+		[]string{",[", string(asJson), "]"},
 		"",
-	)
-	fmt.Println(line)
+	))
 }
 
 func span(str, prop, value string) string {
