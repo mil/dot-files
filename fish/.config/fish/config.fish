@@ -91,11 +91,6 @@ if not set --query SSH_CLIENT
   cat ~/.todo
 end
 
-# GPG-Related
-gpg-connect-agent /bye
-gpg-connect-agent updatestartuptty /bye > /dev/null
-set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-
 # Additional
 if test -d ~/.config/fish_additional
   source ~/.config/fish_additional/config.fish

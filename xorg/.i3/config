@@ -57,6 +57,16 @@ bindsym $mod+h focus left
 bindsym $mod+l focus right
 bindsym $mod+a focus parent
 
+
+bindsym $mod+Ctrl+u exec "xdotool  click 1"
+bindsym $mod+Ctrl+i exec "xdotool  click 3"
+bindsym $mod+Ctrl+m exec "xdotool  click 4"
+bindsym $mod+Ctrl+< exec "xdotool  click 5"
+bindsym $mod+Ctrl+j exec "xdotool  mousemove_relative 0 10"
+bindsym $mod+Ctrl+k exec "xdotool  mousemove_relative 0 -10"
+bindsym $mod+Ctrl+h exec "xdotool  mousemove_relative -- -10 0"
+bindsym $mod+Ctrl+l exec "xdotool  mousemove_relative 10 0"
+
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
