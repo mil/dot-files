@@ -19,6 +19,9 @@ var clipline string
 var mode byte
 var modes = "mw"
 
+var allAmpsL = []float64{}
+var allAmpsR = []float64{}
+
 type Block struct {
 	text   string `json:full_text`
 	markup string `json:markup`
@@ -166,9 +169,26 @@ func clip_item(yesClip bool, label string) string {
 	return fg(bg(label, ibg), ifg)
 }
 
+func maxSlice(itms []float64) float64 {
+	max := 0.0
+	for _, e := range itms {
+		if e > max {
+			max = e
+		}
+	}
+
+	return max
+}
+
 func handle_amp(osc_input_str string) {
 	pieces := strings.Split(osc_input_str, "_")
 	l, r := floatify(pieces[0]), floatify(pieces[1])
+
+	allAmpsL = append(allAmpsL, l)
+	allAmpsR = append(allAmpsR, r)
+
+	l = maxSlice(allAmpsL)
+	r = maxSlice(allAmpsR)
 
 	l_clipping := l >= 1
 	r_clipping := r >= 1

@@ -1,3 +1,11 @@
 #!/usr/bin/env bash
-cat - | tr -d " " | sed 's/^$/NEWLINE/g' | sed 's/,/,$/g' | column -t -s$ | tr -d "NEWLINE" | sed 's/[ \t]*$//' 
+BUF="$(cat -)"
+N=$(echo "$BUF" | wc -l)
+NN=$(echo $N - 1 | bc)
+NN2=$(echo $N - 2 | bc)
+UB=$(echo "$BUF" | tail -n $NN | head -n $NN2)
+
+echo "$BUF" | head -n1
+echo "  $UB" | tr -d " " | sed 's/^$/NEWLINE/g' | sed 's/,/,$/g' | column -t -s$ | tr -d "NEWLINE" | sed 's/[ \t]*$//' | sed  's/^/  /'
+echo "$BUF" | tail -n1
 # (Last sed part is about removing trailing whitespace)

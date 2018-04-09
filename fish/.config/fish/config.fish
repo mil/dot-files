@@ -1,6 +1,6 @@
 # Env vars
-setenv EDITOR vim
-setenv GIT_EDITOR vim
+setenv EDITOR vis
+setenv GIT_EDITOR vis
 setenv BROWSER firefox
 setenv PAGER 'w3m -X'
 setenv TZ America/Chicago
@@ -25,6 +25,7 @@ alias nm='w3m -X'
 alias w3m='w3m -X'
 alias pf='set -x PAGER cat'
 alias po='set -x PAGER w3m -X'
+alias pv='set -x PAGER vis -'
 
 function um; udisksctl mount -b /dev/disk/by-label/$argv; end
 function uu; umount /run/media/mil/$argv; end

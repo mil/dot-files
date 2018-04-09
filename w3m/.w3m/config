@@ -6,7 +6,7 @@ clear_buffer 0
 #set preview_images
 #use_mouse 0
 #show_lnum 0
-editor vim
+editor vis
 frame 0
 
 
