@@ -4,10 +4,9 @@
 [color]
   ui = always
 [core]
-  editor = vim
+  editor = vis '+set syntax=diff'
 [push]
   default = upstream
-
 
 [alias]
   c = checkout

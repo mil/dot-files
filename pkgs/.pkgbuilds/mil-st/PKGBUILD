@@ -16,7 +16,7 @@ makedepends=('ncurses' 'libxext' 'git')
 epoch=1
 # include config.h and any patches you want to have applied here
 source=(
-  'git://git.suckless.org/st'
+  'git+https://git.suckless.org/st'
   '../st-scrollback-0.8.diff'
   '../st-scrollback-mouse-0.8.diff'
   '../st-scrollback-mouse-altscreen-0.8.diff'

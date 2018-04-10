@@ -8,9 +8,9 @@
 static char *font = "Monospace:pixelsize=18:antialias=true:autohint=false";
 static int borderpx = 2;
 
-static char *vimbuf[] = { "/usr/bin/sh", "-c", "X=`mktemp`;cat > $X; st -e vim $X" };
-static char *linkbuf[] = {"/usr/bin/sh", "-c", "grep -Eo \"(http|https)://[a-zA-Z0-9./?=_-]*\" | sort|uniq|dmenu|xclip -i" };
-static char *filebuf[] = {"/usr/bin/sh", "-c", "grep -Eo \" .+ \" | tr -d '[:blank:]' | sort|uniq|dmenu|xclip -i" };
+static char *editbuf[] = { "/usr/bin/sh", "-c", "X=`mktemp`;cat > $X; st -e vim $X" };
+static char *compbuf[] = {"/usr/bin/sh", "-c", "grep -Eo '\\S+' | tr -d '[:blank:]' | sort|uniq|dmenu -l 10 -i -w $(xdotool getactivewindow) | tr -d '\n' | xargs -I CC xdotool type 'CC'" };
+static char *copybuf[] = {"/usr/bin/sh", "-c", "grep -Eo '\\S+' | tr -d '[:blank:]' | sort|uniq|dmenu -l 10 -i -w $(xdotool getactivewindow) | tr -d '\n' | xclip -i" };
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -182,14 +182,14 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ TERMMOD,              XK_I,   iso14755,       {.i =  0} },
 
 	{ TERMMOD,            XK_B,     kscrollup,      {.i = -1} },
 	{ TERMMOD,            XK_F,   kscrolldown,    {.i = -1} },
 
-  { TERMMOD, XK_U, externalpipe,         { .v = vimbuf   } },
-  { TERMMOD, XK_ampersand, externalpipe, { .v = linkbuf  } },
-  { TERMMOD, XK_asterisk, externalpipe,  { .v = filebuf  } },
+  { TERMMOD, XK_U,         externalpipe, { .v = compbuf } },
+  { TERMMOD, XK_I,         externalpipe, { .v = copybuf } },
+  { TERMMOD, XK_O,         externalpipe, { .v = editbuf } },
+	{ TERMMOD, XK_P,         iso14755,     { .i = 0       } },
 };
 
 /*
