@@ -80,6 +80,20 @@ if status --is-login
     end
 end
 
+function edit_commandline
+  set -q EDITOR; or return 1
+  set -l tmpfile (mktemp); or return 1
+  commandline > $tmpfile
+  eval $EDITOR $tmpfile
+  commandline -r -- (cat $tmpfile)
+  rm $tmpfile
+end
+
+function fish_user_key_bindings
+  bind -M insert \cx edit_commandline
+end
+
+
 # At start
 set fish_greeting ""
 if not set --query SSH_CLIENT
