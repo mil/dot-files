@@ -1,22 +1,22 @@
 local lexers = vis.lexers
 
 local colors = {
-	['base00'] = '#ffffff',
-	['base01'] = '#e0e0e0',
-	['base02'] = '#c5c8c6',
-	['base03'] = '#888888',
-	['base04'] = '#969896',
-	['base05'] = '#373b41',
-	['base06'] = '#282a2e',
-	['base07'] = '#1d1f21',
-	['base08'] = 'red',
-	['base09'] = '#000000',
-	['base0A'] = '#000000',
-	['base0B'] = '#000000',
-	['base0C'] = '3971ED',
-	['base0D'] = '3971ED',
-	['base0E'] = 'blue',
-	['base0F'] = '#3971ED',
+  ['base00'] = '#ffffff',
+  ['base01'] = '#e0e0e0',
+  ['base02'] = '#c5c8c6',
+  ['base03'] = '#888888',
+  ['base04'] = '#969896',
+  ['base05'] = '#373b41',
+  ['base06'] = '#282a2e',
+  ['base07'] = '#1d1f21',
+  ['base08'] = 'red',
+  ['base09'] = '#000000',
+  ['base0A'] = 'cyan',
+  ['base0B'] = '#000000',
+  ['base0C'] = '3971ED',
+  ['base0D'] = '3971ED',
+  ['base0E'] = 'blue',
+  ['base0F'] = '#3971ED',
 }
 
 lexers.colors = colors
@@ -48,7 +48,7 @@ lexers.STYLE_IDENTIFIER = 'fore:'..colors.base08
 
 lexers.STYLE_LINENUMBER = 'fore:'..colors.base09..',back:'..colors.base01
 lexers.STYLE_CURSOR = 'fore:'..colors.base00..',back:'..colors.base05
-lexers.STYLE_CURSOR_PRIMARY = 'fore:'..colors.base00..',back:'..colors.base05
+lexers.STYLE_CURSOR_PRIMARY = 'fore:'..colors.base00..',back:'..colors.base0E
 lexers.STYLE_CURSOR_LINE = 'back:'..colors.base01
 lexers.STYLE_COLOR_COLUMN = 'back:'..colors.base01
 lexers.STYLE_SELECTION = 'back:'..colors.base02

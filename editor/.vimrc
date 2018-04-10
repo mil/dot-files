@@ -1,5 +1,3 @@
-execute pathogen#infect()
-
 syntax enable
 filetype plugin indent on
 set encoding=utf-8
@@ -37,9 +35,7 @@ set foldlevel=3000
 " Colorscheme Related
 set t_Co=256
 "set termguicolors
-colorscheme louver
 hi MatchParen cterm=none ctermbg=green ctermfg=black
-hi Insert ctermbg=2
 hi Search ctermbg=Yellow
 hi IncSearch ctermbg=Cyan
 hi Pmenu ctermbg=White
@@ -55,22 +51,6 @@ if version >= 700
   au InsertLeave * hi StatusLine term=reverse ctermbg=blue
 endif
 
-
-" TF
-let g:terraform_fmt_on_save = 1
-" Go
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:go_fmt_command = "goimports"
-source ~/.vim/bundle/vim-go/autoload/go/doc.vim
-" SC
-let g:sclangTerm = "termite -e"
-let g:scFlash = 1
-au Filetype supercollider nnoremap <buffer> <C-C> :call SClang_block()<CR>
-au Filetype supercollider inoremap <buffer> <C-C> :call SClang_block()<CR>a
-au Filetype supercollider vnoremap <buffer> <C-C> :call SClang_send()<CR>
-au Filetype supercollider nnoremap <buffer> <C-S> :call SClangHardstop()<CR>
-
-
 " Keybindings
 imap <up> <nop>
 imap <down> <nop>
@@ -83,16 +63,6 @@ map <left> <c-w><
 
 command! -nargs=1 Silent execute ':silent !'.<q-args> | execute ':redraw!'
 autocmd BufWritePost /home/mil/Mixtapes/*.sc Silent oscsend localhost 57120 /reloadFile s %:p
-
-"autocmd BufWritePost /home/mil/Mixtapes/Library/*.sc Silent oscsend localhost 57120 /reloadLibrary
-
-map <C-j> mzvi[:!colfmt<CR>vi[:>><CR>:redraw!<CR>`z
-map fd mzvi[:!colfmt<CR>vi[:>><CR>:redraw!<CR>`z
-map ff :w! <CR>
-
-map ft  :Silent oscsend localhost 57120 /runTests<CR>
-map fr :w! <CR> :Silent oscsend localhost 57120 /reloadProgramming<CR>
-map fe :w! <CR> :Silent oscsend localhost 57120 /reloadLibrary<CR>
 
 set t_te=
 
