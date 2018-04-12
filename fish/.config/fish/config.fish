@@ -32,12 +32,19 @@ function uu; umount /run/media/mil/$argv; end
 
 alias h='hg'
 alias g='git'
-alias m='make'
 alias r='ranger'
-alias p='w3m'
-alias t='tree -C|w3m'
+alias t='tree -C'
+alias t1='tree -C -L 1'
+alias t2='tree -C -L 2'
+alias t3='tree -C -L 3'
+alias t4='tree -C -L 4'
+alias t5='tree -C -L 5'
+alias m='w3m'
+alias u='cd ..'
+alias c='cd'
+alias tw='tree -C|w3m'
+alias v='vis'
 
-alias ga='git annex'
 alias gd='cd (git rev-parse --show-toplevel 2>/dev/null; or hg root)'
 
 # Set color
@@ -66,7 +73,9 @@ eval (dircolors -c)
 # Fish title
 function fish_title
   set -x pwd (dirs  | xargs)
-  if test -z $argv[1]
+  if test -n "$ft"
+    echo $ft
+  else if test -z $argv[1]
     dirs
   else
     echo $argv[1] "($pwd)"
@@ -89,8 +98,15 @@ function edit_commandline
   rm $tmpfile
 end
 
+function fzf_b
+  set -l tmpfile (mktemp); or return 1
+  eval fzf | tr -d "\n" > $tmpfile
+  commandline -r -- "vis "(cat $tmpfile)
+end
+
 function fish_user_key_bindings
   bind -M insert \cx edit_commandline
+  bind -M insert \cs fzf_b
 end
 
 
@@ -102,7 +118,7 @@ if not set --query SSH_CLIENT
   #fish_vi_mode
 
   #cal -j
-  clear
+  #clear
   cat ~/.todo
 end
 
