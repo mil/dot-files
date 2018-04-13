@@ -98,7 +98,7 @@ function edit_commandline
   rm $tmpfile
 end
 
-function fzf_b
+function f
   set -l tmpfile (mktemp); or return 1
   eval fzf | tr -d "\n" > $tmpfile
   commandline -r -- "vis "(cat $tmpfile)
@@ -106,7 +106,7 @@ end
 
 function fish_user_key_bindings
   bind -M insert \cx edit_commandline
-  bind -M insert \cs fzf_b
+  bind -M insert \cs f
 end
 
 
