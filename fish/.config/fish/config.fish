@@ -34,11 +34,13 @@ alias h='hg'
 alias g='git'
 alias r='ranger'
 alias t='tree -C'
-alias t1='tree -C -L 1'
-alias t2='tree -C -L 2'
-alias t3='tree -C -L 3'
-alias t4='tree -C -L 4'
-alias t5='tree -C -L 5'
+alias f='tree -C -L 1'
+alias ff='tree -C -L 2'
+alias fff='tree -C -L 3'
+alias ffff='tree -C -L 4'
+alias fffff='tree -C -L 5'
+
+
 alias m='w3m'
 alias u='cd ..'
 alias c='cd'
@@ -98,7 +100,7 @@ function edit_commandline
   rm $tmpfile
 end
 
-function f
+function d
   set -l tmpfile (mktemp); or return 1
   eval fzf | tr -d "\n" > $tmpfile
   commandline -r -- "vis "(cat $tmpfile)
@@ -106,7 +108,7 @@ end
 
 function fish_user_key_bindings
   bind -M insert \cx edit_commandline
-  bind -M insert \cs f
+  bind -M insert \cs d
 end
 
 
