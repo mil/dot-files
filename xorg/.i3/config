@@ -169,7 +169,8 @@ exec ~/.bin/pc
 exec autocutsel
 exec autocutsel -selection PRIMARY
 exec xmodmap ~/.xmodmap
-#exec redshift -l 43.07:-89.38
+exec redshift
+#-l 43.07:-89.38
 
 set_from_resource $i3font i3wm.i3font 
 font $i3font # From xresources
