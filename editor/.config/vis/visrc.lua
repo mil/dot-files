@@ -1,6 +1,13 @@
 require('vis')
+local current_file = "nofile"
+
+
 vis.events.subscribe(vis.events.INIT, function()
-  -- Your global configuration options
+ -- Your global configuration options
+
+  vis.events.subscribe(vis.events.FILE_OPEN, function(file)
+    current_file  = file
+  end)
 
   vis.events.subscribe(vis.events.FILE_SAVE_PRE, function(file, path)
     -- Not sure why this is needed but otherwise sometimes selection is nil
@@ -70,8 +77,16 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
   vis:command('set shell /bin/sh')
   vis:command('set theme miles')
   vis:command('set show-tabs on')
-end)
 
+  function set_title()
+    local f_name = current_file.name
+    local abs_path = current_file.path
+    local title = f_name .. " (" .. abs_path .. ")"
+    vis:command("!xdotool getactivewindow set_window --name '" .. title .. "'")
+  end
+
+  pcall(set_title)
+end)
 
 local extras = "/home/mil/.config/vis_additional/visrc.lua"
 if file_exists(extras) then 
