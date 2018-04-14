@@ -81,8 +81,9 @@ changeset = {desc}\n
 
 
 [alias]
-c  = commit -v
-s  = status
-l  = log -GTchangeset --stat
-lb = log  -GTchangeset --stat -r'reverse(sort(bookmark()))'
-sl = log --color always --template '{rev}:{node|short} {desc|firstline}\n'
+plf = push --lfrev 'all()'
+c   = commit -v
+s   = status
+l   = log -GTchangeset --stat
+lb  = log  -GTchangeset --stat -r'reverse(sort(bookmark()))'
+sl  = log --color always --template '{rev}:{node|short} {desc|firstline}\n'
