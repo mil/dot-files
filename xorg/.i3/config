@@ -12,17 +12,11 @@ hide_edge_borders vertical
 bindsym $mod+Return exec "xcwd > /tmp/lastdir && st -e fish -C 'cd (cat /tmp/lastdir); rm -f /tmp/lastdir'"
 bindsym $mod+Shift+Return exec st
 
-
 # Ocr selection
 bindsym --release $mod+Shift+U exec "maim -s > /tmp/imgsel.png; st -e fish -C 'tesseract /tmp/imgsel.png stdout | vim -R -'"
 
 bindsym $mod+n mark swap
 bindsym $mod+m swap container with mark swap
-
-
-bindsym --whole-window button9 exec "xdotool key ctrl+e"
-bindsym $mod+period exec "oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/0"
-bindsym $mod+slash exec "oscsend osc.udp://127.0.0.1:9901 /pdfifo/dsp/1"
 
 bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
@@ -36,18 +30,10 @@ bindsym $mod+Shift+Up exec ~/.bin/dvol -i 2
 bindsym $mod+Shift+Down exec ~/.bin/dvol -d 2
 bindsym $mod+Shift+Left exec ~/.bin/dvol -t
 
-
 bindsym XF86Launch1 exec xset dpms force suspend
 
 # Menus
-bindsym --whole-window $mod+d exec "fish -c '\
-  killall dmenu; \
-  set -x FROM_DMENU true; \
-  set -x SURFRAW_graphical true; \
-  dmenu_path | dmenu -p Run -b | sh \
-  '"
-
-bindsym $mod+Shift+d exec "cat ~/.bookmarks | cut -d ' ' -f1 | awk 'NF' | dmenu -fn 'Hack-20' -b -p 'Bookmark:' | xargs -I NAME grep -E '^NAME\s' ~/.bookmarks | tr ' ' '\n' | tail -n 1 | xargs -I URL firefox URL | sh"
+bindsym --whole-window $mod+d exec dmenul
 bindsym --release $mod+Shift+P exec --no-startup-id ~/.bin/pwdhashX
 
 # Windows Focus
@@ -56,7 +42,6 @@ bindsym $mod+k focus up
 bindsym $mod+h focus left
 bindsym $mod+l focus right
 bindsym $mod+a focus parent
-
 
 bindsym $mod+Ctrl+u exec "xdotool  click 1"
 bindsym $mod+Ctrl+i exec "xdotool  click 3"

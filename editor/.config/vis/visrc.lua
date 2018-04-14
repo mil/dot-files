@@ -9,7 +9,7 @@ vis.events.subscribe(vis.events.INIT, function()
     current_file  = file
   end)
 
-  vis.events.subscribe(vis.events.FILE_SAVE_PRE, function(file, path)
+  vis.events.subscribe(vis.events.FILE_SAVE_POST, function(file, path)
     -- Not sure why this is needed but otherwise sometimes selection is nil
     vis:feedkeys("<C-j>")
 
@@ -33,11 +33,6 @@ vis.events.subscribe(vis.events.INIT, function()
     elseif extension == ".sc" then
       execute_command = "oscsend localhost 57120 /reloadFile s " .. path
     end
-
-    if string.match(path, "/home/mil/Mixtapes/Programming") then
-      pipe_command = "colfmt"
-    end
-
     
     local text = file:content(0, file.size)
     if not (pipe_command == nil) then
@@ -77,6 +72,19 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
   vis:command('set shell /bin/sh')
   vis:command('set theme miles')
   vis:command('set show-tabs on')
+
+  -- Save pos
+  local fmt_macro = "m<Escape>"
+  -- Delete all spaces
+  fmt_macro = fmt_macro .. "vi[:x/^.+,.+$/<Enter>:y/\\n/ y/^\\S+$/ x/\\s+/ d<Enter>"
+  -- Indent
+  fmt_macro = fmt_macro .. "vi[:x/^.+,.+$/<Enter>><Escape>"
+  -- Align and put 1 space after each comma
+  fmt_macro = fmt_macro .. "vi[:x/^.+,.+$/ x/[^,]+,/<Enter>_<Tab><Escape>a <Escape>"
+  -- Restore pos
+  fmt_macro = fmt_macro .. "M<Escape>"
+  vis:command('map! normal ff ' .. "'" .. fmt_macro .. "'")
+  vis:command('map! normal fF ' .. "'" .. fmt_macro .. ":w<Enter><Escape>M<Escape>'")
 
   function set_title()
     local f_name = current_file.name

@@ -1,0 +1,5 @@
+#!/usr/bin/env fish
+killall dmenu;
+set -x FROM_DMENU true;
+set -x SURFRAW_graphical true;
+dmenu_path | dmenu -p Run -b | sh
