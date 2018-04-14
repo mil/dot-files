@@ -1,5 +1,6 @@
 require('vis')
 local current_file = "nofile"
+local sc_fmt_macro = "<Escape>v\"myr၃vae:|colfmt<Enter><Escape>/၃<Enter>x\"mP"
 
 
 vis.events.subscribe(vis.events.INIT, function()
@@ -10,49 +11,29 @@ vis.events.subscribe(vis.events.INIT, function()
   end)
 
   vis.events.subscribe(vis.events.FILE_SAVE_POST, function(file, path)
-    -- Not sure why this is needed but otherwise sometimes selection is nil
-    vis:feedkeys("<C-j>")
+    pipes = {}
+    pipes[".go"] =   { "gofmt" } 
+    pipes[".java"] = { "cat" } 
+    if string.match(path, "/home/mil/Mixtapes/Programming") then 
+      pipes[".sc"] =   { "colfmt" }
+    end
 
-    local file = vis.win.file
-    local range = vis.win.selection.range
-    range.start = 0
-    range.finish = file.size
-    local old_line = vis.win.selection.line - 1
-    local old_col =  vis.win.selection.col
+    forks = {}
+    forks[".java"]  = { }
+    forks[".sc"]  = { "oscsend localhost 57120 /reloadFile s " .. path }
 
     local extension = path:match("^.+(%..+)$")
-    local pipe_command = nil
-    local execute_command = nil
+    if (forks[extension] ~= nil) then for cmdI = 1, #forks[extension] do
+        local fork_command = forks[extension][cmdI]
+        vis:feedkeys(":!" .. fork_command .. "<Enter><Escape>")
+    end end
 
-    if extension == '.java' then
-      pipe_command = "x"
-    elseif extension == '.go' then
-      pipe_command = "gofmt"
-      --vis:feedkeys("ggvG$:|gofmt")
-      --vis:feedkeys("")
-    elseif extension == ".sc" then
-      execute_command = "oscsend localhost 57120 /reloadFile s " .. path
-    end
-    
-    local text = file:content(0, file.size)
-    if not (pipe_command == nil) then
-      local status, out, err = vis:pipe(file, range, pipe_command)
-      if not status then
-        vis:info(err)
-      else
-        --vis:feedkeys("'zm")
-        file:delete(range)
-        file:insert(range.start, out)
-        --vis:feedkeys("'zM")
-        vis.win.selection:to(old_line, old_col)
-      end
-    end
+    --if (pipes[extension] ~= nil) then for cmdI = 1, #pipes[extension] do
+        --local pipes_command = pipes[extension][cmdI]
+        --vis:feedkeys("Escape>v\"myr၃vae:|" .. pipes_command .. "<Enter><Escape>/၃<Enter>x\"mP")
+        --vis:feedkeys("vae:|" .. pipes_command .. "<Enter>")
+    --end end
 
-    if not (execute_command == nil) then
-      vis:command("!" .. execute_command)
-    end
-
-    vis:feedkeys("<Escape><Escape>")
     return true
   end)
 end)
@@ -73,18 +54,8 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
   vis:command('set theme miles')
   vis:command('set show-tabs on')
 
-  -- Save pos
-  local fmt_macro = "m<Escape>"
-  -- Delete all spaces
-  fmt_macro = fmt_macro .. "vi[:x/^.+,.+$/<Enter>:y/\\n/ y/^\\S+$/ x/\\s+/ d<Enter>"
-  -- Indent
-  fmt_macro = fmt_macro .. "vi[:x/^.+,.+$/<Enter>><Escape>"
-  -- Align and put 1 space after each comma
-  fmt_macro = fmt_macro .. "vi[:x/^.+,.+$/ x/[^,]+,/<Enter>_<Tab><Escape>a <Escape>"
-  -- Restore pos
-  fmt_macro = fmt_macro .. "M<Escape>"
-  vis:command('map! normal ff ' .. "'" .. fmt_macro .. "'")
-  vis:command('map! normal fF ' .. "'" .. fmt_macro .. ":w<Enter><Escape>M<Escape>'")
+  vis:command('map! normal ff \'' .. sc_fmt_macro .. "'")
+  vis:command('map! normal fF :w<Enter>\'' .. sc_fmt_macro .. "'")
 
   function set_title()
     local f_name = current_file.name
@@ -92,7 +63,6 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
     local title = f_name .. " (" .. abs_path .. ")"
     vis:command("!xdotool getactivewindow set_window --name '" .. title .. "'")
   end
-
   pcall(set_title)
 end)
 
