@@ -53,6 +53,7 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
   vis:command('set shell /bin/sh')
   vis:command('set theme miles')
   vis:command('set show-tabs on')
+  vis:command('set show-eof on')
 
   vis:command('map! normal ff \'' .. sc_fmt_macro .. "'")
   vis:command('map! normal fF :w<Enter>\'' .. sc_fmt_macro .. "'")

@@ -10,6 +10,9 @@ set -x PATH ~/.bin $PATH
 set -x PATH /usr/lib/surfraw $PATH
 set -x SURFRAW_graphical false
 
+set -x STARDICT_DATA_DIR ~/.sdcv_data_dir
+function def; sdcv -n $argv | eval $PAGER; end
+
 set -x LS_COLORS 'di=01;34'
 alias cv='xclip -o'
 alias cb='git rev-parse --abbrev-ref HEAD 2>/dev/null; or cat .hg/bookmarks.current'
