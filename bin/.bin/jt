@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+# jitter
+
+arg = ARGV.pop
+inputNumber = ARGF.read.gsub("\n", "").to_i
+
+m = arg.match(/([-+]*)([0-9.]+)/)
+jitterN = m[2].to_f
+jitterPos = m[1].include?("+")
+jitterNeg = m[1].include?("-")
+jitterPos = true if (!jitterPos && !jitterNeg)
+
+randNum = rand(jitterN)
+
+pickFrom = []
+pickFrom.push(randNum) if jitterPos
+pickFrom.push(-randNum) if jitterNeg
+
+jitterValAdd = pickFrom.sample
+finVal = inputNumber + jitterValAdd
+print(finVal)

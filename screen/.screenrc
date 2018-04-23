@@ -1,0 +1,1 @@
+caption always "%{= kw}%-w%{= gW}%n %t%{-}%+w %-= %Y-%m-%d %C:%s"

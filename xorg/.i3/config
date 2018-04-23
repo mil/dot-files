@@ -173,3 +173,6 @@ bar {
         urgent_workspace #000000 #ffffff
     }
 }
+
+for_window [title="localhost levels"] floating disabled
+

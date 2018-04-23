@@ -4,7 +4,7 @@ clear_buffer 0
 #draw_borders true
 #set_draw_borders
 #set preview_images
-#use_mouse 0
+use_mouse 0
 #show_lnum 0
 editor vis
 frame 0
