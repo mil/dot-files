@@ -10,6 +10,8 @@ set -x PATH ~/.bin $PATH
 set -x PATH /usr/lib/surfraw $PATH
 set -x SURFRAW_graphical false
 
+set -x LEDGER_FILE ~/.ledger.journal
+
 set -x STARDICT_DATA_DIR ~/.sdcv_data_dir
 function def; sdcv -n $argv | eval $PAGER; end
 
@@ -33,10 +35,12 @@ alias pv='set -x PAGER vis -'
 function um; udisksctl mount -b /dev/disk/by-label/$argv; end
 function uu; umount /run/media/mil/$argv; end
 
+
+alias l='ledger'
+
 alias h='hg'
 alias g='git'
 alias r='ranger'
-alias t='tree -C'
 alias f='tree -C -L 1'
 alias ff='tree -C -L 2'
 alias fff='tree -C -L 3'
