@@ -16,10 +16,8 @@ optdepends=('dmenu: url bar and search'
             'mpv: default video player')
 provides=("$s")
 conflicts=("$s")
-source=("$s::git+https://git.suckless.org/surf"
-        'config.h')
-md5sums=('SKIP'
-         'SKIP')
+source=("$s::git+https://git.suckless.org/surf" 'config.h' 'hlclipcopy.patch')
+md5sums=(SKIP SKIP SKIP)
 
 pkgver() {
   cd "$s"
@@ -29,6 +27,8 @@ pkgver() {
 prepare() {
   cd "$s"
   cp "$srcdir/config.h" .
+  cp "$srcdir/hlclipcopy.patch" .
+  patch -Np2 -i hlclipcopy.patch surf.c
 }
 
 build() {
