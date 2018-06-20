@@ -4,7 +4,7 @@
 
 pkgname=mil-st # Forked from st-git
 _pkgname=st
-pkgver=0.8.1.3.g041912a
+pkgver=0.8.1.6.gdc3b5ba
 pkgrel=1
 pkgdesc='Simple virtual terminal emulator for X'
 url='http://st.suckless.org/'

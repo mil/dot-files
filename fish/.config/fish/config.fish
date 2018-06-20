@@ -36,8 +36,6 @@ function um; udisksctl mount -b /dev/disk/by-label/$argv; end
 function uu; umount /run/media/mil/$argv; end
 
 
-alias l='ledger'
-
 alias h='hg'
 alias g='git'
 alias r='ranger'

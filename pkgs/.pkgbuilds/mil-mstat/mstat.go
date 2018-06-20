@@ -17,10 +17,7 @@ import (
 var stdinline string
 var clipline string
 var mode byte
-var modes = "mw"
-
-var allAmpsL = []float64{}
-var allAmpsR = []float64{}
+var modes = "wn"
 
 type Block struct {
 	text   string `json:full_text`
@@ -28,8 +25,7 @@ type Block struct {
 }
 
 func main() {
-	mode = byte('m')
-	handle_amp("0_0")
+	mode = byte('w')
 	reload := make(chan bool)
 	go poll_stdin(reload)
 	go open_osc_server(reload)
@@ -54,11 +50,11 @@ func init_json() {
 
 func update_status() {
 	var items []string
-	if mode == 'm' {
-		items = []string{stdinline, info_memusage(), clipline}
-	}
 	if mode == 'w' {
 		items = []string{stdinline, info_battery(), info_memusage(), info_date()}
+	}
+	if mode == 'n' {
+		items = []string{stdinline, info_battery(), info_memusage()}
 	}
 
 	type JsonStruct struct {
@@ -161,13 +157,6 @@ func str_cycle(str string, char byte) byte {
 	return str[0]
 }
 
-func clip_item(yesClip bool, label string) string {
-	ibg, ifg := "black", "white"
-	if yesClip {
-		ibg, ifg = "red", "black"
-	}
-	return fg(bg(label, ibg), ifg)
-}
 
 func maxSlice(itms []float64) float64 {
 	max := 0.0
@@ -180,27 +169,6 @@ func maxSlice(itms []float64) float64 {
 	return max
 }
 
-func handle_amp(osc_input_str string) {
-	pieces := strings.Split(osc_input_str, "_")
-	l, r := floatify(pieces[0]), floatify(pieces[1])
-
-	allAmpsL = append(allAmpsL, l)
-	allAmpsR = append(allAmpsR, r)
-
-	l = maxSlice(allAmpsL)
-	r = maxSlice(allAmpsR)
-
-	l_clipping := l >= 1
-	r_clipping := r >= 1
-
-	l_label := fmt.Sprintf(" L (%05.2f) ", l*100)
-	r_label := fmt.Sprintf(" R (%05.2f) ", r*100)
-
-	// Set the clipline
-	clipline = strings.Join([]string{
-		clip_item(l_clipping, l_label), clip_item(r_clipping, r_label),
-	}, "")
-}
 
 func open_osc_server(reload chan bool) {
 	addr := "127.0.0.1:9988"
@@ -210,9 +178,6 @@ func open_osc_server(reload chan bool) {
 		pieces = pieces[1:len(pieces)]
 		if pieces[0] == "mode_toggle" {
 			mode = str_cycle(modes, mode)
-		}
-		if pieces[0] == "amp" {
-			handle_amp(pieces[1])
 		}
 		reload <- true
 	})
