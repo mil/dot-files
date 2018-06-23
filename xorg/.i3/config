@@ -9,11 +9,11 @@ floating_minimum_size 100x100
 hide_edge_borders vertical
 
 # Applications
-bindsym $mod+Return exec "xcwd > /tmp/lastdir && st -e fish -C 'cd (cat /tmp/lastdir); rm -f /tmp/lastdir'"
-bindsym $mod+Shift+Return exec st
+bindsym $mod+Return exec "xcwd > /tmp/lastdir && stw -e fish -C 'cd (cat /tmp/lastdir); rm -f /tmp/lastdir'"
+bindsym $mod+Shift+Return exec stw
 
 # Ocr selection
-bindsym --release $mod+Shift+U exec "maim -s > /tmp/imgsel.png; st -e fish -C 'tesseract /tmp/imgsel.png stdout | vim -R -'"
+bindsym --release $mod+Shift+U exec "maim -s > /tmp/imgsel.png; stw -e fish -C 'tesseract /tmp/imgsel.png stdout | vim -R -'"
 
 bindsym $mod+n mark swap
 bindsym $mod+m swap container with mark swap
