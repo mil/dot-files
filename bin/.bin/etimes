@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+sudo su -c 'qlist -I | xargs qlop -t |sort -t" " -rnk2'

@@ -8,6 +8,7 @@ setenv TZ America/Chicago
 # Path & aliases
 set -x PATH ~/.bin $PATH
 set -x PATH /usr/lib/surfraw $PATH
+set -x PATH /usr/share/surfraw $PATH
 set -x SURFRAW_graphical false
 
 set -x LEDGER_FILE ~/.ledger.journal
@@ -122,6 +123,7 @@ set fish_greeting ""
 if not set --query SSH_CLIENT
   # Vi input
   fish_vi_key_bindings
+  clear
   #fish_vi_mode
 
   #cal -j

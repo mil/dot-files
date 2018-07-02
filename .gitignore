@@ -20,3 +20,6 @@ termite/.config/termite/config
 pkgs/.pkgbuilds/st/st-git/.SRCINFO
 pkgs/.pkgbuilds/st/st-git/st-*.tar.xz
 pkgs/.pkgbuilds/st/st-git/st/*
+
+browser/.surf/cache
+browser/.surf/cookies.txt

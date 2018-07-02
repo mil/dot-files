@@ -161,7 +161,7 @@ set_from_resource $i3font i3wm.i3font
 font $i3font # From xresources
 bar {
   position top
-    status_command xtitle -s | mstat
+    status_command status-bar
     font $i3font
     colors {
       background #cfcfcf
@@ -175,4 +175,3 @@ bar {
 }
 
 for_window [title="localhost levels"] floating disabled
-

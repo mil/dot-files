@@ -6,57 +6,20 @@ require 'json'
 $title = ""
 $memory = ""
 $date = ""
-$weather = ""
 $battery = ""
 $user = %x[whoami].chomp!
 $hostname = %x[hostname].chomp!
-#$weather = ''
 
 $date_f = "/home/#{$user}/.bar_date_enabled"
-$clip_f = "/home/#{$user}/.bar_clip_enabled"
 File.write($date_f, "true") if !File.exist?($date_f)
-File.write($clip_f, "true") if !File.exists?($clip_f)
 $date_enabled = File.read("/home/#{$user}/.bar_date_enabled").chomp! == "true"
-$clip_enabled = File.read("/home/#{$user}/.bar_clip_enabled").chomp! == "true"
-
-$clip = ""
-
-def poll_clipmeter
-  Thread.new do
-    cmd = "oscdump osc.udp://:9209"
-
-    begin
-      PTY.spawn( cmd ) do |stdout, stdin, pid|
-        begin
-          stdout.each { |line|
-            clip_l = line[2] == "1" if  line[1] == "l"
-            clip_r = line[2] == "1" if line[1] == "r"
-            new_str = ""
-            sides = [ {side: 'L', is_clipping: clip_l }, {side: 'R', is_clipping: clip_r } ]
-            sides.each do |x|
-              bg_color = x[:is_clipping] ? "red": "black"
-              fg_color = x[:is_clipping] ? "black": "white"
-              content = "<span color='#{fg_color}' background='#{bg_color}'> #{x[:side]} </span>"
-              new_str = "#{new_str}#{content}"
-            end
-            $clip = new_str
-            refresh_bar
-          }
-        end
-      end
-    end
-  end
-end
-
 
 def refresh_bar
   items = []
   items.push($title) if $title != ""
   items.push($battery)  if $battery != ""
   items.push($memory)  if $memory != ""
-  #items.push($weather)  if $weather != ""
   items.push($date) if $date_enabled && $date != ""
-  items.push($clip) if $clip_enabled 
 
   STDOUT.puts "," + ([{
     :full_text => [
@@ -81,8 +44,8 @@ def poll_xtitle
           refresh_bar
         }
       rescue Errno::EIO
-        puts "Errno:EIO error, but this probably just means " +
-              "that the process has finished giving output"
+        #puts "Errno:EIO error, but this probably just means " +
+        #      "that the process has finished giving output"
       end
     end
   rescue PTY::ChildExited
@@ -90,16 +53,6 @@ def poll_xtitle
   end
 end
 
-def update_weather
-  d = %x[weather '']
-  $weather = [
-   #"<span rise='-15000' size='large' underline_color='#ffffff' underline='double'>",
-   #d[0],
-   #"</span>",
-   d[2..d.length - 2],
-   "°F"
-  ].join("")
-end
 
 def update_battery
   $battery = %x[battery].chomp!.match(/(\d|\.|%)+/)[0] 
@@ -114,10 +67,8 @@ def update_memory
   $memory= "#{mem[0]}/#{mem[1]}"
 end
 
-
 def updates
   update_date
-  #update_weather
   update_battery
   update_memory
 end
@@ -131,7 +82,6 @@ end
 
 init_msg
 updates
-poll_clipmeter
 Thread.new {
   loop do
     updates
