@@ -40,6 +40,11 @@ function cb_win_open()
     vis:command('set syntax off')
   end
 
+  if current_file and current_file.path ~= nil then
+    local extension = current_file.name:match("^.+(%..+)$")
+    if extension == ".ebuild" then vis:command('set syntax bash') end
+  end
+
   --vis:command('set show-spaces on')
   pcall(set_title)
 end
