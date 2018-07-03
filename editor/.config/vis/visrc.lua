@@ -33,12 +33,20 @@ function cb_win_open()
   vis:command('set show-eof on')
   vis:command('set savemethod inplace')
   vis:command('set show-newlines on')
+
+  --#File.lines
+
+  if current_file and #current_file.lines > 1000 then
+    vis:command('set syntax off')
+  end
+
   --vis:command('set show-spaces on')
   pcall(set_title)
 end
 
 function cb_file_open(file)
   current_file  = file
+  if file == nil or file.path == nil then return end
 
   local fmt_macro = ""
   local marker_string = "XQX"
