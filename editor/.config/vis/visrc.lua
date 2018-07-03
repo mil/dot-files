@@ -32,7 +32,7 @@ function cb_win_open()
   vis:command('set show-tabs on')
   vis:command('set show-eof on')
   vis:command('set savemethod inplace')
-  vis:command('set show-newlines on')
+  vis:command('set show-newlines off')
 
   --#File.lines
 
