@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
 # Restow all configs
-stow -t ~ $(ls -d */)
+stow -t ~ $(ls -d */) --ignore gentoo
+sudo ln -s $(readlink -f gentoo/savedconfig) /etc/portage/savedconfig
+sudo ln -s $(readlink -f gentoo/patches) /etc/portage/patches

@@ -23,3 +23,16 @@ pkgs/.pkgbuilds/st/st-git/st/*
 
 browser/.surf/cache
 browser/.surf/cookies.txt
+
+# E.g. all patches
+gentoo/**
+!gentoo/patches
+!gentoo/patches/*
+!gentoo/patches/*/*
+
+# Some savedconfigs
+!gentoo/savedconfig
+!gentoo/savedconfig/x11-terms
+!gentoo/savedconfig/x11-terms/st*
+!gentoo/savedconfig/www-client
+!gentoo/savedconfig/www-client/surf*
