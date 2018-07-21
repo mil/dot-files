@@ -1,9 +1,2 @@
-#!/usr/bin/env ruby
-
-off = %x[synclient | grep TouchpadOff]
-
-if (off.match('1')) then
-  %x[synclient TouchpadOff=0]
-else
-  %x[synclient TouchpadOff=1]
-end
+#!/usr/bin/env sh
+xinput off `xinput list | grep -oE 'TouchPad.+id=([0-9]+)' | grep -oE '[0-9]+$'`

@@ -69,3 +69,11 @@ color body color90 color225 "^gpg: .*"
 color body color90 color225 "^Primary key fingerprint: .*"
 color body color28 color194 "^gpg: Good signature.*"
 color body color124 color223 "^(gpg: (Can't check signature|BAD signature from.*|WARNING: This key is not certified with a trusted signature!|         There is no indication that the signature belongs to the owner.)|Verification failure).*"
+
+
+ignore *
+unignore from date subject to cc
+unignore x-mailer
+unignore x-spam-status
+unignore x-spam-report
+

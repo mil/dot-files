@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Monospace:pixelsize=18:antialias=true:autohint=false";
+static char *font = "Inconsolata:pixelsize=18:antialias=true:autohint=false";
 static int borderpx = 2;
 
 static char *editbuf[] = { "/usr/bin/sh", "-c", "X=`mktemp`;cat > $X; st -e vim $X" };

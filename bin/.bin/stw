@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 P=~/.st_font
-D=Monospace:pixelsize=38:antialias=true:autohint=false
+D=Inconsolata:pixelsize=38:antialias=true:autohint=false
 test -f $P || echo "$D" > $P
 st -f `cat ~/.st_font` "$@"

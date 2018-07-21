@@ -43,6 +43,7 @@ function cb_win_open()
   if current_file and current_file.path ~= nil then
     local extension = current_file.name:match("^.+(%..+)$")
     if extension == ".ebuild" then vis:command('set syntax bash') end
+    if current_file.name:match('COMMIT_EDITMSG') then vis:command('set syntax diff') end
   end
 
   --vis:command('set show-spaces on')
@@ -67,6 +68,8 @@ function cb_file_open(file)
     fmt_macro = "$"
     vis:command('set expandtab on')
   elseif string.match(file.path, "Makefile") then 
+    vis:command('set expandtab off')
+  elseif string.match(file.path, ".go") then 
     vis:command('set expandtab off')
   end
 
