@@ -146,7 +146,7 @@ client.urgent #000000 #000000 #ffffff #000000
 # Startup
 exec ~/.bin/trackball
 exec ~/.bin/yubi off
-exec ~/.bin/touchpad off
+#exec ~/.bin/touchpad off
 exec xsetroot -mod 2 2 -fg '#888888' -bg '#ffffff'
 exec --no-startup-id keynav
 exec xrdb ~/.Xresources
