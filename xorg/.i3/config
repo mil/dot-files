@@ -89,6 +89,7 @@ bindsym $mod+v split vertical
 # Floating
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
+bindsym Print exec touchpad
 
 # Quit
 bindsym $mod+Shift+r restart
