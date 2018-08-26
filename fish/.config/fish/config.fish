@@ -123,7 +123,7 @@ set fish_greeting ""
 if not set --query SSH_CLIENT
   # Vi input
   fish_vi_key_bindings
-  clear
+  #clear
   #fish_vi_mode
 
   #cal -j
