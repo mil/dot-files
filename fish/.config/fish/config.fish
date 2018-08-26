@@ -7,8 +7,14 @@ setenv TZ America/Chicago
 
 # Path & aliases
 set -x PATH ~/.bin $PATH
-set -x PATH /usr/lib/surfraw $PATH
-set -x PATH /usr/share/surfraw $PATH
+
+if test -d /usr/lib/surfraw
+  set -x PATH /usr/lib/surfraw $PATH
+end
+if test -d /usr/share/surfraw
+  set -x PATH /usr/share/surfraw $PATH
+end
+
 set -x SURFRAW_graphical false
 
 set -x LEDGER_FILE ~/.ledger.journal
