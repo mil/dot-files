@@ -20,6 +20,24 @@ function load_extras()
   end
 end
 
+function file_type_exec(file)
+  if not file then return end
+
+  if string.match(file, ".ebuild") then 
+    vis:command('set syntax bash')
+  elseif string.match(file, "COMMIT_EDITMSG") then 
+    vis:command('set syntax diff')
+  elseif string.match(file, "Makefile") then 
+    vis:command('set expandtab off')
+  elseif string.match(file, ".go") then 
+    vis:command('set expandtab off')
+  elseif string.match(file, ".java") then
+    vis:command('set tabwidth 4')
+  elseif string.match(file, ".rs") then
+    vis:command('set tabwidth 4')
+  end
+end
+
 function cb_win_open()
   vis:command('set number')
   vis:command('set colorcolumn 80')
@@ -41,9 +59,7 @@ function cb_win_open()
   end
 
   if current_file and current_file.path ~= nil then
-    local extension = current_file.name:match("^.+(%..+)$")
-    if extension == ".ebuild" then vis:command('set syntax bash') end
-    if current_file.name:match('COMMIT_EDITMSG') then vis:command('set syntax diff') end
+    file_type_exec(current_file.name)
   end
 
   --vis:command('set show-spaces on')
@@ -53,41 +69,7 @@ end
 function cb_file_open(file)
   current_file  = file
   if file == nil or file.path == nil then return end
-
-  local fmt_macro = ""
-  local marker_string = "XQX"
-  local pipes = {}
-  pipes[".go"] = "gofmt"
-  pipes[".dart"] = "dartfmt"
-  pipes[".java"] = "cat"
-
-  vis:command('set expandtab on')
-  if string.match(file.path, "/home/mil/Mixtapes/Programming") then 
-    pipes[".sc"] = "colfmt"
-    marker_string = "၃"
-    fmt_macro = "$"
-    vis:command('set expandtab on')
-  elseif string.match(file.path, "Makefile") then 
-    vis:command('set expandtab off')
-  elseif string.match(file.path, ".go") then 
-    vis:command('set expandtab off')
-  end
-
-
-  local extension = file.name:match("^.+(%..+)$")
-  if (pipes[extension] ~= nil) then
-    fmt_macro = (
-      fmt_macro ..
-      "<Escape>a" .. 
-      marker_string .. 
-      "<Escape>vae:|" .. 
-      pipes[extension] .. 
-      "<Enter><Escape>:x/" .. 
-      marker_string ..
-      "/<Enter>x"
-    )
-    vis:command('map! normal ff \'' .. fmt_macro .. "'")
-  end
+  file_type_exec(file.path)
 end
 
 function cb_file_save_post(file, path)
@@ -105,19 +87,6 @@ function cb_file_save_post(file, path)
 
   return true
 end
-
---if (pipes[extension] ~= nil) then for cmdI = 1, #pipes[extension] do
---  local old_line = vis.win.selection.line
---  local old_col = vis.win.selection.col
---  vis:feedkeys("vae")
---  local pipes_command = pipes[extension][cmdI]
---  local sel = vis.win.selection
---  local code, pipe_res, pipe_stderr = vis:pipe(vis.win.file, sel.range, "dartfmt") 
---  vis.win.file:delete(sel.range)
---  vis.win.file:insert(0, pipe_res)
---  vis.win.selection:to(old_line, old_col)
---  --vis:feedkeys("vae:|" .. pipes_command .. "<Enter>")
---end end
 
 
 vis.events.subscribe(vis.events.INIT, function()
