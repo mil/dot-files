@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# echo '"ATTRS{product}=="USB Trackball", SYMLINK+="miltrackball", ENV{DISPLAY}=":0", RUN+="/home/m/.bin/trackball"' > /etc/udev/rules.d/trackball.rules
+# echo 'ATTRS{product}=="USB Trackball", SYMLINK+="miltrackball", ENV{DISPLAY}=":0", RUN+="/home/m/.bin/trackball"' > /etc/udev/rules.d/trackball.rules
 
 export XUSER=m
 export XAUTHORITY=/home/$XUSER/.Xauthority

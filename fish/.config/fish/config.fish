@@ -15,6 +15,11 @@ if test -d /usr/share/surfraw
   set -x PATH /usr/share/surfraw $PATH
 end
 
+
+if test -d /home/$USER/.cargo/bin
+  set -x PATH /home/$USER/.cargo/bin $PATH
+end
+
 set -x SURFRAW_graphical false
 
 set -x LEDGER_FILE ~/.ledger.journal
@@ -71,11 +76,11 @@ source /usr/share/autojump/autojump.fish
 
 # Go-related
 if test -d ~/Go
-  export GOPATH='/home/mil/Go'
+  export GOPATH='/home/$USER/Go'
   set PATH $PATH $GOPATH/bin
 end
 if test -d ~/.Go
-  export GOPATH='/home/mil/.Go'
+  export GOPATH='/home/$USER/.Go'
   set PATH $PATH $GOPATH/bin
 end
 
