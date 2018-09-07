@@ -76,11 +76,11 @@ source /usr/share/autojump/autojump.fish
 
 # Go-related
 if test -d ~/Go
-  export GOPATH='/home/$USER/Go'
+  export GOPATH=/home/$USER/Go
   set PATH $PATH $GOPATH/bin
 end
 if test -d ~/.Go
-  export GOPATH='/home/$USER/.Go'
+  export GOPATH=/home/$USER/.Go
   set PATH $PATH $GOPATH/bin
 end
 
