@@ -47,6 +47,8 @@ function cb_win_open()
   vis:command('set shell /bin/sh')
   --vis:command('set th d')
   vis:command('set th l')
+
+  vis:command('set expandtab on')
   vis:command('set show-tabs on')
   vis:command('set show-eof on')
   vis:command('set savemethod inplace')

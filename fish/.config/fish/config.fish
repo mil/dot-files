@@ -138,7 +138,7 @@ if not set --query SSH_CLIENT
   #fish_vi_mode
 
   #cal -j
-  #clear
+  clear
   cat ~/.todo
 end
 
