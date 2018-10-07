@@ -37,6 +37,8 @@ function file_type_exec(file)
     vis:command('set tabwidth 4')
   elseif string.match(file, ".rs") then
     vis:command('set tabwidth 4')
+  elseif string.match(file, ".scss") then
+    vis:command('set tabwidth 2')
   end
 end
 

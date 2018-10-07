@@ -321,8 +321,8 @@ index dac64d8..628e876 100644
  #include <stdint.h>
  #include <sys/types.h>
  
-+/* Arbitrary size */
-+#define HISTSIZE      100000
++/* Arbitrary size, ~30mb */
++#define HISTSIZE      10000
 +
  /* macros */
  #define MIN(a, b)		((a) < (b) ? (a) : (b))
