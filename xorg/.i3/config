@@ -22,13 +22,13 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
 
 # Volume & Special Keys
-bindsym XF86AudioRaiseVolume exec ~/.bin/dvol -i 2
-bindsym XF86AudioLowerVolume exec ~/.bin/dvol -d 2
-bindsym XF86AudioMute exec ~/.bin/dvol -t
+bindsym XF86AudioRaiseVolume exec ~/.bin/voln up
+bindsym XF86AudioLowerVolume exec ~/.bin/voln down
+bindsym XF86AudioMute exec ~/.bin/voln mute
 
-bindsym $mod+Shift+Up exec ~/.bin/dvol -i 2
-bindsym $mod+Shift+Down exec ~/.bin/dvol -d 2
-bindsym $mod+Shift+Left exec ~/.bin/dvol -t
+bindsym $mod+Shift+Up exec ~/.bin/voln up
+bindsym $mod+Shift+Down exec ~/.bin/voln down
+bindsym $mod+Shift+Left exec ~/.bin/voln mute
 
 bindsym XF86Launch1 exec xset dpms force suspend
 
