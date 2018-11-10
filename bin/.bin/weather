@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+YAHOO_WCODE=12781045
+BUF=`curl https://weather.tuxnet24.de/?id=$YAHOO_WCODE`
+
+ctof() {
+  echo "scale=2;((9/5) * $1) + 32" | bc
+}
+tval() {
+  echo "$2" | grep "^$1" | awk -F= '{print $2}'
+}
+val() {
+  echo "$2" | grep "^$1" | tr -d "^$1 = "
+}
+numval() {
+  echo $(val "$1" "$2") | tr -dc '0-9'
+}
+fnumval() {
+  ctof `echo $(val "$1" "$2") | tr -dc '0-9'`
+}
+ 
+echo $(tval current_text "$BUF") $(fnumval 'current_temp =' "$BUF")°f

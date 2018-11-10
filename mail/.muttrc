@@ -2,7 +2,10 @@ set ssl_starttls=yes
 set ssl_force_tls=yes
 set spoolfile="imaps://imap.fastmail.com"
 set edit_headers
-set editor            = "vim +/^$ ++1"
+
+set header_cache = ~/.cache/mutt
+set message_cachedir = ~/.cache/mutt
+
 set folder="imaps://imap.fastmail.com:993/INBOX"
 set record="imaps://imap.fastmail.com:993/Sent"
 set postponed="=Drafts"

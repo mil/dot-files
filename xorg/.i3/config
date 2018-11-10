@@ -123,6 +123,21 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
+
+set $mode_notify [<u>a</u>ll] [<u>d</u>]ate [<u>c</u>]al [<u>w</u>]eather
+bindsym $mod+s mode "$mode_notify"
+mode --pango_markup "$mode_notify" {
+  bindsym d exec "date | xargs -I C dunstify -t 10000 -r 90 C"; mode default
+  bindsym c exec "cal -n 1 | xargs -I C dunstify -t 10000 -r 91 C"; mode default
+  bindsym w exec "weather | xargs -I C dunstify -t 10000 -r 92 C"; mode default
+
+  bindsym a exec "date | xargs -I C dunstify -t 10000 -r 90 C"; exec "cal -n 1 | xargs -I C dunstify -t 10000 -r 91 C"; exec "weather | xargs -I C dunstify -t 10000 -r 92 C"; mode default
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+
 bindsym $mod+r mode resize
 mode "resize" {
   bindsym h resize shrink width 10 px or 10 ppt

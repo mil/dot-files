@@ -37,6 +37,8 @@ alias no='nomad'
 alias pk='packer-io'
 alias scmit='mktemp -p .; git add .; git commit -am "scrap"; git push origin master'
 
+alias lyrics='duckduckgo -l site:genius.com'
+
 alias nm='w3m -X'
 
 alias w3m='w3m -X'
@@ -47,6 +49,10 @@ alias pv='set -x PAGER vis -'
 function um; udisksctl mount -b /dev/disk/by-label/$argv; end
 function uu; umount /run/media/mil/$argv; end
 
+
+set -x NNN_USE_EDITOR 1
+alias n='nnn'
+alias q='quit'
 
 alias h='hg'
 alias g='git'
