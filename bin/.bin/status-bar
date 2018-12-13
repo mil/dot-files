@@ -5,6 +5,7 @@ require 'json'
 
 $title = ""
 $memory = ""
+$cpu = ""
 $date = ""
 $battery = ""
 $user = %x[whoami].chomp!
@@ -19,6 +20,7 @@ def refresh_bar
   items.push($title) if $title != ""
   items.push($battery)  if $battery != ""
   items.push($memory)  if $memory != ""
+  items.push($cpu)  if $cpu != ""
   items.push($date) if $date_enabled && $date != ""
 
   STDOUT.puts "," + ([{
@@ -62,6 +64,10 @@ def update_date
   $date = %x[date +"%I:%M%p"].chomp!
 end
 
+def update_cpu
+  $cpu = %x[sensors | awk '/temp1/ { print $2 }' | tr -d '+' ]
+end
+
 def update_memory
   mem = %x[free -ht | tail -n1 | sed -r "s/\\s+/\\n/g" | tail -n3 | head -n2 | tac].split("\n")
   $memory= "#{mem[0]}/#{mem[1]}"
@@ -71,6 +77,7 @@ def updates
   update_date
   update_battery
   update_memory
+  update_cpu
 end
 
 def init_msg 

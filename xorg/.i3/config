@@ -12,9 +12,6 @@ hide_edge_borders vertical
 bindsym $mod+Return exec "xcwd > /tmp/lastdir && stw -e fish -C 'cd (cat /tmp/lastdir); rm -f /tmp/lastdir'"
 bindsym $mod+Shift+Return exec stw
 
-# Ocr selection
-bindsym --release $mod+Shift+U exec "maim -s > /tmp/imgsel.png; stw -e fish -C 'tesseract /tmp/imgsel.png stdout | vim -R -'"
-
 bindsym $mod+n mark swap
 bindsym $mod+m swap container with mark swap
 
@@ -124,12 +121,15 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-set $mode_notify [<u>a</u>ll] [<u>d</u>]ate [<u>c</u>]al [<u>w</u>]eather
+set $mode_notify [<u>a</u>ll] [<u>d</u>]ate [<u>c</u>]al [<u>w</u>]eather [<u>p</u>]rocessor [<u>m</u>]emory
+
 bindsym $mod+s mode "$mode_notify"
 mode --pango_markup "$mode_notify" {
   bindsym d exec "date | xargs -I C dunstify -t 10000 -r 90 C"; mode default
   bindsym c exec "cal -n 1 | xargs -I C dunstify -t 10000 -r 91 C"; mode default
   bindsym w exec "weather | xargs -I C dunstify -t 10000 -r 92 C"; mode default
+  bindsym m exec "ps xo '%mem,cmd' | sort -r  | head -n 4 | cut -c -80 | xargs -I C dunstify C"; mode default
+  bindsym p exec "ps xo '%cpu,cmd' | sort -r  | head -n 4 | cut -c -80 | xargs -I C dunstify C"; mode default
 
   bindsym a exec "date | xargs -I C dunstify -t 10000 -r 90 C"; exec "cal -n 1 | xargs -I C dunstify -t 10000 -r 91 C"; exec "weather | xargs -I C dunstify -t 10000 -r 92 C"; mode default
 

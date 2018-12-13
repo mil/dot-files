@@ -148,6 +148,22 @@ if not set --query SSH_CLIENT
   cat ~/.todo
 end
 
+function fish_mode_prompt --description 'Displays the current mode'
+        switch $fish_bind_mode
+            case default
+                set_color --bold --background red white
+                echo ' '
+            case insert
+                set_color --bold --background green white
+                echo ' '
+            case visual
+                set_color --bold --background magenta white
+                echo ' '
+        end
+        set_color normal
+        echo -n ' '
+end
+
 # Additional
 if test -d ~/.config/fish_additional
   source ~/.config/fish_additional/config.fish
