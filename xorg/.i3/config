@@ -160,6 +160,7 @@ client.urgent #000000 #000000 #ffffff #000000
 #client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 
 # Startup
+exec dunst
 exec ~/.bin/trackball
 exec ~/.bin/yubi off
 #exec ~/.bin/touchpad off
