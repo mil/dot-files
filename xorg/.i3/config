@@ -15,8 +15,8 @@ bindsym $mod+Shift+Return exec stw
 bindsym $mod+n mark swap
 bindsym $mod+m swap container with mark swap
 
-bindsym $mod+minus scratchpad show
-bindsym $mod+Shift+minus move scratchpad
+#bindsym $mod+minus scratchpad show
+#bindsym $mod+Shift+minus move scratchpad
 
 # Volume & Special Keys
 bindsym XF86AudioRaiseVolume exec ~/.bin/voln up
@@ -49,10 +49,10 @@ bindsym $mod+Ctrl+k exec "xdotool  mousemove_relative 0 -10"
 bindsym $mod+Ctrl+h exec "xdotool  mousemove_relative -- -10 0"
 bindsym $mod+Ctrl+l exec "xdotool  mousemove_relative 10 0"
 
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
 
 # Windows Shift
 bindsym $mod+Shift+j move down

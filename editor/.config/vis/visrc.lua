@@ -25,6 +25,8 @@ function file_type_exec(file)
 
   if string.match(file, ".ebuild") then 
     vis:command('set syntax bash')
+  elseif string.match(file, ".ts") then
+    vis:command('set syntax javascript')
   elseif string.match(file, "COMMIT_EDITMSG") then 
     vis:command('set syntax diff')
   elseif string.match(file, ".commit.hg") then

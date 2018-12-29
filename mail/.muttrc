@@ -80,3 +80,4 @@ unignore x-mailer
 unignore x-spam-status
 unignore x-spam-report
 
+set mark_old=no
