@@ -35,10 +35,15 @@ function file_type_exec(file)
     vis:command('set expandtab off')
   elseif string.match(file, ".go") then 
     vis:command('set expandtab off')
+    vis:command('set show-tabs off')
   elseif string.match(file, ".java") then
     vis:command('set tabwidth 4')
   elseif string.match(file, ".rs") then
     vis:command('set tabwidth 4')
+  elseif string.match(file, ".py") then
+    vis:command('set tabwidth 4')
+  elseif string.match(file, ".rb") then
+    vis:command('set tabwidth 2')
   elseif string.match(file, ".scss") then
     vis:command('set tabwidth 2')
   end
@@ -61,8 +66,10 @@ function cb_win_open()
   vis:command('set show-newlines off')
 
   --#File.lines
-
-  if current_file and #current_file.lines > 1000 then
+  if current_file and #current_file.lines > 1000 and (
+    -- non-performant lpegs
+    string.match(current_file.path, ".yml")
+  ) then
     vis:command('set syntax off')
   end
 

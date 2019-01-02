@@ -1,7 +1,7 @@
 # Helper fns
 function add_to_path_if_exists
-  if test -d $ARGV
-    set -x PATH $ARGV $PATH
+  if test -d $argv
+    set -x PATH $argv $PATH
   end
 end
 
@@ -21,7 +21,7 @@ function setup_envvars_and_path
   add_to_path_if_exists /home/$USER/.cargo/bin
   add_to_path_if_exists /usr/share/surfraw
   add_to_path_if_exists /usr/lib/surfraw
-  add_to_path_if_exists ~/.bin
+  add_to_path_if_exists /home/$USER/.bin
 end
 
 
