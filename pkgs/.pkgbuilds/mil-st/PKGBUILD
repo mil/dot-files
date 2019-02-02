@@ -17,13 +17,16 @@ epoch=1
 # include config.h and any patches you want to have applied here
 source=(
   'git+https://git.suckless.org/st'
+  '../st-keyboard_select-0.8.1.diff'
   '../st-scrollback-20190122-3be4cf1.diff'
   '../st-scrollback-mouse-0.8.diff'
   '../st-scrollback-mouse-altscreen-20190106-e23acb9.diff'
   '../st-externalpipe-20181016-c19e14b.diff'
+  '../plumb_without_shell_OSC.diff'
+  '../config.h'
 
 )
-sha1sums=(SKIP SKIP SKIP SKIP SKIP)
+sha1sums=(SKIP SKIP SKIP SKIP SKIP SKIP SKIP SKIP)
 
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")

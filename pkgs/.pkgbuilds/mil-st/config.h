@@ -5,10 +5,13 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
+
+static char *plumb_cmd = "stedit_args";
+
 static char *font = "Monospace:pixelsize=18:antialias=true:autohint=false";
 static int borderpx = 2;
 
-static char *editbuf[] = { "/bin/sh", "-c", "X=`mktemp`;cat > $X; st -e vim $X" };
+static char *editbuf[] = { "/bin/sh", "-c", "stedit_stdin" };
 static char *compbuf[] = {"/bin/sh", "-c", "grep -Eo '\\S+' | tr -d '[:blank:]' | sort|uniq|dmenu -l 10 -i -w $(xdotool getactivewindow) | tr -d '\n' | xargs -I CC xdotool type 'CC'" };
 static char *copybuf[] = {"/bin/sh", "-c", "grep -Eo '\\S+' | tr -d '[:blank:]' | sort|uniq|dmenu -l 10 -i -w $(xdotool getactivewindow) | tr -d '\n' | xclip -i" };
 
@@ -182,6 +185,7 @@ static Shortcut shortcuts[] = {
   { TERMMOD, XK_U,         externalpipe, { .v = compbuf } },
   { TERMMOD, XK_I,         externalpipe, { .v = copybuf } },
   { TERMMOD, XK_O,         externalpipe, { .v = editbuf } },
+	{ TERMMOD, XK_colon, keyboard_select, { 0 } },
 };
 
 /*
