@@ -26,6 +26,7 @@ end
 
 
 function setup_shortcuts
+  abbr -a nb newsboat
   abbr -a g git
   abbr -a gco git checkout
   abbr -a gc git commit
@@ -122,6 +123,7 @@ function setup_addons_and_misc
   end
 
   # Go-related
+  setenv GO111MODULE on
   if test -d ~/Go; export GOPATH=/home/$USER/Go; end
   if test -d ~/.Go; export GOPATH=/home/$USER/.Go; end
   add_to_path_if_exists $GOPATH/bin

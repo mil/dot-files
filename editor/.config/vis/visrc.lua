@@ -103,7 +103,6 @@ function cb_file_save_post(file, path)
   return true
 end
 
-
 vis.events.subscribe(vis.events.INIT, function()
   vis.events.subscribe(vis.events.WIN_OPEN, cb_win_open)
   vis.events.subscribe(vis.events.FILE_OPEN, cb_file_open)

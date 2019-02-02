@@ -168,28 +168,20 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-
-
 	{ TERMMOD,              XK_plus,        zoom,           {.f = +1} },
 	{ TERMMOD,              XK_underscore,  zoom,           {.f = -1} },
-
-	{ TERMMOD,              XK_K,        zoom,           {.f = +1} },
-	{ TERMMOD,              XK_J,  zoom,           {.f = -1} },
-
+	{ TERMMOD,              XK_K,           zoom,           {.f = +1} },
+	{ TERMMOD,              XK_J,           zoom,           {.f = -1} },
 	{ TERMMOD,              XK_parenright,  zoomreset,      {.f =  0} },
-
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-
-	{ TERMMOD,            XK_B,     kscrollup,      {.i = -1} },
-	{ TERMMOD,            XK_F,   kscrolldown,    {.i = -1} },
-
+	{ TERMMOD,              XK_B,     kscrollup,            {.i = -1} },
+	{ TERMMOD,              XK_F,   kscrolldown,            {.i = -1} },
   { TERMMOD, XK_U,         externalpipe, { .v = compbuf } },
   { TERMMOD, XK_I,         externalpipe, { .v = copybuf } },
   { TERMMOD, XK_O,         externalpipe, { .v = editbuf } },
-	{ TERMMOD, XK_P,         iso14755,     { .i = 0       } },
 };
 
 /*

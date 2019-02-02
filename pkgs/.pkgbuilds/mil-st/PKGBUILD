@@ -4,7 +4,7 @@
 
 pkgname=mil-st # Forked from st-git
 _pkgname=st
-pkgver=0.8.1.6.gdc3b5ba
+pkgver=0.8.1.22.g3be4cf1
 pkgrel=1
 pkgdesc='Simple virtual terminal emulator for X'
 url='http://st.suckless.org/'
@@ -17,13 +17,13 @@ epoch=1
 # include config.h and any patches you want to have applied here
 source=(
   'git+https://git.suckless.org/st'
-  '../st-scrollback-0.8.diff'
+  '../st-scrollback-20190122-3be4cf1.diff'
   '../st-scrollback-mouse-0.8.diff'
-  '../st-scrollback-mouse-altscreen-0.8.diff'
-  '../st-externalpipe-0.8.diff'
-  '../config.h'
+  '../st-scrollback-mouse-altscreen-20190106-e23acb9.diff'
+  '../st-externalpipe-20181016-c19e14b.diff'
+
 )
-sha1sums=(SKIP SKIP SKIP SKIP SKIP SKIP)
+sha1sums=(SKIP SKIP SKIP SKIP SKIP)
 
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
@@ -36,11 +36,6 @@ pkgver() {
 prepare() {
 	cd "${_pkgname}"
 	sed \
-		-e '/char font/s/= .*/= "Fixed:pixelsize=13:style=SemiCondensed";/' \
-		-e '/char worddelimiters/s/= .*/= " '"'"'`\\\"()[]{}<>|";/' \
-		-e '/int defaultcs/s/= .*/= 1;/' \
-		-i config.def.h
-	sed \
 		-e 's/CPPFLAGS =/CPPFLAGS +=/g' \
 		-e 's/CFLAGS =/CFLAGS +=/g' \
 		-e 's/LDFLAGS =/LDFLAGS +=/g' \
@@ -49,10 +44,7 @@ prepare() {
 	sed '/@tic/d' -i Makefile
 	for file in "${source[@]}"; do
 		if [[ "$file" == "../config.h" ]]; then
-			# add config.h if present in source array
-			# Note: this supersedes the above sed to config.def.h
 			cp "$srcdir/$file" .
-      echo "OK"
 		elif [[ "$file" == *.diff || "$file" == *.patch ]]; then
 			# add all patches present in source array
 			patch -Np1 <"$srcdir/$(basename ${file})"
