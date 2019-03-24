@@ -21,7 +21,8 @@ ThresholdVal=$(($NewVal<$MaxVal?$NewVal:$MaxVal))
 echo $ThresholdVal 
 
 # Set the new value directly. 
-sudo su -c "echo -n $ThresholdVal > /sys/class/backlight/intel_backlight/brightness"
+#sudo su -c "echo -n $ThresholdVal > /sys/class/backlight/intel_backlight/brightness"
+echo -n $ThresholdVal > /sys/class/backlight/intel_backlight/brightness
 
 
 logger "[ACPI] brightnessup |$CurrVal| |$NewVal| |$ThresholdVal|"

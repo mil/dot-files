@@ -23,6 +23,9 @@ bindsym XF86AudioRaiseVolume exec ~/.bin/voln up
 bindsym XF86AudioLowerVolume exec ~/.bin/voln down
 bindsym XF86AudioMute exec ~/.bin/voln mute
 
+bindsym XF86MonBrightnessUp exec ~/.bin/bup
+bindsym XF86MonBrightnessDown exec ~/.bin/bdown
+
 bindsym $mod+Shift+Up exec ~/.bin/voln up
 bindsym $mod+Shift+Down exec ~/.bin/voln down
 bindsym $mod+Shift+Left exec ~/.bin/voln mute
@@ -152,6 +155,12 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 
+
+bindsym --release Mod4+m exec "xdotool key Left"
+bindsym --release Mod4+period exec "xdotool key Up"
+bindsym --release Mod4+comma exec "xdotool key Down"
+bindsym --release Mod4+slash exec "xdotool key Right"
+
 # Theme
 client.focused #000000 #005b88 #ffffff #000000
 client.focused_inactive #000000 #5a5a5a #ffffff #000000
@@ -165,11 +174,13 @@ exec ~/.bin/trackball
 exec ~/.bin/yubi off
 #exec ~/.bin/touchpad off
 exec xsetroot -mod 2 2 -fg '#888888' -bg '#ffffff'
+#exec xsetroot -solid purple
 exec --no-startup-id keynav
 exec xrdb ~/.Xresources
 exec ~/.bin/pcs off
 exec ~/.bin/pc
 exec autocutsel
+exec xcape
 exec autocutsel -selection PRIMARY
 exec xmodmap ~/.xmodmap
 #exec redshift
@@ -193,3 +204,4 @@ bar {
 }
 
 for_window [title="localhost levels"] floating disabled
+

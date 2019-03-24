@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+require 'uri'
+
+def is_url(s)
+  s =~ URI::regexp
+end
+
+def which(cmd)
+  exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
+  ENV['PATH'].split(File::PATH_SEPARATOR).each do |path|
+    exts.each { |ext|
+      exe = File.join(path, "#{cmd}#{ext}")
+      return exe if File.executable?(exe) && !File.directory?(exe)
+    }
+  end
+  return nil
+end
+
+def run(cmd)
+  Process.fork do
+    %x[#{cmd}]
+  end
+end
+
+items = ARGV.reject { |j| j.nil? }.map {|j| j.strip }
+items = ARGF.read.split("\n") if items.empty?
+
+if items.size == 1 && is_url(items[0])
+  puts "Open in browser #{items[0]}"
+  run("surf #{items[0]}")
+elsif !which(items[0]).nil?
+  puts "Executable: #{items}"
+  run(items.join(' '))
+elsif items.map {|j| File.exist?(j) }.uniq[0]
+  puts "Fileshandle: #{items}"
+elsif items.size != 0 && items[0].strip != ""
+  puts "Open in surfraw: #{items}"
+  run("S #{items.join(' ')}")
+end

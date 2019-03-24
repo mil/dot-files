@@ -5,6 +5,8 @@ clean: clean-st clean-surf clean-mstat
 
 clean-st:
 	rm -fr mil-st/st/ mil-st/*.tar.xz
+clean-dwm:
+	rm -fr mil-dwm/dwm/mil-dwm/*.tar.xz
 clean-surf:
 	rm -fr mil-surf/mil-surf/ mil-surf/*.tar.xz
 clean-mstat:
@@ -17,6 +19,10 @@ surf: clean-surf
 st: clean-st
 	cd mil-st && makepkg --clean -f
 	cd mil-st && sudo pacman --noconfirm -U mil-st-*
+
+dwm: clean-dwm
+	cd mil-dwm && makepkg --clean -f
+	cd mil-dwm && sudo pacman --noconfirm -U mil-dwm-*
 
 mstat: clean-mstat
 	cd mil-mstat && makepkg --clean -f

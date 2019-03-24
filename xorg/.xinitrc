@@ -1,2 +1,10 @@
 #!/usr/bin/env sh
-exec i3
+xbindkeys &
+xmodmap ~/.xmodmap &
+dwm-status-bar &
+autocutsel &
+xcape &
+~/.bin/trackball &
+xsetroot -mod 2 2 -fg '#888888' -bg '#ffffff' &
+dunst &
+exec dwm

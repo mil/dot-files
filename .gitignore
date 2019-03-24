@@ -40,3 +40,7 @@ gentoo/**
 
 pkgs/.pkgbuilds/mil-st/st
 pkgs/.pkgbuilds/mil-st/*.tar.xz
+pkgs/.pkgbuilds/mil-surf/mil-surf
+pkgs/.pkgbuilds/mil-surf/*.tar.xz
+pkgs/.pkgbuilds/mil-dwm/dwm
+pkgs/.pkgbuilds/mil-dwm/*.tar.xz

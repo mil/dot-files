@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+xcwd > /tmp/lastdir && stw -e fish -C 'cd (cat /tmp/lastdir); rm -f /tmp/lastdir'

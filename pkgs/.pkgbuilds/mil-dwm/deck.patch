@@ -1,0 +1,74 @@
+From c1b5c188abe327751f9abce367acc1e7be727514 Mon Sep 17 00:00:00 2001
+From: Joshua Haase <hahj87@gmail.com>
+Date: Tue, 16 Aug 2016 10:00:05 -0500
+Subject: [PATCH] Apply a modified deck patch.
+
+---
+ config.def.h |  3 +++
+ layouts.c    | 29 +++++++++++++++++++++++++++++
+ 2 files changed, 32 insertions(+)
+ create mode 100644 layouts.c
+
+diff --git a/config.def.h b/config.def.h
+index a9ac303..37ec7f3 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -36,11 +36,13 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95]
+ static const int nmaster     = 1;    /* number of clients in master area */
+ static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+ 
++#include "layouts.c"
+ static const Layout layouts[] = {
+ 	/* symbol     arrange function */
+ 	{ "[]=",      tile },    /* first entry is default */
+ 	{ "><>",      NULL },    /* no layout function means floating behavior */
+ 	{ "[M]",      monocle },
++	{ "H[]",      deck },
+ };
+ 
+ /* key definitions */
+@@ -76,6 +78,7 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+ 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+ 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
++	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[3]} },
+ 	{ MODKEY,                       XK_space,  setlayout,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+ 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+diff --git a/layouts.c b/layouts.c
+new file mode 100644
+index 0000000..e2c17f2
+--- /dev/null
++++ b/layouts.c
+@@ -0,0 +1,29 @@
++static void deck(Monitor *m);
++
++void
++deck(Monitor *m) {
++	int dn;
++	unsigned int i, n, h, mw, my;
++	Client *c;
++
++	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
++	if(n == 0)
++		return;
++
++	dn = n - m->nmaster;
++	if(dn > 0) /* override layout symbol */
++		snprintf(m->ltsymbol, sizeof m->ltsymbol, "D %d", dn);
++
++	if(n > m->nmaster)
++		mw = m->nmaster ? m->ww * m->mfact : 0;
++	else
++		mw = m->ww;
++	for(i = my = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
++		if(i < m->nmaster) {
++			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
++			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), False);
++			my += HEIGHT(c);
++		}
++		else
++			resize(c, m->wx + mw, m->wy, m->ww - mw - (2*c->bw), m->wh - (2*c->bw), False);
++}
+-- 
+2.14.1

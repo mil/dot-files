@@ -1,10 +1,10 @@
-! Remap Caps Lock to Escapeo
 clear Lock
 keycode 66 = Escape
-keycode 62 = Right
 keycode 119 = backslash bar
 keycode 9 = Escape asciitilde grave 
-!keysym Menu = Hyper_L
-!keycode 32 = Alt_L
-!
+
+clear shift
+add shift = Shift_L
+clear mod3
+keycode 62 = Hyper_L
 

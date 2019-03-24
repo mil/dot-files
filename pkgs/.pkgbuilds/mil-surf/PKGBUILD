@@ -1,7 +1,7 @@
 _pkgname=mil-surf
 pkgname=mil-surf
 s=mil-surf
-pkgver=2.0.r53.g81f0452
+pkgver=2.0.r73.gd068a38
 pkgrel=1
 pkgdesc="a WebKit based browser"
 arch=('i686' 'x86_64')
@@ -16,8 +16,8 @@ optdepends=('dmenu: url bar and search'
             'mpv: default video player')
 provides=("$s")
 conflicts=("$s")
-source=("$s::git+https://git.suckless.org/surf" 'config.h' 'hlclipcopy.patch')
-md5sums=(SKIP SKIP SKIP)
+source=("$s::git+https://git.suckless.org/surf" 'config.h' 'hlclipcopy.patch' 'titlebar.patch' 'ua.patch')
+md5sums=(SKIP SKIP SKIP SKIP SKIP)
 
 pkgver() {
   cd "$s"
@@ -29,6 +29,10 @@ prepare() {
   cp "$srcdir/config.h" .
   cp "$srcdir/hlclipcopy.patch" .
   patch -Np2 -i hlclipcopy.patch surf.c
+  cp "$srcdir/titlebar.patch" .
+  patch -Np2 -i titlebar.patch surf.c
+  cp "$srcdir/ua.patch" .
+  patch -Np2 -i ua.patch surf.c
 }
 
 build() {

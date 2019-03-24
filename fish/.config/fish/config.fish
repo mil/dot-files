@@ -12,7 +12,8 @@ function setup_envvars_and_path
   setenv EDITOR vis
   setenv GIT_EDITOR vis
   setenv BROWSER firefox
-  setenv PAGER 'w3m -X'
+  #setenv PAGER 'w3m -X'
+  setenv PAGER w3m
   setenv TZ America/Chicago
   set -x SURFRAW_graphical false
   set -x LEDGER_FILE ~/.ledger.journal
@@ -27,6 +28,7 @@ end
 
 function setup_shortcuts
   abbr -a nb newsboat
+  abbr -a we weechat
   abbr -a g git
   abbr -a gco git checkout
   abbr -a gc git commit

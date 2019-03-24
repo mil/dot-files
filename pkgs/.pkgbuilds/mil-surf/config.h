@@ -29,13 +29,13 @@ static Parameter defconfig[ParameterLast] = {
 	[FrameFlattening]     =       { { .i = 0 },     },
 	[Geolocation]         =       { { .i = 0 },     },
 	[HideBackground]      =       { { .i = 0 },     },
-	[Inspector]           =       { { .i = 1 },     },
+	[Inspector]           =       { { .i = 0 },     },
 	[Java]                =       { { .i = 1 },     },
 	[JavaScript]          =       { { .i = 0 },     },
 	[KioskMode]           =       { { .i = 0 },     },
 	[LoadImages]          =       { { .i = 1 },     },
 	[MediaManualPlay]     =       { { .i = 1 },     },
-	[Plugins]             =       { { .i = 0 },     },
+	[Plugins]             =       { { .i = 1 },     },
 	[PreferredLanguages]  =       { { .v = (char *[]){ NULL } }, },
 	[RunInFullscreen]     =       { { .i = 0 },     },
 	[ScrollBars]          =       { { .i = 1 },     },
@@ -133,27 +133,27 @@ static Key keys[] = {
 	{ MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
 	{ MODKEY,                GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 
+
 	{ 0,                     GDK_KEY_Escape, stop,       { 0 } },
 	{ MODKEY,                GDK_KEY_c,      stop,       { 0 } },
+
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_r,      reload,     { .i = 1 } },
 	{ MODKEY,                GDK_KEY_r,      reload,     { .i = 0 } },
 
+
 	{ MODKEY,                GDK_KEY_l,      navigate,   { .i = +1 } },
 	{ MODKEY,                GDK_KEY_h,      navigate,   { .i = -1 } },
 
-	/* Currently we have to use scrolling steps that WebKit2GTK+ gives us
-	 * d: step down, u: step up, r: step right, l:step left
-	 * D: page down, U: page up */
-	{ MODKEY,                GDK_KEY_j,      scroll,     { .i = 'd' } },
-	{ MODKEY,                GDK_KEY_k,      scroll,     { .i = 'u' } },
 
-	{ MODKEY,                GDK_KEY_f,      scroll,     { .i = 'D' } },
-	{ MODKEY,                GDK_KEY_b,      scroll,     { .i = 'U' } },
-
-	{ MODKEY,                GDK_KEY_space,  scroll,     { .i = 'D' } },
-	{ MODKEY,                GDK_KEY_i,      scroll,     { .i = 'r' } },
-	{ MODKEY,                GDK_KEY_u,      scroll,     { .i = 'l' } },
+	/* vertical and horizontal scrolling, in viewport percentage */
+	{ MODKEY,                GDK_KEY_j,      scrollv,    { .i = +10 } },
+	{ MODKEY,                GDK_KEY_k,      scrollv,    { .i = -10 } },
+	{ MODKEY,                GDK_KEY_space,  scrollv,    { .i = +50 } },
+	{ MODKEY,                GDK_KEY_f,      scrollv,    { .i = +50 } },
+	{ MODKEY,                GDK_KEY_b,      scrollv,    { .i = -50 } },
+	{ MODKEY,                GDK_KEY_i,      scrollh,    { .i = +10 } },
+	{ MODKEY,                GDK_KEY_u,      scrollh,    { .i = -10 } },
 
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_j,      zoom,       { .i = -1 } },
@@ -162,19 +162,14 @@ static Key keys[] = {
 	{ MODKEY,                GDK_KEY_minus,  zoom,       { .i = -1 } },
 	{ MODKEY,                GDK_KEY_plus,   zoom,       { .i = +1 } },
 
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_minus,  zoom,       { .i = -1 } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_plus,   zoom,       { .i = +1 } },
-
-	/*{ MODKEY,                GDK_KEY_p,      clipboard,  { .i = 1 } },*/
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_y,      clipboard,  { .i = 1 } },
+	{ MODKEY,                GDK_KEY_p,      clipboard,  { .i = 1 } },
 	{ MODKEY,                GDK_KEY_y,      clipboard,  { .i = 0 } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_c,      hlclipcopy, { 0 } },
+
 
 	{ MODKEY,                GDK_KEY_n,      find,       { .i = +1 } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_n,      find,       { .i = -1 } },
-	{ MODKEY,                GDK_KEY_p,      find,       { .i = -1 } },
-	/*{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_p,    print,      { 0 } },*/
 
+	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_p,      print,      { 0 } },
 	{ MODKEY,                GDK_KEY_t,      showcert,   { 0 } },
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_a,      togglecookiepolicy, { 0 } },

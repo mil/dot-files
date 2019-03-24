@@ -27,7 +27,7 @@ interface = curses
 
 [extensions]
 record=
-largefiles =
+#largefiles =
 strip =
 purge =
 churn =

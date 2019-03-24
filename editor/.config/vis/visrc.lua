@@ -36,6 +36,10 @@ function file_type_exec(file)
   elseif string.match(file, ".go") then 
     vis:command('set expandtab off')
     vis:command('set show-tabs off')
+  elseif string.match(file, ".mod") then
+    vis:command('set expandtab off')
+  elseif string.match(file, ".sum") then
+    vis:command('set expandtab off')
   elseif string.match(file, ".java") then
     vis:command('set tabwidth 4')
   elseif string.match(file, ".rs") then
