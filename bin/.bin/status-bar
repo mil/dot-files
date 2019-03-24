@@ -17,23 +17,20 @@ $date_enabled = File.read("/home/#{$user}/.bar_date_enabled").chomp! == "true"
 
 def refresh_bar
   items = []
-  #items.push($title) if $title != ""
+  items.push($title) if $title != ""
   items.push($battery)  if $battery != ""
   items.push($memory)  if $memory != ""
   items.push($cpu)  if $cpu != ""
   items.push($date) if $date_enabled && $date != ""
 
-  res = items.join(" | ").gsub("\n", "")
-  STDOUT.puts res
-  %x[xsetroot -name "#{res}"]
-  #STDOUT.puts "," + ([{
-  #  :full_text => [
-  #    "<span color='#000000' >",
-  #    items.join(" | ").gsub("\n", ""),
-  #    "</span>"
-  #  ].join(""),
-  #  :markup => :pango
-  #}]).to_json 
+  STDOUT.puts "," + ([{
+    :full_text => [
+      "<span color='#000000' >",
+      items.join(" | ").gsub("\n", ""),
+      "</span>"
+    ].join(""),
+    :markup => :pango
+  }]).to_json 
 
   STDOUT.flush
 end
@@ -84,9 +81,9 @@ def updates
 end
 
 def init_msg 
-  #STDOUT.puts '{ "version": 1 }'
-  #STDOUT.puts "["
-  #STDOUT.puts "[]" 
+  STDOUT.puts '{ "version": 1 }'
+  STDOUT.puts "["
+  STDOUT.puts "[]" 
   STDOUT.flush
 end
 
