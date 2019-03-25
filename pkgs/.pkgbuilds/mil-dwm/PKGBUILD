@@ -27,26 +27,26 @@ prepare() {
 
   cp "$srcdir/../config.h" .
 
-  #cp "$srcdir/../hidevac.patch" .
-  #patch -p1 < hidevac.patch 
+  cp "$srcdir/../gaps.patch" .
+  patch -p1 < gaps.patch 
+
+  cp "$srcdir/../hidevacc.patch" .
+  patch -p1 < hidevacc.patch 
 
   cp "$srcdir/../deck.patch" .
   patch -p1 < deck.patch 
 
-  #cp "$srcdir/../corners.patch" .
-  #patch -p1 < corners.patch 
-
   cp "$srcdir/../fancybar.patch" .
   patch -p1 < fancybar.patch 
 
-  cp "$srcdir/../gaps.patch" .
-  patch -p1 < gaps.patch 
 
   cp "$srcdir/../rotate.patch" .
   patch -p1 < rotate.patch 
 
+  cp "$srcdir/../pertag.patch" .
+  patch -p1 < pertag.patch 
 
-  #cp "$srcdir/../zoomswap.patch" .
+  ##cp "$srcdir/../zoomswap.patch" .
   #patch -p1 < zoomswap.patch 
 
   #cp "$srcdir/../focusonclick.patch" .
@@ -67,4 +67,3 @@ package() {
 }
 
 # vim:set ts=2 sw=2 et:
-
