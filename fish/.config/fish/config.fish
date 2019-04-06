@@ -15,8 +15,7 @@ function setup_envvars_and_path
   #setenv PAGER 'w3m -X'
   setenv PAGER w3m
   setenv TZ America/Chicago
-  set -x SURFRAW_graphical false
-  set -x LEDGER_FILE ~/.ledger.journal
+  setenv SURFRAW_graphical false
 
   # Path
   add_to_path_if_exists /home/$USER/.cargo/bin
@@ -105,7 +104,7 @@ function setup_vimlike
         case insert;  set_color --bold --background green white
         case visual;  set_color --bold --background magenta white
     end
-    echo ' '
+    date '+%H%M'
     set_color normal
     echo -n ' '
   end
