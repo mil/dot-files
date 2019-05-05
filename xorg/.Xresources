@@ -3,7 +3,7 @@
 #ifdef COLOR
 *customization              : -color
 #endif 
-*font: xft:Hack-9
+//*font: xft:Hack-9
 *hinting: false
 
 Xft.dpi: 96
@@ -123,7 +123,7 @@ URxvt.perl-ext-common: default,resize-font,keyboard-select
 
 URxvt.keysym.C-9: command:\033]710;xft:Hack:size=14:antialias=true\007
 URxvt.keysym.C-0: command:\033]710;xft:Hack:size=20:antialias=true\007
-urxvt.font: xft:Hack:pixelsize=20
+//urxvt.font: xft:Hack:pixelsize=20
 URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-equal
 URxvt.resize-font.reset: C-plus

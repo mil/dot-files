@@ -12,8 +12,7 @@ function setup_envvars_and_path
   setenv EDITOR vis
   setenv GIT_EDITOR vis
   setenv BROWSER firefox
-  #setenv PAGER 'w3m -X'
-  setenv PAGER w3m
+  set -x PAGER 'w3m -X'
   setenv TZ America/Chicago
   set -x SURFRAW_graphical false
   set -x LEDGER_FILE ~/.ledger.journal
@@ -23,11 +22,20 @@ function setup_envvars_and_path
   add_to_path_if_exists /usr/share/surfraw
   add_to_path_if_exists /usr/lib/surfraw
   add_to_path_if_exists /home/$USER/.bin
+  add_to_path_if_exists /usr/lib64/go/bin/goimports
+  add_to_path_if_exists /usr/local/bin
 end
 
 
 function setup_shortcuts
-  abbr -a nb newsboat
+  abbr -a jdi 'killall jackd || true && jackd -r -d alsa -d 'hw:0' -r 44100'
+  abbr -a jdu 'killall jackd || true && jackd -r -d alsa -r 44100 -i 2 -d hw:USB'
+
+  abbr -a ytdlpl 'youtube-dl -xo "%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"'
+
+  abbr -a inv 'xcalib -invert -alter'
+
+  abbr -a nb 'killall newsboat; newsboat'
   abbr -a we weechat
   abbr -a g git
   abbr -a gco git checkout
@@ -37,7 +45,7 @@ function setup_shortcuts
   abbr -a r ranger
 
   alias nm='w3m -X'
-  alias w3m='w3m -X'
+  #alias w3m='w3m -X'
   alias pf='set -x PAGER cat'
   alias po='set -x PAGER w3m -X'
   alias pv='set -x PAGER vis -'
@@ -93,10 +101,10 @@ function setup_vimlike
   function fish_user_key_bindings; bind -M insert \cx edit_commandline; end
 
   # Keybindings
-  if not set --query SSH_CLIENT
-    fish_vi_key_bindings #fish_vi_mode
-    #cat ~/.todo
-  end
+  #if not set --query SSH_CLIENT
+  #  fish_vi_key_bindings #fish_vi_mode
+  #  #cat ~/.todo
+  #end
 
   # Prompt
   function fish_mode_prompt --description 'Displays the current mode'

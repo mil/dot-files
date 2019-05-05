@@ -7,4 +7,4 @@ xcape &
 ~/.bin/trackball &
 xsetroot -mod 2 2 -fg '#888888' -bg '#ffffff' &
 dunst &
-exec dwm
+exec i3

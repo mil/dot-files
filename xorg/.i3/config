@@ -11,6 +11,7 @@ hide_edge_borders vertical
 # Applications
 bindsym $mod+Return exec "xcwd > /tmp/lastdir && stw -e fish -C 'cd (cat /tmp/lastdir); rm -f /tmp/lastdir'"
 bindsym $mod+Shift+Return exec stw
+bindsym $mod+backslash exec surf
 
 bindsym $mod+n mark swap
 bindsym $mod+m swap container with mark swap
@@ -164,7 +165,7 @@ bindsym --release Mod4+slash exec "xdotool key Right"
 # Theme
 client.focused #000000 #005b88 #ffffff #000000
 client.focused_inactive #000000 #5a5a5a #ffffff #000000
-client.unfocused #4a4a4a #d4d4d4 #696969 #000000
+client.unfocused #000000 #e8e8e8 #000000 #000000
 client.urgent #000000 #000000 #ffffff #000000
 #client.placeholder #ff0000 #ff0000 #ff0000 #ff0000
 
@@ -181,13 +182,19 @@ exec ~/.bin/pcs off
 exec ~/.bin/pc
 exec autocutsel
 exec xcape
+#exec unclutter -idle 0
 exec autocutsel -selection PRIMARY
+exec xset +fp /usr/share/fonts/proggy-fonts/ && xset fp rehash
 exec xmodmap ~/.xmodmap
 #exec redshift
 #-l 43.07:-89.38
 
 set_from_resource $i3font i3wm.i3font 
-font $i3font # From xresources
+#font $i3font # From xresources
+#font pango:Inconsolata 10
+font -*-proggyclean-*-*-*-*-13-*-*-*-*-*-*-*
+#font pango:Envy Code R 10
+
 bar {
   position top
     status_command status-bar
@@ -203,5 +210,7 @@ bar {
     }
 }
 
-for_window [title="localhost levels"] floating disabled
+
+#for_window [title=".*"] title_format "<bold>%title</bold>"
+#for_window [title="DIS"] title_format "<span bgcolor='black' fgcolor='red'>%title</span>"
 

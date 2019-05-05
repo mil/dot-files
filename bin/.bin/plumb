@@ -24,13 +24,18 @@ end
 
 items = ARGV.reject { |j| j.nil? }.map {|j| j.strip }
 items = ARGF.read.split("\n") if items.empty?
+puts items
 
 if items.size == 1 && is_url(items[0])
   puts "Open in browser #{items[0]}"
   run("surf #{items[0]}")
 elsif !which(items[0]).nil?
   puts "Executable: #{items}"
-  run(items.join(' '))
+  if (items[0] == 'mpv')
+    run "st -e sh -c '#{items.join(' ')}'"
+  else
+    run(items.join(' '))
+  end
 elsif items.map {|j| File.exist?(j) }.uniq[0]
   puts "Fileshandle: #{items}"
 elsif items.size != 0 && items[0].strip != ""

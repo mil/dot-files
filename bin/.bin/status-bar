@@ -12,8 +12,8 @@ $user = %x[whoami].chomp!
 $hostname = %x[hostname].chomp!
 
 $date_f = "/home/#{$user}/.bar_date_enabled"
-File.write($date_f, "true") if !File.exist?($date_f)
-$date_enabled = File.read("/home/#{$user}/.bar_date_enabled").chomp! == "true"
+File.write($date_f, "1") if !File.exist?($date_f)
+$date_enabled = File.read("/home/#{$user}/.bar_date_enabled").chomp! == "1"
 
 def refresh_bar
   items = []
@@ -43,6 +43,7 @@ def poll_xtitle
         stdout.each { |line| 
           $title = line.chomp!
           $title.gsub!(/ - VIM$/, "")
+          $title.gsub!(/^\[I\]/, "<span bgcolor='#40ff00'> insert </span>")
           refresh_bar
         }
       rescue Errno::EIO
