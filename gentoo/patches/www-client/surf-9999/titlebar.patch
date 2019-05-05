@@ -1,0 +1,15 @@
+diff --git a/surf.c b/surf.c
+--- a/surf.c
++++ b/surf.c
+632,633c632,633
+< 			title = g_strdup_printf("[%i%%] %s:%s | %s",
+< 			        c->progress, togglestats, pagestats, name);
+---
+> 			title = g_strdup_printf("[%i%%] %s%s | %s:%s",
+> 			        c->progress, insertmode == 1 ? "[I] " : "", name, togglestats, pagestats);
+635,636c635,636
+< 			title = g_strdup_printf("%s:%s | %s",
+< 			        togglestats, pagestats, name);
+---
+> 			title = g_strdup_printf("%s%s | %s:%s",
+> 			        insertmode == 1 ? "[I] " : "", name,  togglestats, pagestats);
