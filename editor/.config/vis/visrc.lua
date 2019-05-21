@@ -1,6 +1,18 @@
 require('vis')
 local current_file = "nofile"
 
+--local pk = require("parkour")
+--
+--pk.equalprg.scheme = "scmindent"
+--pk.equalprg.lisp = "yasi --dialect lisp"
+--pk.equalprg.clojure = "yasi --dialect clojure"
+--pk.repl_fifo = "/home/m/.repl_fifo"
+--pk.autoselect = true
+
+--pk.syntax.lua = true       -- non-Lisps kind of work, but haven't been tested much
+
+
+
 function file_exists(name)
   local f=io.open(name,"r")
   if f~=nil then io.close(f) return true else return false end
@@ -29,7 +41,11 @@ function file_type_exec(file)
   --  vis:command('set syntax javascript')
   elseif string.match(file, ".ts") then
     vis:command('set syntax typescript')
+  elseif string.match(file, ".boot") then 
+    vis:command('set syntax clojure')
   elseif string.match(file, "COMMIT_EDITMSG") then 
+    vis:command('set syntax diff')
+  elseif string.match(file, ".rej") then 
     vis:command('set syntax diff')
   elseif string.match(file, ".commit.hg") then
     vis:command('set syntax diff')

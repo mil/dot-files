@@ -24,6 +24,7 @@ pkgs/.pkgbuilds/st/st-git/st/*
 
 browser/.surf/cache
 browser/.surf/cookies.txt
+browser/.surf/bookmarks
 
 # E.g. all patches
 gentoo/**

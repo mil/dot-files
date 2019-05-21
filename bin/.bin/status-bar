@@ -44,6 +44,7 @@ def poll_xtitle
           $title = line.chomp!
           $title.gsub!(/ - VIM$/, "")
           $title.gsub!(/^\[I\]/, "<span bgcolor='#40ff00'> insert </span>")
+          $title.gsub!(/(?<=[aA][cC][gG][dD][iI])(S)/, "<span bgcolor='red'>S</span>")
           refresh_bar
         }
       rescue Errno::EIO
@@ -59,6 +60,7 @@ end
 
 def update_battery
   $battery = %x[battery].chomp!.match(/(\d|\.|%)+/)[0] 
+  $battery = "<span fgcolor='red'>#{$battery}</span>" if $battery.to_i < 10
 end
 
 def update_date

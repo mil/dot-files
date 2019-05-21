@@ -31,10 +31,11 @@ function setup_shortcuts
   abbr -a jdu 'killall jackd || true && jackd -r -d alsa -r 44100 -i 2 -d hw:USB'
 
   abbr -a ytdlpl 'youtube-dl -xo "%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"'
+  abbr -a syncwatch watch grep -e Dirty: -e Writeback: /proc/meminfo
 
   abbr -a inv 'xcalib -invert -alter'
 
-  abbr -a nb 'killall newsboat; newsboat'
+  abbr -a nb 'killall newsboat || newsboat'
   abbr -a we weechat
   abbr -a g git
   abbr -a gco git checkout
@@ -101,7 +102,7 @@ function setup_vimlike
 
   # Keybindings
   #if not set --query SSH_CLIENT
-  #  fish_vi_key_bindings #fish_vi_mode
+    fish_vi_key_bindings #fish_vi_mode
   #  #cat ~/.todo
   #end
 

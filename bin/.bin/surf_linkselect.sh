@@ -1,8 +1,18 @@
 #!/usr/bin/env sh
 #
 # surf_linkselect.sh:
+#  Revision: 2 (Fri May 10 20:25:25 CDT 2019)
+#
 #  Usage:
-#    curl somesite.com | surf_linkselect [SURFWINDOWID] [PROMPT]
+#    curl g.com | surf_linkselect [SURFWINID] [PROMPT] [TAG] [LPROP] [CPROP]
+#  
+#  Args:
+#   - SURFWINID: windowid of surf instance
+#   - PROMPT:    prompt to be used for dmenu
+#   - TAG:       (optional, default: a) tag to extract via xpath
+#   - LPROP:     (optional, default: href) target link property on provided tag
+#   - CPROP:     (optional, default: '') target property on provided tag w/
+#                target content. set to '' use tag's inner contents at title
 #
 #  Description:
 #    Given an HTML body as STDIN, extracts links via xmllint & provides list
@@ -14,20 +24,39 @@
 #    xmllint, awk, dmenu
 
 function dump_links_with_titles() {
+  TAG=$1
+  LINKPROP=$2
+  CONTENTPROP=$3
+  # E.g. href = [hH][rR][eE][fF] , img = [iI][mM][gG]
+  tag_regex=`echo $TAG | grep -o . | awk -F' ' '{print "["toupper($1) tolower($1)"]"}' | tr -d '\n'`
+  linkprop_regex=`echo $LINKPROP | grep -o . | awk -F' ' '{print "["toupper($1) tolower($1)"]"}' | tr -d '\n'`
+  contentprop_regex=`echo $CONTENTPROP | grep -o . | awk -F' ' '{print "["toupper($1) tolower($1)"]"}' | tr -d '\n'`
+
   awk '{
     input = $0;
 
+    # Determine the link
     $0 = input;
-    gsub("<[^>]*>", "");
-    gsub(/[ ]+/, " ");
-    $1 = $1;
-    title = ($0 == "" ? "None" : $0);
-
-    $0 = input;
-    match($0, /\<[ ]*[aA][^>]* [hH][rR][eE][fF]=["]([^"]+)["]/, linkextract);
+    match($0, /\<[ ]*'$tag_regex'[^>]* '$linkprop_regex'=["]([^"]+)["]/, linkextract);
     $0 = linkextract[1];
     gsub("[ ]", "%20");
     link = $0;
+
+    if ("'$contentprop_regex'"!="") {
+      # Use specific property for the content
+      $0 = input;
+      match($0, /\<[ ]*'$tag_regex'[^>]* '$contentprop_regex'=["]([^"]+)["]/, titleprop);
+      $0 = titleprop[1];
+      title = ($0 == "" ? "None" : $0);
+    } else {
+      # Use inner content of the tag for the title, just strip away all tags
+      $0 = input;
+      gsub("<[^>]*>", "");
+      gsub(/[ ]+/, " ");
+      $1 = $1;
+      title = ($0 == "" ? "None" : $0);
+    }
+
 
     print title ": " link;
   }'
@@ -59,9 +88,14 @@ function link_normalize() {
 function link_select() {
   SURF_WINDOW=$1
   DMENU_PROMPT=$2
+  # Valid ideas: [a href title] [a href] [img src alt]
+  TAG="${3:-a}"
+  LINKPROP="${4:-href}"
+  CONTENTPROP=$5
+
   tr -d '\n\r' |
-    xmllint --html --xpath "//a" - |
-    dump_links_with_titles |
+    xmllint --html --xpath "//$TAG" - |
+    dump_links_with_titles $TAG $LINKPROP $CONTENTPROP |
     sort |
     uniq |
     dmenu -p "$DMENU_PROMPT" -l 10 -i -w $SURF_WINDOW |
@@ -69,4 +103,4 @@ function link_select() {
     link_normalize $(xprop -id $SURF_WINDOW _SURF_URI | cut -d '"' -f 2)
 }
 
-link_select "$1" "$2"
+link_select "$1" "$2" "$3" "$4" "$5"

@@ -8,12 +8,15 @@ static char *cookiefile     = "~/.surf/cookies.txt";
 
 static char *searchengine   = "https://duckduckgo.com/?q=";
 
-static char *editbuffer[] = { "/bin/sh", "-c", "editbuffer" };
+static char *editbuffer[] =         { "/bin/sh", "-c", "edit_screen.sh" };
 static char *linkselect_curwin [] = { "/bin/sh", "-c", "surf_linkselect.sh $0 'Link' | xargs -r xprop -id $0 -f _SURF_GO 8s -set _SURF_GO", winid };
 static char *linkselect_newwin [] = { "/bin/sh", "-c", "surf_linkselect.sh $0 'Link (new window)' | xargs -r surf", winid };
 static char *linkselect_yank [] =   { "/bin/sh", "-c", "surf_linkselect.sh $0 'Link (yank)' | y", winid };
+static char *string_yank[] =        { "/bin/sh", "-c", "html2text | strings_extract.sh | dmenu -p Copy -l 10 -i -w $(xdotool getactivewindow) | tr -d '\n' | y", winid };
+static char *piped_find[] =         { "/bin/sh", "-c", "html2text | strings_extract.sh | dmenu -t -p Find -l 10 -i -w $(xdotool getactivewindow) | xargs -r xprop -id $0 -f _SURF_FIND 8s -set _SURF_FIND", winid };
+static char *image_select[] =       { "/bin/sh", "-c", "surf_linkselect.sh $0 'Image (new window)' 'img' 'src' 'alt' | xargs -r surf", winid };
 
-//static char *linkselect [] = { "/bin/sh", "-c", "dumplinks | uniq | dmenu -p Links -l 10 -i -w $0 | awk -F' ' '{print $NF}' | link_normalize -v uri=$(xprop -id $0 _SURF_URI | cut -d '\"' -f 2) | xargs xprop -id $0 -f _SURF_GO 8s -set _SURF_GO", winid};
+
 
 /* Webkit default features */
 /* Highest priority value will be used.
@@ -63,7 +66,11 @@ static UriParameters uriparams[] = {
 	  [JavaScript] = { { .i = 0 }, 1 },
 	  [Plugins]    = { { .i = 0 }, 1 },
 	}, },
+	{ "https?://clojuredocs.org(/|$)", {
+	  [JavaScript] = { { .i = 1 }, 1 },
+	}, },
 };
+
 
 /* default window size: width, height */
 static int winsize[] = { 800, 600 };
@@ -80,7 +87,7 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
         .v = (const char *[]){ "/bin/sh", "-c", \
              "prop=\"$(printf '%b' \"$(xprop -id $1 $2 " \
              "| sed \"s/^$2(STRING) = //;s/^\\\"\\(.*\\)\\\"$/\\1/\")\" " \
-             "| dmenu -h 30 -p \"$4\" -w $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
+             "| dmenu -t -h 30 -p \"$4\" -w $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
              "surf-setprop", winid, r, s, p, NULL \
         } \
 }
@@ -91,7 +98,7 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
              "prop=\"$(printf '%b' \"$(xprop -id $1 $2 " \
              "| sed \"s/^$2(STRING) = //;s/^\\\"\\(.*\\)\\\"$/\\1/\")\" " \
 	     "| cat - ~/.ddg_bangs" \
-             "| dmenu -h 30 -p \"$4\" -w $1)\" && surf \"$prop\"", \
+             "| dmenu -t -h 30 -p \"$4\" -w $1)\" && surf \"$prop\"", \
              "surf-setprop", winid, r, s, p, NULL \
         } \
 }
@@ -102,9 +109,32 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
              "prop=\"$(printf '%b' \"$(xprop -id $1 $2 " \
              "| sed \"s/^$2(STRING) = //;s/^\\\"\\(.*\\)\\\"$/\\1/\")\" " \
 	     "| cat - ~/.ddg_bangs" \
-             "| dmenu -h 30 -p \"$4\" -w $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
+             "| dmenu -t -h 30 -p \"$4\" -w $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
              "surf-setprop", winid, r, s, p, NULL \
         } \
+}
+
+#define ADDBMK { \
+	.v = (char *[]){ "/bin/sh", "-c", \
+	     "surf_bookmarkurl $0", winid, NULL \
+	} \
+}
+#define LOADBMK(r, s, p) { \
+	.v = (const char *[]){ "/bin/sh", "-c", \
+	     "prop=\"$(surf_loadbookmark $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
+	     "surf-setprop", winid, r, s, p, NULL \
+	} \
+}
+
+
+#define SELNAV { \
+  .v = (char *[]){ "/bin/sh", "-c", \
+    "prop=\"`xprop -id $0 _SURF_HIST" \
+    " | sed -e 's/^.[^\"]*\"//' -e 's/\"$//' -e 's/\\\\\\n/\\n/g'" \
+    " | dmenu -p History -w $(xdotool getactivewindow) -i -l 10`\"" \
+    " && xprop -id $0 -f _SURF_NAV 8s -set _SURF_NAV \"$prop\"", \
+    winid, NULL \
+  } \
 }
 
 
@@ -183,7 +213,8 @@ static Key keys[] = {
 
 	{ 0,                     GDK_KEY_o,      spawn,      SETPROP_URI("_SURF_URI", "_SURF_GO", PROMPT_GO) },
 	{ GDK_SHIFT_MASK|0,      GDK_KEY_o,      spawn,      SPAWN_NEW("_SURF_URI", "_SURF_GO", PROMPT_GONEW) },
-	{ 0,                     GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
+	//{ 0,                     GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
+	{ 0,                     GDK_KEY_slash,      externalpipe, { .v = piped_find} },
 
 	{ 0,                     GDK_KEY_i,      insert,     { .i = 1 } },
 	{ 0,                     GDK_KEY_Escape, insert,     { .i = 0 } },
@@ -195,12 +226,16 @@ static Key keys[] = {
 	{ 0,                     GDK_KEY_l,      navigate,   { .i = +1 } },
 	{ 0,                     GDK_KEY_h,      navigate,   { .i = -1 } },
 
+  	{ GDK_SHIFT_MASK|0,	GDK_KEY_h,      selhist,    SELNAV },
+
 	{ 0,                     GDK_KEY_j,      scrollv,    { .i = +10 } },
 	{ 0,                     GDK_KEY_k,      scrollv,    { .i = -10 } },
 
 	{ 0,                     GDK_KEY_c,      scrollv,    { .i = +1000 } },
 	{ 0,                     GDK_KEY_d,      scrollv,    { .i = -1000 } },
 
+	{ 0,                     GDK_KEY_b,      spawn,      LOADBMK("_SURF_URI", "_SURF_GO", PROMPT_GO)},
+	{ GDK_SHIFT_MASK|0,      GDK_KEY_b,      spawn,      ADDBMK},
 
 
 	{ 0,                     GDK_KEY_bracketleft,      scrollv,    { .i = -50 } },
@@ -219,16 +254,20 @@ static Key keys[] = {
 	{ GDK_SHIFT_MASK|0,      GDK_KEY_n,      find,       { .i = -1 } },
 
 	{ 0,                     GDK_KEY_w,      toggleinspector, { 0 } },
-	{ GDK_SHIFT_MASK|0,      GDK_KEY_w,      sourcepipe, { .v = editbuffer } },
-	{ 0,			 GDK_KEY_u,      sourcepipe, { .v = linkselect_curwin } },
-	{ GDK_SHIFT_MASK|0,	 GDK_KEY_u,      sourcepipe, { .v = linkselect_newwin } },
+	{ GDK_SHIFT_MASK|0,      GDK_KEY_w,      externalpipe, { .v = editbuffer } },
+	{ 0,			 GDK_KEY_u,      externalpipe, { .v = linkselect_curwin } },
+	{ GDK_SHIFT_MASK|0,	 GDK_KEY_u,      externalpipe, { .v = linkselect_newwin } },
 
 
 	{ 0,                     GDK_KEY_t,      showcert,   { 0 } },
 
 	{ 0,                     GDK_KEY_p,      clipboard,  { .i = 1 } },
 	{ 0,                     GDK_KEY_y,      clipboard,  { .i = 0 } },
-	{ GDK_SHIFT_MASK|0,	 GDK_KEY_y,      sourcepipe, { .v = linkselect_yank } },
+	{ GDK_SHIFT_MASK|0,	 GDK_KEY_y,      externalpipe, { .v = linkselect_yank } },
+
+	{ MODKEY|GDK_SHIFT_MASK,      GDK_KEY_i,      externalpipe, { .v = string_yank } },
+
+	{ MODKEY|GDK_SHIFT_MASK,      GDK_KEY_o,      externalpipe, { .v = image_select } },
 
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_p,      print,      { 0 } },
