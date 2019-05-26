@@ -16,7 +16,13 @@ function setup_envvars_and_path
   setenv TZ America/Chicago
   setenv SURFRAW_graphical false
 
+  # Java
+  export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
+  export BOOT_JVM_OPTIONS='-client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:none'
+
+
   # Path
+  add_to_path_if_exists /opt/bin
   add_to_path_if_exists /home/$USER/.cargo/bin
   add_to_path_if_exists /usr/share/surfraw
   add_to_path_if_exists /usr/lib/surfraw
@@ -35,7 +41,7 @@ function setup_shortcuts
 
   abbr -a inv 'xcalib -invert -alter'
 
-  abbr -a nb 'killall newsboat || newsboat'
+  abbr -a nb 'killall newsboat || sleep 0.1 && newsboat'
   abbr -a we weechat
   abbr -a g git
   abbr -a gco git checkout

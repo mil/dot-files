@@ -68,6 +68,11 @@ function file_type_exec(file)
     vis:command('set tabwidth 2')
   elseif string.match(file, ".scss") then
     vis:command('set tabwidth 2')
+  elseif string.match(file, ".cljs") then
+    vis:command('set syntax off')
+
+  elseif string.match(file, ".clj") then
+    vis:command('set syntax off')
   end
 end
 
