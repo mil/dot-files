@@ -42,7 +42,7 @@ function file_type_exec(file)
   elseif string.match(file, ".ts") then
     vis:command('set syntax typescript')
   elseif string.match(file, ".boot") then 
-    vis:command('set syntax clojure')
+    vis:command('set syntax clj')
   elseif string.match(file, "COMMIT_EDITMSG") then 
     vis:command('set syntax diff')
   elseif string.match(file, ".rej") then 
@@ -69,10 +69,9 @@ function file_type_exec(file)
   elseif string.match(file, ".scss") then
     vis:command('set tabwidth 2')
   elseif string.match(file, ".cljs") then
-    vis:command('set syntax off')
-
+    vis:command('set syntax clj')
   elseif string.match(file, ".clj") then
-    vis:command('set syntax off')
+    vis:command('set syntax clj')
   end
 end
 

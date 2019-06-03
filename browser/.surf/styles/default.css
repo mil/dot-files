@@ -21,8 +21,7 @@
 }
 ::-webkit-scrollbar-thumb:hover { background: #555; }
 
-// html, img { -webkit-filter: invert(95%) hue-rotate(180deg); }
-//html, body {
-//  background: white !important;
-//  color: black !important;
-//}
+/* Stack overflow */
+#js-gdpr-consent-banner {
+  display: none !important;
+}

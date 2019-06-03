@@ -59,8 +59,11 @@ end
 
 
 def update_battery
-  $battery = %x[battery].chomp!.match(/(\d|\.|%)+/)[0] 
-  $battery = "<span fgcolor='red'>#{$battery}</span>" if $battery.to_i < 10
+  bat = %x[battery]
+  $battery = bat.chomp!.match(/(\d|\.|%)+/)[0] 
+  is_charging = bat.match('Charging')
+  $battery = "<span fgcolor='red'>#{$battery}</span>" if !is_charging && $battery.to_i < 10
+  $battery = "<span fgcolor='green'>#{$battery}</span>" if is_charging
 end
 
 def update_date

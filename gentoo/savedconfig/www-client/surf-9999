@@ -12,6 +12,7 @@ static char *editbuffer[] =         { "/bin/sh", "-c", "edit_screen.sh" };
 static char *linkselect_curwin [] = { "/bin/sh", "-c", "surf_linkselect.sh $0 'Link' | xargs -r xprop -id $0 -f _SURF_GO 8s -set _SURF_GO", winid };
 static char *linkselect_newwin [] = { "/bin/sh", "-c", "surf_linkselect.sh $0 'Link (new window)' | xargs -r surf", winid };
 static char *linkselect_yank [] =   { "/bin/sh", "-c", "surf_linkselect.sh $0 'Link (yank)' | y", winid };
+static char *codeblock_yank[] =     { "/bin/sh", "-c", "surf_tagyank.sh $0 'Codeblock'", winid };
 static char *string_yank[] =        { "/bin/sh", "-c", "sed -e 's/<[^>]*>//g' | strings_extract.sh | dmenu -p Copy -l 10 -i -w $(xdotool getactivewindow) | tr -d '\n' | y", winid };
 static char *piped_find[] =         { "/bin/sh", "-c", "sed -e 's/<[^>]*>//g' | strings_extract.sh | dmenu -t -p Find -l 10 -i -w $(xdotool getactivewindow) | xargs -r xprop -id $0 -f _SURF_FIND 8s -set _SURF_FIND", winid };
 static char *image_select[] =       { "/bin/sh", "-c", "surf_linkselect.sh $0 'Image (new window)' 'img' 'src' 'alt' | xargs -r surf", winid };
@@ -257,6 +258,8 @@ static Key keys[] = {
 	{ GDK_SHIFT_MASK|0,      GDK_KEY_w,      externalpipe, { .v = editbuffer } },
 	{ 0,			 GDK_KEY_u,      externalpipe, { .v = linkselect_curwin } },
 	{ GDK_SHIFT_MASK|0,	 GDK_KEY_u,      externalpipe, { .v = linkselect_newwin } },
+
+	{ 0,			 GDK_KEY_g,      externalpipe, { .v = codeblock_yank } },
 
 
 	{ 0,                     GDK_KEY_t,      showcert,   { 0 } },
