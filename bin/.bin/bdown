@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/usr/bin/env sh
 
 # echo '#!/bin/sh' > /etc/local.d/bupdown.sh
 # echo 'chown -R m /sys/class/backlight/intel_backlight/brightness' > /etc/local.d/bupdown.sh

@@ -40,7 +40,7 @@ function file_type_exec(file)
   --elseif string.match(file, ".ts") then
   --  vis:command('set syntax javascript')
   elseif string.match(file, ".ts") then
-    vis:command('set syntax typescript')
+    vis:command('set syntax javascript')
   elseif string.match(file, ".boot") then 
     vis:command('set syntax clj')
   elseif string.match(file, "COMMIT_EDITMSG") then 

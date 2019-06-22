@@ -12,9 +12,11 @@ function setup_envvars_and_path
   setenv EDITOR vis
   setenv GIT_EDITOR vis
   setenv BROWSER firefox
+  setenv XDG_CONFIG_HOME ~/.config
   set -x PAGER 'w3m -X'
   setenv TZ America/Chicago
   setenv SURFRAW_graphical false
+  setenv RANGER_LOAD_DEFAULT_RC FALSE
 
   # Java
   export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
@@ -129,14 +131,14 @@ end
 
 function setup_addons_and_misc
   # J
-  source /usr/share/autojump/autojump.fish
+  source /usr/share/autojump/autojump.fish 2> /dev/null
 
   # X autostart
-  if status --is-login
-      if test -z "$DISPLAY" -a $XDG_VTNR = 1
-          startx -- -keeptty
-      end
-  end
+  #if status --is-login
+  #    if test -z "$DISPLAY" -a $XDG_VTNR = 1
+  #        startx -- -keeptty
+  #    end
+  #end
 
   # Go-related
   setenv GO111MODULE on

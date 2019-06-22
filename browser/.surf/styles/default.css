@@ -3,6 +3,11 @@
   height: 5px;
   border-bottom: 12px solid #e8e8e8;
 }
+
+body {
+caret-color: red;
+}
+
 ::-webkit-scrollbar-track { 
 
   background: #e8e8e8; 

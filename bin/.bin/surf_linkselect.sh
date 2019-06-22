@@ -1,11 +1,14 @@
 #!/usr/bin/env sh
 # surf_linkselect.sh:
-#  Dependencies: xmllint, dmenu, corutils
-#  Usage: curl somesite.com | surf_linkselect [SURFWINDOWID] [PROMPT]
-#  Description:
-#    Given some HTML, extracts links via xmllint & provides to dmenu with each 
-#    link paired with its associated content. Selected link is then normalized 
-#    based on the passed surf window's URI and the result is printed to STDOUT.
+#   Usage: curl somesite.com | surf_linkselect [SURFWINDOWID] [PROMPT]
+#   Deps: xmllint, dmenu
+#   Info:
+#     Designed to be used w/ surf externalpipe patch. Enables keyboard-only
+#     link selection via dmenu. Given HTML stdin, extracts links one per line
+#     Selected link is normalized based on current URI and printed to STDOUT.
+#     Pipe the result to a new surf or xprop _SURF_URI accordingly.
+SURF_WINDOW="${1:-$(xprop -root | sed -n '/^_NET_ACTIVE_WINDOW/ s/.* //p')}"
+DMENU_PROMPT="${2:-Link}"
 
 function dump_links_with_titles() {
   awk '{
@@ -51,8 +54,6 @@ function link_normalize() {
 }
 
 function link_select() {
-  SURF_WINDOW="${1:-$(xprop -root | sed -n '/^_NET_ACTIVE_WINDOW/ s/.* //p')}"
-  DMENU_PROMPT="${2:-Link}"
   tr -d '\n\r' |
     xmllint --html --xpath "//a" - |
     dump_links_with_titles |
@@ -63,4 +64,4 @@ function link_select() {
     link_normalize $(xprop -id $SURF_WINDOW _SURF_URI | cut -d '"' -f 2)
 }
 
-link_select "$@"
+link_select

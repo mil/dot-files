@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 require 'json'
 JSON.parse(%x[i3-msg -t get_workspaces]).each do |workspace|
 	if (workspace['focused']) then

@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/usr/bin/env bash
 
 # Set the static increment value.  Keep in mind that this will 
 # be done twice. 

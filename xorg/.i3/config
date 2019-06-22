@@ -198,7 +198,7 @@ font -*-proggyclean-*-*-*-*-13-*-*-*-*-*-*-*
 bar {
   position top
     status_command status-bar
-    font $i3font
+    font xft: Terminus 7
     colors {
       background #cfcfcf
         statusline #000000
