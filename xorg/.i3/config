@@ -13,8 +13,10 @@ bindsym $mod+Return exec "xcwd > /tmp/lastdir && stw -e fish -C 'cd (cat /tmp/la
 bindsym $mod+Shift+Return exec stw
 bindsym $mod+backslash exec surf
 
-bindsym $mod+n mark swap
-bindsym $mod+m swap container with mark swap
+#bindsym $mod+n mark swap
+#bindsym $mod+m swap container with mark swap
+bindsym --release $mod+m exec --no-startup-id xdotool key --clearmodifiers "ctrl+l" "ctrl+c" && xclip -o | xargs urlhandler
+
 
 #bindsym $mod+minus scratchpad show
 #bindsym $mod+Shift+minus move scratchpad

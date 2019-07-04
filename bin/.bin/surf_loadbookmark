@@ -1,5 +1,5 @@
 #!/bin/sh
-cat ~/.surf/bookmarks |\
+cat ~/.bookmarks |\
   awk -F' ' '{print $2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,": " $1}' |\
   sed -Es 's/\s+:/:/' |\
   dmenu -p 'Load Bookmark' -i -l 10 -w $1 |\

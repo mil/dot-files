@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+sleep $(echo $1 | bc)
+while :
+do
+  notify-send  "done with $1"
+done

@@ -9,6 +9,7 @@ end
 # Main
 function setup_envvars_and_path
   # Env vars
+  setenv GO111MODULE on
   setenv EDITOR vis
   setenv GIT_EDITOR vis
   setenv BROWSER firefox
@@ -121,7 +122,10 @@ function setup_vimlike
         case insert;  set_color --bold --background green white
         case visual;  set_color --bold --background magenta white
     end
-    date '+%H%M'
+
+    #date '+%H%M'
+    msformat $CMD_DURATION
+
     set_color normal
     echo -n ' '
   end
@@ -141,7 +145,6 @@ function setup_addons_and_misc
   #end
 
   # Go-related
-  setenv GO111MODULE on
   if test -d ~/Go; export GOPATH=/home/$USER/Go; end
   if test -d ~/.Go; export GOPATH=/home/$USER/.Go; end
   add_to_path_if_exists $GOPATH/bin

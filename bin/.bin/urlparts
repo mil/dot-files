@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+echo "$(
+  inp="$1"
+  IFS='/' read -r -a array <<< "$inp"
+  for i in "${!array[@]}"
+  do
+    printf "/%s" "${array[@]:0:$i+1}" | cut -c 2-
+  done
+)" | sort -r | grep -E '://'

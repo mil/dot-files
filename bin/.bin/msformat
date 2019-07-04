@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+CMD_DURATION=$1
+
+[[ -z "$CMD_DURATION" ]] && exit 0
+
+if (( $CMD_DURATION<1000 )); then
+  echo ${CMD_DURATION}ms
+fi
+
+if (( $CMD_DURATION>999 && $CMD_DURATION<59999 )); then
+  echo ${CMD_DURATION::-3}s
+fi
+
+if (( $CMD_DURATION>59999 )); then
+  echo "$CMD_DURATION / 60000" | bc | tr -d '\n'
+  echo m
+fi

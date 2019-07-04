@@ -1,0 +1,3 @@
+.container #content { max-width:  100% !important; width: 100% !important;}
+#left-sidebar { display: none; }
+#js-gdpr-consent-banner { display: none !important; }

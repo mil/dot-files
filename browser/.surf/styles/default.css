@@ -25,8 +25,3 @@ caret-color: red;
   background: rgba(0, 0, 255, 0.1);
 }
 ::-webkit-scrollbar-thumb:hover { background: #555; }
-
-/* Stack overflow */
-#js-gdpr-consent-banner {
-  display: none !important;
-}

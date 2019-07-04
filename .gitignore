@@ -6,6 +6,8 @@ vim/.vim/backup
 vim/.vim/tmp
 vim/.vim/.netrwhist
 
+media/.config/mpv/watch_later/
+
 w3m/.w3m/w3mtmp*
 w3m/.w3m/cookie*
 w3m/.w3m/history*

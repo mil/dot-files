@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+xdotool key --clearmodifiers "ctrl+l" "ctrl+c" && xclip -o | xargs urlhandler
+
