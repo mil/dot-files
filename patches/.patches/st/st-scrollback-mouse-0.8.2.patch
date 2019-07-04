@@ -1,0 +1,53 @@
+diff --git a/st.h b/st.h
+index 17a79e0..3ac7f57 100644
+--- a/st.h
++++ b/st.h
+@@ -76,6 +76,13 @@ typedef union {
+ 	const void *v;
+ } Arg;
+ 
++typedef struct {
++	 uint b;
++	 uint mask;
++	 void (*func)(const Arg *);
++	 const Arg arg;
++} MouseKey;
++
+ void die(const char *, ...);
+ void redraw(void);
+ void draw(void);
+@@ -122,3 +129,4 @@ extern char *termname;
+ extern unsigned int tabspaces;
+ extern unsigned int defaultfg;
+ extern unsigned int defaultbg;
++extern MouseKey mkeys[];
+diff --git a/x.c b/x.c
+index 0422421..e9fd6e9 100644
+--- a/x.c
++++ b/x.c
+@@ -409,6 +409,7 @@ bpress(XEvent *e)
+ {
+ 	struct timespec now;
+ 	MouseShortcut *ms;
++	MouseKey *mk;
+ 	int snap;
+ 
+ 	if (IS_SET(MODE_MOUSE) && !(e->xbutton.state & forceselmod)) {
+@@ -424,6 +425,14 @@ bpress(XEvent *e)
+ 		}
+ 	}
+ 
++	for (mk = mkeys; mk < mkeys + LEN(mkeys); mk++) {
++		if (e->xbutton.button == mk->b
++				&& match(mk->mask, e->xbutton.state)) {
++			mk->func(&mk->arg);
++			return;
++		}
++	}
++
+ 	if (e->xbutton.button == Button1) {
+ 		/*
+ 		 * If the user clicks below predefined timeouts specific
+-- 
+2.21.0
+

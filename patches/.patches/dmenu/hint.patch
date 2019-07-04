@@ -1,0 +1,24 @@
+--- dmenu-4.5/dmenu.c   2012-01-08 20:18:43.000000000 +0800
++++ dmenu-4.5/dmenu.new.c   2015-01-03 09:16:39.719946115 +0800
+@@ -589,6 +589,21 @@
+                        DefaultVisual(dc->dpy, screen),
+                        CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
+
++   /* Set window properties */
++   if (win) {
++       {
++           char *NAME = "dmenu";
++           XTextProperty tprop_name;
++           if (Success == Xutf8TextListToTextProperty(dc->dpy, &NAME, 1,
++                       XStringStyle, &tprop_name))
++               XSetWMName(dc->dpy, win, &tprop_name);
++       }
++       {
++           XClassHint HINT = { "dmenu", "Dmenu" };
++           XSetClassHint(dc->dpy, win, &HINT);
++       }
++   }
++
+    /* open input methods */
+    xim = XOpenIM(dc->dpy, NULL, NULL, NULL);
+    xic = XCreateIC(xim, XNInputStyle, XIMPreeditNothing | XIMStatusNothing,

@@ -2,5 +2,6 @@
 
 # Restow all configs
 stow -t ~ $(ls -d */) --ignore gentoo
+sudo ln -s $(pwd)/configuration.nix /etc/nixos/configuration.nix
 #sudo ln -sfn $(readlink -f gentoo/savedconfig) /etc/portage/
 #sudo ln -sfn $(readlink -f gentoo/patches) /etc/portage/
