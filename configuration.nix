@@ -11,12 +11,6 @@
   boot.loader.grub.backgroundColor = "#cfcfcf";
   boot.loader.grub.splashImage = null;
 
-  networking.extraHosts = builtins.readFile
-  (builtins.fetchurl { 
-    url = https://raw.githubusercontent.com/StevenBlack/hosts/v2.3.7/hosts;
-    sha256 = "1crw9hhw7rjbxyl6xxivc1j509pdhn2b3ky7q52g5p0h4frlazqb";
-  });
-
   boot.extraModprobeConfig = ''
     options snd_hda_intel enable=0,1
     options thinkpad_acpi fan_control=1
