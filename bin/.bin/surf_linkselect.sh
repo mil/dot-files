@@ -26,7 +26,9 @@ function dump_links_with_titles() {
     gsub("[ ]", "%20");
     link = $0;
 
-    print title ": " link;
+    if (link != "") {
+      print title ": " link;
+    }
   }'
 }
 
@@ -57,8 +59,8 @@ function link_select() {
   tr -d '\n\r' |
     xmllint --html --xpath "//a" - |
     dump_links_with_titles |
-    sort |
-    uniq |
+    awk '!x[$0]++' |
+    # sort | uniq
     dmenu -p "$DMENU_PROMPT" -l 10 -i -w $SURF_WINDOW |
     awk -F' ' '{print $NF}' |
     link_normalize $(xprop -id $SURF_WINDOW _SURF_URI | cut -d '"' -f 2)
