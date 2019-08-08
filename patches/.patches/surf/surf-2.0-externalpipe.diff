@@ -77,7 +77,7 @@ index 93a1629..ba53b94 100644
 +{
 +	if (curconfig[JavaScript].val.i) {
 +		webkit_web_view_run_javascript(
-+			c->view, "window.document.body.outerHTML",
++			c->view, "window.document.documentElement.outerHTML",
 +			NULL, externalpipe_js_done, arg);
 +	} else {
 +		WebKitWebResource *resource = webkit_web_view_get_main_resource(c->view);

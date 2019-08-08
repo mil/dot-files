@@ -4,12 +4,16 @@
 { config, pkgs, ... }:
 
 { imports = [ /etc/nixos/hardware-configuration.nix /etc/nixos/networks.nix ];
+  programs.adb.enable = true;
+
+
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.backgroundColor = "#cfcfcf";
   boot.loader.grub.splashImage = null;
+  boot.tmpOnTmpfs = true;
 
   boot.extraModprobeConfig = ''
     options snd_hda_intel enable=0,1
@@ -47,6 +51,14 @@
   };
   fonts.fontconfig.hinting.autohint = true;
   services.logind.lidSwitch = "ignore";
+
+boot.kernelPatches = [
+{
+	name = "foo";
+	patch = /home/m/.patches/firmware-linux-nonfree/fix-wifi.diff;
+}
+
+];
   
   nixpkgs.config.packageOverrides = pkgs: {
     dunst = pkgs.dunst.override {
@@ -69,6 +81,11 @@
         /home/m/.patches/st/st-scrollback-mouse-altscreen-20190131-e23acb9.patch
       ];
     };
+    firmware-linux-nonfree = pkgs.firmware-linux-nonfree.override {
+      patches =[
+        /home/m/.patches/firmware-linux-nonfree/firmware-linux-nonfree-config.patch
+      ];
+    };
     chuck = pkgs.chuck.overrideAttrs (oldAttrs: rec {
       name = "chuck";
       version = "1.4.0.0";
@@ -84,10 +101,12 @@
     surf-head = pkgs.surf.overrideAttrs (oldAttrs: rec {
       name = "surf-head";
       patches = [
+
         /home/m/.patches/surf/config.h.patch
         /home/m/.patches/surf/notifyclip.patch
         /home/m/.patches/surf/titlebar.patch
         /home/m/.patches/surf/surf-modal-20190209-d068a38.diff
+        /home/m/.patches/surf/ddg.diff
         /home/m/.patches/surf/surf-2.0-externalpipe.diff
         /home/m/.patches/surf/ua.patch
       ];
@@ -101,17 +120,28 @@
     });
   };
 
+  nixpkgs.config.allowUnfree =true;
+  hardware.enableRedistributableFirmware = true;
+  #  hardware.enableAllFirmware = true;
+  #     boot.kernelPatches = [ {
+  #        name = "enable-mediatek-wifi";
+  #        patch = null;
+  #        extraConfig = ''
+  #		MT7601 y
+  #              '';
+  #        } ];
+
   services.logind.extraConfig = "HandleLidSwitch=ignore";
 
   networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
-  networking.wireless.userControlled.enable = true;
+  networking.wireless.userControlled.enable = false;
 
   users.users.m = {
     shell = pkgs.fish;
     isNormalUser = true;
     home = "/home/m";
     description = "m";
-    extraGroups = [ "wheel" "docker" "jackaudio" ];
+    extraGroups = [ "wheel" "docker" "jackaudio" "adbusers" "dialout" "uucp"];
   };
   services.xserver.enable = true;
   services.xserver.exportConfiguration = true;
@@ -154,18 +184,31 @@
     dbeaver
     compton
     terraform
-
+    sshfs
     # Media
-    mpv youtube-dl
+    mpv 
+    youtube-dl
+
+    # Todo re-org
     yubikey-personalization
     yubikey-manager
     xurls
     libtidy
     screen
-
-    # Todo remove
+    picocom
+    guvcview
+    xcape
+    elinks
+    dos2unix
+    exfat
+    sass
+    rockbox_utility
+    libarchive
     python3
     ruby
+    p7zip
+    gimp
+    recode
   ];
   sound.enable = true;
   services.xserver.libinput.enable = true;

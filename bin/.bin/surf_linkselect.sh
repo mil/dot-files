@@ -17,12 +17,17 @@ function dump_links_with_titles() {
     $0 = input;
     gsub("<[^>]*>", "");
     gsub(/[ ]+/, " ");
+    gsub("&amp;", "\\&");
+    gsub("&lt;", "<");
+    gsub("&gt;", ">");
     $1 = $1;
     title = ($0 == "" ? "None" : $0);
 
     $0 = input;
     match($0, /\<[ ]*[aA][^>]* [hH][rR][eE][fF]=["]([^"]+)["]/, linkextract);
     $0 = linkextract[1];
+    gsub(/^[ \t]+/,"");
+    gsub(/[ \t]+$/,"");
     gsub("[ ]", "%20");
     link = $0;
 
@@ -35,6 +40,8 @@ function dump_links_with_titles() {
 function link_normalize() {
   URI=$1
   awk -v uri=$URI '{
+    gsub("&amp;", "\\&");
+
     if ($0 ~ /^https?:\/\//  || $0 ~ /^\/\/.+$/) {
       print $0;
     } else if ($0 ~/^#/) {

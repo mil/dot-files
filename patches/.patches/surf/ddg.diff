@@ -1,0 +1,15 @@
+diff --git a/surf.c b/surf.c
+index 2b54e3c..e0fbd95 100644
+--- a/surf.c
++++ b/surf.c
+@@ -545,7 +545,9 @@ loaduri(Client *c, const Arg *a)
+ 	if (g_strcmp0(uri, "") == 0)
+ 		return;
+ 
+-	if (g_str_has_prefix(uri, "http://")  ||
++  if (g_str_has_prefix(uri, " ") || g_regex_match_simple("\\s*!\\S+\\s*", uri, 0, 0)) {
++		url = g_strdup_printf("%s%s", searchengine, uri);
++  } else if (g_str_has_prefix(uri, "http://")  ||
+ 	    g_str_has_prefix(uri, "https://") ||
+ 	    g_str_has_prefix(uri, "file://")  ||
+ 	    g_str_has_prefix(uri, "about:")) {

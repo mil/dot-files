@@ -14,7 +14,7 @@ function setup_envvars_and_path
   setenv GIT_EDITOR vis
   setenv BROWSER firefox
   setenv XDG_CONFIG_HOME ~/.config
-  set -x PAGER 'w3m -X'
+  setenv PAGER w3m
   setenv TZ America/Chicago
   setenv SURFRAW_graphical false
   setenv RANGER_LOAD_DEFAULT_RC FALSE
@@ -52,6 +52,7 @@ function setup_shortcuts
   abbr -a yt youtube
   abbr -a h hg
   abbr -a r ranger
+  abbr -a dg git diff HEAD
 
   alias nm='w3m -X'
   #alias w3m='w3m -X'

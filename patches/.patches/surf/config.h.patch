@@ -3,7 +3,7 @@ new file mode 100644
 index 0000000..0c98462
 --- /dev/null
 +++ b/config.h
-@@ -0,0 +1,360 @@
+@@ -0,0 +1,361 @@
 + static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
 + static char *fulluseragent  = ""; /* Or override the whole user agent string */
 + static char *scriptfile     = "~/.surf/script.js";
@@ -64,7 +64,7 @@ index 0000000..0c98462
 + 	[SpellChecking]       =       { { .i = 0 },     },
 + 	[SpellLanguages]      =       { { .v = ((char *[]){ "en_US", NULL }) }, },
 + 	[StrictTLS]           =       { { .i = 1 },     },
-+ 	[Style]               =       { { .i = 1 },     },
++ 	[Style]               =       { { .i = 0 },     },
 + 	[WebGL]               =       { { .i = 1 },     },
 + 	[ZoomLevel]           =       { { .f = 1.0 },   },
 + };
@@ -109,8 +109,8 @@ index 0000000..0c98462
 +         .v = (const char *[]){ "/bin/sh", "-c", \
 +              "prop=\"$(printf '%b' \"$(xprop -id $1 $2 " \
 +              "| sed \"s/^$2(STRING) = //;s/^\\\"\\(.*\\)\\\"$/\\1/\")\" " \
-+ 	     "| cat - ~/.ddg_bangs" \
-+              "| dmenu -t -h 30 -p \"$4\" -w $1)\" && surf \"$prop\"", \
++              "| cat - ~/.ddg_bangs" \
++              "| dmenu -l 10 -t -p \"$4\" -w $1)\" && surf \"$prop\"", \
 +              "surf-setprop", winid, r, s, p, NULL \
 +         } \
 + }
@@ -132,6 +132,7 @@ index 0000000..0c98462
 +              "prop=\"$(printf '%b' \"$(xprop -id $1 $2 " \
 +              "| sed \"s/^$2(STRING) = //;s/^\\\"\\(.*\\)\\\"$/\\1/\")\" " \
 +              "| xargs urlparts " \
++              "| cat - ~/.ddg_bangs" \
 +              "| dmenu -t -l 10 -p \"$4\" -w $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
 +              "surf-setprop", winid, r, s, p, NULL \
 +         } \
