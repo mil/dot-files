@@ -2,7 +2,7 @@
 +++ b/config.h	2019-08-13 15:32:27.452259446 -0500
 @@ -0,0 +1,153 @@
 +#include "zoomswap.c"
-+/* See LICENSE file for copyright and license details. */
++#include "layouts.c"
 +#include "movestack.c"
 +/* grid of tags */
 +#define DRAWCLASSICTAGS             1 << 0
@@ -39,7 +39,7 @@
 +};
 +static const int focusonwheel       = 0;
 +static const unsigned int gappx     = 3;        /* gap pixel between windows */
-+#include "layouts.c"
++ 
 +
 +/* tagging */
 +static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -63,12 +63,12 @@
 +
 +static const Layout layouts[] = {
 +	/* symbol     arrange function */
-+	{ "[]=",      tile },    /* first entry is default */
-+	{ "><>",      NULL },    /* no layout function means floating behavior */
++	{ "[=]",      tile },    /* first entry is default */
++	{ "[F]",      NULL },    /* no layout function means floating behavior */
 +	{ "[M]",      monocle },
-+	{ "H[]",      deck },
++	{ "[D]",      deck },
++	{ "[G]",      grid },
 +};
-+
 +
 +/* key definitions */
 +#define MODKEY Mod1Mask
@@ -115,7 +115,7 @@
 +	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} },
 +	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 +	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
-+
++	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[4]} },
 +	//{ MODKEY,                       XK_space,  setlayout,      {0} },
 +	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 +

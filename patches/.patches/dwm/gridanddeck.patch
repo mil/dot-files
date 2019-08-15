@@ -1,0 +1,86 @@
+diff --git a/layouts.c b/layouts.c
+new file mode 100644
+index 0000000..e2c17f2
+--- /dev/null
++++ b/layouts.c
+@@ -0,0 +1,80 @@
++static void deck(Monitor *m);
++
++void
++deck(Monitor *m) {
++	int dn;
++	unsigned int i, n, h, mw, my;
++	Client *c;
++
++	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
++	if(n == 0)
++		return;
++
++	dn = n - m->nmaster;
++	if(dn > 0) /* override layout symbol */
++		snprintf(m->ltsymbol, sizeof m->ltsymbol, "{%d}", dn);
++
++	if(n > m->nmaster)
++		mw = m->nmaster ? m->ww * m->mfact : 0;
++	else
++		mw = m->ww;
++	for(i = my = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
++		if(i < m->nmaster) {
++			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
++			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), False);
++			my += HEIGHT(c);
++		}
++		else
++			resize(c, m->wx + mw, m->wy, m->ww - mw - (2*c->bw), m->wh - (2*c->bw), False);
++}
++void
++grid(Monitor *m) {
++    unsigned int n = 0, i = 0, ri = 0, ci = 0;  /* counters */
++    unsigned int cx, cy, cw, ch;                /* client geometry */
++    unsigned int uw = 0, uh = 0, uc = 0;        /* utilization trackers */
++    unsigned int cols, rows = m->nmaster + 1;
++    Client *c;
++
++    /* count clients */
++    for (c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
++
++    /* nothing to do here */
++    if (n == 0)
++        return;
++
++    /* force 2 clients to always split vertically */ #define FORCE_VSPLIT 1
++    if (FORCE_VSPLIT && n == 2)
++        rows = 1;
++
++    /* never allow empty rows */
++    if (n < rows)
++        rows = n;
++
++    /* define first row */
++    cols = n / rows;
++    uc = cols;
++    cy = m->wy;
++    ch = m->wh / rows;
++    uh = ch;
++
++    for (c = nexttiled(m->clients); c; c = nexttiled(c->next), i++, ci++) {
++        if (ci == cols) {
++            uw = 0;
++            ci = 0;
++            ri++;
++
++            /* next row */
++            cols = (n - uc) / (rows - ri);
++            uc += cols;
++            cy = m->wy + uh;
++            ch = (m->wh - uh) / (rows - ri);
++            uh += ch;
++        }
++
++        cx = m->wx + uw;
++        cw = (m->ww - uw) / (cols - ci);
++        uw += cw;
++
++        resize(c, cx, cy, cw - 2 * c->bw, ch - 2 * c->bw, 0);
++    }
++}

@@ -120,7 +120,7 @@ in {
          /home/m/.patches/dwm/dwm-6.2-taggrid.diff
          /home/m/.patches/dwm/dwm-switchcol-6.1.diff
          /home/m/.patches/dwm/dwm-config.patch
-         /home/m/.patches/dwm/deck.patch
+         /home/m/.patches/dwm/gridanddeck.patch
          /home/m/.patches/dwm/pertag.patch
          /home/m/.patches/dwm/zoomswap.patch
          /home/m/.patches/dwm/movestack.patch
