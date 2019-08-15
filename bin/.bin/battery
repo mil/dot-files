@@ -33,7 +33,7 @@ if (ARGV[0] == "percentage") then
 elsif (ARGV[0] == "status") then
   puts getStatus
 else
-  puts "#{getStatus} #{getPercentage}"
+  puts " #{getStatus} #{getPercentage}"
 end
 
 

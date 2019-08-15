@@ -3,7 +3,9 @@
 
 { config, pkgs, ... }:
 
-{ imports = [ /etc/nixos/hardware-configuration.nix /etc/nixos/networks.nix ];
+let unstable = import <unstable>{};
+in {
+  imports = [ /etc/nixos/hardware-configuration.nix /etc/nixos/networks.nix ];
   programs.adb.enable = true;
 
 
@@ -30,15 +32,28 @@
     serviceConfig.Type = "oneshot";
   };
 
-  # Yubikey
-  services.pcscd.enable = true;
-
   services.udev.extraRules = ''
       ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="${pkgs.stdenv.shell} -c 'chown -R m /sys/class/backlight/%k/brightness'"
       ATTRS{product}=="USB Trackball", SYMLINK+="miltrackball", ENV{DISPLAY}=":0", RUN+="${pkgs.stdenv.shell} -c '/home/m/.bin/trackball'"
   '';
 
+
+  # Yubikey
   hardware.u2f.enable = true;
+  programs.ssh.startAgent = false;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+  services.pcscd.enable = true;
+  services.udev.packages = with pkgs; [yubikey-personalization];
+  environment.shellInit = ''
+    export GPG_TTY="$(tty)"
+    gpg-connect-agent /bye
+    export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+  '';
+
+
 
   programs.fish.enable = true;
   virtualisation.docker.enable = true;
@@ -52,33 +67,68 @@
   fonts.fontconfig.hinting.autohint = true;
   services.logind.lidSwitch = "ignore";
 
-boot.kernelPatches = [
-{
-	name = "foo";
-	patch = /home/m/.patches/firmware-linux-nonfree/fix-wifi.diff;
-}
-
-];
+#boot.kernelPatches = [
+#{
+#	name = "foo";
+#	patch = /home/m/.patches/firmware-linux-nonfree/fix-wifi.diff;
+#}
+#
+#];
   
   nixpkgs.config.packageOverrides = pkgs: {
     dunst = pkgs.dunst.override {
       dunstify = true;
     };
-    dmenu = pkgs.dmenu.override {
-      patches =[
+
+    dmenu = pkgs.surf.overrideAttrs (oldAttrs: rec {
+      name = "dmenu";
+      patches = [
+        #/home/m/.patches/dmenu/non_blocking_stdin-4.9.diff
+        #/home/m/.patches/dmenu/patched.diff
+        #/home/m/.patches/dmenu/dmenu-numbers-4.9.diff
+
+
+        #/home/m/.patches/dmenu/cust.diff
         /home/m/.patches/dmenu/height.patch
+	/home/m/.patches/dmenu/dmenu-nonblockingstdin-4.9.diff
+        /home/m/.patches/dmenu/dmenu-numbers-4.9-nonblocking-compat.diff
         /home/m/.patches/dmenu/scroll.patch
         /home/m/.patches/dmenu/printinputflag.patch
       ];
-        #/home/m/.patches/dmenu/hint.patch
-    };
+      makeFlags = [ "PREFIX=$(out)" ];
+      src = builtins.fetchGit {
+        url = "https://git.suckless.org/dmenu";
+	# e.g. 4.9
+        rev = "65be875f5adf31e9c4762ac8a8d74b1dfdd78584";
+      };
+    });
+
     st = pkgs.st.override {
       patches =[
         /home/m/.patches/st/st-config.patch
         /home/m/.patches/st/st-externalpipe-0.8.2.patch
+        /home/m/.patches/st/st-externalpipe-signal-0.8.2.diff
+        /home/m/.patches/st/keysel.patch
         /home/m/.patches/st/st-scrollback-0.8.2.patch
         /home/m/.patches/st/st-scrollback-mouse-0.8.2.patch
         /home/m/.patches/st/st-scrollback-mouse-altscreen-20190131-e23acb9.patch
+        #/home/m/.patches/st/sixel.patch
+      ];
+    };
+    dwm = pkgs.dwm.override {
+      patches =[
+         /home/m/.patches/dwm/dwm-6.2-taggrid.diff
+         /home/m/.patches/dwm/dwm-switchcol-6.1.diff
+         /home/m/.patches/dwm/dwm-config.patch
+         /home/m/.patches/dwm/deck.patch
+         /home/m/.patches/dwm/pertag.patch
+         /home/m/.patches/dwm/zoomswap.patch
+         /home/m/.patches/dwm/movestack.patch
+         /home/m/.patches/dwm/barheight.patch
+
+         #/home/m/.patches/dwm/awesomebar.patch
+         #/home/m/.patches/dwm/awesomebarswallow.patch
+         /home/m/.patches/dwm/swallow_betterkill_awesomebar.patch
       ];
     };
     firmware-linux-nonfree = pkgs.firmware-linux-nonfree.override {
@@ -98,19 +148,21 @@ boot.kernelPatches = [
       substituteInPlace src/makefile --replace "/usr/local/bin" "$out/bin"
   '';
     });
+
+
     surf-head = pkgs.surf.overrideAttrs (oldAttrs: rec {
       name = "surf-head";
       patches = [
-
         /home/m/.patches/surf/config.h.patch
         /home/m/.patches/surf/notifyclip.patch
         /home/m/.patches/surf/titlebar.patch
         /home/m/.patches/surf/surf-modal-20190209-d068a38.diff
         /home/m/.patches/surf/ddg.diff
         /home/m/.patches/surf/surf-2.0-externalpipe.diff
+        /home/m/.patches/surf/surf-externalpipe-signal-2.0.diff
         /home/m/.patches/surf/ua.patch
       ];
-      buildInputs = oldAttrs.buildInputs ++ [ pkgs.gcr pkgs.gstreamer ];
+      buildInputs = oldAttrs.buildInputs ++ [ pkgs.gcr  ];
       makeFlags = [ "PREFIX=$(out)" ];
       src = builtins.fetchGit {
         url = "https://git.suckless.org/surf";
@@ -163,22 +215,23 @@ boot.kernelPatches = [
     arandr unclutter gnumeric
 
     inotifyTools
+    python37Packages.pip
     adoptopenjdk-bin
 
     leiningen
     boot
-    clojure
     ncdu
-    go gotools
-    
+    unstable.go gotools
+
     sqlite unzip
-
     # Music
-    jack_capture chuck jack2
+    jack_capture 
+    chuck jack2
 
-    libreoffice
+    #libreoffice    
     i3 zathura sxiv libnotify dunst
-    surf-head pkgs.libxml2 firefox 
+    surf-head 
+    pkgs.libxml2 firefox 
     dmenu st 
     gnumake stow 
     dbeaver
@@ -194,7 +247,9 @@ boot.kernelPatches = [
     yubikey-manager
     xurls
     libtidy
+    wmutils-core
     screen
+    slock
     picocom
     guvcview
     xcape
@@ -207,8 +262,24 @@ boot.kernelPatches = [
     python3
     ruby
     p7zip
+    rakudo
+    discount
+    gcc
+    rofi
+    yubikey-manager
+    lsof
+    pinentry
     gimp
     recode
+    sxhkd
+    dwm
+    alpine
+    zig
+    expect
+    xlibsWrapper
+    lynx html2text
+    gnupg
+    psmisc
   ];
   sound.enable = true;
   services.xserver.libinput.enable = true;

@@ -1,0 +1,66 @@
+From 84a41d036329c7599024b7cb0f613400d7484cec Mon Sep 17 00:00:00 2001
+From: Miles Alan <m@milesalan.com>
+Date: Sun, 11 Aug 2019 21:36:58 -0500
+Subject: [PATCH] Add handler for SIGUSR1 signal to run an externalpipe command
+
+---
+ config.def.h |  1 +
+ surf.c       | 16 ++++++++++++++++
+ 2 files changed, 17 insertions(+)
+
+diff --git a/config.def.h b/config.def.h
+index 6d3135e..a7363d9 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -5,6 +5,7 @@ static char *scriptfile     = "~/.surf/script.js";
+ static char *styledir       = "~/.surf/styles/";
+ static char *cachedir       = "~/.surf/cache/";
+ static char *cookiefile     = "~/.surf/cookies.txt";
++static char *externalpipe_sigusr1[] = {"/bin/sh", "-c", "externalpipe_buffer.sh surf_strings_read"};
+ 
+ /* Webkit default features */
+ static Parameter defconfig[ParameterLast] = {
+diff --git a/surf.c b/surf.c
+index 93a1629..0e402ca 100644
+--- a/surf.c
++++ b/surf.c
+@@ -146,6 +146,7 @@ static void die(const char *errstr, ...);
+ static void setup(void);
+ static void sigchld(int unused);
+ static void sighup(int unused);
++static void sigusr1(int unused);
+ static char *buildfile(const char *path);
+ static char *buildpath(const char *path);
+ static const char *getuserhomedir(const char *user);
+@@ -338,6 +339,15 @@ sigchld(int unused)
+ 		;
+ }
+ 
++void
++sigusr1(int unused)
++{
++  static Arg a = {.v = externalpipe_sigusr1};
++	Client *c;
++	for (c = clients; c; c = c->next)
++		externalpipe(c, &a);
++}
++
+ void
+ sighup(int unused)
+ {
+@@ -1757,6 +1767,12 @@ main(int argc, char *argv[])
+ 	c = newclient(NULL);
+ 	showview(NULL, c);
+ 
++	struct sigaction sa;
++	sa.sa_handler = sigusr1;
++	sigemptyset(&sa.sa_mask);
++	sa.sa_flags = SA_RESTART;
++	sigaction(SIGUSR1, &sa, NULL);
++
+ 	loaduri(c, &arg);
+ 	updatetitle(c);
+ 
+-- 
+2.19.2
+

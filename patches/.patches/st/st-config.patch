@@ -5,7 +5,7 @@ index 0000000..0c98462
 +++ b/config.h
 @@ -0,0 +1,477 @@
 +/* See LICENSE file for copyright and license details. */
-+
++char *externalpipe_sigusr1[] = {"/bin/sh", "-c", "externalpipe_buffer.sh st_strings_read"};
 +/*
 + * appearance
 + *
@@ -184,7 +184,7 @@ index 0000000..0c98462
 +	{ TERMMOD,              XK_J,  zoom,           {.f = -1} },
 +
 +	{ TERMMOD,              XK_parenright,  zoomreset,      {.f =  0} },
-+
++	{ TERMMOD,              XK_P,   keyboard_select, {0} },
 +	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 +	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 +	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },

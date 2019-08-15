@@ -42,6 +42,8 @@ function link_normalize() {
   awk -v uri=$URI '{
     gsub("&amp;", "\\&");
 
+    print "Navigate via uri: " uri > "/dev/stderr";
+
     if ($0 ~ /^https?:\/\//  || $0 ~ /^\/\/.+$/) {
       print $0;
     } else if ($0 ~/^#/) {
@@ -51,7 +53,9 @@ function link_normalize() {
       split(uri, uri_parts, "/");
       print uri_parts[3] $0;
     } else {
+
       gsub(/[#][^#]+/, "", uri);
+      gsub(/\/[.][/]/, "", uri);
       uri_parts_size = split(uri, uri_parts, "/");
       delete uri_parts[uri_parts_size];
       for (v in uri_parts) {
@@ -63,7 +67,7 @@ function link_normalize() {
 }
 
 function link_select() {
-  tr -d '\n\r' |
+  tr '\n\r' ' ' |
     xmllint --html --xpath "//a" - |
     dump_links_with_titles |
     awk '!x[$0]++' |

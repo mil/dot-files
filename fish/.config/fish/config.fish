@@ -63,7 +63,6 @@ function setup_shortcuts
   alias m='w3m'
   alias c='cd'
   alias tw='tree -C|w3m'
-  alias v='vis'
   alias gd='cd (git rev-parse --show-toplevel 2>/dev/null; or hg root)'
   alias cb='git rev-parse --abbrev-ref HEAD 2>/dev/null; or cat .hg/bookmarks.current'
   alias tc='set GIT_COMMITER_DATE (date); git commit --amend --date (date)'

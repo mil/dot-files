@@ -3,28 +3,26 @@ new file mode 100644
 index 0000000..0c98462
 --- /dev/null
 +++ b/config.h
-@@ -0,0 +1,361 @@
+@@ -0,0 +1,346 @@
 + static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
 + static char *fulluseragent  = ""; /* Or override the whole user agent string */
 + static char *scriptfile     = "~/.surf/script.js";
 + static char *styledir       = "~/.surf/styles/";
 + static char *certdir        = "~/.surf/certificates/";
-+ static char *cachedir       = "~/.surf/cache/";
-+ static char *cookiefile     = "~/.surf/cookies.txt";
-+ 
++ static char *cachedir       = "/tmp/.surf_cache";
++ static char *cookiefile     = "/tmp/.surf_cookies";
 + static char *searchengine   = "https://duckduckgo.com/?q=";
-+ 
-+ static char *editbuffer[] =         { "/bin/sh", "-c", "edit_screen.sh" };
-+ static char *linkselect_curwin [] = { "/bin/sh", "-c", "surf_linkselect.sh $0 'Link' | xargs -r xprop -id $0 -f _SURF_GO 8s -set _SURF_GO", winid };
-+ static char *linkselect_newwin [] = { "/bin/sh", "-c", "surf_linkselect.sh $0 'Link (new window)' | xargs -r surf", winid };
-+ static char *linkselect_yank [] =   { "/bin/sh", "-c", "surf_linkselect.sh $0 'Link (yank)' | y", winid };
++
++ static char *externalpipe_sigusr1[] =    { "/bin/sh", "-c", "externalpipe_buffer.sh surf_strings_read", winid};
++ static char *editbuffer[] =              { "/bin/sh", "-c", "edit_screen.sh" };
++ static char *linkselect_curwin [] =      { "/bin/sh", "-c", "surf_linkselect.sh $0 'Link' | xargs -r xprop -id $0 -f _SURF_GO 8s -set _SURF_GO", winid };
++ static char *linkselect_newwin [] =      { "/bin/sh", "-c", "surf_linkselect.sh $0 'Link (new window)' | xargs -r surf", winid };
++ static char *linkselect_yank [] =        { "/bin/sh", "-c", "surf_linkselect.sh $0 'Link (yank)' | y", winid };
 + static char *linkselect_urlhandler[] =   { "/bin/sh", "-c", "surf_linkselect.sh $0 'URL handler' | xargs -r urlhandler", winid };
-+ static char *codeblock_yank[] =     { "/bin/sh", "-c", "surf_tagyank.sh $0 'Codeblock'", winid };
-+ static char *string_yank[] =        { "/bin/sh", "-c", "sed -e 's/<[^>]*>//g' | strings_extract.sh | dmenu -p Copy -l 10 -i -w $(xdotool getactivewindow) | tr -d '\n' | y", winid };
-+ static char *piped_find[] =         { "/bin/sh", "-c", "sed -e 's/<[^>]*>//g' | strings_extract.sh | dmenu -t -p Find -l 10 -i -w $(xdotool getactivewindow) | xargs -r xprop -id $0 -f _SURF_FIND 8s -set _SURF_FIND", winid };
-+ static char *image_select[] =       { "/bin/sh", "-c", "surf_linkselect.sh $0 'Image (new window)' 'img' 'src' 'alt' | xargs -r surf", winid };
-+ 
-+ 
++ static char *codeblock_yank[] =          { "/bin/sh", "-c", "surf_tagyank.sh $0 'Codeblock'", winid };
++ static char *string_yank[] =             { "/bin/sh", "-c", "sed -e 's/<[^>]*>//g' | strings_extract.sh | dmenu -p Copy -l 10 -i -w $(xdotool getactivewindow) | tr -d '\n' | y", winid };
++ static char *piped_find[] =              { "/bin/sh", "-c", "sed -e 's/<[^>]*>//g' | strings_extract.sh | dmenu -t -p Find -l 10 -i -w $(xdotool getactivewindow) | xargs -IBB -r xprop -id $0 -f _SURF_FIND 8s -set _SURF_FIND 'BB'", winid };
++ static char *image_select[] =            { "/bin/sh", "-c", "surf_linkselect.sh $0 'Image (new window)' 'img' 'src' 'alt' | xargs -r surf", winid };
 + 
 + /* Webkit default features */
 + /* Highest priority value will be used.
@@ -99,11 +97,11 @@ index 0000000..0c98462
 +              "surf-setprop", winid, r, s, p, NULL \
 +         } \
 + }
-+
-+ #define XDOCLICK(r) { .v = (const char *[]){ "/bin/sh", "-c", "xdotool click $1", winid, r, NULL } }
-+ #define XDOKEY(r) { .v = (const char *[]){ "/bin/sh", "-c", "xdotool key $1", winid, r, NULL } }
-+ #define XDOKEYMULTI(r) { .v = (const char *[]){ "/bin/sh", "-c", "xdotool key $1 $1 $1 $1 $1 $1 $1 $1", winid, r, NULL } }
 + 
++ 
++ 
++ 
++  
 + /* SETPROP(readprop, setprop, prompt)*/
 + #define SPAWN_NEW(r, s, p) { \
 +         .v = (const char *[]){ "/bin/sh", "-c", \
@@ -116,36 +114,25 @@ index 0000000..0c98462
 + }
 +
 + /* SETPROP(readprop, setprop, prompt)*/
-+ #define SPAWN_NEW_SEARCH(r, s, p) { \
-+         .v = (const char *[]){ "/bin/sh", "-c", \
-+              "prop=\"$(printf '%b' \"$(xprop -id $1 $2 " \
-+              "| sed \"s/^$2(STRING) = //;s/^\\\"\\(.*\\)\\\"$/\\1/\")\" " \
-+ 	       "| tail -n1 /tmp/surf_search | cat - ~/.ddg_bangs" \
-+              "| dmenu -t -h 30 -p \"Search (New)\" -w $1 | tee -a /tmp/surf_search | sed s#^#duckduckgo.com\/?q=#)\" && surf \"$prop\"", \
-+              "surf-setprop", winid, r, s, p, NULL \
-+         } \
-+ }
-+ 
-+ /* SETPROP(readprop, setprop, prompt)*/
 + #define SETPROP_URI(r, s, p) { \
 +         .v = (const char *[]){ "/bin/sh", "-c", \
 +              "prop=\"$(printf '%b' \"$(xprop -id $1 $2 " \
 +              "| sed \"s/^$2(STRING) = //;s/^\\\"\\(.*\\)\\\"$/\\1/\")\" " \
 +              "| xargs urlparts " \
-+              "| cat - ~/.ddg_bangs" \
-+              "| dmenu -t -l 10 -p \"$4\" -w $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
++              "| cat - ~/.ddg_bangs | externalpipe_buffer.sh pipe_combine" \
++              "| dmenu -i -t -l 10 -p \"$4\" -w $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
 +              "surf-setprop", winid, r, s, p, NULL \
 +         } \
 + }
-+ #define SETPROP_URI_SEARCH(r, s, p) { \
-+         .v = (const char *[]){ "/bin/sh", "-c", \
-+              "prop=\"$(printf '%b' \"$(xprop -id $1 $2 " \
-+              "| sed \"s/^$2(STRING) = //;s/^\\\"\\(.*\\)\\\"$/\\1/\")\" " \
-+ 	       "| tail -n1 /tmp/surf_search | cat - ~/.ddg_bangs" \
-+              "| dmenu -t -h 30 -p Search -w $1 | tee -a /tmp/surf_search | sed s#^#duckduckgo.com\/?q=# )\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
-+              "surf-setprop", winid, r, s, p, NULL \
-+         } \
-+ }
++ 
++         
++              
++              
++ 	           
++              
++              
++         
++ 
 + 
 + #define URLHANDLER { \
 + 	.v = (char *[]){ "/bin/sh", "-c", \
@@ -253,8 +240,6 @@ index 0000000..0c98462
 + 
 + 	{ 0,                     GDK_KEY_o,      spawn,      SETPROP_URI("_SURF_URI", "_SURF_GO", PROMPT_GO) },
 + 	{ GDK_SHIFT_MASK|0,      GDK_KEY_o,      spawn,      SPAWN_NEW("_SURF_URI", "_SURF_GO", PROMPT_GONEW) },
-+ 	{ 0,                     GDK_KEY_f,      spawn,      SETPROP_URI_SEARCH("_SURF_URI", "_SURF_GO", PROMPT_GO) },
-+ 	{ GDK_SHIFT_MASK|0,      GDK_KEY_f,      spawn,      SPAWN_NEW_SEARCH("_SURF_URI", "_SURF_GO", PROMPT_GO) },
 + 	//{ 0,                     GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 + 	{ 0,                     GDK_KEY_slash,      externalpipe, { .v = piped_find} },
 + 
@@ -283,8 +268,8 @@ index 0000000..0c98462
 + 	{ 0,                     GDK_KEY_bracketright,      scrollv,    { .i = +50 } },
 + 	{ MODKEY,                GDK_KEY_f,      scrollv,    { .i = +100 } },
 + 	{ MODKEY,                GDK_KEY_b,      scrollv,    { .i = -100 } },
-+ 	{ 0,      GDK_KEY_8,      spawn,    XDOKEYMULTI("Page_Up") },
-+ 	{ 0,      GDK_KEY_9,      spawn,   XDOKEYMULTI("Page_Down") },
++ 	//{ 0,      GDK_KEY_8,      spawn,    XDOKEYMULTI("Page_Up") },
++ 	//{ 0,      GDK_KEY_9,      spawn,   XDOKEYMULTI("Page_Down") },
 + 
 + 	{ MODKEY,                GDK_KEY_t,  spawn,           NEWTAB()},
 + 	{ MODKEY,                GDK_KEY_w,  destroyclient,           {}},

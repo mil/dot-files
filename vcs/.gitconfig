@@ -1,6 +1,7 @@
 [user]
 	email = m@milesalan.com
   name = Miles Alan
+	signingkey = 18FAE46301B50948C2B69C0FAAB6DDF0008140A2
 [color]
   ui = always
 [core]

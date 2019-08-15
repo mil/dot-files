@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
 cat - | xsel -i
-dunstify Copied:
-dunstify "`xclip -o`"
+notify-send Copied:
+notify-send "`xclip -o`"

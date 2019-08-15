@@ -26,20 +26,6 @@ index 1edb647..317fa2f 100644
  
  /*
   * Characters not considered part of a word while deleting words
-diff --git a/dmenu.1 b/dmenu.1
-index 323f93c..7ef34d2 100644
---- a/dmenu.1
-+++ b/dmenu.1
-@@ -50,6 +50,9 @@ dmenu matches menu items case insensitively.
- .BI \-l " lines"
- dmenu lists items vertically, with the given number of lines.
- .TP
-+.BI \-h " height"
-+dmenu uses a menu line of at least 'height' pixels tall, but no less than 8.
-+.TP
- .BI \-m " monitor"
- dmenu is displayed on the monitor number supplied. Monitor numbers are starting
- from 0.
 diff --git a/dmenu.c b/dmenu.c
 index 6b8f51b..45d1946 100644
 --- a/dmenu.c
@@ -52,14 +38,6 @@ index 6b8f51b..45d1946 100644
  	lines = MAX(lines, 0);
  	mh = (lines + 1) * bh;
  #ifdef XINERAMA
-@@ -683,6 +684,7 @@ static void
- usage(void)
- {
- 	fputs("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
-+	      "             [-h height]\n"
- 	      "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n", stderr);
- 	exit(1);
- }
 @@ -716,6 +718,10 @@ main(int argc, char *argv[])
  			prompt = argv[++i];
  		else if (!strcmp(argv[i], "-fn"))  /* font or font set */

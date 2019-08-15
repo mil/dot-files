@@ -81,3 +81,6 @@ unignore x-spam-status
 unignore x-spam-report
 
 set mark_old=no
+set crypt_use_gpgme = yes
+set pgp_autosign=yes
+
