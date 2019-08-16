@@ -14,7 +14,7 @@ diff --git a/config.h b/config.h
 +static const char *colors[SchemeLast][2] = {
 +	/*     fg         bg       */
 +	[SchemeNorm] = { "#bbbbbb", "#222222" },
-+	[SchemeSel] = { "#eeeeee", /*"#005577" */ "#004292" },
++	[SchemeSel] = { "#eeeeee", "#005577" /* "#004292" */ },
 +	[SchemeOut] = { "#000000", "#00ffff" },
 +};
 +/* -l option; if nonzero, dmenu uses vertical list with given number of lines */

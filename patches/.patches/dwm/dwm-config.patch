@@ -1,6 +1,6 @@
 --- a/config.h  2019-08-13 15:14:31.101090598 -0500
 +++ b/config.h	2019-08-13 15:32:27.452259446 -0500
-@@ -0,0 +1,154 @@
+@@ -0,0 +1,155 @@
 +#include "zoomswap.c"
 +#include "layouts.c"
 +#include "movestack.c"
@@ -30,13 +30,14 @@
 +static const char col_gray2[]       = "#444444";
 +static const char col_gray3[]       = "#bbbbbb";
 +static const char col_gray4[]       = "#eeeeee";
++static const char col_lgray[]       = "#e8e8e8";
 +static const char col_cyan[]        = "#005577";
 +static const char col_blue[]        = /*"#002aff"; */ "#004292";
 +static const char col_white[]        = "#ffffff";
 +static const char *colors[][3]      = {
 +	/*               fg         bg         border   */
-+	[SchemeNorm] = { col_gray3, col_gray1, col_white },
-+	[SchemeSel]  = { col_gray4, col_blue,  col_blue },
++	[SchemeNorm] = { col_gray3, col_gray1, col_lgray },
++	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan},
 +	[SchemeHid]  = { col_gray4, col_cyan,  col_gray2 },
 +};
 +static const int focusonwheel       = 0;
