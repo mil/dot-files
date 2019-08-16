@@ -1,6 +1,6 @@
 --- a/config.h  2019-08-13 15:14:31.101090598 -0500
 +++ b/config.h	2019-08-13 15:32:27.452259446 -0500
-@@ -0,0 +1,153 @@
+@@ -0,0 +1,154 @@
 +#include "zoomswap.c"
 +#include "layouts.c"
 +#include "movestack.c"
@@ -20,7 +20,7 @@
 +static const unsigned int drawtagmask = DRAWTAGGRID; /* | DRAWCLASSICTAGS to show classic row of tags */
 +static const int tagrows = 2;
 +/* appearance */
-+static const unsigned int borderpx  = 3;        /* border pixel of windows */
++static const unsigned int borderpx  = 1;        /* border pixel of windows */
 +static const unsigned int snap      = 1;       /* snap pixel */
 +static const int showbar            = 1;        /* 0 means no bar */
 +static const int topbar             = 1;        /* 0 means bottom bar */
@@ -31,11 +31,13 @@
 +static const char col_gray3[]       = "#bbbbbb";
 +static const char col_gray4[]       = "#eeeeee";
 +static const char col_cyan[]        = "#005577";
-+static const char col_blue[]        = "#002aff";
++static const char col_blue[]        = /*"#002aff"; */ "#004292";
++static const char col_white[]        = "#ffffff";
 +static const char *colors[][3]      = {
 +	/*               fg         bg         border   */
-+	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-+	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
++	[SchemeNorm] = { col_gray3, col_gray1, col_white },
++	[SchemeSel]  = { col_gray4, col_blue,  col_blue },
++	[SchemeHid]  = { col_gray4, col_cyan,  col_gray2 },
 +};
 +static const int focusonwheel       = 0;
 +static const unsigned int gappx     = 3;        /* gap pixel between windows */
@@ -105,8 +107,8 @@
 +	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 +	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
 +
-+	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-+	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
++	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.01} },
++	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.01} },
 +	{ MODKEY,                       XK_s,      zoom,           {0} },
 +	{ MODKEY,                       XK_Tab,    view,           {0} },
 +	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },

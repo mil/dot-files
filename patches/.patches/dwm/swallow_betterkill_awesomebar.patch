@@ -275,7 +275,7 @@ index 4465af1..3568e36 100644
  		occ |= c->tags;
  		if (c->isurgent)
  			urg |= c->tags;
-@@ -729,16 +812,28 @@ drawbar(Monitor *m)
+@@ -729,16 +812,30 @@ drawbar(Monitor *m)
  	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
  
  	if ((w = m->ww - sw - x) > bh) {
@@ -294,8 +294,10 @@ index 4465af1..3568e36 100644
 +					scm = SchemeHid;
 +				else
 +					scm = SchemeNorm;
-+				drw_setscheme(drw, scheme[scm]);
++				drw_setscheme(drw, scheme[scm]); 
 +				drw_text(drw, x, 0, (1.0 / (double)n) * w, bh, lrpad / 2, c->name, 0);
++				drw_setscheme(drw, scheme[SchemeSel]); 
++       if (c->isfloating) { drw_rect(drw, x, 0, 3, 3, 1, 0); }
 +				x += (1.0 / (double)n) * w;
 +			}
  		} else {

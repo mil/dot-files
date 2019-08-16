@@ -89,6 +89,7 @@ in {
 
 
         #/home/m/.patches/dmenu/cust.diff
+        /home/m/.patches/dmenu/dmenu-config.patch
         /home/m/.patches/dmenu/height.patch
 	/home/m/.patches/dmenu/dmenu-nonblockingstdin-4.9.diff
         /home/m/.patches/dmenu/dmenu-numbers-4.9-nonblocking-compat.diff
