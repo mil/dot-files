@@ -1,0 +1,23 @@
+alt + u
+  externalpipe_buffer.sh dmenu_type
+
+alt + y
+  externalpipe_buffer.sh dmenu_copy
+
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+  ~/.bin/voln {up,down,mute}
+
+alt + shift + {Up,Down}
+  ~/.bin/voln {up,down}
+
+XF86MonBrightness{Up,Down}
+  ~/.bin/b{up,down}
+
+XF86Launch1
+  xset dpms force suspend
+
+alt + shift + p
+  pwdhashX
+
+alt + equal
+  xdotool click --clearmodifiers 1
