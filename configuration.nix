@@ -76,62 +76,65 @@ in {
 #];
   
   nixpkgs.config.packageOverrides = pkgs: {
-    dunst = pkgs.dunst.override {
-      dunstify = true;
-    };
+    dunst = pkgs.dunst.override { dunstify = true; };
 
-    dmenu = pkgs.surf.overrideAttrs (oldAttrs: rec {
+    dmenu = pkgs.dmenu.overrideAttrs (oldAttrs: rec {
       name = "dmenu";
-      patches = [
-        #/home/m/.patches/dmenu/non_blocking_stdin-4.9.diff
-        #/home/m/.patches/dmenu/patched.diff
-        #/home/m/.patches/dmenu/dmenu-numbers-4.9.diff
-
-
-        #/home/m/.patches/dmenu/cust.diff
-        /home/m/.patches/dmenu/dmenu-config.patch
-        /home/m/.patches/dmenu/height.patch
-	/home/m/.patches/dmenu/dmenu-nonblockingstdin-4.9.diff
-        /home/m/.patches/dmenu/dmenu-numbers-4.9-nonblocking-compat.diff
-        /home/m/.patches/dmenu/scroll.patch
-        /home/m/.patches/dmenu/printinputflag.patch
-      ];
+      patches = [];
       makeFlags = [ "PREFIX=$(out)" ];
       src = builtins.fetchGit {
-        url = "https://git.suckless.org/dmenu";
-	# e.g. 4.9
-        rev = "65be875f5adf31e9c4762ac8a8d74b1dfdd78584";
+        #url = "https://git.suckless.org/dmenu";
+        #rev = "65be875f5adf31e9c4762ac8a8d74b1dfdd78584";
+
+        rev = "01dc1e8933b4a68e60644212035ee791fcf6a4f2";
+        url = "https://github.com/mil/dmenu";
+        #url = "file:///home/m/Repos/dmenu";
       };
     });
 
-    st = pkgs.st.override {
-      patches =[
-        /home/m/.patches/st/st-config.patch
-        /home/m/.patches/st/st-externalpipe-0.8.2.patch
-        /home/m/.patches/st/st-externalpipe-signal-0.8.2.diff
-        /home/m/.patches/st/keysel.patch
-        /home/m/.patches/st/st-scrollback-0.8.2.patch
-        /home/m/.patches/st/st-scrollback-mouse-0.8.2.patch
-        /home/m/.patches/st/st-scrollback-mouse-altscreen-20190131-e23acb9.patch
-        #/home/m/.patches/st/sixel.patch
-      ];
-    };
-    dwm = pkgs.dwm.override {
-      patches =[
-         /home/m/.patches/dwm/dwm-6.2-taggrid.diff
-         /home/m/.patches/dwm/dwm-switchcol-6.1.diff
-         /home/m/.patches/dwm/dwm-config.patch
-         /home/m/.patches/dwm/gridanddeck.patch
-         /home/m/.patches/dwm/pertag.patch
-         /home/m/.patches/dwm/zoomswap.patch
-         /home/m/.patches/dwm/movestack.patch
-         /home/m/.patches/dwm/barheight.patch
+    st = pkgs.st.overrideAttrs (oldAttrs: rec {
+      name = "st";
+      patches = [];
+      src = builtins.fetchGit {
+        #url = "https://git.suckless.org/st";
+        #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
 
-         #/home/m/.patches/dwm/awesomebar.patch
-         #/home/m/.patches/dwm/awesomebarswallow.patch
-         /home/m/.patches/dwm/swallow_betterkill_awesomebar.patch
-      ];
-    };
+        rev = "1cf20a5d081c85ba1380ee980b5c76d051b54992";
+        url = "https://github.com/mil/st";
+        #url = "file:///home/m/Repos/st";
+      };
+    });
+
+
+    dwm = pkgs.dwm.overrideAttrs (oldAttrs: rec {
+      name = "dwm";
+      patches = [];
+      src = builtins.fetchGit {
+        #url = "https://git.suckless.org/dwm";
+        #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
+
+        rev = "fef24189f050fb8bd77a0b2ab594d8570d234ba6";
+        url = "https://github.com/mil/dwm";
+        #url = "file:///home/m/Repos/dwm";
+      };
+    });
+
+
+    surf = pkgs.surf.overrideAttrs (oldAttrs: rec {
+      name = "surf";
+      patches = [];
+      buildInputs = oldAttrs.buildInputs ++ [ pkgs.gcr  ];
+      makeFlags = [ "PREFIX=$(out)" ];
+      src = builtins.fetchGit {
+        #url = "https://git.suckless.org/surf";
+        #rev = "d068a3878b6b9f2841a49cd7948cdf9d62b55585";
+
+        rev = "73bad2abbf2b9ac2f3ce5d4bff1c441d509b4fe1";
+        #url = "file:///home/m/Repos/surf";
+        url = "https://github.com/mil/surf";
+      };
+    });
+
     firmware-linux-nonfree = pkgs.firmware-linux-nonfree.override {
       patches =[
         /home/m/.patches/firmware-linux-nonfree/firmware-linux-nonfree-config.patch
@@ -151,26 +154,6 @@ in {
     });
 
 
-    surf-head = pkgs.surf.overrideAttrs (oldAttrs: rec {
-      name = "surf-head";
-      patches = [
-        /home/m/.patches/surf/config.h.patch
-        /home/m/.patches/surf/notifyclip.patch
-        /home/m/.patches/surf/titlebar.patch
-        /home/m/.patches/surf/surf-modal-20190209-d068a38.diff
-        /home/m/.patches/surf/ddg.diff
-        /home/m/.patches/surf/surf-2.0-externalpipe.diff
-        /home/m/.patches/surf/surf-externalpipe-signal-2.0.diff
-        /home/m/.patches/surf/ua.patch
-      ];
-      buildInputs = oldAttrs.buildInputs ++ [ pkgs.gcr  ];
-      makeFlags = [ "PREFIX=$(out)" ];
-      src = builtins.fetchGit {
-        url = "https://git.suckless.org/surf";
-        rev = "d068a3878b6b9f2841a49cd7948cdf9d62b55585";
-      };
-
-    });
   };
 
   nixpkgs.config.allowUnfree =true;
@@ -214,6 +197,7 @@ in {
     xorg.xmodmap keynav xdotool scrot xcwd xtitle xorg.xinit xfontsel
     xorg.xf86inputlibinput xclip xsel autocutsel
     arandr unclutter gnumeric
+    nix-index
 
     inotifyTools
     python37Packages.pip
@@ -231,7 +215,7 @@ in {
 
     #libreoffice    
     i3 zathura sxiv libnotify dunst
-    surf-head 
+    surf
     pkgs.libxml2 firefox 
     dmenu st 
     gnumake stow 
@@ -260,6 +244,7 @@ in {
     sass
     rockbox_utility
     libarchive
+    zip
     python3
     ruby
     p7zip
@@ -268,12 +253,14 @@ in {
     gcc
     rofi
     yubikey-manager
+    unstable.stagit
     lsof
     pinentry
     gimp
     recode
     sxhkd
     dwm
+    imagemagick
     alpine
     zig
     expect
@@ -281,6 +268,11 @@ in {
     lynx html2text
     gnupg
     psmisc
+    linux.dev
+    moreutils
+    linuxHeaders
+    xcalib
+    bind
   ];
   sound.enable = true;
   services.xserver.libinput.enable = true;
