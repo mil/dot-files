@@ -102,6 +102,7 @@ in {
         rev = "1cf20a5d081c85ba1380ee980b5c76d051b54992";
         url = "https://github.com/mil/st";
         #url = "file:///home/m/Repos/st";
+        #url = "file:///home/m/Repos/st";
       };
     });
 
@@ -113,8 +114,8 @@ in {
         #url = "https://git.suckless.org/dwm";
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
 
-        rev = "fef24189f050fb8bd77a0b2ab594d8570d234ba6";
         url = "https://github.com/mil/dwm";
+        rev = "fd43eb1e8a7d271c72250ff97eafbe6e0de047cc";
         #url = "file:///home/m/Repos/dwm";
       };
     });
