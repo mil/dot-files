@@ -115,7 +115,8 @@ in {
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
 
         url = "https://github.com/mil/dwm";
-        rev = "fd43eb1e8a7d271c72250ff97eafbe6e0de047cc";
+        #rev = "8b46acfcc62f79a60054127905d126a265a3a8f2";
+        rev = "39c2903201ea6b21d6e32e60ef7d6bafcff908ba";
         #url = "file:///home/m/Repos/dwm";
       };
     });
@@ -135,6 +136,12 @@ in {
         url = "https://github.com/mil/surf";
       };
     });
+    #w3m = pkgs.w3m.overrideAttrs (oldAttrs: rec {
+    #  name = "w3m";
+    #  patches = [
+    #    /home/m/.patches/w3m/never-clearscreen.diff
+    #  ];
+    #});
 
     firmware-linux-nonfree = pkgs.firmware-linux-nonfree.override {
       patches =[

@@ -4,7 +4,7 @@ battery_dwm_loop.sh &
 sxhkd &
 autocutsel &
 autocutsel -selection PRIMARY &
-xsetroot -mod 2 2 -fg '#888888' -bg '#ffffff' &
+xsetroot -mod 2 2 -fg '#e8e8e8' -bg '#ffffff' &
 keynav &
 xmodmap ~/.xmodmap &
 dunst &
