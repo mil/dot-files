@@ -1,9 +1,25 @@
 #!/usr/bin/env sh
-echo "$(
-  inp="$1"
-  IFS='/' read -r -a array <<< "$inp"
-  for i in "${!array[@]}"
-  do
-    printf "/%s" "${array[@]:0:$i+1}" | cut -c 2-
+slashentries=`
+  # e.g. foo.com/bar/baz => [foo.com, foo.com/bar, foo.com/bar/baz]
+  echo "$(
+    inp="$1"
+    IFS='/' read -r -a slashparts <<< "$inp"
+    for i in "${!slashparts[@]}"
+    do
+      printf "/%s" "${slashparts[@]:0:$i+1}" | cut -c 2-
+    done
+  )" | sort -r | grep -E '://'
+`
+
+dotentries=`
+  # e.g. foo.bar.baz.com => [bar.baz.com, baz.com]
+  entry=$(echo "$slashentries" | tail -n1)
+  while [[ $entry =~ ^.*\..*$ ]]; do
+    echo "$entry"
+    entry="$(echo "$entry" | sed -E 's#[a-zA-Z0-9]*\.##')"
   done
-)" | sort -r | grep -E '://'
+`
+echo "$(
+  echo "$slashentries"
+  echo "$dotentries"
+)" | uniq

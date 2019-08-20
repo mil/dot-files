@@ -21,3 +21,6 @@ alt + shift + p
 
 alt + equal
   xdotool click --clearmodifiers 1
+
+alt + backslash
+  xcalib -a -invert
