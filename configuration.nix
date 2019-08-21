@@ -115,7 +115,7 @@ in {
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
 
         #rev = "8b46acfcc62f79a60054127905d126a265a3a8f2";
-        rev =                                                                                                                                                                                        "a79bd6d007c2eb16d11fdb7d2143a7b4b139609d"; #localdwm
+        rev =                                                                                                                                                                                         "6cb0130a39e34e0abec9bc0e3e1b351bbb5f3e68"; #localdwm
         url = "https://github.com/mil/dwm";
         #url = "file:///home/m/Repos/dwm";
       };
