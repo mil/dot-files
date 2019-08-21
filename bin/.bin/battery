@@ -15,7 +15,7 @@ end
 
 def getStatus
   begin
-    return File.read("/sys/class/power_supply/BAT0/status").chomp!
+    return File.read("/sys/class/power_supply/BAT0/status").chomp![0]
   rescue
     return ""
   end
