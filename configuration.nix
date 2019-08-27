@@ -18,7 +18,7 @@ in {
   boot.tmpOnTmpfs = true;
 
   boot.extraModprobeConfig = ''
-    options snd_hda_intel enable=0,1
+    #options snd_hda_intel enable=0,1
     options thinkpad_acpi fan_control=1
   '';
 
@@ -115,7 +115,7 @@ in {
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
 
         #rev = "8b46acfcc62f79a60054127905d126a265a3a8f2";
-        rev =                                                                                                                                                                                                                                                                                                              "97c6666aee1df50d79aaafd05f9762eebb54ad58"; #localdwm
+        rev = "b500de39924d8c68d6a18448a3dbfb55f88376f0"; #localdwm
         url = "https://github.com/mil/dwm";
         #url = "file:///home/m/Repos/dwm";
       };
@@ -214,7 +214,10 @@ in {
     leiningen
     boot
     ncdu
-    unstable.go gotools
+    unstable.zig
+    unstable.stagit
+    unstable.go 
+    gotools
 
     sqlite unzip
     # Music
@@ -261,7 +264,6 @@ in {
     gcc
     rofi
     yubikey-manager
-    unstable.stagit
     lsof
     pinentry
     gimp
@@ -270,7 +272,6 @@ in {
     dwm
     imagemagick
     alpine
-    zig
     expect
     xlibsWrapper
     lynx html2text
@@ -282,6 +283,8 @@ in {
     xcalib
     bind
     gdb
+    geoipWithDatabase
+    ripgrep
   ];
   sound.enable = true;
   services.xserver.libinput.enable = true;

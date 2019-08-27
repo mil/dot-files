@@ -14,7 +14,7 @@ function setup_envvars_and_path
   setenv GIT_EDITOR vis
   setenv BROWSER firefox
   setenv XDG_CONFIG_HOME ~/.config
-  setenv PAGER w3m
+  setenv PAGER w3n
   setenv TZ America/Chicago
   setenv SURFRAW_graphical false
   setenv RANGER_LOAD_DEFAULT_RC FALSE
@@ -43,6 +43,8 @@ function setup_shortcuts
   abbr -a syncwatch watch grep -e Dirty: -e Writeback: /proc/meminfo
 
   abbr -a inv 'xcalib -invert -alter'
+
+  abbr -a d date
 
   abbr -a nb 'killall newsboat || sleep 0.1 && newsboat'
   abbr -a we weechat
