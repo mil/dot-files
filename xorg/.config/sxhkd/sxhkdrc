@@ -31,5 +31,8 @@ alt + shift + p
 alt + equal
   xdotool click --clearmodifiers 1
 
+#~button1
+#    focus.sh (underneath.sh)
+
 alt + backslash
   xcalib -a -invert
