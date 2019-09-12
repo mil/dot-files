@@ -57,6 +57,7 @@ function setup_shortcuts
   abbr -a h hg
   abbr -a r ranger
   abbr -a dg git diff HEAD
+  abbr -a cati siv4 -s30
 
   alias nm='w3m -X'
   #alias w3m='w3m -X'

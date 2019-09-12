@@ -9,6 +9,8 @@ in {
   programs.adb.enable = true;
 
 
+	# Prevent DHCP from holding boot
+	systemd.services.systemd-user-sessions.enable = false;
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -115,7 +117,7 @@ in {
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
 
         #rev = "8b46acfcc62f79a60054127905d126a265a3a8f2";
-        rev = "267b640d391352612e62a2849cf1ebfa00cfdd4b"; #localdwm
+        rev =     "eefcaa8ce37341027c8a175d5702d49f3d83677c"; #localdwm
         url = "https://github.com/mil/dwm";
         #url = "file:///home/m/Repos/dwm";
       };
@@ -131,8 +133,8 @@ in {
         #url = "https://git.suckless.org/surf";
         #rev = "d068a3878b6b9f2841a49cd7948cdf9d62b55585";
 
-        rev = "73bad2abbf2b9ac2f3ce5d4bff1c441d509b4fe1";
-        #url = "file:///home/m/Repos/surf";
+        rev = "09cc302afb35bafc83f6a44ab32d5ccd7ffa40b9"; #localsurf
+        #url = "file:///home/m/Repos/surf"; 
         url = "https://github.com/mil/surf";
       };
     });
@@ -285,6 +287,14 @@ in {
     gdb
     geoipWithDatabase
     ripgrep
+    unstable.rustc
+    linux.dev
+    unstable.cargo
+    sox
+    xorg.xwd
+    farbfeld
+    unrar
+    plowshare
   ];
   sound.enable = true;
   services.xserver.libinput.enable = true;

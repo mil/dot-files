@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Extract common file formats
 
 # Display usage if no parameters given

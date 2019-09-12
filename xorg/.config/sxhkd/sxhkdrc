@@ -35,4 +35,7 @@ alt + equal
 #    focus.sh (underneath.sh)
 
 alt + backslash
+  urlhandler
+
+alt + shift + backslash
   xcalib -a -invert

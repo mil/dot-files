@@ -51,6 +51,8 @@ function file_type_exec(file)
     vis:command('set syntax diff')
   elseif string.match(file, "Makefile") then 
     vis:command('set expandtab off')
+  elseif string.match(file, ".c") then 
+    vis:command('set expandtab off')
   elseif string.match(file, ".go") then 
     vis:command('set expandtab off')
     vis:command('set show-tabs off')
