@@ -3,6 +3,7 @@
 battery_dwm_loop.sh &
 sxhkd &
 autocutsel &
+xcape &
 autocutsel -selection PRIMARY &
 xsetroot -mod 2 2 -fg '#e8e8e8' -bg '#ffffff' &
 keynav &

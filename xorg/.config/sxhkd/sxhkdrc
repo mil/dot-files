@@ -2,10 +2,10 @@ alt + d
   dmenul
 
 alt + Return
-  stw
+  stw_in_cwd
 
 alt + shift + Return
-  stw_in_cwd
+  stw
 
 alt + u
   externalpipe_buffer.sh dmenu_type

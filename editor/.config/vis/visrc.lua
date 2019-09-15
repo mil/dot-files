@@ -84,6 +84,7 @@ function cb_win_open()
   vis:command('set cursorline')
   vis:command('set autoindent on')
   vis:command('set shell /bin/sh')
+  --vis:command('set escdelay 150')
   --vis:command('set th d')
   vis:command('set th l')
 

@@ -88,7 +88,7 @@ in {
         #url = "https://git.suckless.org/dmenu";
         #rev = "65be875f5adf31e9c4762ac8a8d74b1dfdd78584";
 
-        rev = "01dc1e8933b4a68e60644212035ee791fcf6a4f2";
+        rev = "46d61998b88877f3e0351d3a57ced8e9f8b26ec5"; #localdmenu
         url = "https://github.com/mil/dmenu";
         #url = "file:///home/m/Repos/dmenu";
       };
@@ -116,8 +116,7 @@ in {
         #url = "https://git.suckless.org/dwm";
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
 
-        #rev = "8b46acfcc62f79a60054127905d126a265a3a8f2";
-        rev =     "eefcaa8ce37341027c8a175d5702d49f3d83677c"; #localdwm
+        rev = "ac0ebeab8aff515cccb4b5fe04b871c374362cd5"; #localdwm
         url = "https://github.com/mil/dwm";
         #url = "file:///home/m/Repos/dwm";
       };
@@ -130,10 +129,7 @@ in {
       buildInputs = oldAttrs.buildInputs ++ [ pkgs.gcr  ];
       makeFlags = [ "PREFIX=$(out)" ];
       src = builtins.fetchGit {
-        #url = "https://git.suckless.org/surf";
-        #rev = "d068a3878b6b9f2841a49cd7948cdf9d62b55585";
-
-        rev = "09cc302afb35bafc83f6a44ab32d5ccd7ffa40b9"; #localsurf
+        rev = "0a12229e591a3d9f7c3336e5d28dbcc274a715e2"; #localsurf
         #url = "file:///home/m/Repos/surf"; 
         url = "https://github.com/mil/surf";
       };
@@ -225,6 +221,8 @@ in {
     # Music
     jack_capture 
     chuck jack2
+    vmpk
+    puredata
 
     #libreoffice    
     i3 zathura sxiv libnotify dunst
@@ -295,6 +293,9 @@ in {
     farbfeld
     unrar
     plowshare
+    xorg.xev
+
+
   ];
   sound.enable = true;
   services.xserver.libinput.enable = true;
