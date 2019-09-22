@@ -11,3 +11,4 @@ cat /etc/nixos/configuration.nix | sed -E "s/\".+\"; #localdmenu/ \"$l\"; #local
 
 l=$(cd ~/Repos/surf && git rev-parse master)
 cat /etc/nixos/configuration.nix | sed -E "s/\".+\"; #localsurf/ \"$l\"; #localsurf/" | sponge /etc/nixos/configuration.nix
+

@@ -47,6 +47,7 @@ function setup_shortcuts
   abbr -a inv 'xcalib -invert -alter'
 
   abbr -a d date
+  abbr -a bw set -x TERM vt102
 
   abbr -a nb 'killall newsboat || sleep 0.1 && newsboat'
   abbr -a we weechat
@@ -58,6 +59,8 @@ function setup_shortcuts
   abbr -a r ranger
   abbr -a dg git diff HEAD
   abbr -a cati siv4 -s30
+
+  alias ag="ag --color-path 35 --color-match '1;31' --color-line-number 32"
 
   alias nm='w3m -X'
   #alias w3m='w3m -X'

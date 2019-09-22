@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
-
-
+$fp = "/sys/class/power_supply/BAT0"
+$fp = "/sys/class/power_supply/BAT1" if !File.exists?($fp)
 
 def getPercentage
   begin
-    now = File.read("/sys/class/power_supply/BAT0/energy_now").to_f
-    full = File.read("/sys/class/power_supply/BAT0/energy_full").to_f
+    now = File.read("#{$fp}/energy_now").to_f
+    full = File.read("#{$fp}/energy_full").to_f
     percentage = "%05.2f" % ((now/full) * 100)
     return "#{percentage}%"
   rescue
@@ -15,7 +15,7 @@ end
 
 def getStatus
   begin
-    return File.read("/sys/class/power_supply/BAT0/status").chomp![0]
+    return File.read("#{$fp}/status").chomp![0]
   rescue
     return ""
   end

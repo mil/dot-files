@@ -5,12 +5,11 @@
 
 let unstable = import <unstable>{};
 in {
-  imports = [ /etc/nixos/hardware-configuration.nix /etc/nixos/networks.nix ];
+  imports = [ /etc/nixos/hardware-configuration.nix /etc/nixos/machine.nix ];
   programs.adb.enable = true;
 
-
-	# Prevent DHCP from holding boot
-	systemd.services.systemd-user-sessions.enable = false;
+  # Prevent DHCP from holding boot
+  systemd.services.systemd-user-sessions.enable = false;
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -20,8 +19,20 @@ in {
   boot.tmpOnTmpfs = true;
 
   boot.extraModprobeConfig = ''
-    #options snd_hda_intel enable=0,1
+    options snd_hda_intel enable=0,1
     options thinkpad_acpi fan_control=1
+  '';
+  sound.extraConfig = ''
+    #defaults.pcm.!card "USB"
+    #defaults.ctl.!card "USB"
+    #pcm.!default {
+    #    type plug
+    #    slave.pcm {
+    #        @func getenv
+    #        vars [ ALSAPCM ]
+    #        default "hw:Scarlett 2i4 USB"
+    #    }
+    #}
   '';
 
   systemd.services.miles-fixes = {
@@ -39,7 +50,6 @@ in {
       ATTRS{product}=="USB Trackball", SYMLINK+="miltrackball", ENV{DISPLAY}=":0", RUN+="${pkgs.stdenv.shell} -c '/home/m/.bin/trackball'"
   '';
 
-
   # Yubikey
   hardware.u2f.enable = true;
   programs.ssh.startAgent = false;
@@ -54,9 +64,7 @@ in {
     gpg-connect-agent /bye
     export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
   '';
-
-
-
+    
   programs.fish.enable = true;
   virtualisation.docker.enable = true;
 
@@ -69,16 +77,20 @@ in {
   fonts.fontconfig.hinting.autohint = true;
   services.logind.lidSwitch = "ignore";
 
-#boot.kernelPatches = [
-#{
-#	name = "foo";
-#	patch = /home/m/.patches/firmware-linux-nonfree/fix-wifi.diff;
-#}
-#
-#];
-  
+  #boot.kernelPatches = [
+  #{
+  #	name = "foo";
+  #	patch = /home/m/.patches/firmware-linux-nonfree/fix-wifi.diff;
+  #}
+  #
+  #];
+
   nixpkgs.config.packageOverrides = pkgs: {
     dunst = pkgs.dunst.override { dunstify = true; };
+    mpv = pkgs.mpv.override {
+      jackaudioSupport = true;
+      youtubeSupport = true;
+    };
 
     dmenu = pkgs.dmenu.overrideAttrs (oldAttrs: rec {
       name = "dmenu";
@@ -88,58 +100,42 @@ in {
         #url = "https://git.suckless.org/dmenu";
         #rev = "65be875f5adf31e9c4762ac8a8d74b1dfdd78584";
 
-        rev = "46d61998b88877f3e0351d3a57ced8e9f8b26ec5"; #localdmenu
+        rev =    "66b109a4d1aceba602b224f74b05c1cb3e41b1f0"; #localdmenu
         url = "https://github.com/mil/dmenu";
         #url = "file:///home/m/Repos/dmenu";
       };
     });
-
     st = pkgs.st.overrideAttrs (oldAttrs: rec {
       name = "st";
       patches = [];
       src = builtins.fetchGit {
-        #url = "https://git.suckless.org/st";
-        #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
-
-        rev = "1cf20a5d081c85ba1380ee980b5c76d051b54992";
+        rev =    "1cf20a5d081c85ba1380ee980b5c76d051b54992"; #localst
         url = "https://github.com/mil/st";
-        #url = "file:///home/m/Repos/st";
         #url = "file:///home/m/Repos/st";
       };
     });
-
-
     dwm = pkgs.dwm.overrideAttrs (oldAttrs: rec {
       name = "dwm";
       patches = [];
       src = builtins.fetchGit {
         #url = "https://git.suckless.org/dwm";
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
-
-        rev = "ac0ebeab8aff515cccb4b5fe04b871c374362cd5"; #localdwm
+        rev =    "e9a118712535c14182b9a0dfe008d525462340de"; #localdwm
         url = "https://github.com/mil/dwm";
         #url = "file:///home/m/Repos/dwm";
       };
     });
-
-
     surf = pkgs.surf.overrideAttrs (oldAttrs: rec {
       name = "surf";
       patches = [];
       buildInputs = oldAttrs.buildInputs ++ [ pkgs.gcr  ];
       makeFlags = [ "PREFIX=$(out)" ];
       src = builtins.fetchGit {
-        rev = "0a12229e591a3d9f7c3336e5d28dbcc274a715e2"; #localsurf
+        rev =    "0a12229e591a3d9f7c3336e5d28dbcc274a715e2"; #localsurf
         #url = "file:///home/m/Repos/surf"; 
         url = "https://github.com/mil/surf";
       };
     });
-    #w3m = pkgs.w3m.overrideAttrs (oldAttrs: rec {
-    #  name = "w3m";
-    #  patches = [
-    #    /home/m/.patches/w3m/never-clearscreen.diff
-    #  ];
-    #});
 
     firmware-linux-nonfree = pkgs.firmware-linux-nonfree.override {
       patches =[
@@ -149,17 +145,17 @@ in {
     chuck = pkgs.chuck.overrideAttrs (oldAttrs: rec {
       name = "chuck";
       version = "1.4.0.0";
-    src = builtins.fetchurl {
-      url = "http://chuck.cs.princeton.edu/release/files/chuck-${version}.tgz";
-      sha256 = "1b17rsf7bv45gfhyhfmpz9d4rkxn24c0m2hgmpfjz3nlp0rf7bic";
-    };
-  patches = [];
-    postPatch = ''
-      substituteInPlace src/makefile --replace "/usr/local/bin" "$out/bin"
-  '';
+      src = builtins.fetchurl {
+        url = "http://chuck.cs.princeton.edu/release/files/chuck-${version}.tgz";
+        sha256 = "1b17rsf7bv45gfhyhfmpz9d4rkxn24c0m2hgmpfjz3nlp0rf7bic";
+      };
+      buildFlags = ["linux-jack"];
+      buildInputs = oldAttrs.buildInputs ++ [ pkgs.libjack2 ];
+      patches = [];
+      postPatch = ''
+        substituteInPlace src/makefile --replace "/usr/local/bin" "$out/bin"
+      '';
     });
-
-
   };
 
   nixpkgs.config.allowUnfree =true;
@@ -194,108 +190,43 @@ in {
 
   environment.systemPackages = with pkgs; [
     # Cli progs
-    vis htop restic mutt newsboat wget 
-    killall ag git w3m  bc
+    vis htop mutt newsboat wget 
+    killall ag git w3m elinks  bc gnumake ncdu
     fish autojump ranger highlight
-    docker jq aria2 whois tree
+    docker jq aria2 whois tree stow 
+    inotifyTools sshfs libtidy screen picocom
+    unzip p7zip lsof recode lynx html2text moreutils psmisc
+    nix-index zip dos2unix exfat libarchive
+    imagemagick geoipWithDatabase ripgrep
+    farbfeld unrar plowshare tldr usbutils
 
     # X progs
     xorg.xmodmap keynav xdotool scrot xcwd xtitle xorg.xinit xfontsel
-    xorg.xf86inputlibinput xclip xsel autocutsel
-    arandr unclutter gnumeric
-    nix-index
+    xorg.xf86inputlibinput xclip xsel autocutsel xcape
+    xorg.xev xorg.xhost xorg.xgamma xorg.xdpyinfo xorg.xwd xcalib
+    arandr unclutter 
 
-    inotifyTools
-    python37Packages.pip
-    adoptopenjdk-bin
+    # Core
+    sxhkd i3 dwm dmenu st surf pkgs.libxml2 
+    sxiv libnotify dunst slock terraform restic 
+    yubikey-personalization yubikey-manager pinentry
+    gnupg rockbox_utility
 
-    leiningen
-    boot
-    ncdu
-    unstable.zig
-    unstable.stagit
-    unstable.go 
-    gotools
-
-    sqlite unzip
-    # Music
-    jack_capture 
-    chuck jack2
-    vmpk
-    puredata
-
+    # Guis
+    gnumeric firefox dbeaver zathura guvcview gimp
     #libreoffice    
-    i3 zathura sxiv libnotify dunst
-    surf
-    pkgs.libxml2 firefox 
-    dmenu st 
-    gnumake stow 
-    dbeaver
-    compton
-    terraform
-    sshfs
-    # Media
-    mpv 
-    youtube-dl
 
-    # Todo re-org
-    yubikey-personalization
-    yubikey-manager
-    xurls
-    libtidy
-    wmutils-core
-    screen
-    slock
-    picocom
-    guvcview
-    xcape
-    elinks
-    dos2unix
-    exfat
-    sass
-    rockbox_utility
-    libarchive
-    zip
-    python3
-    ruby
-    p7zip
-    rakudo
-    discount
-    gcc
-    rofi
-    yubikey-manager
-    lsof
-    pinentry
-    gimp
-    recode
-    sxhkd
-    dwm
-    imagemagick
-    alpine
-    expect
-    xlibsWrapper
-    lynx html2text
-    gnupg
-    psmisc
-    linux.dev
-    moreutils
-    linuxHeaders
-    xcalib
-    bind
-    gdb
-    geoipWithDatabase
-    ripgrep
-    unstable.rustc
-    linux.dev
-    unstable.cargo
-    sox
-    xorg.xwd
-    farbfeld
-    unrar
-    plowshare
-    xorg.xev
+    # Music
+    jack_capture chuck jack2 vmpk puredata sox qjackctl
+    mplayer ffmpeg mpv youtube-dl
 
 
+    # TODO remove and use nix shell or docker
+    python37Packages.pip adoptopenjdk-bin leiningen
+    boot unstable.zig unstable.stagit unstable.go gotools
+    sqlite expect bind sass python3 ruby discount
+    gcc gdb xlibsWrapper linux.dev linuxHeaders
+    unstable.rustc unstable.cargo
   ];
   sound.enable = true;
   services.xserver.libinput.enable = true;

@@ -1,6 +1,12 @@
 alt + d
   dmenul
 
+alt + x
+  paperlike_invert && paperlike_invert
+
+alt + shift + x
+  paperlike_invert
+
 alt + Return
   stw_in_cwd
 
@@ -37,5 +43,3 @@ alt + equal
 alt + backslash
   urlhandler
 
-alt + shift + backslash
-  xcalib -a -invert
