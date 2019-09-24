@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
-H=HDMI-1
-H=DP-2-2
+xrandr | grep 'HDMI-1 connected' && H="HDMI-1"
+xrandr | grep 'DP-2-2 connected' && H="DP-2-2"
+
 xrandr --newmode "plikehd"  $(cvt 2200 1650 20 | tail -n1 | cut -d' ' -f3-)
 xrandr --newmode "plikehd2"  $(cvt 2200 1650 30 | tail -n1 | cut -d' ' -f3-)
 xrandr --newmode "plikemd"  $(cvt 1400 950 20 | tail -n1 | cut -d' ' -f3-)

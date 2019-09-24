@@ -100,7 +100,7 @@ in {
         #url = "https://git.suckless.org/dmenu";
         #rev = "65be875f5adf31e9c4762ac8a8d74b1dfdd78584";
 
-        rev =         "66b109a4d1aceba602b224f74b05c1cb3e41b1f0"; #localdmenu
+        rev =                     "66b109a4d1aceba602b224f74b05c1cb3e41b1f0"; #localdmenu
         url = "https://github.com/mil/dmenu";
         #url = "file:///home/m/Repos/dmenu";
       };
@@ -109,7 +109,7 @@ in {
       name = "st";
       patches = [];
       src = builtins.fetchGit {
-        rev =         "1cf20a5d081c85ba1380ee980b5c76d051b54992"; #localst
+        rev =                     "1cf20a5d081c85ba1380ee980b5c76d051b54992"; #localst
         url = "https://github.com/mil/st";
         #url = "file:///home/m/Repos/st";
       };
@@ -120,7 +120,7 @@ in {
       src = builtins.fetchGit {
         #url = "https://git.suckless.org/dwm";
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
-        rev =         "3a805c31d3ec53380919f5caaccd6ff1eb7f0ca4"; #localdwm
+        rev =                     "2816c299635190fa2c9a36fbb4dccf177beb8d14"; #localdwm
         url = "https://github.com/mil/dwm";
         #url = "file:///home/m/Repos/dwm";
       };
@@ -131,7 +131,7 @@ in {
       buildInputs = oldAttrs.buildInputs ++ [ pkgs.gcr  ];
       makeFlags = [ "PREFIX=$(out)" ];
       src = builtins.fetchGit {
-        rev =         "0a12229e591a3d9f7c3336e5d28dbcc274a715e2"; #localsurf
+        rev =                     "0a12229e591a3d9f7c3336e5d28dbcc274a715e2"; #localsurf
         #url = "file:///home/m/Repos/surf"; 
         url = "https://github.com/mil/surf";
       };
