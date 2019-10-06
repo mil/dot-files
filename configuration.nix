@@ -100,7 +100,7 @@ in {
         #url = "https://git.suckless.org/dmenu";
         #rev = "65be875f5adf31e9c4762ac8a8d74b1dfdd78584";
 
-        rev =                                                                                                                      "66b109a4d1aceba602b224f74b05c1cb3e41b1f0"; #localdmenu
+        rev = "30246d565811ac0eb21c723dc16dba3274d33848"; #localdmenu
         url = "https://github.com/mil/dmenu";
         #url = "file:///home/m/Repos/dmenu";
       };
@@ -109,7 +109,7 @@ in {
       name = "st";
       patches = [];
       src = builtins.fetchGit {
-        rev =                                                                                                                      "1cf20a5d081c85ba1380ee980b5c76d051b54992"; #localst
+        rev = "1cf20a5d081c85ba1380ee980b5c76d051b54992"; #localst
         url = "https://github.com/mil/st";
         #url = "file:///home/m/Repos/st";
       };
@@ -120,7 +120,7 @@ in {
       src = builtins.fetchGit {
         #url = "https://git.suckless.org/dwm";
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
-        rev =                                                                                                                      "1061cb02144ad30f545f5d2343bc6277d379c8e5"; #localdwm
+        rev = "b1b26736fe2dd4d44be594395fc51286377b82b9"; #localdwm
         url = "https://github.com/mil/dwm";
         #url = "file:///home/m/Repos/dwm";
       };
@@ -131,7 +131,7 @@ in {
       buildInputs = oldAttrs.buildInputs ++ [ pkgs.gcr  ];
       makeFlags = [ "PREFIX=$(out)" ];
       src = builtins.fetchGit {
-        rev =                                                                                                                      "234f4e60cb370e490ba66051d0039dd6f6ed5f10"; #localsurf
+        rev = "0a12229e591a3d9f7c3336e5d28dbcc274a715e2"; #localsurf
         url = "file:///home/m/Repos/surf"; 
         #url = "https://github.com/mil/surf";
       };
@@ -199,10 +199,11 @@ in {
     nix-index zip dos2unix exfat libarchive
     imagemagick geoipWithDatabase ripgrep
     farbfeld unrar plowshare tldr usbutils
+    pass
 
     # X progs
     xorg.xmodmap keynav xdotool scrot xcwd xtitle xorg.xinit xfontsel
-    xorg.xf86inputlibinput xclip xsel autocutsel xcape
+    xorg.xf86inputlibinput xclip xsel autocutsel xcape xorg.xwininfo
     xorg.xev xorg.xhost xorg.xgamma xorg.xdpyinfo xorg.xwd xcalib
     arandr unclutter 
 

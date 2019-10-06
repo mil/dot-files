@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 20px;
   height: 5px;
   border-bottom: 12px solid #e8e8e8;
 }
@@ -9,7 +9,6 @@ caret-color: red;
 }
 
 ::-webkit-scrollbar-track { 
-
   background: #e8e8e8; 
   //background: url('/favicon.ico');
   //background-position: left bottom;

@@ -60,13 +60,14 @@ function setup_shortcuts
   abbr -a dg git diff HEAD
   abbr -a cati siv4 -s30
 
+  # Pager
+  abbr -a pgo 'set -x PAGER cat'
+  abbr -a pgw 'set -x PAGER w3n'
+  abbr -a pgv 'set -x PAGER visp'
+
   alias ag="ag --color-path 35 --color-match '1;31' --color-line-number 32"
 
-  alias nm='w3m -X'
-  #alias w3m='w3m -X'
-  alias pf='set -x PAGER cat'
-  alias po='set -x PAGER w3m -X'
-  alias pv='set -x PAGER vis -'
+
   alias q='quit'
   alias m='w3m'
   alias c='cd'

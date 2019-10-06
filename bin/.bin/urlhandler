@@ -1,13 +1,26 @@
 #!/usr/bin/env sh
-WINDOW="$(xprop -root | sed -n '/^_NET_ACTIVE_WINDOW/ s/.* //p')"
 
-SURFURL=`xprop -id $1 | grep URI | awk '{print $3}' | sed 's/\"//g'`
-if [[ -z "$SURFURL" ]]
+# URL test passed from $1
+URL=${1:-$URL}
+
+# Surf
+WINDOW="$(xprop -root | sed -n '/^_NET_ACTIVE_WINDOW/ s/.* //p')"
+SURFURL=`xprop -id $WINDOW | grep URI | awk '{print $3}' | sed 's/\"//g'`
+if [[ ! -z "$SURFURL" ]]
 then
-  URL=$1
-else
   URL="$SURFURL"
 fi
+
+# FF
+ISFFWIN=`xprop -id $(xdotool getactivewindow) | grep -E 'WM_CLASS.*Firefox'`
+if [[ ! -z "$ISFFWIN" ]]
+then
+  xdotool key --clearmodifiers --delay 20 "ctrl+l" "ctrl+c"
+  sleep 0.2
+  URL="$(xclip -o)"
+fi
+
+
 
 COMMAND=$(
   echo "
@@ -24,11 +37,11 @@ COMMAND=$(
     curl URL | tidy -i 4 -w 80 | vis -
     wget URL
     aria2c URL
-    " | sed -e '/^\s*$/d' | sed -e 's/^\s*//' | dmenu -p "Pipe URL" -l 10 -w $WINDOW 
+    " | sed "s/URL/'URL'/g" | sed -e '/^\s*$/d' | sed -e 's/^\s*//' | dmenu -p "Pipe URL" -l 10 -w $WINDOW 
 )
 [[ -z "$COMMAND" ]] && exit 1
 
-RUN=$(echo $COMMAND | sed -e "s#URL#\"$URL\"#g")
+RUN=$(echo $URL | xargs -IURL echo "$COMMAND")
 
 case $COMMAND in 
 (*surf*|*firefox*|*xclip*)
