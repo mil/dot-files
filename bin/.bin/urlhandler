@@ -29,6 +29,7 @@ COMMAND=$(
     firefox -new-window URL
     surf URL
     echo URL | xclip -i
+    cd ~/Repos && git clone URL && fish
     youtube-dl -o- URL | mpv -
     youtube-dl -F URL && cat | xargs -IFORMAT mpv --ytdl-format=FORMAT URL
     youtube-dl URL

@@ -141,6 +141,13 @@ in {
     #    /home/m/.patches/firmware-linux-nonfree/firmware-linux-nonfree-config.patch
     #  ];
     #};
+
+
+    vis = pkgs.vis.overrideAttrs (oldAttrs: rec {
+      patches = [/home/m/.patches/vis/noclear.diff];
+    });
+
+
     chuck = pkgs.chuck.overrideAttrs (oldAttrs: rec {
       name = "chuck";
       version = "1.4.0.0";
