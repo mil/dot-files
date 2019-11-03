@@ -49,21 +49,23 @@ function setup_shortcuts
   abbr -a d date
   abbr -a bw set -x TERM vt102
 
-  abbr -a nb 'killall newsboat || sleep 0.1 && newsboat'
-  abbr -a we weechat
   abbr -a g git
   abbr -a gco git checkout
   abbr -a gc git commit
   abbr -a yt youtube
   abbr -a h hg
   abbr -a r ranger
-  abbr -a dg git diff HEAD
   abbr -a cati siv4 -s30
+
+  abbr -a mpvlq mpv --ytdl-format="[height<420]"
 
   # Pager
   abbr -a pgo 'set -x PAGER cat'
   abbr -a pgw 'set -x PAGER w3n'
   abbr -a pgv 'set -x PAGER visp'
+
+  abbr -a noc 'sed "s,(printf '\033')\\[[0-9;]*[a-zA-Z],,g"   '
+
 
   alias ag="ag --color-path 35 --color-match '1;31' --color-line-number 32"
 
@@ -146,12 +148,23 @@ function setup_addons_and_misc
   # J
   source /usr/share/autojump/autojump.fish 2> /dev/null
 
+  # Control-R
+  function reverse_history_search
+    history | fzf --no-sort | read -l command
+    if test $command
+      commandline -rb $command
+    end
+  end
+  function fish_user_key_bindings
+    bind \cr reverse_history_search
+  end
+
   # X autostart
-  #if status --is-login
-  #    if test -z "$DISPLAY" -a $XDG_VTNR = 1
-  #        startx -- -keeptty
-  #    end
-  #end
+  if status is-login
+      if test -z "$DISPLAY" -a $XDG_VTNR = 1
+          exec startx -- -keeptty
+      end
+  end
 
   # Go-related
   if test -d ~/Go; export GOPATH=/home/$USER/Go; end

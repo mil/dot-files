@@ -52,7 +52,7 @@ function file_type_exec(file)
   elseif string.match(file, "Makefile") then 
     vis:command('set expandtab off')
   elseif string.match(file, ".c") then 
-    vis:command('set expandtab off')
+    --vis:command('set expandtab off')
   elseif string.match(file, ".go") then 
     vis:command('set expandtab off')
     vis:command('set show-tabs off')
@@ -66,6 +66,8 @@ function file_type_exec(file)
     vis:command('set tabwidth 4')
   elseif string.match(file, ".py") then
     vis:command('set tabwidth 4')
+  elseif string.match(file, ".zig") then
+    vis:command('set syntax python')
   elseif string.match(file, ".rb") then
     vis:command('set tabwidth 2')
   elseif string.match(file, ".scss") then
@@ -74,6 +76,8 @@ function file_type_exec(file)
     vis:command('set syntax clj')
   elseif string.match(file, ".clj") then
     vis:command('set syntax clj')
+  elseif string.match(file, ".p6") then
+    vis:command('set syntax perl')
   end
 end
 

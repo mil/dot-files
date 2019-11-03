@@ -33,6 +33,7 @@ COMMAND=$(
     youtube-dl -o- URL | mpv -
     youtube-dl -F URL && cat | xargs -IFORMAT mpv --ytdl-format=FORMAT URL
     youtube-dl URL
+    curl URL | tscrape | w3m
     curl URL | vis -
     curl URL | jq | vis -
     curl URL | tidy -i 4 -w 80 | vis -

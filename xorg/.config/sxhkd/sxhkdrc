@@ -43,3 +43,7 @@ alt + equal
 alt + backslash
   urlhandler
 
+alt + shift + backslash
+  externalpipe_buffer.sh dmenu_urlhandle
+
+

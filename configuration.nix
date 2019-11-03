@@ -3,10 +3,19 @@
 
 { config, pkgs, ... }:
 
-let unstable = import <unstable>{};
+let 
+  unstable = import <unstable>{};
+  sacc = pkgs.callPackage /home/m/.nixpkgs/sacc.nix {};
+  soundpipe = pkgs.callPackage /home/m/.nixpkgs/soundpipe.nix {};
+  sporth = pkgs.callPackage /home/m/.nixpkgs/sporth.nix {};
+  idiotbox = pkgs.callPackage /home/m/.nixpkgs/idiotbox.nix {};
+  json2tsv = pkgs.callPackage /home/m/.nixpkgs/json2tsv.nix {};
+  tscrape = pkgs.callPackage /home/m/.nixpkgs/tscrape.nix {};
+  sfeed = pkgs.callPackage /home/m/.nixpkgs/sfeed.nix {};
+  njconnect = pkgs.callPackage /home/m/.nixpkgs/njconnect.nix {};
+
 in {
   imports = [ /etc/nixos/hardware-configuration.nix /etc/nixos/machine.nix ];
-  programs.adb.enable = true;
 
   # Prevent DHCP from holding boot
   systemd.services.systemd-user-sessions.enable = false;
@@ -21,6 +30,7 @@ in {
   boot.extraModprobeConfig = ''
     options snd_hda_intel enable=0,1
     options thinkpad_acpi fan_control=1
+    options rtl8192cu debug_level=5
   '';
   sound.extraConfig = ''
     #defaults.pcm.!card "USB"
@@ -44,11 +54,13 @@ in {
     '';
     serviceConfig.Type = "oneshot";
   };
-
   services.udev.extraRules = ''
       ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="${pkgs.stdenv.shell} -c 'chown -R m /sys/class/backlight/%k/brightness'"
       ATTRS{product}=="USB Trackball", SYMLINK+="miltrackball", ENV{DISPLAY}=":0", RUN+="${pkgs.stdenv.shell} -c '/home/m/.bin/trackball'"
   '';
+
+  documentation.dev.enable = true;
+
 
   # Yubikey
   hardware.u2f.enable = true;
@@ -58,7 +70,7 @@ in {
     enableSSHSupport = true;
   };
   services.pcscd.enable = true;
-  services.udev.packages = with pkgs; [yubikey-personalization];
+  services.udev.packages = with pkgs; [yubikey-personalization pkgs.libu2f-host];
   environment.shellInit = ''
     export GPG_TTY="$(tty)"
     gpg-connect-agent /bye
@@ -75,8 +87,15 @@ in {
     fonts = with pkgs; [inconsolata terminus proggyfonts terminus_font];
   };
   fonts.fontconfig.hinting.autohint = true;
-  services.logind.lidSwitch = "ignore";
 
+  services.logind.lidSwitch = "ignore";
+  services.ntp.enable = true;
+  services.logind.extraConfig = "HandleLidSwitch=ignore";
+  services.xserver.enable = true;
+  services.xserver.exportConfiguration = true;
+  services.xserver.autorun = false;
+
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
   #boot.kernelPatches = [
   #{
   #	name = "foo";
@@ -114,68 +133,74 @@ in {
         #url = "file:///home/m/Repos/st";
       };
     });
+
     dwm = pkgs.dwm.overrideAttrs (oldAttrs: rec {
       name = "dwm";
       patches = [];
+      makeFlags = [ "PREFIX=$(out)" ];
+
       src = builtins.fetchGit {
         #url = "https://git.suckless.org/dwm";
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
-        rev = "b1b26736fe2dd4d44be594395fc51286377b82b9"; #localdwm
-        url = "https://github.com/mil/dwm";
-        #url = "file:///home/m/Repos/dwm";
+        rev = "3c5398b8e386708624e9cc84a69748a687f77508"; #localdwm
+        #url = "https://github.com/mil/dwm";
+        url = "file:///home/m/Repos/dwm";
       };
     });
+
     surf = pkgs.surf.overrideAttrs (oldAttrs: rec {
       name = "surf";
       patches = [];
       buildInputs = oldAttrs.buildInputs ++ [ pkgs.gcr  ];
       makeFlags = [ "PREFIX=$(out)" ];
       src = builtins.fetchGit {
-        rev = "0a12229e591a3d9f7c3336e5d28dbcc274a715e2"; #localsurf
-        url = "file:///home/m/Repos/surf"; 
-        #url = "https://github.com/mil/surf";
+        rev = "8f9b63d0af526f1d9bd047209b0d1a2d6ab0a665"; #localsurf
+        #url = "file:///home/m/Repos/surf"; 
+        url = "https://github.com/mil/surf";
       };
     });
+
     #firmware-linux-nonfree = pkgs.firmware-linux-nonfree.override {
     #  patches =[
     #    /home/m/.patches/firmware-linux-nonfree/firmware-linux-nonfree-config.patch
     #  ];
     #};
 
-
     vis = pkgs.vis.overrideAttrs (oldAttrs: rec {
       patches = [/home/m/.patches/vis/noclear.diff];
     });
 
-
-    chuck = pkgs.chuck.overrideAttrs (oldAttrs: rec {
-      name = "chuck";
-      version = "1.4.0.0";
-      src = builtins.fetchurl {
-        url = "http://chuck.cs.princeton.edu/release/files/chuck-${version}.tgz";
-        sha256 = "1b17rsf7bv45gfhyhfmpz9d4rkxn24c0m2hgmpfjz3nlp0rf7bic";
-      };
-      buildFlags = ["linux-jack"];
-      buildInputs = oldAttrs.buildInputs ++ [ pkgs.libjack2 ];
-      patches = [];
-      postPatch = ''
-        substituteInPlace src/makefile --replace "/usr/local/bin" "$out/bin"
-      '';
-    });
+    #chuck = pkgs.chuck.overrideAttrs (oldAttrs: rec {
+    #  name = "chuck";
+    #  version = "1.4.0.0";
+    #  src = builtins.fetchurl {
+    #    url = "http://chuck.cs.princeton.edu/release/files/chuck-${version}.tgz";
+    #    sha256 = "1b17rsf7bv45gfhyhfmpz9d4rkxn24c0m2hgmpfjz3nlp0rf7bic";
+    #  };
+    #  buildFlags = ["linux-jack"];
+    #  buildInputs = oldAttrs.buildInputs ++ [ pkgs.libjack2 ];
+    #  patches = [];
+    #  postPatch = ''
+    #    substituteInPlace src/makefile --replace "/usr/local/bin" "$out/bin"
+    #  '';
+    #});
+  };
+  services.jack = {
+    jackd.enable = true;
+    alsa.enable = false;
+    loopback = { enable = true; dmixConfig = '' period_size 2048 ''; }; 
   };
 
   nixpkgs.config.allowUnfree =true;
   hardware.enableRedistributableFirmware = true;
-  #  hardware.enableAllFirmware = true;
-  #     boot.kernelPatches = [ {
-  #        name = "enable-mediatek-wifi";
-  #        patch = null;
-  #        extraConfig = ''
-  #		MT7601 y
-  #              '';
-  #        } ];
 
-  services.logind.extraConfig = "HandleLidSwitch=ignore";
+  # hardware.enableAllFirmware = true;
+  # boot.kernelPatches = [{
+  #    name = "enable-mediatek-wifi";
+  #    patch = null;
+  #    extraConfig = ''MT7601 y'';
+  # }];
+
 
   networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
   networking.wireless.userControlled.enable = false;
@@ -187,9 +212,8 @@ in {
     description = "m";
     extraGroups = [ "wheel" "docker" "jackaudio" "adbusers" "dialout" "uucp"];
   };
-  services.xserver.enable = true;
-  services.xserver.exportConfiguration = true;
-  services.xserver.autorun = false;
+  services.mingetty.autologinUser = "m";
+
   #users.mutableUsers = false;
 
   time.timeZone = "America/Chicago";
@@ -197,16 +221,21 @@ in {
 
   environment.systemPackages = with pkgs; [
     # Cli progs
-    vis htop mutt newsboat wget 
-    killall ag git w3m elinks  bc gnumake ncdu
+    vis htop mutt wget 
+    killall ag
+    finger_bsd binutils-unwrapped netcat-gnu telnet sshfs 
+    git mercurial
+    w3m elinks  sacc
+    bc gnumake ncdu
     fish autojump ranger highlight
     docker jq aria2 whois tree stow 
-    inotifyTools sshfs libtidy screen picocom
+    inotifyTools libtidy screen picocom
     unzip p7zip lsof recode lynx html2text moreutils psmisc
     nix-index zip dos2unix exfat libarchive
     imagemagick geoipWithDatabase ripgrep
     farbfeld unrar plowshare tldr usbutils
-    pass
+    pass fzf rlwrap
+    idiotbox tscrape sfeed json2tsv
 
     # X progs
     xorg.xmodmap keynav xdotool scrot xcwd xtitle xorg.xinit xfontsel
@@ -226,20 +255,30 @@ in {
 
     # Music
     jack_capture chuck jack2 vmpk puredata sox qjackctl
-    mplayer ffmpeg mpv youtube-dl pianobar
-
+    ffmpeg mpv youtube-dl pianobar njconnect
+    soundpipe sporth
 
     # TODO remove and use nix shell or docker
     python37Packages.pip adoptopenjdk-bin leiningen
-    boot unstable.zig unstable.stagit unstable.go gotools
+    boot zig unstable.stagit unstable.go gotools
     sqlite expect bind sass python3 ruby discount
     gcc gdb xlibsWrapper linux.dev linuxHeaders
-    unstable.rustc unstable.cargo 
+    unstable.rustc unstable.cargo lua unstable.rakudo
+
+    # Docs
+    manpages
+    posix_man_pages
+
+    astyle
   ];
+
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "m" ];
+
   sound.enable = true;
   services.xserver.libinput.enable = true;
   #services.sshd.enable = true;
   programs.command-not-found.enable = true;
 
-  system.stateVersion = "19.03"; # Did you read the comment?
+  system.stateVersion = "19.09"; # Did you read the comment?
 }

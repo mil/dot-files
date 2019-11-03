@@ -6,7 +6,7 @@ BUFFER_FILE=/tmp/content_buffer
 function st_strings_read() {
   INPUT="$(cat)"
   echo "$(
-    echo "$INPUT" | grep -Eo '\S+' | tr -d '[:blank:]'
+    echo "$INPUT" | grep -Eo '\S+' | tr -d '[:blank:]' | sed -E 's#^(a|b)/##g'
     echo "$INPUT" | grep -oP '"[^"]+"' | tr -d '"'
     echo "$INPUT" | sed 's/^ *[0-9]\+.//g' | awk '{$1=$1};1'
   )" | uniq | grep . | awk '{ print length, $0 }' | sort -n -s | cut -d" " -f2- \
@@ -38,6 +38,10 @@ function dmenu_copy() {
 function dmenu_type() {
   trigger_sigusr1
   cat $BUFFER_FILE | dmenu -l 10 -i -w $(xdotool getactivewindow) -p 'Screen Type' | sed 's/↵/\n/g' | xargs -IC xdotool type --delay 0 "C"
+}
+function dmenu_urlhandle() {
+  trigger_sigusr1
+  cat $BUFFER_FILE | dmenu -l 10 -i -w $(xdotool getactivewindow) -p 'Screen URL Handle' | sed 's/↵/\n/g' | xargs urlhandler
 }
 function pipe_combine() {
   trigger_sigusr1

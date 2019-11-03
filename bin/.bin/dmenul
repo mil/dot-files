@@ -3,4 +3,5 @@ pkill dmenu;
 set -x FROM_DMENU true;
 set -x SURFRAW_graphical true;
 #dmenu_path | dmenu -p Run -b | sh
-dmenu_path | cat - ~/.ddg_bangs | dmenu_run -b -p Run -b -h 30
+
+cat (history | sed -e '/.\{80\}/d' | psub) ~/.ddg_bangs (dmenu_path | psub) | dmenu -b -p Run -b -h 30 -t | launch
