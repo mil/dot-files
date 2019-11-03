@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+F=$(mktemp --suffix=.html)
+cat > $F
+surf $F
