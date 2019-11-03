@@ -143,8 +143,8 @@ in {
         #url = "https://git.suckless.org/dwm";
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
         rev = "3c5398b8e386708624e9cc84a69748a687f77508"; #localdwm
-        #url = "https://github.com/mil/dwm";
-        url = "file:///home/m/Repos/dwm";
+        url = "https://github.com/mil/dwm";
+        #url = "file:///home/m/Repos/dwm";
       };
     });
 
