@@ -1,0 +1,33 @@
+set nopreview
+set ratios 1
+set dircounts 1
+
+set info size:time
+set incsearch 1
+
+#cmd x set ratios 1:2
+#cmd X set ratios 1
+
+map X :{{
+  set ratios 1:2
+  set preview
+  redraw
+}}
+map x :{{
+  set nopreview
+  set ratios 1
+  redraw
+}}
+
+map S push w
+map s push $
+map <enter> push l
+
+cmd open ${{
+  vis $fx
+}}
+
+set previewer ~/.config/lf/pv.sh
+map i $~/.config/lf/pv.sh $f | w3m
+
+map f $vi $(fzf)
