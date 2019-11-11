@@ -6,9 +6,9 @@ BUFFER_FILE=/tmp/content_buffer
 function st_strings_read() {
   INPUT="$(cat)"
   echo "$(
-    echo "$INPUT" | grep -Eo '\S+' | tr -d '[:blank:]' | sed -E 's#^(a|b)/##g'
-    echo "$INPUT" | grep -oP '"[^"]+"' | tr -d '"'
-    echo "$INPUT" | sed 's/^ *[0-9]\+.//g' | awk '{$1=$1};1'
+    echo "$INPUT" | tr '›' ' ' | grep -Eo '\S+' | tr -d '[:blank:]' | sed -E 's#^(a|b)/##g'
+    echo "$INPUT" | tr '›' ' ' | grep -oP '"[^"]+"' | tr -d '"'
+    echo "$INPUT" | tr '›' ' ' | sed 's/^ *[0-9]\+.//g' | awk '{$1=$1};1'
   )" | uniq | grep . | awk '{ print length, $0 }' | sort -n -s | cut -d" " -f2- \
   >> $BUFFER_FILE &
 }

@@ -26,6 +26,7 @@ COMMAND=$(
   echo "
     w3m URL
     mpv URL
+    mpv --ytdl-format=[height<420] URL
     firefox -new-window URL
     surf URL
     echo URL | xclip -i

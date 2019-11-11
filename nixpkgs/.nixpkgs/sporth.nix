@@ -5,11 +5,13 @@ stdenv.mkDerivation rec {
 
   name = "sporth";
   src = builtins.fetchGit {
-    rev = "5fd8e476b7bbe6cf54e69813fbe6dfd78a9bfca7"; #localsporth
+    ref = "custom-ugens";
+    rev = "1f9f54cc11cb3f94130cb03a9fa0dc5e6331b709"; #localsporth
+    #url = "https://github.com/PaulBatchelor/Sporth";
     url = "https://github.com/mil/Sporth";
     #url = "file:///home/m/Repos/Sporth"; 
   };
-  NIX_CFLAGS_COMPILE = "-DNO_POLYSPORTH ";# -DDEBUG_MODE
+  NIX_CFLAGS_COMPILE = "-DNO_POLYSPORTH -DDEBUG_MODE";
   buildInputs = [soundpipe libsndfile libjack2];
 
   preBuild=''
@@ -22,7 +24,9 @@ stdenv.mkDerivation rec {
    sed -i 's#/usr/local/bin#/bin#g' Makefile util/installer.sh
    sed -i 's#/usr/local/lib#/lib#g' Makefile util/installer.sh
    sed -i 's#/usr/local/include#/include#g' Makefile util/installer.sh
-   sed -i 's#/usr/local/#/usr/#g' Makefile util/installer.sh
+   sed -i 's#/usr/local/#/usr/#g' Makefile util/installer.sh 
+
+   sed -i "s#/usr/local/#$out/usr/#g" util/ugen_lookup
    sed -i '/mkdir/d' Makefile
    sed -i '/polysporth/d' Makefile
    sed -i -E 's/install (.*) (.*)/install \1 $(PREFIX)\2/ ' Makefile util/installer.sh

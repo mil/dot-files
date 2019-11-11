@@ -45,6 +45,11 @@ in {
     #}
   '';
 
+  fonts.fontconfig.defaultFonts.emoji = ["symbola"];
+
+
+
+
   systemd.services.miles-fixes = {
     description = "Fixes fan permissions";
     wantedBy = [ "multi-user.target" "post-resume.target" ];
@@ -84,7 +89,7 @@ in {
     enableFontDir = true;
     enableDefaultFonts = true;
     enableGhostscriptFonts = true;
-    fonts = with pkgs; [inconsolata terminus proggyfonts terminus_font];
+    fonts = with pkgs; [inconsolata terminus proggyfonts terminus_font symbola];
   };
   fonts.fontconfig.hinting.autohint = true;
 
@@ -189,6 +194,12 @@ in {
     jackd.enable = true;
     alsa.enable = false;
     loopback = { enable = true; dmixConfig = '' period_size 2048 ''; }; 
+    jackd.extraOptions = [
+      "-r" "-d" "alsa" "-d" 
+      #"hw:USB"
+      "hw:0" 
+      "-r" "44100"
+    ];
   };
 
   nixpkgs.config.allowUnfree =true;
@@ -227,15 +238,16 @@ in {
     git mercurial
     w3m elinks  sacc
     bc gnumake ncdu
-    fish autojump ranger highlight
+    fish autojump highlight
     docker jq aria2 whois tree stow 
     inotifyTools libtidy screen picocom
     unzip p7zip lsof recode lynx html2text moreutils psmisc
     nix-index zip dos2unix exfat libarchive
     imagemagick geoipWithDatabase ripgrep
     farbfeld unrar plowshare tldr usbutils
-    pass fzf rlwrap
+    pass fzf rlwrap fd astyle
     idiotbox tscrape sfeed json2tsv
+    shellcheck shfmt lf file
 
     # X progs
     xorg.xmodmap keynav xdotool scrot xcwd xtitle xorg.xinit xfontsel
@@ -256,7 +268,7 @@ in {
     # Music
     jack_capture chuck jack2 vmpk puredata sox qjackctl
     ffmpeg mpv youtube-dl pianobar njconnect
-    soundpipe sporth
+    soundpipe sporth liblo
 
     # TODO remove and use nix shell or docker
     python37Packages.pip adoptopenjdk-bin leiningen
@@ -268,8 +280,6 @@ in {
     # Docs
     manpages
     posix_man_pages
-
-    astyle
   ];
 
   virtualisation.virtualbox.host.enable = true;

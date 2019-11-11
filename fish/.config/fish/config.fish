@@ -31,6 +31,7 @@ function setup_envvars_and_path
   add_to_path_if_exists /usr/share/surfraw
   add_to_path_if_exists /usr/lib/surfraw
   add_to_path_if_exists /home/$USER/.bin
+  add_to_path_if_exists /home/$USER/Mixtapes/.bin
   add_to_path_if_exists /home/$USER/.bin_wmutils
   add_to_path_if_exists /usr/lib64/go/bin/goimports
   add_to_path_if_exists /usr/local/bin

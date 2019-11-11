@@ -3,7 +3,9 @@
 #ifdef COLOR
 *customization              : -color
 #endif 
-//*font: xft:Hack-9
+
+*font: xft:Inconsolata:pixelsize=18:antialias=true:autohint=false
+
 *hinting: false
 
 Xft.dpi: 96

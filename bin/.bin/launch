@@ -2,11 +2,16 @@
 INPUT="$(cat)"
 REGEX='(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'
 REGEX2='.+\.(com|net|org)'
+KNOWN_GRAPHICAL_PROGS="^surf|firefox|dbeaver|st|chromium|mpv|mplayer|slack"
 
 [ -z "$INPUT" ] && exit 1
 
 if [[ $(which $(echo "$INPUT" | tr ' ' '\n' | head -n1)) ]]; then
-  fish -C "st -e $INPUT"
+  if [[ $(echo "$INPUT" | grep -E "$KNOWN_GRAPHICAL_PROGS") ]]; then
+    eval "$INPUT"
+  else
+    fish -C "st -e $INPUT"
+  fi
 elif [[ $INPUT =~ $REGEX || $INPUT =~ $REGEX2 ]]; then
   surf "${INPUT}"
 else
