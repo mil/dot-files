@@ -163,8 +163,8 @@ in {
       makeFlags = [ "PREFIX=$(out)" ];
       src = builtins.fetchGit {
         rev = "7152a472b944199778188ef85d9c3b0e6c7d65b1"; #localsurf
-        url = "file:///home/m/Repos/surf"; 
-        #url = "https://github.com/mil/surf";
+        #url = "file:///home/m/Repos/surf"; 
+        url = "https://github.com/mil/surf";
       };
     });
 
