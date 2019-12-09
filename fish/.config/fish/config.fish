@@ -20,6 +20,8 @@ function setup_envvars_and_path
   setenv SURFRAW_graphical false
   setenv RANGER_LOAD_DEFAULT_RC FALSE
 
+  set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+
   # Java
   export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
   export BOOT_JVM_OPTIONS='-client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:none'
@@ -45,6 +47,7 @@ function setup_shortcuts
   abbr -a ytdlpl 'youtube-dl -xo "%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"'
   abbr -a syncwatch watch grep -e Dirty: -e Writeback: /proc/meminfo
 
+  abbr -a a 'ag'
   abbr -a inv 'xcalib -invert -alter'
 
   abbr -a d date

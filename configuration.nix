@@ -40,7 +40,7 @@ in {
     #    slave.pcm {
     #        @func getenv
     #        vars [ ALSAPCM ]
-    #        default "hw:Scarlett 2i4 USB"
+    #        default "hw :Scarlett 2i4 USB"
     #    }
     #}
   '';
@@ -48,6 +48,9 @@ in {
   fonts.fontconfig.defaultFonts.emoji = ["symbola"];
 
 
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=5s
+  '';
 
 
   systemd.services.miles-fixes = {
@@ -159,9 +162,9 @@ in {
       buildInputs = oldAttrs.buildInputs ++ [ pkgs.gcr  ];
       makeFlags = [ "PREFIX=$(out)" ];
       src = builtins.fetchGit {
-        rev = "8f9b63d0af526f1d9bd047209b0d1a2d6ab0a665"; #localsurf
-        #url = "file:///home/m/Repos/surf"; 
-        url = "https://github.com/mil/surf";
+        rev = "7152a472b944199778188ef85d9c3b0e6c7d65b1"; #localsurf
+        url = "file:///home/m/Repos/surf"; 
+        #url = "https://github.com/mil/surf";
       };
     });
 
@@ -196,7 +199,7 @@ in {
     loopback = { enable = true; dmixConfig = '' period_size 2048 ''; }; 
     jackd.extraOptions = [
       "-r" "-d" "alsa" "-d" 
-      #"hw:USB"
+      #"h w:USB"
       "hw:0" 
       "-r" "44100"
     ];
@@ -247,7 +250,7 @@ in {
     farbfeld unrar plowshare tldr usbutils
     pass fzf rlwrap fd astyle
     idiotbox tscrape sfeed json2tsv
-    shellcheck shfmt lf file
+    shellcheck shfmt lf file entr
 
     # X progs
     xorg.xmodmap keynav xdotool scrot xcwd xtitle xorg.xinit xfontsel
@@ -256,7 +259,7 @@ in {
     arandr unclutter 
 
     # Core
-    sxhkd i3 dwm dmenu st surf pkgs.libxml2 
+    sxhkd dwm dmenu st surf pkgs.libxml2 
     sxiv libnotify dunst slock terraform restic 
     yubikey-personalization yubikey-manager pinentry
     gnupg rockbox_utility
@@ -271,11 +274,13 @@ in {
     soundpipe sporth liblo
 
     # TODO remove and use nix shell or docker
-    python37Packages.pip adoptopenjdk-bin leiningen
-    boot zig unstable.stagit unstable.go gotools
-    sqlite expect bind sass python3 ruby discount
-    gcc gdb xlibsWrapper linux.dev linuxHeaders
-    unstable.rustc unstable.cargo lua unstable.rakudo
+    #python37Packages.pip adoptopenjdk-bin leiningen
+    #boot zig unstable.stagit unstable.go gotools
+    #sqlite expect bind sass python3 ruby discount
+    python3
+    #gcc gdb xlibsWrapper linux.dev linuxHeaders
+    #unstable.rustc unstable.cargo lua unstable.rakudo
+    ruby
 
     # Docs
     manpages

@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 #exec i3
-xset -dpms &
+xset s off -dpms &
 battery_dwm_loop.sh &
 sxhkd &
 autocutsel &

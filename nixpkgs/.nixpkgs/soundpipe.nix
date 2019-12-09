@@ -2,8 +2,9 @@
 
 stdenv.mkDerivation rec {
   name = "soundpipe";
+  #NIX_CFLAGS_COMPILE = "-DUSE_DOUBLE";
   src = builtins.fetchGit {
-    rev = "35d856fcf8a0d85c285818554f569b592d066d10"; #localsoundpipe
+    rev = "3a0803b1e21c3e6de1e3bb1051cecd1b39d98aa0"; #localsoundpipe
     url = "https://github.com/PaulBatchelor/Soundpipe";
     #url = "file:///home/m/Repos/Soundpipe"; 
   };

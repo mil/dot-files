@@ -6,7 +6,7 @@ stdenv.mkDerivation rec {
   name = "sporth";
   src = builtins.fetchGit {
     ref = "custom-ugens";
-    rev = "1f9f54cc11cb3f94130cb03a9fa0dc5e6331b709"; #localsporth
+    rev = "156d5189262f126f8658b3c4e1910d9cda84b587"; #localsporth
     #url = "https://github.com/PaulBatchelor/Sporth";
     url = "https://github.com/mil/Sporth";
     #url = "file:///home/m/Repos/Sporth"; 

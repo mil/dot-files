@@ -20,11 +20,18 @@ map x :{{
 }}
 
 map S push w
-map s push $
+#map s push $
 map <enter> push l
 
 cmd open ${{
-  vis $fx
+  case "$f" in
+      *.html) $BROWSER "$fx";;
+      *.pdf | *.djvu | *.epub) zathura "$fx";;
+      *.jpg | *.gif | *.png ) sxiv "$fx";;
+      *.wav | *.opus | *.flac | *.mp3 | *.ogg) mpv "$fx";;
+      *.mkv | *.mp4 | *.avi) mpv "$fx";;
+      *) vis "$fx";;
+  esac
 }}
 
 set previewer ~/.config/lf/pv.sh
