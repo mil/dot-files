@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+NC=/etc/nixos/configuration.nix
+
+die() {
+  echo "./togjackdev USB|0"
+  exit 1
+}
+
+echo "$1" | grep -E "^(USB|0)$" || die
+echo "Set jack to use device: $1"
+sed -iE "s/hw:[A-Z0-9]+/hw:$1/g" $NC
+sudo nixos-rebuild switch
+sudo systemctl restart jack

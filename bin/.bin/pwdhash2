@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+DOMAIN=$1
+PASSWORD=$2
+
+constraints() {
+  echo "$1 todo"
+}
+
+generate() {
+  echo -n $DOMAIN |
+    openssl dgst -md5 -binary -hmac $PASSWORD |
+    base64 |
+    rev | cut -c3- | rev
+    #constraints
+}
+
+generate
