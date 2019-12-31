@@ -1,7 +1,7 @@
 { stdenv, fetchFromGitHub, libsndfile, libjack2, callPackage }:
 
 stdenv.mkDerivation rec {
-  soundpipe = callPackage /home/m/.nixpkgs/soundpipe.nix {};
+  soundpipe = callPackage ./soundpipe.nix {};
 
   name = "sporth";
   src = builtins.fetchGit {

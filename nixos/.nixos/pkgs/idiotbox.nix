@@ -1,4 +1,4 @@
-{ stdenv, linuxHeaders, gnutls, libressl }:
+{ stdenv, linuxHeaders, gnutls, libressl, cacert }:
 
 stdenv.mkDerivation rec {
   name = "idiotbox";
@@ -9,6 +9,7 @@ stdenv.mkDerivation rec {
   preBuild=''
     sed -i 's#tls.h#linux/tls.h#' youtube.c
     sed -i 's#-static##' Makefile
+    sed -i '1 i\#define TLS_CA_CERT_FILE "testo"\n' *.c
   '';
   installPhase = ''
    mkdir -p $out/bin
@@ -18,8 +19,12 @@ stdenv.mkDerivation rec {
    cp gph $out/bin/idiotbox_gph
   '';
 
+    postInstall = ''
+          ln -s ${cacert}/etc/ssl/certs/ca-bundle.crt $out/cacert.pem
+              '';
 
-  makeFlags = [ "PREFIX=$(out) " ];
+
+  makeFlags = [ "PREFIX=$(out)" ];
   installFlags = [ "PREFIX=$(out)"  ];
-  buildInputs = [linuxHeaders gnutls libressl];
+  buildInputs = [linuxHeaders gnutls libressl cacert];
 }

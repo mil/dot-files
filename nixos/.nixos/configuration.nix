@@ -4,64 +4,34 @@
 { config, pkgs, ... }:
 
 let 
-  unstable = import <unstable>{};
-  sacc = pkgs.callPackage /home/m/.nixpkgs/sacc.nix {};
-  soundpipe = pkgs.callPackage /home/m/.nixpkgs/soundpipe.nix {};
-  sporth = pkgs.callPackage /home/m/.nixpkgs/sporth.nix {};
-  idiotbox = pkgs.callPackage /home/m/.nixpkgs/idiotbox.nix {};
-  json2tsv = pkgs.callPackage /home/m/.nixpkgs/json2tsv.nix {};
-  tscrape = pkgs.callPackage /home/m/.nixpkgs/tscrape.nix {};
-  sfeed = pkgs.callPackage /home/m/.nixpkgs/sfeed.nix {};
-  njconnect = pkgs.callPackage /home/m/.nixpkgs/njconnect.nix {};
+  #unstable = import <unstable>{};
+  sacc = pkgs.callPackage /home/m/.nixos/pkgs/sacc.nix {};
+  wxedid = pkgs.callPackage /home/m/.nixos/pkgs/wxedid.nix {};
+  soundpipe = pkgs.callPackage /home/m/.nixos/pkgs/soundpipe.nix {};
+  sporth = pkgs.callPackage /home/m/.nixos/pkgs/sporth.nix {};
+  idiotbox = pkgs.callPackage /home/m/.nixos/pkgs/idiotbox.nix {};
+  json2tsv = pkgs.callPackage /home/m/.nixos/pkgs/json2tsv.nix {};
+  tscrape = pkgs.callPackage /home/m/.nixos/pkgs/tscrape.nix {};
+  sfeed = pkgs.callPackage /home/m/.nixos/pkgs/sfeed.nix {};
+  njconnect = pkgs.callPackage /home/m/.nixos/pkgs/njconnect.nix {};
 
 in {
-  imports = [ /etc/nixos/hardware-configuration.nix /etc/nixos/machine.nix ];
+  imports = [
+     /home/m/.nixos/machines/thinkpad.nix
+     #/home/m/.nixos/machines/rpi3.nix
+     /etc/nixos/hidden.nix
+     #/etc/nixos/nixos-configs/qemu.nix
+  ];
 
   # Prevent DHCP from holding boot
+  #boot.kernelParams = ["video=HDMI-A-1:D"];
   systemd.services.systemd-user-sessions.enable = false;
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.backgroundColor = "#cfcfcf";
-  boot.loader.grub.splashImage = null;
-  boot.tmpOnTmpfs = true;
-
-  boot.extraModprobeConfig = ''
-    options snd_hda_intel enable=0,1
-    options thinkpad_acpi fan_control=1
-    options rtl8192cu debug_level=5
-  '';
-  sound.extraConfig = ''
-    #defaults.pcm.!card "USB"
-    #defaults.ctl.!card "USB"
-    #pcm.!default {
-    #    type plug
-    #    slave.pcm {
-    #        @func getenv
-    #        vars [ ALSAPCM ]
-    #        default "hw :Scarlett 2i4 USB"
-    #    }
-    #}
-  '';
-
-  fonts.fontconfig.defaultFonts.emoji = ["symbola"];
-
+  #boot.tmpOnTmpfs = true;
 
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=5s
   '';
-
-
-  systemd.services.miles-fixes = {
-    description = "Fixes fan permissions";
-    wantedBy = [ "multi-user.target" "post-resume.target" ];
-    after = [ "multi-user.target" "post-resume.target" ];
-    script = ''
-      chown -R m /proc/acpi/ibm/fan
-    '';
-    serviceConfig.Type = "oneshot";
-  };
   services.udev.extraRules = ''
       ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="${pkgs.stdenv.shell} -c 'chown -R m /sys/class/backlight/%k/brightness'"
       ATTRS{product}=="USB Trackball", SYMLINK+="miltrackball", ENV{DISPLAY}=":0", RUN+="${pkgs.stdenv.shell} -c '/home/m/.bin/trackball'"
@@ -69,14 +39,10 @@ in {
 
   documentation.dev.enable = true;
 
-
   # Yubikey
   hardware.u2f.enable = true;
   programs.ssh.startAgent = false;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
+  programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
   services.pcscd.enable = true;
   services.udev.packages = with pkgs; [yubikey-personalization pkgs.libu2f-host];
   environment.shellInit = ''
@@ -92,25 +58,23 @@ in {
     enableFontDir = true;
     enableDefaultFonts = true;
     enableGhostscriptFonts = true;
-    fonts = with pkgs; [inconsolata terminus proggyfonts terminus_font symbola];
-  };
-  fonts.fontconfig.hinting.autohint = true;
+    fonts = with pkgs; [inconsolata 
+    #terminus 
+    proggyfonts 
+    terminus_font 
+    symbola];
 
-  services.logind.lidSwitch = "ignore";
+    fontconfig.defaultFonts.emoji = ["symbola"];
+    fontconfig.hinting.autohint = true;
+  };
+
   services.ntp.enable = true;
+  services.logind.lidSwitch = "ignore";
   services.logind.extraConfig = "HandleLidSwitch=ignore";
   services.xserver.enable = true;
+  services.xserver.libinput.enable = true;
   services.xserver.exportConfiguration = true;
   services.xserver.autorun = false;
-
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
-  #boot.kernelPatches = [
-  #{
-  #	name = "foo";
-  #	patch = /home/m/.patches/firmware-linux-nonfree/fix-wifi.diff;
-  #}
-  #
-  #];
 
   nixpkgs.config.packageOverrides = pkgs: {
     dunst = pkgs.dunst.override { dunstify = true; };
@@ -168,38 +132,35 @@ in {
       };
     });
 
-    #firmware-linux-nonfree = pkgs.firmware-linux-nonfree.override {
-    #  patches =[
-    #    /home/m/.patches/firmware-linux-nonfree/firmware-linux-nonfree-config.patch
-    #  ];
-    #};
-
     vis = pkgs.vis.overrideAttrs (oldAttrs: rec {
-      patches = [/home/m/.patches/vis/noclear.diff];
+      patches = [/home/m/.nixos/patches/vis/noclear.diff];
     });
+  };
 
-    #chuck = pkgs.chuck.overrideAttrs (oldAttrs: rec {
-    #  name = "chuck";
-    #  version = "1.4.0.0";
-    #  src = builtins.fetchurl {
-    #    url = "http://chuck.cs.princeton.edu/release/files/chuck-${version}.tgz";
-    #    sha256 = "1b17rsf7bv45gfhyhfmpz9d4rkxn24c0m2hgmpfjz3nlp0rf7bic";
-    #  };
-    #  buildFlags = ["linux-jack"];
-    #  buildInputs = oldAttrs.buildInputs ++ [ pkgs.libjack2 ];
-    #  patches = [];
-    #  postPatch = ''
-    #    substituteInPlace src/makefile --replace "/usr/local/bin" "$out/bin"
-    #  '';
-    #});
+
+  sound = {
+    extraConfig = ''
+      #defaults.pcm.!card "USB"
+      #defaults.ctl.!card "USB"
+      #pcm.!default {
+      #    type plug
+      #    slave.pcm {
+      #        @func getenv
+      #        vars [ ALSAPCM ]
+      #        default "hw :Scarlett 2i4 USB"
+      #    }
+      #}
+    '';
+    enable = true;
   };
   services.jack = {
-    jackd.enable = true;
-    alsa.enable = false;
-    loopback = { enable = true; dmixConfig = '' period_size 2048 ''; }; 
+    #alsa.enable = true;
+    #loopback = { enable = true; dmixConfig = '' period_size 2048 ''; }; 
+
     jackd.extraOptions = [
       "-r" "-d" "alsa" "-d" 
       #"h w:USB"
+      #"hw:USB" 
       "hw:0" 
       "-r" "44100"
     ];
@@ -218,7 +179,6 @@ in {
 
   networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
   networking.wireless.userControlled.enable = false;
-
   users.users.m = {
     shell = pkgs.fish;
     isNormalUser = true;
@@ -231,69 +191,56 @@ in {
   #users.mutableUsers = false;
 
   time.timeZone = "America/Chicago";
-
-
   environment.systemPackages = with pkgs; [
     # Cli progs
-    vis htop mutt wget 
-    killall ag
+    vis htop mutt wget killall ag
     finger_bsd binutils-unwrapped netcat-gnu telnet sshfs 
-    git mercurial
-    w3m elinks  sacc
-    bc gnumake ncdu
-    fish autojump highlight
-    docker jq aria2 whois tree stow 
-    inotifyTools libtidy screen picocom
-    unzip p7zip lsof recode lynx html2text moreutils psmisc
-    nix-index zip dos2unix exfat libarchive
-    imagemagick geoipWithDatabase ripgrep
-    farbfeld unrar plowshare tldr usbutils
-    pass fzf rlwrap fd astyle
-    idiotbox tscrape sfeed json2tsv
-    shellcheck shfmt lf file entr
+    git mercurial w3m elinks sacc bc gnumake ncdu
+    fish autojump highlight jq aria2 whois tree stow 
+    inotifyTools libtidy screen picocom unzip p7zip lsof 
+    recode lynx html2text moreutils psmisc nix-index zip dos2unix 
+    exfat libarchive imagemagick geoipWithDatabase farbfeld unrar 
+    plowshare tldr usbutils pass fzf rlwrap astyle idiotbox tscrape sfeed 
+    json2tsv shellcheck shfmt lf file entr dvtm abduco hdparm
+    ii sic
 
     # X progs
     xorg.xmodmap keynav xdotool scrot xcwd xtitle xorg.xinit xfontsel
     xorg.xf86inputlibinput xclip xsel autocutsel xcape xorg.xwininfo
     xorg.xev xorg.xhost xorg.xgamma xorg.xdpyinfo xorg.xwd xcalib
-    arandr unclutter 
+    arandr unclutter sxhkd  libxml2 sxiv libnotify dunst slock restic 
+    yubikey-personalization yubikey-manager pinentry gnupg rockbox_utility 
+    zathura firefox
 
-    # Core
-    sxhkd dwm dmenu st surf pkgs.libxml2 
-    sxiv libnotify dunst slock terraform restic 
-    yubikey-personalization yubikey-manager pinentry
-    gnupg rockbox_utility
-
-    # Guis
-    gnumeric firefox dbeaver zathura guvcview gimp
-    #libreoffice    
+    # X Patched
+    dwm dmenu st surf
 
     # Music
-    jack_capture chuck jack2 vmpk puredata sox qjackctl
-    ffmpeg mpv youtube-dl pianobar njconnect
-    soundpipe sporth liblo
+    jack_capture chuck jack2 vmpk puredata sox qjackctl ffmpeg mpv youtube-dl 
+    pianobar soundpipe sporth liblo
+    #njconnect
 
     # TODO remove and use nix shell or docker
     #python37Packages.pip adoptopenjdk-bin leiningen
     #boot zig unstable.stagit unstable.go gotools
     #sqlite expect bind sass python3 ruby discount
-    python3
     #gcc gdb xlibsWrapper linux.dev linuxHeaders
     #unstable.rustc unstable.cargo lua unstable.rakudo
-    ruby
+
+    # Lang: TODO remove
+    python3 ruby
 
     # Docs
-    manpages
-    posix_man_pages
+    dict aspellDicts.en manpages posix_man_pages sdcv
   ];
+  #services.dictd.enable = true;
+  services.dictd.DBs = with pkgs.dictdDBs; [ wiktionary wordnet ];
 
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "m" ];
-
-  sound.enable = true;
-  services.xserver.libinput.enable = true;
   #services.sshd.enable = true;
-  programs.command-not-found.enable = true;
+  # networking.interfaces.enp0s25.ipv4.addresses = [ { address = "192.168.8.100"; prefixLength = 24; } ];
 
+  swapDevices = [ { device = "/swapfile"; size = 2048; } ];
+
+  programs.command-not-found.enable = true;
   system.stateVersion = "19.09"; # Did you read the comment?
 }
