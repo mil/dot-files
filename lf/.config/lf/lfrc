@@ -19,9 +19,13 @@ map x :{{
   redraw
 }}
 
+map | push &cat<space>$f<space>|<space>
 map S push w
 #map s push $
 map <enter> push l
+
+map q
+map Q quit
 
 cmd open ${{
   case "$f" in

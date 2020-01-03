@@ -166,6 +166,8 @@ function setup_addons_and_misc
   # X autostart
   if status is-login
       if test -z "$DISPLAY" -a $XDG_VTNR = 1
+          # For plike
+          fbset -depth 16 -xres 2200 -vxres 2200 -yres 1650 -vyres 1650
           exec startx -- -keeptty
       end
   end
@@ -178,6 +180,7 @@ function setup_addons_and_misc
   # For compat
   export TERM='xterm-256color'
   set fish_function_path $fish_function_path ~/.config/fish/plugin-foreign-env/functions
+
   eval (dircolors -c)
 
   # Additional-configs if existant

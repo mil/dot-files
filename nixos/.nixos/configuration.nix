@@ -184,7 +184,7 @@ in {
     isNormalUser = true;
     home = "/home/m";
     description = "m";
-    extraGroups = [ "wheel" "docker" "jackaudio" "adbusers" "dialout" "uucp"];
+    extraGroups = [ "wheel" "docker" "jackaudio" "adbusers" "dialout" "uucp" "video"];
   };
   services.mingetty.autologinUser = "m";
 
@@ -202,7 +202,7 @@ in {
     exfat libarchive imagemagick geoipWithDatabase farbfeld unrar 
     plowshare tldr usbutils pass fzf rlwrap astyle idiotbox tscrape sfeed 
     json2tsv shellcheck shfmt lf file entr dvtm abduco hdparm
-    ii sic
+    ii sic edid-decode busybox
 
     # X progs
     xorg.xmodmap keynav xdotool scrot xcwd xtitle xorg.xinit xfontsel

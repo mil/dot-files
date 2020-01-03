@@ -16,4 +16,7 @@ while [ "$date1" -ge `date +%s` ]; do
 done
 
 echo "Done with $@"
-while :; do notify-send  "Done with $@"; done
+while :; 
+  do notify-send  "Done with $@"; 
+  sleep 1
+done

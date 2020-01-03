@@ -9,7 +9,7 @@ def getPercentage
     percentage = "%05.2f" % ((now/full) * 100)
     return "#{percentage}%"
   rescue
-    return ""
+    return "NOBAT"
   end
 end
 

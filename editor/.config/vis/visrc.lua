@@ -53,6 +53,8 @@ function file_type_exec(file)
     vis:command('set expandtab off')
   elseif string.match(file, ".c") then 
     --vis:command('set expandtab off')
+  elseif string.match(file, ".mom") then
+    vis:command('set syntax man')
   elseif string.match(file, ".go") then 
     vis:command('set expandtab off')
     vis:command('set show-tabs off')
@@ -78,6 +80,8 @@ function file_type_exec(file)
     vis:command('set syntax clj')
   elseif string.match(file, ".p6") then
     vis:command('set syntax perl')
+  elseif string.match(file, ".tsv") then
+    vis:command('set et 0')
   end
 end
 

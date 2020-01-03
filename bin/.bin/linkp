@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+urlx | dmenu -i -l 10 -w $(xdotool getactivewindow) | xargs urlhandler
