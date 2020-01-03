@@ -28,6 +28,6 @@
       fsType = "ext4";
     };
   };
-  services.xserver.videoDrivers = [ "fbset" ]; #modeset
+  services.xserver.videoDrivers = [ "fbdev" ]; #modeset
   services.jack.jackd.enable = false;
 }
