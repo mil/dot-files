@@ -17,11 +17,12 @@ let
 
 in {
   imports = [
-     /home/m/.nixos/machines/thinkpad.nix
-     #/home/m/.nixos/machines/rpi3.nix
-     /etc/nixos/hidden.nix
-     #/etc/nixos/nixos-configs/qemu.nix
+    /etc/nixos/hidden.nix
+    /home/m/.nixos/machines/rpi3.nix
+    /home/m/.nixos/machines/thinkpad.nix
   ];
+
+
 
   # Prevent DHCP from holding boot
   #boot.kernelParams = ["video=HDMI-A-1:D"];
