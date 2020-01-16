@@ -13,7 +13,7 @@ l=$(cd ~/Repos/surf && git rev-parse master)
 cat /etc/nixos/configuration.nix | sed -E "s/\".+\"; #localsurf/\"$l\"; #localsurf/" | sponge /etc/nixos/configuration.nix
 
 l=$(cd ~/Repos/Sporth && git rev-parse custom-ugens)
-cat /home/m/.nixpkgs/sporth.nix | sed -E "s/\".+\"; #localsporth/\"$l\"; #localsporth/" | sponge /home/m/.nixpkgs/sporth.nix
+cat /home/m/.nixos/pkgs/sporth.nix | sed -E "s/\".+\"; #localsporth/\"$l\"; #localsporth/" | sponge /home/m/.nixos/pkgs/sporth.nix
 
 l=$(cd ~/Repos/Soundpipe && git rev-parse master)
-cat /home/m/.nixpkgs/soundpipe.nix | sed -E "s/\".+\"; #localsoundpipe/\"$l\"; #localsoundpipe/" | sponge /home/m/.nixpkgs/soundpipe.nix
+cat /home/m/.nixos/pkgs/soundpipe.nix | sed -E "s/\".+\"; #localsoundpipe/\"$l\"; #localsoundpipe/" | sponge /home/m/.nixos/pkgs/soundpipe.nix

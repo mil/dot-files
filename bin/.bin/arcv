@@ -14,5 +14,6 @@ T=$(mktemp -d)
 mkdir $T
 cd $T
 wget -mpk $SITE
+find -name '*.html' | xargs -INAME xmllint --html --dropdtd -o NAME NAME
 tar czvf $ARCNAME.tar.gz *
 cp *.tar.gz $X

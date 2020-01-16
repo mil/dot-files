@@ -22,8 +22,6 @@ in {
     /home/m/.nixos/machines/thinkpad.nix
   ];
 
-
-
   # Prevent DHCP from holding boot
   #boot.kernelParams = ["video=HDMI-A-1:D"];
   systemd.services.systemd-user-sessions.enable = false;
@@ -92,7 +90,7 @@ in {
         #url = "https://git.suckless.org/dmenu";
         #rev = "65be875f5adf31e9c4762ac8a8d74b1dfdd78584";
 
-        rev = "30246d565811ac0eb21c723dc16dba3274d33848"; #localdmenu
+        rev = "0ee22c922e7c129268af91f5d92b6f75eb059fcf"; #localdmenu
         url = "https://github.com/mil/dmenu";
         #url = "file:///home/m/Repos/dmenu";
       };
@@ -115,7 +113,7 @@ in {
       src = builtins.fetchGit {
         #url = "https://git.suckless.org/dwm";
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
-        rev = "d27a0d9014b6328a7045a19705d85bee0ec2ec9a"; #localdwm
+        rev = "7ae0e8da005722697e709a47be6d42e376907db1"; #localdwm
         url = "https://github.com/mil/dwm";
         #url = "file:///home/m/Repos/dwm";
       };
@@ -155,7 +153,7 @@ in {
     enable = true;
   };
   services.jack = {
-    #alsa.enable = true;
+    alsa.enable = true;
     #loopback = { enable = true; dmixConfig = '' period_size 2048 ''; }; 
 
     jackd.extraOptions = [
@@ -201,9 +199,11 @@ in {
     inotifyTools libtidy screen picocom unzip p7zip lsof 
     recode lynx html2text moreutils psmisc nix-index zip dos2unix 
     exfat libarchive imagemagick geoipWithDatabase farbfeld unrar 
-    plowshare tldr usbutils pass fzf rlwrap astyle idiotbox tscrape sfeed 
-    json2tsv shellcheck shfmt lf file entr dvtm abduco hdparm
-    ii sic edid-decode busybox
+    plowshare tldr usbutils pass fzf rlwrap astyle 
+    idiotbox 
+    tscrape sfeed json2tsv 
+    shellcheck shfmt lf file entr dvtm abduco hdparm
+    ii sic edid-decode busybox irssi discount httrack
 
     # X progs
     xorg.xmodmap keynav xdotool scrot xcwd xtitle xorg.xinit xfontsel
