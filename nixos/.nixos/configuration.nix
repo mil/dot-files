@@ -113,7 +113,7 @@ in {
       src = builtins.fetchGit {
         #url = "https://git.suckless.org/dwm";
         #rev = "caa1d8fbea2b92bca24652af0fee874bdbbbb3e5";
-        rev = "7ae0e8da005722697e709a47be6d42e376907db1"; #localdwm
+        rev = "486ad05f4b1f473451c1d1e630725f7e68a60285"; #localdwm
         url = "https://github.com/mil/dwm";
         #url = "file:///home/m/Repos/dwm";
       };

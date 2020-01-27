@@ -8,17 +8,29 @@ body {
 caret-color: red;
 }
 
+title {
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+
+}
+
 ::-webkit-scrollbar-track { 
   background: #e8e8e8; 
-  //background: url('/favicon.ico');
-  //background-position: left bottom;
-  //background-size: 5px 5px;
-  //background-repeat: no-repeat;
+  /*background: url('/favicon.ico');
+  background-position: left bottom;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;*/
   border-left: 1px solid #888888;
+  z-index: 9999;
 
 }
 ::-webkit-scrollbar-thumb { 
   border: 1px solid transparent;
+  z-index: 2;
+  display: block;
 
   border: 1px solid #888888;
   background: rgba(0, 0, 255, 0.1);

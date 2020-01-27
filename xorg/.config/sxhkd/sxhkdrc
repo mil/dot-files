@@ -13,6 +13,9 @@ alt + Return
 alt + shift + Return
   stw
 
+alt + shift + ctrl + grave
+  xdotool getactivewindow | xargs xprop -id | grep NET_WM_PID | cut -d' ' -f3 | xargs kill -9
+
 alt + u
   externalpipe_buffer.sh dmenu_type
 
