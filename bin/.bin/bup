@@ -2,7 +2,7 @@
 
 # Set the static increment value.  Keep in mind that this will 
 # be done twice. 
-IncVal=${1:-200}
+IncVal=${1:-50}
 
 # Get the Maximum value for use. 
 #MaxVal=$(cat /sys/class/backlight/intel_backlight/max_brightness); 
