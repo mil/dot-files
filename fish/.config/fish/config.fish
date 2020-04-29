@@ -190,9 +190,9 @@ function setup_addons_and_misc
 end
 
 function setup_gpg_ssh
-  set -x GPG_TTY (tty)
+  setenv GPG_TTY (tty)
   gpg-connect-agent updatestartuptty /bye >/dev/null
-  set -x SSH_AUTH_SOCK (gpgconf --list-dir agent-ssh-socket)
+  setenv SSH_AUTH_SOCK (gpgconf --list-dir agent-ssh-socket)
 end
 
 
