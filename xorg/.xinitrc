@@ -7,7 +7,7 @@ autocutsel &
 xcape &
 autocutsel -selection PRIMARY &
 #xsetroot -mod 2 2 -fg '#e8e8e8' -bg '#ffffff' &
-xsetroot -mod 3 2 -fg '#cfcfcf' -bg '#ffffff' &
+xsetroot -rv -mod 3 2 -fg '#cfcfcf' -bg '#ffffff' &
 xinput list | grep Synaptics | grep -oE 'id=([0-9]+)' | awk -F= '{print $2}' | xargs xinput --disable &
 keynav &
 xmodmap ~/.xmodmap &

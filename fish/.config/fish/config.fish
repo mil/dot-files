@@ -28,6 +28,7 @@ function setup_envvars_and_path
 
 
   # Path
+  add_to_path_if_exists /home/m/.local/bin
   add_to_path_if_exists /opt/bin
   add_to_path_if_exists /home/$USER/.cargo/bin
   add_to_path_if_exists /usr/share/surfraw
@@ -127,8 +128,8 @@ function setup_vimlike
   # Keybindings
   #if not set --query SSH_CLIENT
     fish_vi_key_bindings #fish_vi_mode
-  #  #cat ~/.todo
   #end
+  test -e ~/.todo && cat ~/.todo 
 
   # Prompt
   function fish_mode_prompt --description 'Displays the current mode'
@@ -188,6 +189,12 @@ function setup_addons_and_misc
   if test -d ~/.config/fish_work; source ~/.config/fish_work/config.fish; end
 end
 
+function setup_gpg_ssh
+  set -x GPG_TTY (tty)
+  gpg-connect-agent updatestartuptty /bye >/dev/null
+  set -x SSH_AUTH_SOCK (gpgconf --list-dir agent-ssh-socket)
+end
+
 
 
 setup_envvars_and_path
@@ -196,3 +203,4 @@ setup_vimlike
 setup_promptconfig
 setup_colorsconfig
 setup_addons_and_misc
+setup_gpg_ssh

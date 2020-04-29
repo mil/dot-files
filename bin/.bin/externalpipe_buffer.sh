@@ -13,15 +13,20 @@ function st_strings_read() {
   >> $BUFFER_FILE &
 }
 function surf_strings_read() {
-  awk '{printf "%sNEWLINE_REPLACE", $0} END {printf "\n"}' |
-    xmllint --html --xpath "//*" - |
-    awk '{ gsub("<[^>]*>", ""); print($0); }' |
-    sed 's/NEWLINE_REPLACE/↵/g' |
-    awk '{ gsub("<[^>]*>",""); print $0 }' |
-    sed 's/&lt;/</g' |
-    sed 's/&gt;/>/g' |
-    uniq | grep . | awk '{ print length, $0 }' | sort -n -s | cut -d" " -f2- \
-    >> $BUFFER_FILE &
+  DECODED="$(
+    awk '{printf "%sNEWLINE_REPLACE", $0} END {printf "\n"}' |
+      xmllint --html --xpath "//*" - |
+      awk '{ gsub("<[^>]*>", ""); print($0); }' |
+      sed 's/NEWLINE_REPLACE/↵/g' |
+      awk '{ gsub("<[^>]*>",""); print $0 }' |
+      sed 's/&lt;/</g' |
+      sed 's/&gt;/>/g' |
+      uniq | grep . | awk '{ print length, $0 }' | sort -n -s | cut -d" " -f2-
+  )
+  
+  echo "$(
+    echo "$DECODED"
+  ) >> $BUFFER_FILE &
 }
 function trigger_sigusr1() {
   USE_FIFO=T # Recomended as T but only if using dmenu-stdin patch w/ FIFO
@@ -33,15 +38,15 @@ function trigger_sigusr1() {
 }
 function dmenu_copy() {
   trigger_sigusr1
-  cat $BUFFER_FILE | dmenu -l 10 -i -w $(xdotool getactivewindow) -p 'Screen Copy' | sed 's/↵/\n/g' | xclip -i
+  cat $BUFFER_FILE | dmenu -b -l 10 -i -w $(xdotool getactivewindow) -p 'Screen Copy' | sed 's/↵/\n/g' | xclip -i
 }
 function dmenu_type() {
   trigger_sigusr1
-  cat $BUFFER_FILE | dmenu -l 10 -i -w $(xdotool getactivewindow) -p 'Screen Type' | sed 's/↵/\n/g' | xargs -IC xdotool type --delay 0 "C"
+  cat $BUFFER_FILE | dmenu -b -l 10 -i -w $(xdotool getactivewindow) -p 'Screen Type' | sed 's/↵/\n/g' | xargs -IC xdotool type --delay 0 "C"
 }
 function dmenu_urlhandle() {
   trigger_sigusr1
-  cat $BUFFER_FILE | dmenu -l 10 -i -w $(xdotool getactivewindow) -p 'Screen URL Handle' | sed 's/↵/\n/g' | xargs urlhandler
+  cat $BUFFER_FILE | dmenu -b -l 10 -i -w $(xdotool getactivewindow) -p 'Screen URL Handle' | sed 's/↵/\n/g' | xargs urlhandler
 }
 function pipe_combine() {
   trigger_sigusr1

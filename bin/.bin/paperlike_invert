@@ -1,2 +1,4 @@
 #!/usr/bin/env sh
-xrandr | grep -E '[0-9]+x[0-9]+\+' | awk '{print NR-1 "," $0}' | grep 2200x1650 | head -c1 | xargs xcalib -a -invert -o
+xcalib -a -invert || $(
+  xrandr | grep -E '[0-9]+x[0-9]+\+' | awk '{print NR-1 "," $0}' | grep 2200x1650 | head -c1 | xargs xcalib -a -invert -o
+)

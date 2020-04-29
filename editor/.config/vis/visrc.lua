@@ -39,6 +39,9 @@ function file_type_exec(file)
     vis:command('set syntax bash')
   --elseif string.match(file, ".ts") then
   --  vis:command('set syntax javascript')
+
+  elseif string.match(file, ".exp") then
+    vis:command('set syntax tcl')
   elseif string.match(file, ".ts") then
     vis:command('set syntax javascript')
   elseif string.match(file, ".boot") then 
@@ -66,6 +69,8 @@ function file_type_exec(file)
     vis:command('set tabwidth 4')
   elseif string.match(file, ".rs") then
     vis:command('set tabwidth 4')
+  elseif string.match(file, ".janet") then
+    vis:command('set syntax clojure')
   elseif string.match(file, ".py") then
     vis:command('set tabwidth 4')
   elseif string.match(file, ".zig") then
@@ -77,6 +82,8 @@ function file_type_exec(file)
   elseif string.match(file, ".cljs") then
     vis:command('set syntax clj')
   elseif string.match(file, ".clj") then
+    vis:command('set syntax clj')
+  elseif string.match(file, ".janet") then
     vis:command('set syntax clj')
   elseif string.match(file, ".p6") then
     vis:command('set syntax perl')
@@ -126,10 +133,9 @@ end
 
 function cb_file_save_post(file, path)
   forks = {}
-  forks[".java"]  = { }
-  forks[".sc"]  = { 
-    "oscsend localhost 57120 /reloadFile s " .. path
-  }  
+  forks[".java"]  = { 
+    -- "foocmd" 
+  }
 
   local extension = path:match("^.+(%..+)$")
   if (forks[extension] ~= nil) then for cmdI = 1, #forks[extension] do

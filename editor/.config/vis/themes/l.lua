@@ -1,6 +1,8 @@
 local lexers = vis.lexers
 
 local colors = {
+	['background']       = '#e8e8e8',
+
   ['base00'] = '#ffffff',
   ['base01'] = '#e0e0e0',
   ['base02'] = '#c5c8c6',

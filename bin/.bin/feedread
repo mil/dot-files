@@ -1,19 +1,13 @@
 #!/usr/bin/env sh
-#$(echo $DATE | sed 's/ /_/g')"
-# E.g. Read one day back:
-# cd $(feedread 1)
 
-DATE="$(date +'%Y%m%d' | xargs -IM echo M - $@ | bc)0000"
-
-D="/tmp/sfeed_$DATE"
+D="/tmp/sfeed_$(echo $@ | sed 's/ /_/g')"
 mkdir -p $D
 rm -rf $D/*
 
 cd ~/.sfeed/feeds/
 for f in $(ls)
 do
-  cat $f | tflt $DATE > $D/$f
+  cat $f | tflt $@ > $D/$f
   [ -s $D/$f ] || rm $D/$f
 done
 echo $D
-

@@ -32,7 +32,7 @@ cmd open ${{
       *.html) $BROWSER "$fx";;
       *.pdf | *.djvu | *.epub) zathura "$fx";;
       *.jpg | *.gif | *.png ) sxiv "$fx";;
-      *.wav | *.opus | *.flac | *.mp3 | *.ogg) mpv "$fx";;
+      *.wav | *.WAV | *.opus | *.flac | *.mp3 | *.ogg) mpv "$fx";;
       *.m4a | *.flac | *.ogg | *.mkv | *.mp4 | *.avi) mpv "$fx";;
       *) vis "$fx";;
   esac
