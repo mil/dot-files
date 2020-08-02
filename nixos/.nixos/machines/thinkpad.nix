@@ -49,8 +49,7 @@
       guvcview 
       openscad 
       meshlab 
-      chromium
     ];
-    nixpkgs.config.chromium.enableWideVine = true;
+    #nixpkgs.config.chromium.enableWideVine = true;
   };
 }

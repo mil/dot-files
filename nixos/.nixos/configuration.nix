@@ -49,9 +49,17 @@ in {
     gpg-connect-agent /bye
     export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
   '';
+  #boot.binfmt.emulatedSystems = ["aarch64-linux" ];
     
   programs.fish.enable = true;
   virtualisation.docker.enable = true;
+
+  location.provider = "geoclue2";
+  services.redshift = {
+    enable = true;
+    brightness = { day = "0.5"; night = "0.5"; };
+    temperature = { day = 5500; night = 3700; };
+  };
 
   fonts = {
     enableFontDir = true;
@@ -167,8 +175,8 @@ in {
 
   nixpkgs.config.allowUnfree =true;
   hardware.enableRedistributableFirmware = true;
+  hardware.enableAllFirmware = true;
 
-  # hardware.enableAllFirmware = true;
   # boot.kernelPatches = [{
   #    name = "enable-mediatek-wifi";
   #    patch = null;
@@ -203,7 +211,7 @@ in {
     idiotbox 
     tscrape sfeed json2tsv 
     shellcheck shfmt lf file entr dvtm abduco hdparm
-    ii sic edid-decode busybox irssi discount httrack
+    discount
 
     # X progs
     xorg.xmodmap keynav xdotool scrot xcwd xtitle xorg.xinit xfontsel
@@ -211,15 +219,19 @@ in {
     xorg.xev xorg.xhost xorg.xgamma xorg.xdpyinfo xorg.xwd xcalib
     arandr unclutter sxhkd  libxml2 sxiv libnotify dunst slock restic 
     yubikey-personalization yubikey-manager pinentry gnupg rockbox_utility 
-    zathura firefox
+    zathura firefox chromium
 
     # X Patched
     dwm dmenu st surf
+    go sqlite
 
     # Music
     jack_capture chuck jack2 vmpk puredata sox qjackctl ffmpeg mpv youtube-dl 
-    pianobar soundpipe sporth liblo
-    #njconnect
+    pianobar soundpipe liblo
+    #sporth  doesn't compile atm? 
+
+    # Email
+    isync msmtp mblaze
 
     # TODO remove and use nix shell or docker
     #python37Packages.pip adoptopenjdk-bin leiningen
@@ -228,8 +240,12 @@ in {
     #gcc gdb xlibsWrapper linux.dev linuxHeaders
     #unstable.rustc unstable.cargo lua unstable.rakudo
 
+
     # Lang: TODO remove
-    python3 ruby
+    python3 ruby openssl
+
+     # Spellcheck
+     aspell aspellDicts.en
 
     # Docs
     dict aspellDicts.en manpages posix_man_pages sdcv
@@ -237,11 +253,13 @@ in {
   #services.dictd.enable = true;
   services.dictd.DBs = with pkgs.dictdDBs; [ wiktionary wordnet ];
 
-  #services.sshd.enable = true;
+  services.sshd.enable = true;
   # networking.interfaces.enp0s25.ipv4.addresses = [ { address = "192.168.8.100"; prefixLength = 24; } ];
+
+
 
   swapDevices = [ { device = "/swapfile"; size = 2048; } ];
 
   programs.command-not-found.enable = true;
-  system.stateVersion = "19.09"; # Did you read the comment?
+  system.stateVersion = "20.03"; # Did you read the comment?
 }
