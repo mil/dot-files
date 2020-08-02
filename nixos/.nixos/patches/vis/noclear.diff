@@ -8,5 +8,5 @@ index 59f5bc3..72e5720 100644
  	ui_curses_suspend(term);
 -	endwin();
 +	//endwin();
-+	curs_set(1);
++	reset_shell_mode(); curs_set(1);
  }
