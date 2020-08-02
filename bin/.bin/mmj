@@ -1,0 +1,114 @@
+#!/usr/bin/env janet
+(def mixtapes_samples_path (string "/home/" (os/getenv "USER") "/Mixtapes/Samples"))
+(def programming_root (string "/home/" (os/getenv "USER") "/Mixtapes/Programming"))
+
+(defn wrap [delim arg] (string delim arg (string/reverse delim)))
+(defn rnth [lst n] (lst (- (length lst) n)))
+(defn replacer [patt subst] (peg/compile ~(% (any (+ (/ (<- ,patt) ,subst) (<- 1))))))
+(defn translate_smpl
+  "Translates a samplepath like 'p37/q/foo' -> '/home/m/Mixtapes/Prj37/sequences/22foo.wav"
+  [smpl_abbr]
+  (let [
+      mtch (peg/match '{
+        :pexp (/ "p" "Prj")
+        :proj (any (sequence :pexp (capture (any (range "09")))))
+        :seq (any (/ "/q/" "/sequences/"))
+        :fileglob (capture (any (if-not :s 1)))
+        :main (sequence :proj :seq :fileglob)
+      } smpl_abbr)
+      fil (string/replace "/" "" (last mtch))
+      pth (string/join (flatten [[mixtapes_samples_path "/"] (array/slice mtch 0 (- (length mtch) 1))]))
+    ]
+    (->> pth
+      (os/dir)
+      (find (fn [f] (string/find fil f)))
+      ((fn [x] (string/join [pth x] "/"))))))
+
+# Custom fns
+(defn mf [stack] 
+  (let 
+    [seek_ms (wrap " " (rnth stack 1))
+     sample_path (wrap " '" (translate_smpl (rnth stack 2)))]
+    {
+      :head [] 
+      :tail []
+      :body [(string 
+        "1 0 branch 1.0 " sample_path " tbldur / 0 tphasor 1 "
+        seek_ms sample_path "tbldur 1000 * / 0 " sample_path "tabread")]
+    }))
+(defn sf [stack]
+  (let 
+    [seek_ms (wrap " " (rnth stack 1))
+     sample_path (translate_smpl (rnth stack 2))
+     sample_path_quot (wrap " '" sample_path)
+     sample_l (wrap " '" (string sample_path "_l"))
+     sample_r (wrap " '" (string sample_path "_r"))]
+    {
+      :head [sample_l sample_r sample_path_quot "loadfile2"]
+      :tail []
+      :body [
+        " dup
+          1 0 branch 1.0 " sample_l " tbldur / 0 tphasor 1 
+          " seek_ms sample_l " tbldur 1000 * /
+          0 " sample_l " tabread
+          swap
+          1 0 branch 1.0 " sample_r " tbldur / 0 tphasor 1 
+          " seek_ms sample_r " tbldur 1000 * /
+          0 " sample_r " tabread"
+      ]
+    }))
+(defn b [stack]
+  (let [lduidx (wrap "'" (rnth stack 1))]
+    { 
+      :head ["_keyup" "var" "lduserver"]
+      :body [lduidx "ldu" "_keyup" "set" "_keyup" "get" "0" "0.002" "delay"]
+      :tail []
+    }))
+
+
+(defn translate-item
+  [memo x]
+  (let 
+    [valid_fns {
+        "mf" {:fn mf :nargs 2}
+        "sf" {:fn sf :nargs 2}
+        "b"  {:fn b  :nargs 1}
+     }
+     item (valid_fns x)]
+    (if item 
+      (flatten [(tuple/slice memo 0 (- (length memo) (item :nargs))) ((item :fn) memo)])
+      (flatten [memo x]))))
+
+(defn translate
+  [s]
+    (->> s
+      # TODO hash comments
+      (string/replace "\n" " ")
+      (string/split " ")
+      (filter (fn [x] (not (= "" x))))
+      (reduce translate-item [])
+      (map (fn [x] (if (= :struct (type x)) x {:body x :head [] :tail []})))
+      ((fn [struct_stack] (flatten [
+        "0 0"
+        (distinct (map (fn [x] (x :head)) struct_stack))
+        (map (fn [x] (x :body)) struct_stack)
+        (map (fn [x] (x :tail)) struct_stack)
+        "swap"
+      ])))
+      ((fn [arr] (string/join arr " ")))
+      (peg/match (replacer :s+ " "))
+      (first)
+      ))
+
+(defn in_file
+  []
+  (file/read
+    (if 
+      (> (length (dyn :args)) 0)
+      (if (= ((dyn :args) 1) "-") stdin (file/open ((dyn :args) 1))))
+    :all))
+
+(defn cmd_debug [] (print (translate (in_file))))
+(defn cmd_run [] (pp "Run"))
+
+(({ "d" cmd_debug "r" cmd_run } (or ((os/environ) "mmode") "r")))
