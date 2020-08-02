@@ -47,19 +47,13 @@ function setup_shortcuts
 
   abbr -a ytdlpl 'youtube-dl -xo "%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"'
   abbr -a syncwatch watch grep -e Dirty: -e Writeback: /proc/meminfo
-
-  abbr -a a 'ag'
   abbr -a inv 'xcalib -invert -alter'
 
   abbr -a d date
   abbr -a bw set -x TERM vt102
-
-  abbr -a g git
   abbr -a gco git checkout
   abbr -a gc git commit
   abbr -a yt youtube
-  abbr -a h hg
-  abbr -a r ranger
   abbr -a cati siv4 -s30
 
   abbr -a mpvlq mpv --ytdl-format="[height<420]"
@@ -71,13 +65,8 @@ function setup_shortcuts
 
   abbr -a noc 'sed "s,(printf '\033')\\[[0-9;]*[a-zA-Z],,g"   '
 
-
   alias ag="ag --color-path 35 --color-match '1;31' --color-line-number 32"
-
-
   alias q='quit'
-  alias m='w3m'
-  alias c='cd'
   alias tw='tree -C|w3m'
   alias gd='cd (git rev-parse --show-toplevel 2>/dev/null; or hg root)'
   alias cb='git rev-parse --abbrev-ref HEAD 2>/dev/null; or cat .hg/bookmarks.current'
