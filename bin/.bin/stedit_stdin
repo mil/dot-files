@@ -1,4 +1,0 @@
-#!/bin/sh
-D=`mktemp`
-cat - > $D
-stw -e vis $D

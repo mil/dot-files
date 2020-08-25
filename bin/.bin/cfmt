@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-astyle \
-  --lineend=linux
-
-#--indent=tab \

@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-TIME=$(eval date -d \""$@"\" +%s)
-cat | awk "\$1 > $TIME"

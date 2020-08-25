@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-xargs -ID date --date "@D" | tr -d '\n'

@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# This script is called by parkour.lua and has to be in $PATH
-
-for i; do
-	echo "$i"
-done | vis-menu -b

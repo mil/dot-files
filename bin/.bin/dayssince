@@ -1,3 +1,0 @@
-#!/usr/bin/env ruby
-require 'date'
-puts (DateTime.now - Date.parse(ARGV[0])).to_i

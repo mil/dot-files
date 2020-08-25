@@ -1,9 +1,0 @@
-#!/usr/bin/env ruby
-
-z = ARGV[0].split(":")
-
-if z.size > 1
-  %x[vis "+:#{z[1]}" #{z[0]}]
-else
-  %x[vis #{z[0]}]
-end

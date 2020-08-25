@@ -1,4 +1,0 @@
-#!/bin/sh
-cat ~/.bookmarks |\
-  dmenu -p 'Load Bookmark' -i -l 10 -w $1 |\
-  awk '{print $NF}'

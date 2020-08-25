@@ -1,9 +1,0 @@
-#!/usr/bin/env sh
-FILE=`fzf -m `
-ECODE=$?
-
-if [ $ECODE -eq 0 ]
-then
-echo $FILE
-"${EDITOR}" $FILE
-fi

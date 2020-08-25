@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-curl "https://twitter.com/$1" | tscrape | w3m

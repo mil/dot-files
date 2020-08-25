@@ -1,6 +1,0 @@
-ao=jack
-fs=1
-zoom=1
-noaspectratio=0
-cache=2048
-af=scaletempo

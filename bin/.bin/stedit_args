@@ -1,4 +1,0 @@
-#!/bin/sh
-D=`mktemp`
-echo "$@" > $D
-stw -e vis $D

@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-st -f "`cat ~/.st_font | head -n1`" "$@"

@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-itm = ARGV[0].chomp
-usr = %x[whoami].chomp!
-de = File.read("/home/#{usr}/.bar_#{itm}_enabled").chomp!
-new_text = (de == "true" ? "false" : "true")
-%x[echo #{new_text} > /home/#{usr}/.bar_#{itm}_enabled]
-%x[i3-msg restart]
