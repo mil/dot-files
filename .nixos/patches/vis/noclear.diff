@@ -1,0 +1,12 @@
+diff --git a/ui-terminal-curses.c b/ui-terminal-curses.c
+index 59f5bc3..72e5720 100644
+--- a/ui-terminal-curses.c
++++ b/ui-terminal-curses.c
+@@ -287,5 +287,6 @@ static void ui_curses_suspend(UiTerm *term) {
+ 
+ static void ui_curses_free(UiTerm *term) {
+ 	ui_curses_suspend(term);
+-	endwin();
++	//endwin();
++	reset_shell_mode(); curs_set(1);
+ }

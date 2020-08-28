@@ -5,6 +5,8 @@ while true; do
 	sleep 30
 done &
 
+autocutsel -selection PRIMARY & autocutsel &
+xsetroot -rv -mod 3 2 -fg '#cfcfcf' -bg '#ffffff' &
 xmodmap -e "clear lock" -e "keycode 0x42 = Escape" &
 keynav & 
 

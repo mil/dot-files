@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+# E.g. fan u|d|4|auto
+FANFILE=/proc/acpi/ibm/fan
+
+L=$(cat $FANFILE | grep level: | awk -F' ' '{print $2}')
+if [ "$1" == "u" ]; then
+  NL=$(echo $L | xargs echo 1 + | bc)
+elif [ "$1" == "d" ]; then
+  NL=$(echo $L | xargs echo -1 + | bc)
+else
+  NL=$1
+fi
+
+echo "Setting fan to: $NL"
+echo level $NL > $FANFILE
