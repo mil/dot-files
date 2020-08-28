@@ -1,8 +1,13 @@
 #!/usr/bin/env sh
 
 while true; do
-	xsetroot -name " $(apm -l)"
-	sleep 30
+	if command -v apm; then
+		xsetroot -name " $(apm -l)"
+		sleep 30
+	else
+		xsetroot -name " todo"
+		sleep 30
+	fi
 done &
 
 autocutsel -selection PRIMARY & autocutsel &
