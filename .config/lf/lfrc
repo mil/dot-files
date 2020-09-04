@@ -20,7 +20,8 @@ map x :{{
 }}
 
 map | push &cat<space>$f<space>|<space>
-map S push w
+map S push $m<space>flag<space>-S<space>
+map N push $m<space>new
 #map s push $
 map <enter> push l
 
@@ -32,6 +33,7 @@ cmd open ${{
       *.html) $BROWSER "$fx";;
       *.pdf | *.djvu | *.epub) zathura "$fx";;
       *.jpg | *.gif | *.png ) sxiv "$fx";;
+      *.mblaze) mshow $(echo "$fx" | tr " " "\n" | xargs -IC basename C | grep -oE "^[0-9]+") ;;
       *.wav | *.WAV | *.opus | *.flac | *.mp3 | *.ogg) mpv "$fx";;
       *.m4a | *.flac | *.ogg | *.mkv | *.mp4 | *.avi) mpv "$fx";;
       *) vis "$fx";;

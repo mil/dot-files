@@ -19,7 +19,9 @@ vimode() {
 aliases() {
 	hlprsucmd() { if which doas; then; doas $@; else; sudo $@; fi; }
 	alias d="date"
-	alias t="st &"
+	alias t="tail"
+	alias h="head"
+	alias n="st &"
 	alias ls="ls -F"
 	alias v=$EDITOR
 	alias V="hlprsucmd $EDITOR"
@@ -62,9 +64,24 @@ promptandwindowtitle() {
 		fi
 	}
 }
+setupfasd() {
+	eval "$(
+		fasd --init \
+			posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
+			zsh-wcomp zsh-wcomp-install
+	)"
+	bindkey '^Xa' fasd-complete # files + dirs
+	bindkey '^Xf' fasd-complete-f # files
+	bindkey '^Xd' fasd-complete-d # dirs
+}
+machinespecific() {
+	[ -f $HOME/.zshrc.machine ] && source $HOME/.zshrc.machine
+}
 
 vimode
 envvars
 aliases
 zshhist
 promptandwindowtitle
+setupfasd
+machinespecific

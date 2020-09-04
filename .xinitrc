@@ -1,13 +1,16 @@
 #!/usr/bin/env sh
 
 while true; do
+	BAT="unimplemented"
 	if command -v apm; then
-		xsetroot -name " $(apm -l)"
-		sleep 30
-	else
-		xsetroot -name " todo"
-		sleep 30
+		BAT="$(apm -l)"
+	elif [ -e /sys/class/power_supply/BAT0/capacity ]; then
+		BAT="$(cat /sys/class/power_supply/BAT0/capacity)"
+	elif [ -e /sys/class/power_supply/BAT1/capacity ]; then
+		BAT="$(cat /sys/class/power_supply/BAT1/capacity)"
 	fi
+	xsetroot -name " $BAT"
+	sleep 30
 done &
 
 autocutsel -selection PRIMARY & autocutsel &
@@ -22,5 +25,5 @@ if stat /dev/wsmouse; then
 fi
 
 while true; do
-	exec dwm
+	exec dwm 2> ~/.dwm.log
 done

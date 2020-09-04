@@ -3,7 +3,7 @@
 stdenv.mkDerivation rec {
   name = "json2tsv";
   src = builtins.fetchGit {
-    rev = "a8950873f2e40fe767530b8e58b723c8b56abc33";
+    rev = "5b92fe10218579d7dd0c725c043de425d4076a9c";
     url = "https://github.com/mil/json2tsv";
   };
 

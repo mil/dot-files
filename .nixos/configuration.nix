@@ -10,7 +10,7 @@ let
   soundpipe = pkgs.callPackage /home/m/.nixos/pkgs/soundpipe.nix {};
   sporth = pkgs.callPackage /home/m/.nixos/pkgs/sporth.nix {};
   idiotbox = pkgs.callPackage /home/m/.nixos/pkgs/idiotbox.nix {};
-  json2tsv = pkgs.callPackage /home/m/.nixos/pkgs/json2tsv.nix {};
+  #json2tsv = pkgs.callPackage /home/m/.nixos/pkgs/json2tsv.nix {};
   tscrape = pkgs.callPackage /home/m/.nixos/pkgs/tscrape.nix {};
   sfeed = pkgs.callPackage /home/m/.nixos/pkgs/sfeed.nix {};
   njconnect = pkgs.callPackage /home/m/.nixos/pkgs/njconnect.nix {};
@@ -96,27 +96,31 @@ in {
         sha256 = "19j66fhckihbg30ypngvqc9bcva47mp379ch5vinasjdxgn3qbfl";
       };
       patches = [
-        /home/m/Repos/suckless-patches/personal/p1/st/st-config-0.8.4.diff
-        /home/m/Repos/suckless-patches/personal/p1/st/st-invert-0.8.4.diff
+        /home/m/Repos/suckless-patches/personal/p1/st/patch-st-config-0.8.4.diff
+        /home/m/Repos/suckless-patches/personal/p1/st/patch-st-invert-0.8.4.diff
       ];
     });
     dwm = pkgs.dwm.overrideAttrs (oldAttrs: rec {
+
+      name = "dwm";
+      makeFlags = [ "PREFIX=$(out)" ];
+
       src = builtins.fetchurl {
         url = "https://dl.suckless.org/dwm/dwm-6.2.tar.gz";
         sha256 = "03hirnj8saxnsfqiszwl2ds7p0avg20izv9vdqyambks00p2x44p";
       };
       patches = [
-        /home/m/Repos/suckless-patches/personal/p1/dwm/dwm-00-disableenterandmotionnotify.diff
-        /home/m/Repos/suckless-patches/personal/p1/dwm/dwm-bartabgroups-6.2.diff
-        /home/m/Repos/suckless-patches/personal/p1/dwm/dwm-clientindicatorshidevacant-6.2.diff
-        /home/m/Repos/suckless-patches/personal/p1/dwm/dwm-combo-6.2.diff
-        /home/m/Repos/suckless-patches/personal/p1/dwm/dwm-config-6.2.diff
-        /home/m/Repos/suckless-patches/personal/p1/dwm/dwm-deck-6.2.diff
-        /home/m/Repos/suckless-patches/personal/p1/dwm/dwm-deck-double-6.2.diff
-        /home/m/Repos/suckless-patches/personal/p1/dwm/dwm-dragmfact-6.2.diff
-        /home/m/Repos/suckless-patches/personal/p1/dwm/dwm-inplacerotate-6.2.diff
-        /home/m/Repos/suckless-patches/personal/p1/dwm/dwm-swallow-6.2.diff
-        /home/m/Repos/suckless-patches/personal/p1/dwm/dwm-switchcol-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-00-disableenterandmotionnotify.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-bartabgroups-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-clientindicatorshidevacant-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-combo-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-config-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-deck-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-deck-double-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-dragmfact-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-inplacerotate-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-swallow-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-switchcol-6.2.diff
       ];
     });
 
@@ -215,9 +219,9 @@ in {
     exfat libarchive imagemagick geoipWithDatabase farbfeld unrar 
     plowshare tldr usbutils pass fzf rlwrap astyle 
     idiotbox 
-    tscrape sfeed json2tsv 
+    tscrape sfeed #json2tsv 
     shellcheck shfmt lf file entr dvtm abduco hdparm
-    discount
+    discount fasd
 
     # X progs
     xorg.xmodmap keynav xdotool scrot xcwd xtitle xorg.xinit xfontsel
