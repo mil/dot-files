@@ -5,7 +5,7 @@
 [color]
 	ui = true
 [core]
-  editor = vis '+set syntax=diff'
+  editor = $EDITOR '+set syntax=diff'
 [push]
   default = upstream
 
