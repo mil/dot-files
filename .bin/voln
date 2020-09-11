@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+ID=999
+
+get_volume() {
+    amixer -M get Master | awk 'END { print $0, value }' | awk '{print $4}' | grep -Eo '[0-9]+'
+}
+
+is_mute() {
+    amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
+}
+
+send_notification() {
+    volume=`get_volume`
+    dunstify -r $ID  -u normal "${volume}%"
+}
+
+case $1 in
+    up)
+        amixer set Master on > /dev/null
+        amixer set Master 1+ > /dev/null
+        send_notification
+	;;
+    down)
+        amixer set Master on > /dev/null
+        amixer set Master 1- > /dev/null
+        send_notification
+	;;
+    mute)
+        amixer set Master toggle > /dev/null
+        if is_mute ; then
+        dunstify -r $ID -u normal "Mute"
+        else
+        send_notification
+	fi
+	;;
+esac
