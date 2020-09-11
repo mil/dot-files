@@ -112,6 +112,7 @@ in {
       patches = [
         /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-00-disableenterandmotionnotify.diff
         /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-bartabgroups-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-attachbelow-6.2.diff
         /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-clientindicatorshidevacant-6.2.diff
         /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-combo-6.2.diff
         /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-config-6.2.diff
@@ -121,6 +122,7 @@ in {
         /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-inplacerotate-6.2.diff
         /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-swallow-6.2.diff
         /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-switchcol-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-fakefullscreen-6.2.diff
       ];
     });
 
@@ -204,6 +206,7 @@ in {
     extraGroups = [ "wheel" "docker" "jackaudio" "adbusers" "dialout" "uucp" "video"];
   };
   services.mingetty.autologinUser = "m";
+  programs.light.enable = true;
 
   #users.mutableUsers = false;
 

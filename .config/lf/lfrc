@@ -29,7 +29,7 @@ map q
 map Q quit
 
 cmd open ${{
-  case "$f" in
+  case "$(echo "$f" | tr '[:upper:]' '[:lower:]')" in
       *.html) $BROWSER "$fx";;
       *.pdf | *.djvu | *.epub) zathura "$fx";;
       *.jpg | *.gif | *.png ) sxiv "$fx";;

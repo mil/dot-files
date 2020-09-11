@@ -3,7 +3,7 @@
   imports = [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
   config = lib.mkIf (builtins.currentSystem == "x86_64-linux") {
     boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sdhci_pci" ];
-    boot.kernelModules = [ "kvm-intel" ];
+    #boot.kernelModules = [ "kvm-intel" ];
     boot.extraModulePackages = [ ];
     fileSystems."/" = { device = "/dev/mapper/c"; fsType = "ext4"; };
     boot.initrd.luks.devices."c".device = "/dev/sda2";
@@ -12,7 +12,7 @@
     nix.maxJobs = lib.mkDefault 4;
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
-    boot.kernelPackages = pkgs.linuxPackages;#_latest;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
     systemd.services.miles-fixes = {
       description = "Fixes fan permissions";
@@ -27,6 +27,7 @@
       options thinkpad_acpi fan_control=1
       options rtl8192cu debug_level=5
     '';
+    hardware.enableRedistributableFirmware = true;
 
 
     boot.loader.grub.enable = true;
