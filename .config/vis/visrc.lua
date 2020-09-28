@@ -30,6 +30,8 @@ function file_type_exec(file)
 
   elseif string.match(file, ".exp") then
     vis:command('set syntax tcl')
+  elseif string.match(file, ".scad") then
+    vis:command('set syntax cpp')
   elseif string.match(file, ".ts") then
     vis:command('set syntax javascript')
   elseif string.match(file, ".boot") then 

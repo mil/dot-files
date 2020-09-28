@@ -13,6 +13,7 @@ while true; do
 	sleep 30
 done &
 
+xinput list | grep Synaptics | grep -oE 'id=[0-9]+' | cut -d= -f2 | xargs xinput disable
 autocutsel -selection PRIMARY & autocutsel &
 xsetroot -rv -mod 3 2 -fg '#cfcfcf' -bg '#ffffff' &
 xmodmap -e "clear lock" -e "keycode 0x42 = Escape" &

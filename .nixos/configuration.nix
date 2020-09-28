@@ -123,6 +123,7 @@ in {
         /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-swallow-6.2.diff
         /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-switchcol-6.2.diff
         /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-fakefullscreen-6.2.diff
+        /home/m/Repos/suckless-patches/personal/p1/dwm/patch-dwm-transfer-6.2.diff
       ];
     });
 
@@ -252,6 +253,7 @@ in {
     #sqlite expect bind sass python3 ruby discount
     #gcc gdb xlibsWrapper linux.dev linuxHeaders
     #unstable.rustc unstable.cargo lua unstable.rakudo
+solvespace 
 
 
     # Lang: TODO remove

@@ -25,6 +25,7 @@ aliases() {
 	alias ls="ls -F"
 	alias v=$EDITOR
 	alias V="hlprsucmd $EDITOR"
+	alias ytdlpl='youtube-dl -xo "%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"'
 	alias mpvlq='mpv --ytdl-format="[height<420]"'
 	alias gd='cd $(git rev-parse --show-toplevel 2>/dev/null || hg root)'
 	alias cb='git rev-parse --abbrev-ref HEAD 2>/dev/null || cat .hg/bookmarks.current'
@@ -55,7 +56,7 @@ promptandwindowtitle() {
 	}
 	precmd()  {
 		#echo -en "\e]0;%~\a"; # E.g. set wintitle to dir
-		[ -z $DISPLAY ] || xdotool getactivewindow set_window --name $(pwd)
+		[ -z $DISPLAY ] || xdotool getactivewindow set_window --name "$(pwd)"
 		durs="$(echo $(date +%s) - $pres | bc 2>/dev/null)"
 		if [ "$durs" -lt 1 ]; then
 			durs=""
