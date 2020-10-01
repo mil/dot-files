@@ -1,15 +1,16 @@
 #!/usr/bin/env sh
 
 while true; do
+  DATE="$(date +'%l%m%p' | tr -d ' ')"
 	BAT="unimplemented"
 	if command -v apm; then
-		BAT="$(apm -l)"
+		BAT="$(apm -l)%"
 	elif [ -e /sys/class/power_supply/BAT0/capacity ]; then
-		BAT="$(cat /sys/class/power_supply/BAT0/capacity)"
+		BAT="$(cat /sys/class/power_supply/BAT0/capacity)%"
 	elif [ -e /sys/class/power_supply/BAT1/capacity ]; then
-		BAT="$(cat /sys/class/power_supply/BAT1/capacity)"
+		BAT="$(cat /sys/class/power_supply/BAT1/capacity)%"
 	fi
-	xsetroot -name " $BAT"
+	xsetroot -name " $DATE | $BAT"
 	sleep 30
 done &
 
