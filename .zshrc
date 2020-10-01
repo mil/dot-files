@@ -36,6 +36,7 @@ envvars() {
 	export PAGER=w3m
 	export BROWSER=surf
 	export PATH="$PATH:$HOME/.bin"
+	export PATH="$PATH:$HOME/.bin_extra"
 }
 zshhist() {
 	HISTFILE=/tmp/.zshhist
