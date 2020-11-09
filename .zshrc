@@ -38,7 +38,10 @@ envvars() {
 	export ST_INVERT=1
 	export PAGER=w3m
 	export BROWSER=surf
+
+	export PATH="$PATH:$HOME/.bin_extra"
 	export PATH="$PATH:$HOME/.bin"
+
 	[ -d /home/m/Repos/blip/zig-cache/bin ] && 
 		export PATH="$PATH:/home/m/Repos/blip/zig-cache/bin"
 }
