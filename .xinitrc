@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 while true; do
-  DATE="$(date +'%l%m%p' | tr -d ' ')"
+  DATE="$(date +'%l%M%p' | tr -d ' ')"
 	BAT="unimplemented"
 	if command -v apm; then
 		BAT="$(apm -l)%"

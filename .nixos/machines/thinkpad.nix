@@ -14,6 +14,9 @@
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
+    services.xserver.videoDrivers = [ "intel" "modesetting" ];
+    #services.xserver.videoDrivers = [ "vesa" ];
+
     systemd.services.miles-fixes = {
       description = "Fixes fan permissions";
       wantedBy = [ "multi-user.target" "post-resume.target" ];
@@ -35,21 +38,21 @@
     boot.loader.grub.device = "/dev/sda";
     boot.loader.grub.backgroundColor = "#cfcfcf";
     boot.loader.grub.splashImage = null;
-    services.jack.jackd.enable = true;
+    #services.jack.jackd.enable = true;
 
     virtualisation.docker.enable = true;
-    virtualisation.virtualbox.host.enable = true;
-    users.extraGroups.vboxusers.members = [ "m" ];
+    #virtualisation.virtualbox.host.enable = true;
+    #users.extraGroups.vboxusers.members = [ "m" ];
 
     environment.systemPackages = with pkgs; [
       #libreoffice    
-      terraform 
-      gimp
-      gnumeric
-      dbeaver 
-      guvcview 
-      openscad 
-      meshlab 
+      #terraform 
+      #gimp
+      #gnumeric
+      #dbeaver 
+      #guvcview 
+      #openscad 
+      #meshlab 
     ];
     #nixpkgs.config.chromium.enableWideVine = true;
   };

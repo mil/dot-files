@@ -4,14 +4,10 @@
 { config, pkgs, ... }:
 
 let 
-  #unstable = import <unstable>{};
+  unstable = import <unstable>{};
   sacc = pkgs.callPackage /home/m/.nixos/pkgs/sacc.nix {};
-  wxedid = pkgs.callPackage /home/m/.nixos/pkgs/wxedid.nix {};
   soundpipe = pkgs.callPackage /home/m/.nixos/pkgs/soundpipe.nix {};
   sporth = pkgs.callPackage /home/m/.nixos/pkgs/sporth.nix {};
-  idiotbox = pkgs.callPackage /home/m/.nixos/pkgs/idiotbox.nix {};
-  #json2tsv = pkgs.callPackage /home/m/.nixos/pkgs/json2tsv.nix {};
-  tscrape = pkgs.callPackage /home/m/.nixos/pkgs/tscrape.nix {};
   sfeed = pkgs.callPackage /home/m/.nixos/pkgs/sfeed.nix {};
   njconnect = pkgs.callPackage /home/m/.nixos/pkgs/njconnect.nix {};
 
@@ -28,6 +24,7 @@ in {
 
   #boot.tmpOnTmpfs = true;
 
+
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=5s
   '';
@@ -36,10 +33,9 @@ in {
       ATTRS{product}=="USB Trackball", SYMLINK+="miltrackball", ENV{DISPLAY}=":0", RUN+="${pkgs.stdenv.shell} -c '/home/m/.bin/trackball'"
   '';
 
-  documentation.dev.enable = true;
+  #documentation.dev.enable = true;
 
   # Yubikey
-  hardware.u2f.enable = true;
   programs.ssh.startAgent = false;
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
   services.pcscd.enable = true;
@@ -61,6 +57,8 @@ in {
     temperature = { day = 5500; night = 3700; };
   };
 
+
+
   fonts = {
     enableFontDir = true;
     enableDefaultFonts = true;
@@ -80,15 +78,33 @@ in {
   services.logind.extraConfig = "HandleLidSwitch=ignore";
   services.xserver.enable = true;
   services.xserver.libinput.enable = true;
+  services.xserver.verbose = 7;
+  services.xserver.libinput.accelProfile = "flat";
+#    services.xserver.libinput.enable = true;
   services.xserver.exportConfiguration = true;
   services.xserver.autorun = false;
 
   nixpkgs.config.packageOverrides = pkgs: {
     dunst = pkgs.dunst.override { dunstify = true; };
     mpv = pkgs.mpv.override {
-      jackaudioSupport = true;
+      #jackaudioSupport = true;
       youtubeSupport = true;
     };
+
+
+  git = pkgs.git.override {
+    svnSupport       = false;
+    guiSupport       = false;
+    sendEmailSupport = true;
+    withLibsecret    = false;
+  };
+
+    #zig = unstable.zig.overrideAttrs (oldAttrs: rec {
+    #  src = builtins.fetchGit {
+    #    rev = "245d98d32dd29e80de9732f415a4731748008acf";
+    #    url = "https://github.com/zig/ziglang";
+    #  };
+    #});
     
     st = pkgs.st.overrideAttrs (oldAttrs: rec {
       src = builtins.fetchurl {
@@ -136,25 +152,46 @@ in {
         #url = "https://git.suckless.org/dmenu";
         #rev = "65be875f5adf31e9c4762ac8a8d74b1dfdd78584";
 
-        rev = "944a2f8315818f238b90061381260803c268377d"; #localdmenu
-        url = "https://github.com/mil/dmenu";
-        #url = "file:///home/m/Repos/dmenu";
+        rev = "462727d670505aca88952ff37ea6f70f82b069bd"; #localdmenu
+        #url = "https://github.com/mil/dmenu";
+        url = "file:///home/m/Repos/dmenu";
       };
     });
+
+    #solvespace = pkgs.solvespace.overrideAttrs (oldAttrs: rec {
+    #  name = "solvespace";
+    #  patches = [];
+    #  buildInputs = oldAttrs.buildInputs ++ [ pkgs.mount ];
+    #  makeFlags = [ "PREFIX=$(out)" ];
+    #  src = pkgs.fetchgit {
+    #    sha256 = "b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c";
+    #    url = "https://github.com/solvespace/solvespace";
+    #    fetchSubmodules = true;
+    #  };
+    #});
+
     surf = pkgs.surf.overrideAttrs (oldAttrs: rec {
       name = "surf";
-      patches = [];
+      patches = [
+        /home/m/Repos/suckless-patches/personal/p1/surf/patch-surf-buildfix-tip.diff
+        /home/m/Repos/suckless-patches/personal/p1/surf/patch-surf-config-tip.diff
+        /home/m/Repos/suckless-patches/personal/p1/surf/patch-surf-externalpipe-tip.diff
+        /home/m/Repos/suckless-patches/personal/p1/surf/patch-surf-modal-tip.diff
+        /home/m/Repos/suckless-patches/personal/p1/surf/patch-surf-useragent-tip.diff
+      ];
       buildInputs = oldAttrs.buildInputs ++ [ pkgs.gcr  ];
       makeFlags = [ "PREFIX=$(out)" ];
       src = builtins.fetchGit {
-        rev = "f9c9da02ebdc4c6a3389c8637b95b5812e8cc78f"; #localsurf
+        rev = "d068a3878b6b9f2841a49cd7948cdf9d62b55585"; #localsurf
+        url = "https://git.suckless.org/surf";
         #url = "file:///home/m/Repos/surf"; 
-        url = "https://github.com/mil/surf";
       };
     });
     vis = pkgs.vis.overrideAttrs (oldAttrs: rec {
       patches = [/home/m/.nixos/patches/vis/noclear.diff];
     });
+
+    #netsurf-browser = pkgs.netsurf.browser.overrideAttrs (oldAttrs: rec { uilib = "gtk"; });
   };
 
 
@@ -204,7 +241,7 @@ in {
     isNormalUser = true;
     home = "/home/m";
     description = "m";
-    extraGroups = [ "wheel" "docker" "jackaudio" "adbusers" "dialout" "uucp" "video"];
+    extraGroups = [ "wheel" "docker" "jackaudio" "adbusers" "dialout" "uucp" "video" "input" "audio"];
   };
   services.mingetty.autologinUser = "m";
   programs.light.enable = true;
@@ -213,57 +250,60 @@ in {
 
   time.timeZone = "America/Chicago";
   environment.systemPackages = with pkgs; [
-    # Cli progs
-    vis htop mutt wget killall ag
-    finger_bsd binutils-unwrapped netcat-gnu telnet sshfs 
-    git mercurial w3m elinks sacc bc gnumake ncdu
+    # CLI
+    htop wget killall ag finger_bsd
+    binutils-unwrapped netcat-gnu telnet sshfs 
+    mercurial w3m elinks sacc bc gnumake ncdu
     fish autojump highlight jq aria2 whois tree stow 
     inotifyTools libtidy screen picocom unzip p7zip lsof 
     recode lynx html2text moreutils psmisc nix-index zip dos2unix 
-    exfat libarchive imagemagick geoipWithDatabase farbfeld unrar 
-    plowshare tldr usbutils pass fzf rlwrap astyle 
-    idiotbox 
-    tscrape sfeed #json2tsv 
-    shellcheck shfmt lf file entr dvtm abduco hdparm
-    discount fasd
+    exfat libarchive farbfeld unrar usbutils fzf rlwrap
+    astyle sfeed shellcheck shfmt lf file entr dvtm abduco hdparm fasd
+    aspell aspellDicts.en smu git ed
+
+    # CLI Docs
+    dict manpages posix_man_pages sdcv
+
+    # Music
+    jack_capture chuck jack2 puredata sox ffmpeg mpv youtube-dl soundpipe liblo #sporth  
+
+    # Email
+    isync msmtp mblaze
 
     # X progs
     xorg.xmodmap keynav xdotool scrot xcwd xtitle xorg.xinit xfontsel
     xorg.xf86inputlibinput xclip xsel autocutsel xcape xorg.xwininfo
     xorg.xev xorg.xhost xorg.xgamma xorg.xdpyinfo xorg.xwd xcalib
     arandr unclutter sxhkd  libxml2 sxiv libnotify dunst slock restic 
-    yubikey-personalization yubikey-manager pinentry gnupg rockbox_utility 
-    zathura firefox chromium
+    yubikey-personalization yubikey-manager pinentry gnupg 
+    #zathura 
 
-    # X Patched
-    dwm dmenu st surf
-    go sqlite
+    # Patched
+    vis dwm dmenu st
+    #surf
 
-    # Music
-    jack_capture chuck jack2 vmpk puredata sox qjackctl ffmpeg mpv youtube-dl 
-    pianobar soundpipe liblo
-    #sporth  doesn't compile atm? 
+    # Langs, DBs
+    go sqlite janet gcc python3Minimal unstable.zig
+    
+    # TODO move:
+    libsndfile
+    libsoundio
+    ncurses
 
-    # Email
-    isync msmtp mblaze
-
-    # TODO remove and use nix shell or docker
-    #python37Packages.pip adoptopenjdk-bin leiningen
-    #boot zig unstable.stagit unstable.go gotools
-    #sqlite expect bind sass python3 ruby discount
-    #gcc gdb xlibsWrapper linux.dev linuxHeaders
-    #unstable.rustc unstable.cargo lua unstable.rakudo
-solvespace 
-
-
-    # Lang: TODO remove
-    python3 ruby openssl
-
-     # Spellcheck
-     aspell aspellDicts.en
-
-    # Docs
-    dict aspellDicts.en manpages posix_man_pages sdcv
+    # Bloated:
+    #vmpk 
+    #qjackctl
+    #pianobar
+    #rockbox_utility 
+    #firefox 
+    #chromium
+    #imagemagick
+    #geoipWithDatabase
+    #appimage-run
+    #solvespace 
+    #openssl
+    #python3
+    #ruby
   ];
   #services.dictd.enable = true;
   services.dictd.DBs = with pkgs.dictdDBs; [ wiktionary wordnet ];
@@ -276,5 +316,5 @@ solvespace
   swapDevices = [ { device = "/swapfile"; size = 2048; } ];
 
   programs.command-not-found.enable = true;
-  system.stateVersion = "20.03"; # Did you read the comment?
+  system.stateVersion = "20.09"; # Did you read the comment?
 }

@@ -28,6 +28,8 @@ function file_type_exec(file)
   --elseif string.match(file, ".ts") then
   --  vis:command('set syntax javascript')
 
+  elseif string.match(file, ".zig") then
+    vis:command('set syntax go')
   elseif string.match(file, ".exp") then
     vis:command('set syntax tcl')
   elseif string.match(file, ".scad") then
@@ -63,8 +65,6 @@ function file_type_exec(file)
     vis:command('set syntax clojure')
   elseif string.match(file, ".py") then
     vis:command('set tabwidth 4')
-  elseif string.match(file, ".zig") then
-    vis:command('set syntax python')
   elseif string.match(file, ".rb") then
     vis:command('set tabwidth 2')
   elseif string.match(file, ".scss") then

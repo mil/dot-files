@@ -25,17 +25,22 @@ aliases() {
 	alias ls="ls -F"
 	alias v=$EDITOR
 	alias V="hlprsucmd $EDITOR"
+	alias ytp='youtube-dl ytsearch5:asmr --get-id | sed 's#^#ytdl://#' | xargs -IC mpv -v --ytdl-format="[height<420]" C'
 	alias ytdlpl='youtube-dl -xo "%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"'
-	alias mpvlq='mpv --ytdl-format="[height<420]"'
+	alias mpvlq='mpv -v --ytdl-format="[height<420]"'
 	alias gd='cd $(git rev-parse --show-toplevel 2>/dev/null || hg root)'
 	alias cb='git rev-parse --abbrev-ref HEAD 2>/dev/null || cat .hg/bookmarks.current'
+	alias nixbuildenv="env -i nix-shell -I nixpkgs=/home/m/Repos/nixpkgs '<nixpkgs>' -A $1"
 }
 envvars() {
 	if which vise 2>&1 >/dev/null; then; export EDITOR=vise; else; export EDITOR=vis; fi
 	export DVTM_EDITOR=$EDITOR
+	export ST_INVERT=1
 	export PAGER=w3m
 	export BROWSER=surf
 	export PATH="$PATH:$HOME/.bin"
+	[ -d /home/m/Repos/blip/zig-cache/bin ] && 
+		export PATH="$PATH:/home/m/Repos/blip/zig-cache/bin"
 }
 zshhist() {
 	HISTFILE=/tmp/.zshhist

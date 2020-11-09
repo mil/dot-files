@@ -6,10 +6,10 @@ stdenv.mkDerivation rec {
   name = "sporth";
   src = builtins.fetchGit {
     ref = "custom-ugens";
-    rev = "156d5189262f126f8658b3c4e1910d9cda84b587"; #localsporth
+    rev = "5ba66310ca364c67800e02b86964eec1acb7e62b"; #localsporth
     #url = "https://github.com/PaulBatchelor/Sporth";
-    url = "https://github.com/mil/Sporth";
-    #url = "file:///home/m/Repos/Sporth"; 
+    #url = "https://github.com/mil/Sporth";
+    url = "file:///home/m/Repos/Sporth"; 
   };
   NIX_CFLAGS_COMPILE = "-DNO_POLYSPORTH -DDEBUG_MODE";
   buildInputs = [soundpipe libsndfile libjack2];

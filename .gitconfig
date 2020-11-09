@@ -19,3 +19,10 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+
+[sendemail]
+	smtpserver = mail.messagingengine.com
+	smtpuser = miles@sent.com
+	from = m@milesalan.com
+	smtpencryption = tls
+	smtpserverport = 587
