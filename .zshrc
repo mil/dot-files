@@ -35,7 +35,7 @@ aliases() {
 envvars() {
 	if which vise 2>&1 >/dev/null; then; export EDITOR=vise; else; export EDITOR=vis; fi
 	export DVTM_EDITOR=$EDITOR
-	export ST_INVERT=1
+	export ST_INVERT=0
 	export PAGER=w3m
 	export BROWSER=surf
 
@@ -86,6 +86,12 @@ setupfasd() {
 machinespecific() {
 	[ -f $HOME/.zshrc.machine ] && source $HOME/.zshrc.machine
 }
+gpgagent() {
+  pkill pinentry
+  pidof gpg-agent >/dev/null || gpg-agent --daemon --enable-ssh-support
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+  export GPG_TTY=$(tty)
+}
 
 vimode
 envvars
@@ -94,3 +100,4 @@ zshhist
 promptandwindowtitle
 setupfasd
 machinespecific
+gpgagent

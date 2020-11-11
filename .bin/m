@@ -23,6 +23,7 @@ usage() {
 
 writeconfigs() {
   styl "[w]rite configs"
+  mkdir -p ~/.mblaze ~/Maildir
   echo "
     account default
     host mail.messagingengine.com
@@ -52,6 +53,9 @@ writeconfigs() {
 
     IMAPStore fastmail-remote
     Account fastmail
+
+    MaxMessages 200
+    ExpireUnread yes
 
     # This section describes the local storage
     MaildirStore fastmail-local
@@ -148,6 +152,7 @@ v() { show "$@"; }
 ups() { u; p; s; }
 
 if type "$1" 2>/dev/null>/dev/null; then
+  writeconfigs
   "$@"
 else
   usage
