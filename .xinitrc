@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
 while true; do
-  DATE="$(date +'%l%M%p' | tr -d ' ')"
+	MEMFREE="$(free -m | grep Mem | awk -F ' ' '{print $4}')M"
+	DATE="$(date +'%H:%M' | tr -d ' ')"
 	BAT="unimplemented"
 	if command -v apm; then
 		BAT="$(apm -l)%"
@@ -10,7 +11,7 @@ while true; do
 	elif [ -e /sys/class/power_supply/BAT1/capacity ]; then
 		BAT="$(cat /sys/class/power_supply/BAT1/capacity)%"
 	fi
-	xsetroot -name " $DATE | $BAT"
+	xsetroot -name " $DATE | $MEMFREE | $BAT"
 	sleep 30
 done &
 
