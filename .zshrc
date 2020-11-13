@@ -90,7 +90,12 @@ gpgagent() {
   pkill pinentry
   pidof gpg-agent >/dev/null || gpg-agent --daemon --enable-ssh-support
   export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-  export GPG_TTY=$(tty)
+  if [ -z $DISPLAY ]; then
+    echo "pinentry-program $(which pinentry-curses)" > ~/.gnupg/gpg-agent.conf
+    export GPG_TTY=$(tty)
+  else
+    echo "pinentry-program $(which pinentry-gtk-2)" > ~/.gnupg/gpg-agent.conf
+  fi
 }
 
 vimode

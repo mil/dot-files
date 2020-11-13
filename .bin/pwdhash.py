@@ -131,9 +131,9 @@ if cmd == "prompt":
     print(pwdhash(domain, password))
 
 elif cmd == "xprompt":
-    domainp = subprocess.run(['dmenu', '-p', 'Domain'], stdout=subprocess.PIPE)
+    domainp = subprocess.run(['sh', '-c', 'echo Enter Domain | dmenu -p Domain'], stdout=subprocess.PIPE)
     domain = domainp.stdout.decode('ascii').rstrip()
-    passwordp = subprocess.run(['dmenu', '-p', 'Password', '-nb', '#e8e8e8', '-nf', '#e8e8e8'], stdout=subprocess.PIPE)
+    passwordp = subprocess.run(['sh', '-c', 'echo Enter Password | dmenu -p Domain -nb "#e8e8e8" -nf "#e8e8e8"'], stdout=subprocess.PIPE)
     password = passwordp.stdout.decode('ascii').rstrip()
     result = pwdhash(domain, password)
     subprocess.run(['xdotool', 'type', result], stdout=subprocess.PIPE)
