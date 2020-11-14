@@ -1,0 +1,47 @@
+#!/usr/bin/env sh
+set -e
+
+USBCRYPT="usb-Kingston_DataTraveler_2.0_*-0:0-part2"
+USBCRYPTN="usbcrypt"
+
+ADATACRYPT="ata-ADATA_SP550_*-part2"
+ADATACRYPTN="adatacrypt"
+
+mountdev() {
+  DEV="/dev/disk/by-id/$1"
+  HANDLE="$2"
+
+  cryptsetup open $DEV $HANDLE
+  mkdir -p /mnt/$HANDLE
+  mount /dev/mapper/$HANDLE /mnt/$HANDLE
+  lsblk $DEV
+}
+
+umountdev() {
+  HANDLE="$1"
+
+  umount /mnt/$HANDLE
+  cryptsetup close $HANDLE
+  rmdir /mnt/$HANDLE
+  lsblk $DEV
+}
+
+musb() {
+  mountdev "$USBCRYPT" "$USBCRYPTN"
+  exit 0
+}
+uusb() {
+  umountdev "$USBCRYPTN"
+  exit 0
+}
+mada() {
+  mountdev "$ADATACRYPT" "$ADATACRYPTN"
+  exit 0
+}
+uada() {
+  umountdev "$ADATACRYPTN"
+  exit 0
+}
+
+$1
+echo "unknown command"
