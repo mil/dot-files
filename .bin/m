@@ -87,7 +87,7 @@ grap() {
   echo "Modified grep query: $QUERY"
   rm -f ~/.mblaze/seq- 
   set -o xtrace
-  mlist /home/m/Maildir/{INBOX,Sent}/ |
+  mlist /home/m/Maildir/INBOX /home/m/Maildir/Sent |
     magrep "$QUERY" |
     msort |
     mthread |
@@ -100,7 +100,7 @@ pick() {
   styl "[p]ick" "$@"
   rm -f ~/.mblaze/seq- 
   set -o xtrace
-  mlist ~/Maildir/{INBOX,Sent}/ |
+  mlist /home/m/Maildir/INBOX /home/m/Maildir/Sent |
     mpick -v "$@" |
     msort |
     mthread |
