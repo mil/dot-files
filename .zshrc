@@ -98,6 +98,13 @@ gpgagent() {
   fi
 }
 
+setupautosuggestions() {
+  P=/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=gray,underline"
+  [ -f $P ] && source $P
+}
+
+setupautosuggestions
 vimode
 envvars
 aliases
