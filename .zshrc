@@ -6,9 +6,10 @@ vimode() {
 		if [ $KEYMAP = vicmd ]; then; printf "\033[2 q"; else; printf "\033[6 q"; fi
 	}
 	function zle-line-init zle-keymap-select {
-		VIM_PROMPT="%{%F{blue}%} cmd%  %{$reset_color%}"
-		RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
+		VIM_PROMPT="%{%F{blue}%}[cmd]%  %{$reset_color%}"
+		PROMPT="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$PROMPT"
 		zle reset-prompt
+		promptandwindowtitle
 	}
 	zle -N zle-keymap-select
 	zle-line-init () { zle -K viins; printf "\033[6 q"; }
@@ -105,11 +106,11 @@ setupautosuggestions() {
 }
 
 setupautosuggestions
-vimode
 envvars
 aliases
 zshhist
 promptandwindowtitle
+vimode
 setupfasd
 machinespecific
 gpgagent
