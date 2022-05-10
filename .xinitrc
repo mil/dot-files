@@ -28,6 +28,8 @@ xsetroot -rv -mod 3 2 -fg '#cfcfcf' -bg '#ffffff' &
 xmodmap -e "clear lock" -e "keycode 0x42 = Escape" &
 keynav & 
 
+lisgd -d /dev/input/by-path/platform-1c2ac00.i2c-event -v -g '1,DU,*,*,,togglekb'
+
 if stat /dev/wsmouse; then
 	xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation" 1
 	xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation Button" 2

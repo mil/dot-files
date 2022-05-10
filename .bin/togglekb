@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+if pidof svkbd-mobile-intl; then
+  pkill svkbd-mobile-intl
+else
+  export DISPLAY=:0
+  svkbd-mobile-intl -l en,symbols
+fi
