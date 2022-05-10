@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+isrotated() {
+  xrandr | grep primary | cut -d' ' -f 5 | sed s/\(// | grep right
+}
+
+if isrotated; then
+  xinput set-prop 'pointer:Goodix Capacitive TouchScreen' 'Coordinate Transformation Matrix' 0 0 0 0 0 0 0 0 0
+  xrandr -o normal
+else
+  xinput set-prop 'pointer:Goodix Capacitive TouchScreen' 'Coordinate Transformation Matrix' 0 1 0 -1 0 1 0 0 1
+  xrandr -o right
+fi
