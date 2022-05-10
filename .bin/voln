@@ -1,6 +1,10 @@
 #!/usr/bin/env sh
 ID=999
 
+ispp() {
+    grep -qi pinephone /etc/deviceinfo
+}
+
 get_volume() {
     amixer -M get Master | awk 'END { print $0, value }' | awk '{print $4}' | grep -Eo '[0-9]+'
 }
@@ -14,23 +18,42 @@ send_notification() {
     dunstify -r $ID  -u normal "${volume}%"
 }
 
-case $1 in
-    up)
-        amixer set Master on > /dev/null
-        amixer set Master 1+ > /dev/null
-        send_notification
-	;;
-    down)
-        amixer set Master on > /dev/null
-        amixer set Master 1- > /dev/null
-        send_notification
-	;;
-    mute)
-        amixer set Master toggle > /dev/null
-        if is_mute ; then
+up() {
+    if ispp; then
+      if pidof svkbd-mobile-intl; then
+        pkill svkbd-mobile-intl
+      else
+        export DISPLAY=:0
+        svkbd-mobile-intl -l en,symbols
+      fi
+    else
+      amixer set Master on > /dev/null
+      amixer set Master 1+ > /dev/null
+      send_notification
+    fi
+}
+
+down() {
+    if ispp; then
+      st
+    else
+      amixer set Master on > /dev/null
+      amixer set Master 1- > /dev/null
+      send_notification
+    fi
+}
+
+mute() {
+    if ispp; then
+      xdotool key Alt+Shift+c
+    else
+      amixer set Master toggle > /dev/null
+      if is_mute ; then
         dunstify -r $ID -u normal "Mute"
-        else
+      else
         send_notification
-	fi
-	;;
-esac
+      fi
+    fi
+}
+
+"$@"
