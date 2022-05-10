@@ -34,6 +34,8 @@ if stat /dev/wsmouse; then
 	xinput | grep /dev/wsmouse0 | grep -oE 'id=[0-9]+' | cut -d= -f2 | xargs xinput --float
 fi
 
+export XDG_RUNTIME_DIR=$HOME/.config
+
 while true; do
 	exec dwm 2> ~/.dwm.log
 done
