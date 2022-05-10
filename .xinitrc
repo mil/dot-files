@@ -6,12 +6,19 @@ while true; do
 	BAT="unimplemented"
 	if command -v apm; then
 		BAT="$(apm -l)%"
+	elif [ -e /sys/class/power_supply/axp20x-battery/capacity ]; then
+		BAT="$(cat /sys/class/power_supply/axp20x-battery/capacity)%"
 	elif [ -e /sys/class/power_supply/BAT0/capacity ]; then
 		BAT="$(cat /sys/class/power_supply/BAT0/capacity)%"
 	elif [ -e /sys/class/power_supply/BAT1/capacity ]; then
 		BAT="$(cat /sys/class/power_supply/BAT1/capacity)%"
 	fi
-	xsetroot -name " $DATE | $MEMFREE | $BAT"
+
+	if [ -e /sys/class/power_supply/axp20x-battery/capacity ]; then
+		BAT2=" / $(cat /sys/class/power_supply/ip5xxx-charger/capacity)%"
+	fi
+
+	xsetroot -name " $DATE | $MEMFREE | ${BAT}${BAT2}"
 	sleep 30
 done &
 
