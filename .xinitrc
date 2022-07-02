@@ -28,6 +28,8 @@ xsetroot -rv -mod 3 2 -fg '#cfcfcf' -bg '#ffffff' &
 xmodmap -e "clear lock" -e "keycode 0x42 = Escape" &
 keynav & 
 
+xinput set-prop 'pointer:Lite-On Tech IBM USB Travel Keyboard with Ultra Nav Mouse' 'libinput Scroll Method Enabled' 0 0 1
+
 lisgd -d /dev/input/by-path/platform-1c2ac00.i2c-event -v -g '1,DLUR,*,*,,sh -c "pidof ppxscreenlock || ppxscreenlock"' &
 
 if stat /dev/wsmouse; then
