@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+
+CHOICE="$(
+  echo "
+    Mepo
+    Firefox
+    Moonbuggy
+    Tile
+    Monocle
+    Screenlock
+    Networks
+    Phone
+    Signal
+    Close
+  " |
+  sed -e '/^\s*$/d' |
+  sed -e 's/^\s*//' |
+  dmenu -l 10
+)"
+
+EVAL="$(
+  case "$CHOICE" in
+    Mepo) echo "mepo";;
+    Firefox) echo "firefox";;
+    Moonbuggy) echo "st -e moon-buggy";;
+    Tile) echo "xdotool key Alt+t";;
+    Monocle) echo "xdotool key Alt+m";;
+    Networks) echo "st -e f_networks";;
+    Phone) echo "st -e f_phone";;
+    Signal) echo 'export "$(dbus-launch)"; st -e flatpak run org.signal.Signal';;
+    Screenlock) echo "ppxscreenlock";;
+    *) echo "";;
+  esac
+)"
+
+eval "$EVAL"
