@@ -33,4 +33,4 @@ EVAL="$(
   esac
 )"
 
-eval "$EVAL"
+eval "$EVAL" &
