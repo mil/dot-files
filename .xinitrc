@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 while true; do
-	MEMFREE="$(free -m | grep Mem | awk -F ' ' '{print $4}')M"
+	#MEMFREE="$(free -m | grep Mem | awk -F ' ' '{print $4}')M"
 	DATE="$(date +'%H:%M' | tr -d ' ')"
 	BAT="unimplemented"
 	if [ -e /sys/class/power_supply/axp20x-battery/capacity ]; then
@@ -21,7 +21,9 @@ while true; do
 	)"
 	TEMP="$(echo "${TEMP}"C)"
 
-	xsetroot -name " $DATE | $TEMP | $MEMFREE | ${BAT}${BAT2}"
+	SPACEFREE="$(df -h | grep -E '% /$' | grep -oE '([^ ]+[GHM])' | tail -n1)"
+
+	xsetroot -name " $DATE | $TEMP | $SPACEFREE | ${BAT}${BAT2}"
 	sleep 30
 done &
 
