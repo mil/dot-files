@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+
+BLFOLD="$(ls -1 /sys/class/backlight | head -n1)"
+MAXVAL="$(cat "/sys/class/backlight/$BLFOLD/max_brightness")"
+CURVAL="$(cat "/sys/class/backlight/$BLFOLD/brightness")"
+MINVAL=0 
+STEP="$(echo "$MAXVAL" | xargs -IMAX echo "MAX / 20" | bc)"
+
+setval(){
+  echo -n $1 > "/sys/class/backlight/$BLFOLD/brightness"
+}
+
+down() {
+  NewVal=$(($CURVAL - $STEP)); 
+  ThresholdVal=$(($NewVal>$MINVAL?$NewVal:$MINVAL)) 
+  setval $ThresholdVal
+}
+
+up() {
+  NewVal=$(($CURVAL + $STEP)); 
+  ThresholdVal=$(($NewVal<$MAXVAL?$NewVal:$MAXVAL)) 
+  setval $ThresholdVal
+}
+
+if [ "$1" = "-A" ]; then
+  up
+elif [ "$1" = "-U" ]; then
+  down
+else
+  $@
+fi
