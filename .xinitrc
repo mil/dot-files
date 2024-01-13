@@ -16,7 +16,12 @@ while true; do
 		BAT2=" / $(cat /sys/class/power_supply/ip5xxx-charger/capacity)%"
 	fi
 
-	xsetroot -name " $DATE | $MEMFREE | ${BAT}${BAT2}"
+	TEMP="$(
+		sensors | grep CPU: | grep -oE '[^ ]+°C' | tr -d '+' | cut -d. -f1
+	)"
+	TEMP="$(echo "${TEMP}"C)"
+
+	xsetroot -name " $DATE | $TEMP | $MEMFREE | ${BAT}${BAT2}"
 	sleep 30
 done &
 
