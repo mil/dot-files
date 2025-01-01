@@ -19,6 +19,7 @@ vimode() {
 }
 aliases() {
 	hlprsucmd() { if which doas; then; doas $@; else; sudo $@; fi; }
+	alias yk='pkill -9 ssh-agent; eval $(ssh-agent); ssh-add -K'
 	alias d="date"
 	alias t="tail"
 	alias h="head"
@@ -74,29 +75,8 @@ promptandwindowtitle() {
 		fi
 	}
 }
-setupfasd() {
-	eval "$(
-		fasd --init \
-			posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
-			zsh-wcomp zsh-wcomp-install
-	)"
-	bindkey '^Xa' fasd-complete # files + dirs
-	bindkey '^Xf' fasd-complete-f # files
-	bindkey '^Xd' fasd-complete-d # dirs
-}
 machinespecific() {
 	[ -f $HOME/.zshrc.machine ] && source $HOME/.zshrc.machine
-}
-gpgagent() {
-  pkill pinentry
-  pidof gpg-agent >/dev/null || gpg-agent --daemon --enable-ssh-support
-  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-  if [ -z $DISPLAY ]; then
-    echo "pinentry-program $(which pinentry-curses)" > ~/.gnupg/gpg-agent.conf
-    export GPG_TTY=$(tty)
-  else
-    echo "pinentry-program $(which pinentry-gtk-2)" > ~/.gnupg/gpg-agent.conf
-  fi
 }
 
 setupautosuggestions() {
@@ -111,6 +91,4 @@ aliases
 zshhist
 promptandwindowtitle
 vimode
-setupfasd
 machinespecific
-gpgagent
