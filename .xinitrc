@@ -39,4 +39,4 @@ xinput set-prop 'pointer:Lite-On Tech IBM USB Travel Keyboard with Ultra Nav Mou
 lisgd -d /dev/input/by-path/platform-1c2ac00.i2c-event -v -g '1,DLUR,*,*,,sh -c "pidof ppxscreenlock || ppxscreenlock"' &
 
 export XDG_RUNTIME_DIR=$HOME/.config
-exec i3
+exec dwm
