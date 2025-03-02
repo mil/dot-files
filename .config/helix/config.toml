@@ -1,0 +1,16 @@
+theme = "term16_dark"
+
+[editor]
+mouse = false
+bufferline = "multiple"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.lsp]
+auto-signature-help = false 
+
+[keys.insert]
+C-p = "signature_help"
