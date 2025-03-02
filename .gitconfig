@@ -4,8 +4,9 @@
 	signingkey = 18FAE46301B50948C2B69C0FAAB6DDF0008140A2
 [color]
 	ui = true
-[core]
-  editor = $EDITOR '+set syntax=diff'
+#[core]
+#  editor = $EDITOR '+set syntax=diff'
+
 [push]
   default = upstream
 

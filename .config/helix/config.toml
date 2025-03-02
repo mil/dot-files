@@ -1,4 +1,4 @@
-theme = "term16_dark"
+theme = "github_dark_high_contrast"
 
 [editor]
 mouse = false

@@ -36,6 +36,7 @@ aliases() {
 }
 envvars() {
 	if which vise 2>&1 >/dev/null; then; export EDITOR=vise; else; export EDITOR=vis; fi
+	export EDITOR=hx
 	export DVTM_EDITOR=$EDITOR
 	export ST_INVERT=0
 	export PAGER=w3m

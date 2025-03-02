@@ -36,7 +36,7 @@ cmd open ${{
       *.mblaze) mshow $(echo "$fx" | tr " " "\n" | xargs -IC basename C | grep -oE "^[0-9]+") ;;
       *.wav | *.WAV | *.opus | *.flac | *.mp3 | *.ogg) mpv "$fx";;
       *.m4a | *.flac | *.ogg | *.mkv | *.mp4 | *.avi) mpv "$fx";;
-      *) vis "$fx";;
+      *) $EDITOR "$fx";;
   esac
 }}
 
