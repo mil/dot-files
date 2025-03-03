@@ -1,5 +1,9 @@
 [font]
 size = 8
+normal = {family = "Terminus"}
 
 [colors.primary]
 background = "#000000"
+
+[window]
+padding = {x = 2, y = 2}

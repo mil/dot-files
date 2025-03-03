@@ -3,6 +3,10 @@ theme = "github_dark_high_contrast"
 [editor]
 mouse = false
 bufferline = "multiple"
+rulers = [80, 120]
+cursorline = true
+popup-border = "all"
+color-modes = true
 
 [editor.cursor-shape]
 insert = "bar"
