@@ -17,3 +17,11 @@ formatter = {command = "dart", args = ["format", "-l", "120"]}
 name = "html"
 auto-format = true
 formatter = {command = "sh", args = ["-c", "tidy -indent --tidy-mark no || true"]}
+
+[[language]]
+name = "tsx"
+file-types=["tsx"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+language-servers = ["typescript-language-server"]
+grammar = "typescript"
