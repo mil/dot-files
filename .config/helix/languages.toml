@@ -12,3 +12,8 @@ formatter = { command = "gofmt" , args = [] }
 name = "dart"
 auto-format = true
 formatter = {command = "dart", args = ["format", "-l", "120"]}
+
+[[language]]
+name = "html"
+auto-format = true
+formatter = {command = "sh", args = ["-c", "tidy -indent --tidy-mark no || true"]}
