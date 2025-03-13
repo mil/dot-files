@@ -8,6 +8,9 @@ cursorline = true
 popup-border = "all"
 color-modes = true
 
+[editor.soft-wrap]
+enable = true
+
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
