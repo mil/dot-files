@@ -10,16 +10,24 @@ setval(){
   echo -n $1 > "/sys/class/backlight/$BLFOLD/brightness"
 }
 
+send_notification() {
+  ID=9736
+  CURVAL="$(cat "/sys/class/backlight/$BLFOLD/brightness")"
+  dunstify -r $ID  -u normal "${CURVAL}"
+}
+
 down() {
   NewVal=$(($CURVAL - $STEP)); 
   ThresholdVal=$(($NewVal>$MINVAL?$NewVal:$MINVAL)) 
   setval $ThresholdVal
+  send_notification
 }
 
 up() {
   NewVal=$(($CURVAL + $STEP)); 
   ThresholdVal=$(($NewVal<$MAXVAL?$NewVal:$MAXVAL)) 
   setval $ThresholdVal
+  send_notification
 }
 
 if [ "$1" = "-A" ]; then

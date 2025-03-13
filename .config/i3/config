@@ -142,6 +142,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id voln up
 bindsym XF86AudioLowerVolume exec --no-startup-id voln down
 bindsym XF86AudioMute exec --no-startup-id voln mute
 bindsym XF86MonBrightnessDown exec --no-startup-id light down
+bindsym XF86MonBrightnessUp exec --no-startup-id light up
 bindsym $mod+Shift+p exec --no-startup-id pwdhash.py xprompt
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
 
