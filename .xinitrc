@@ -1,31 +1,31 @@
 #!/usr/bin/env sh
 
-while true; do
-	#MEMFREE="$(free -m | grep Mem | awk -F ' ' '{print $4}')M"
-	DATE="$(date +'%H:%M' | tr -d ' ')"
-	BAT="unimplemented"
-	if [ -e /sys/class/power_supply/axp20x-battery/capacity ]; then
-		BAT="$(cat /sys/class/power_supply/axp20x-battery/capacity)%"
-	elif [ -e /sys/class/power_supply/BAT0/capacity ]; then
-		BAT="$(cat /sys/class/power_supply/BAT0/capacity)%"
-	fi
+# while true; do
+# 	#MEMFREE="$(free -m | grep Mem | awk -F ' ' '{print $4}')M"
+# 	DATE="$(date +'%H:%M' | tr -d ' ')"
+# 	BAT="unimplemented"
+# 	if [ -e /sys/class/power_supply/axp20x-battery/capacity ]; then
+# 		BAT="$(cat /sys/class/power_supply/axp20x-battery/capacity)%"
+# 	elif [ -e /sys/class/power_supply/BAT0/capacity ]; then
+# 		BAT="$(cat /sys/class/power_supply/BAT0/capacity)%"
+# 	fi
 
-	if [ -e /sys/class/power_supply/BAT1/capacity ]; then
-		BAT2=" / $(cat /sys/class/power_supply/BAT1/capacity)%"
-	elif [ -e /sys/class/power_supply/axp20x-battery/capacity ]; then
-		BAT2=" / $(cat /sys/class/power_supply/ip5xxx-charger/capacity)%"
-	fi
+# 	if [ -e /sys/class/power_supply/BAT1/capacity ]; then
+# 		BAT2=" / $(cat /sys/class/power_supply/BAT1/capacity)%"
+# 	elif [ -e /sys/class/power_supply/axp20x-battery/capacity ]; then
+# 		BAT2=" / $(cat /sys/class/power_supply/ip5xxx-charger/capacity)%"
+# 	fi
 
-	TEMP="$(
-		sensors | grep CPU: | grep -oE '[^ ]+°C' | tr -d '+' | cut -d. -f1
-	)"
-	TEMP="$(echo "${TEMP}"C)"
+# 	TEMP="$(
+# 		sensors | grep CPU: | grep -oE '[^ ]+°C' | tr -d '+' | cut -d. -f1
+# 	)"
+# 	TEMP="$(echo "${TEMP}"C)"
 
-	SPACEFREE="$(df -h | grep -E '% /$' | grep -oE '([^ ]+[GHM])' | tail -n1)"
+# 	SPACEFREE="$(df -h | grep -E '% /$' | grep -oE '([^ ]+[GHM])' | tail -n1)"
 
-	xsetroot -name " $DATE | $TEMP | $SPACEFREE | ${BAT}${BAT2}"
-	sleep 30
-done &
+# 	xsetroot -name " $DATE | $TEMP | $SPACEFREE | ${BAT}${BAT2}"
+# 	sleep 30
+# done &
 
 xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 1
 xinput list | grep Synaptics | grep -oE 'id=[0-9]+' | cut -d= -f2 | xargs xinput disable
@@ -42,4 +42,5 @@ lisgd -d /dev/input/by-path/platform-1c2ac00.i2c-event -v -g '1,DLUR,*,*,,sh -c 
 # xmodmap -e "add Mod4 = Alt_L"
 
 export XDG_RUNTIME_DIR=$HOME/.config
-exec dwm
+#exec dwm
+exec i3

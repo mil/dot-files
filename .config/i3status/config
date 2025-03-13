@@ -1,0 +1,22 @@
+general {
+        colors = true
+        interval = 5
+}
+
+order += "disk /"
+order += "battery 0"
+order += "tztime local"
+
+tztime local {
+        format = " %H:%M "
+}
+
+battery 0 {
+        format = " %percentage "
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+}
+
+disk "/" {
+        format = " %free "
+}
