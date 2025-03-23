@@ -98,8 +98,8 @@ bar {
   position top
   status_command i3status
   colors {
-    background #d8d8d8
-    statusline #000000
+    background #000000
+    statusline #d8d8d8
     separator  #282828
 
     focused_workspace  #4C7899 #005BB0 #FFFFFF
