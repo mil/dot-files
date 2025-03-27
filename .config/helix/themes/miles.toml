@@ -2,3 +2,6 @@ inherits = "github_dark_high_contrast"
 "ui.cursor.primary.normal" = {bg = "red"}
 "ui.cursor.primary.select" = {bg = "red"}
 "ui.cursor.primary.insert" = {bg = "red"}
+"function.method" = {fg="white"}
+"comment" = {fg="#888888"}
+"string" = {fg="white"}
