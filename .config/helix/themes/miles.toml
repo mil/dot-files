@@ -4,4 +4,4 @@ inherits = "github_dark_high_contrast"
 "ui.cursor.primary.insert" = {bg = "red"}
 "function.method" = {fg="white"}
 "comment" = {fg="#888888"}
-"string" = {fg="white"}
+"string" = {fg="#b5b5b5"}
