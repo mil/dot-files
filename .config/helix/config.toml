@@ -7,6 +7,7 @@ rulers = [80, 120]
 cursorline = true
 popup-border = "all"
 color-modes = true
+auto-pairs = false
 
 [editor.soft-wrap]
 enable = true
