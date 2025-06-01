@@ -1,0 +1,10 @@
+model: ollama:llama3.2:3b
+clients:
+  - type: openai-compatible
+    name: ollama
+    api_base: http://localhost:11434/v1
+    models:
+      - { name: llama3.2:3b, max_input_tokens: 131072 }
+      - { name: qwen2.5-coder:3b, max_input_tokens: 131072 }
+      - { name: deepseek-r1:1.5b, max_input_tokens: 131072 }
+      - { name: gemma3:4b, max_input_tokens: 131072 }
