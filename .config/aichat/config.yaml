@@ -8,3 +8,244 @@ clients:
       - { name: qwen2.5-coder:3b, max_input_tokens: 131072 }
       - { name: deepseek-r1:1.5b, max_input_tokens: 131072 }
       - { name: gemma3:4b, max_input_tokens: 131072 }
+
+  # Cfg from https://raw.githubusercontent.com/sigoden/aichat/refs/heads/main/config.example.yaml
+  # Tue Jun  3 10:17:38 EDT 2025
+
+  # All clients have the following configuration:
+  # - type: xxxx
+  #   name: xxxx                                      # Only use it to distinguish clients with the same client type. Optional
+  #   models:
+  #     - name: xxxx                                  # Chat model
+  #       max_input_tokens: 100000
+  #       supports_vision: true
+  #       supports_function_calling: true
+  #     - name: xxxx                                  # Embedding model
+  #       type: embedding
+  #       default_chunk_size: 1500                        
+  #       max_batch_size: 100
+  #     - name: xxxx                                  # Reranker model
+  #       type: reranker 
+  #   patch:                                          # Patch api
+  #     chat_completions:                             # Api type, possible values: chat_completions, embeddings, and rerank
+  #       <regex>:                                    # The regex to match model names, e.g. '.*' 'gpt-4o' 'gpt-4o|gpt-4-.*'
+  #         url: ''                                   # Patch request url
+  #         body:                                     # Patch request body
+  #           <json>
+  #         headers:                                  # Patch request headers
+  #           <key>: <value>
+  #   extra:
+  #     proxy: socks5://127.0.0.1:1080                # Set proxy
+  #     connect_timeout: 10                           # Set timeout in seconds for connect to api
+  #
+  #
+  # 
+
+  # See https://platform.openai.com/docs/quickstart
+  - type: openai
+    api_base: https://api.openai.com/v1               # Optional
+    api_key: xxx
+    organization_id: org-xxx                          # Optional
+
+  # For any platform compatible with OpenAI's API
+  - type: openai-compatible
+    name: ollama
+    api_base: http://localhost:11434/v1
+    api_key: xxx                                      # Optional
+    models:
+      - name: deepseek-r1
+        max_input_tokens: 131072
+      - name: llama3.1
+        max_input_tokens: 128000
+        supports_function_calling: true
+      - name: llama3.2-vision
+        max_input_tokens: 131072
+        supports_vision: true
+      - name: nomic-embed-text
+        type: embedding
+        default_chunk_size: 1000
+        max_batch_size: 50
+
+  # See https://ai.google.dev/docs
+  - type: gemini
+    api_base: https://generativelanguage.googleapis.com/v1beta
+    api_key: xxx
+    patch:
+      chat_completions:
+        '.*':
+          body:
+            safetySettings:
+              - category: HARM_CATEGORY_HARASSMENT
+                threshold: BLOCK_NONE
+              - category: HARM_CATEGORY_HATE_SPEECH
+                threshold: BLOCK_NONE
+              - category: HARM_CATEGORY_SEXUALLY_EXPLICIT
+                threshold: BLOCK_NONE
+              - category: HARM_CATEGORY_DANGEROUS_CONTENT
+                threshold: BLOCK_NONE
+
+  # See https://docs.anthropic.com/claude/reference/getting-started-with-the-api
+  - type: claude
+    api_base: https://api.anthropic.com/v1            # Optional
+    api_key: xxx
+
+  # See https://docs.mistral.ai/
+  - type: openai-compatible
+    name: mistral
+    api_base: https://api.mistral.ai/v1
+    api_key: xxx
+
+  # See https://docs.x.ai/docs
+  - type: openai-compatible
+    name: xai
+    api_base: https://api.x.ai/v1
+    api_key: xxx
+
+  # See https://docs.ai21.com/docs/quickstart
+  - type: openai-compatible
+    name: ai12
+    api_base: https://api.ai21.com/studio/v1
+    api_key: xxx
+
+  # See https://docs.cohere.com/docs/the-cohere-platform
+  - type: cohere
+    api_base: https://api.cohere.ai/v2                # Optional
+    api_key: xxx
+
+  # See https://docs.perplexity.ai/docs/getting-started
+  - type: openai-compatible
+    name: perplexity
+    api_base: https://api.perplexity.ai
+    api_key: xxx
+
+  # See https://console.groq.com/docs/quickstart
+  - type: openai-compatible
+    name: groq
+    api_base: https://api.groq.com/openai/v1
+    api_key: xxx
+
+  # See https://learn.microsoft.com/en-us/azure/ai-services/openai/chatgpt-quickstart
+  - type: azure-openai
+    api_base: https://{RESOURCE}.openai.azure.com
+    api_key: xxx
+    models:
+      - name: gpt-4o                                  # Model deployment name
+        max_input_tokens: 128000
+        supports_vision: true
+        supports_function_calling: true
+
+  # See https://cloud.google.com/vertex-ai
+  - type: vertexai
+    project_id: xxx
+    location: xxx
+    # Specifies a application-default-credentials (adc) file
+    # Run `gcloud auth application-default login` to init the adc file
+    # see https://cloud.google.com/docs/authentication/external/set-up-adc
+    adc_file: <gcloud-config-dir>/application_default_credentials.json>  # Optional field
+    patch:
+      chat_completions:
+        'gemini-.*':
+          body:
+            safetySettings:
+              - category: HARM_CATEGORY_HARASSMENT
+                threshold: BLOCK_ONLY_HIGH
+              - category: HARM_CATEGORY_HATE_SPEECH
+                threshold: BLOCK_ONLY_HIGH
+              - category: HARM_CATEGORY_SEXUALLY_EXPLICIT
+                threshold: BLOCK_ONLY_HIGH
+              - category: HARM_CATEGORY_DANGEROUS_CONTENT
+                threshold: BLOCK_ONLY_HIGH
+
+  # See https://docs.aws.amazon.com/bedrock/latest/userguide/
+  - type: bedrock
+    access_key_id: xxx
+    secret_access_key: xxx
+    region: xxx
+
+  # See https://developers.cloudflare.com/workers-ai/
+  - type: openai-compatible
+    name: cloudflare
+    api_base: https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/v1
+    api_key: xxx
+
+  # See https://cloud.baidu.com/doc/WENXINWORKSHOP/index.html
+  - type: openai-compatible
+    name: ernie
+    api_base: https://qianfan.baidubce.com/v2
+    api_key: xxx
+
+  # See https://dashscope.aliyun.com/
+  - type: openai-compatible
+    name: qianwen
+    api_base: https://dashscope.aliyuncs.com/compatible-mode/v1
+    api_key: xxx
+
+  # See https://cloud.tencent.com/product/hunyuan
+  - type: openai-compatible
+    name: hunyuan
+    api_base: https://api.hunyuan.cloud.tencent.com/v1
+    api_key: xxx
+
+  # See https://platform.moonshot.cn/docs/intro
+  - type: openai-compatible
+    name: moonshot
+    api_base: https://api.moonshot.cn/v1
+    api_key: xxx
+
+  # See https://platform.deepseek.com/api-docs/
+  - type: openai-compatible
+    name: deepseek
+    api_base: https://api.deepseek.com
+    api_key: xxx
+
+  # See https://open.bigmodel.cn/dev/howuse/introduction
+  - type: openai-compatible
+    name: zhipuai
+    api_base: https://open.bigmodel.cn/api/paas/v4
+    api_key: xxx
+
+  # See https://platform.lingyiwanwu.com/docs
+  - type: openai-compatible
+    name: lingyiwanwu
+    api_base: https://api.lingyiwanwu.com/v1
+    api_key: xxx
+
+  # See https://platform.minimaxi.com/document/Fast%20access
+  - type: openai-compatible
+    name: minimax
+    api_base: https://api.minimax.chat/v1
+    api_key: xxx
+
+  # See https://openrouter.ai/docs#quick-start
+  - type: openai-compatible
+    name: openrouter
+    api_base: https://openrouter.ai/api/v1
+    api_key: xxx
+
+  # See https://github.com/marketplace/models
+  - type: openai-compatible
+    name: github
+    api_base: https://models.inference.ai.azure.com
+    api_key: xxx
+
+  # See https://deepinfra.com/docs
+  - type: openai-compatible
+    name: deepinfra
+    api_base: https://api.deepinfra.com/v1/openai
+    api_key: xxx
+
+
+  # ----- RAG dedicated -----
+
+  # See https://jina.ai
+  - type: openai-compatible
+    name: jina
+    api_base: https://api.jina.ai/v1
+    api_key: xxx
+
+  # See https://docs.voyageai.com/docs/introduction
+  - type: openai-compatible
+    name: voyageai
+    api_base: https://api.voyageai.com/v1
+    api_key: xxx
+    
