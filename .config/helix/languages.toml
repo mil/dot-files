@@ -14,11 +14,11 @@ auto-format = true
 formatter = {command = "dart", args = ["format", "-l", "120"]}
 
 [[language]]
-name = "html"
-auto-format = true
-formatter = {command = "sh", args = ["-c", "tidy -indent --tidy-mark no || true"]}
-
-[[language]]
 name = "tsx"
 auto-format = true
 formatter = { command = "prettier", args = ["--parser", "typescript"] }
+
+[[language]]
+name = "python"
+auto-format = true
+formatter = {  command = "black", args = [ "-", "--quiet", "--line-length=79" ] }
