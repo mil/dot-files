@@ -19,6 +19,11 @@ auto-format = true
 formatter = { command = "prettier", args = ["--parser", "typescript"] }
 
 [[language]]
+name = "javascript"
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "foo.js"] }
+
+[[language]]
 name = "python"
 auto-format = true
 formatter = {  command = "black", args = [ "-", "--quiet", "--line-length=79" ] }
