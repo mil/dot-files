@@ -62,12 +62,10 @@ promptandwindowtitle() {
 
 	preexec() {
 		echo -en "\e]0;$1\a"; # E.g. set wintitle to cmd
-		[ -z $DISPLAY ] || xdotool getactivewindow set_window --name "$1"
 		pres="$(date +%s)"
 	}
 	precmd()  {
-		#echo -en "\e]0;%~\a"; # E.g. set wintitle to dir
-		[ -z $DISPLAY ] || xdotool getactivewindow set_window --name "$(pwd)"
+		echo -en "\e]0;$(pwd)\a"; # E.g. set wintitle to dir
 		durs="$(echo $(date +%s) - $pres | bc 2>/dev/null)"
 		if [ "$durs" -lt 1 ]; then
 			durs=""
