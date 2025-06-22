@@ -5,12 +5,16 @@ ispp() {
     grep -qi pinephone /etc/deviceinfo
 }
 
+control() {
+    amixer scontrols | grep -Eo "'[^']+'" | tr -d "'" | grep -Ei 'Master|Speaker|Headphone|PCM' | head -n 1
+}
+
 get_volume() {
-    amixer -M get Master | awk 'END { print $0, value }' | awk '{print $4}' | grep -Eo '[0-9]+'
+    amixer -M get "$(control)" | awk 'END { print $0, value }' | awk '{print $4}' | grep -Eo '[0-9]+'
 }
 
 is_mute() {
-    amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
+    amixer get "$(control)" | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
 }
 
 send_notification() {
@@ -19,19 +23,19 @@ send_notification() {
 }
 
 up() {
-    amixer set Master on > /dev/null
-    amixer set Master 1+ > /dev/null
+    amixer set "$(control)" on > /dev/null
+    amixer set "$(control)" 1+ > /dev/null
     send_notification
 }
 
 down() {
-    amixer set Master on > /dev/null
-    amixer set Master 1- > /dev/null
+    amixer set "$(control)" on > /dev/null
+    amixer set "$(control)" 1- > /dev/null
     send_notification
 }
 
 mute() {
-    amixer set Master toggle > /dev/null
+    amixer set "$(control)" toggle > /dev/null
     if is_mute ; then
       dunstify -r $ID -u normal "Mute"
     else
