@@ -26,4 +26,9 @@ formatter = { command = "prettier", args = ["--stdin-filepath", "foo.js"] }
 [[language]]
 name = "python"
 auto-format = true
+language-servers = ["pylsp"]
 formatter = {  command = "black", args = [ "-", "--quiet", "--line-length=79" ] }
+
+[language-server.pylsp.config.pylsp]
+plugins.pylsp_mypy.enabled = true
+plugins.pylsp_mypy.live_mode = true
