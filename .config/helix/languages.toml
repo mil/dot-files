@@ -24,6 +24,11 @@ auto-format = true
 formatter = { command = "prettier", args = ["--stdin-filepath", "foo.js"] }
 
 [[language]]
+name = "typescript"
+auto-format = true
+formatter = { command = "deno", args = ["fmt", "-"] }
+
+[[language]]
 name = "python"
 auto-format = true
 language-servers = ["pylsp"]
