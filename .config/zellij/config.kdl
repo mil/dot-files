@@ -206,9 +206,12 @@ keybinds clear-defaults=true {
     renamepane {
         bind "esc" { UndoRenamePane; SwitchToMode "pane"; }
     }
-    
 }
+
+// Plugin aliases - can be used to change the implementation of Zellij
+// changing these requires a restart to take effect
 plugins {
+    about location="zellij:about"
     compact-bar location="zellij:compact-bar"
     configuration location="zellij:configuration"
     filepicker location="zellij:strider" {
@@ -223,25 +226,20 @@ plugins {
         welcome_screen true
     }
 }
+
+// Plugins to load in the background when a new session starts
+// eg. "file:/path/to/my-plugin.wasm"
+// eg. "https://example.com/my-plugin.wasm"
 load_plugins {
 }
- 
-default_mode "locked"
 ui {
     pane_frames {
         hide_session_name true
-        rounded_corners false
     }
-}
-layout {
-    pane size=1 borderless=true {
-        plugin location="compact-bar"
-    }
-    pane
-}
-load_plugins {
 }
 
+show_startup_tips false 
+show_release_notes false
 simplified_ui true
 pane_frames false
 theme "ansi"
