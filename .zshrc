@@ -41,6 +41,7 @@ envvars() {
 	export ST_INVERT=0
 	export PAGER=w3m
 	export BROWSER=surf
+	export TERM=xterm-256color
 
 	export PATH="$PATH:$HOME/.bin_extra"
 	export PATH="$PATH:$HOME/.bin"
