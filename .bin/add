@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+awk '{ sum += $NF } END { print sum }'
