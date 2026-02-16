@@ -22,3 +22,6 @@ auto-signature-help = false
 
 [keys.insert]
 C-p = "signature_help"
+
+[keys.normal]
+C-q = [":lsp-stop", ":q"]
